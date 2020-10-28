@@ -1,21 +1,37 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" [opened]="true" fixedInViewport="true">
-        <mat-nav-list>
-            <mat-list-item [routerLink]="['/dashboard']">
+        <mat-nav-list fxLayout="column" fxFill>
+            <!-- top-section -->
+            <mat-list-item [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                 <mat-icon>dashboard</mat-icon>
-                <span>Dashboard</span>
+                <span class="nav-text">Dashboard</span>
             </mat-list-item>
-            <mat-list-item [routerLink]="['/document']">
+            <mat-list-item [routerLink]="['/document']" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
                 <mat-icon>assignment</mat-icon>
-                <span>Document</span>
+                <span class="nav-text">Document</span>
             </mat-list-item>
             <mat-list-item>
                 <mat-icon>show_chart</mat-icon>
-                <span>Chart</span>
+                <span class="nav-text">Chart</span>
             </mat-list-item>
             <mat-list-item>
                 <mat-icon>settings</mat-icon>
-                <span>Settings</span>
+                <span class="nav-text">Settings</span>
+            </mat-list-item>
+            <!-- bottom section -->
+            <span fxFlex></span>
+            <mat-list-item>
+                <mat-icon>account_circle</mat-icon>
+                <span class="nav-text">User Name</span>
+            </mat-list-item>
+            <mat-list-item (click)="logout()">
+                <mat-icon>power_settings_new</mat-icon>
+                <span class="nav-text">Logout</span>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon>info</mat-icon>
+                <span class="nav-text">About</span>
             </mat-list-item>
         </mat-nav-list>
     </mat-sidenav>

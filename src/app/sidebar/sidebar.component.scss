@@ -1,0 +1,31 @@
+mat-sidenav-container {
+    mat-sidenav {
+        width: 56px;
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        -o-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        mat-nav-list {
+            .nav-text {
+                display: none;
+            }
+            mat-list-item {
+                &.active {
+                    color: #19a968 !important;
+                }
+            }
+        }
+        &:hover {
+            width: 250px;
+            mat-nav-list {
+                .nav-text {
+                    display: block;
+                    margin-left: 12px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}
