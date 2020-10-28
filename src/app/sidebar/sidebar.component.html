@@ -1,0 +1,25 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" [opened]="true" fixedInViewport="true">
+        <mat-nav-list>
+            <mat-list-item [routerLink]="['/dashboard']">
+                <mat-icon>dashboard</mat-icon>
+                <span>Dashboard</span>
+            </mat-list-item>
+            <mat-list-item [routerLink]="['/document']">
+                <mat-icon>assignment</mat-icon>
+                <span>Document</span>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon>show_chart</mat-icon>
+                <span>Chart</span>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon>settings</mat-icon>
+                <span>Settings</span>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

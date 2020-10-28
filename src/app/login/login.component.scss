@@ -1,0 +1,52 @@
+.login-wrap {
+    height: -webkit-fill-available;
+    // background: #edffed;
+    // mat-card {
+    //     background: linear-gradient(90deg, #fff 50%, #fbfbfb 50%);
+    // }
+    .login-left {
+        padding: 20px;
+        .app-logo {
+            width: 140px;
+        }
+        .login-bg {
+            width: 100%;
+        }
+    }
+    .login-right {
+        background: #fbfbfb;
+        padding: 20px;
+        .header {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 2;
+        }
+        .mat-button {
+            margin: 10px 0;
+        }
+    }
+    @media only screen and (max-width: 959px) {
+        .login-bg {
+            display: none;
+        }
+        .login-left,
+        .login-right {
+            padding: 20px 0;
+        }
+        .login-right {
+            margin-bottom: 50px;
+        }
+        mat-card {
+            background: none;
+        }
+    }
+
+    .powered-by-wrapper {
+        .powered-by {
+            width: 110px;
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+    }
+}

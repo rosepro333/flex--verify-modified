@@ -1,0 +1,43 @@
+<div class="login-wrap" fxLayout="row" fxLayoutAlign="center center">
+    <div>
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
+            <div class="login-left" fxFlex="50">
+                <div fxLayout="column" fxLayoutAlign="center center">
+                    <img src="./../../assets/logo-main.svg" alt="app-logo" class="app-logo">
+                    <img src="./../../assets/login.svg" alt="login-bg" class="login-bg">
+
+                </div>
+            </div>
+            <div class="login-right" fxFlex="50">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center stretch">
+                    <div class="header" align="center">Login</div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Your e-mail here" formControlName="userName" required>
+                        <mat-icon matSuffix>account_circle</mat-icon>
+                        <mat-error *ngIf="isFieldInvalid('userName')">
+                            Please fill your user name
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" placeholder="Your password here" formControlName="password"
+                            required>
+                        <mat-icon matSuffix>lock</mat-icon>
+                        <mat-error *ngIf="isFieldInvalid('userName')">
+                            Please fill your password
+                        </mat-error>
+                    </mat-form-field>
+                    <div class="my-20" align="right"><button mat-button>Forgot Password?</button></div>
+                    <button mat-button class="primary-button" type="submit">
+                        Login
+                        <mat-icon>login</mat-icon>
+                    </button>
+                </form>
+                <div class="powered-by-wrapper">
+                    <img src="./../../assets/powered-by-logo.svg" alt="login-bg" class="powered-by">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
