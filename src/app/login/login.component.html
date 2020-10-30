@@ -11,8 +11,8 @@
                 <div class="header" align="center">Login</div>
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput placeholder="Your e-mail here" formControlName="userName" required>
-                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <input type="email" matInput placeholder="Your e-mail here" formControlName="userName" required>
+                    <mat-icon matSuffix>alternate_email</mat-icon>
                     <mat-error *ngIf="isFieldInvalid('userName')">
                         Please fill your user name
                     </mat-error>

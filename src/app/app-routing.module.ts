@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DocumentComponent } from './document/document.component';
 import { AuthGuard } from './auth/auth.guard';
+import { VerificationUrlComponent } from './verification-url/verification-url.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'document',
         component: DocumentComponent
+      },
+      {
+        path: 'dashboard/verification-url',
+        component: VerificationUrlComponent
       },
     ]
   },

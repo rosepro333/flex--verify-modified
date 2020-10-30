@@ -23,6 +23,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { DocumentComponent } from './document/document.component';
 import { MatInputModule } from '@angular/material/input'
+import { ChartsModule } from 'ng2-charts';
+import { VerificationUrlComponent } from './verification-url/verification-url.component';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -33,6 +39,7 @@ import { MatInputModule } from '@angular/material/input'
     LoginComponent,
     SidebarComponent,
     DocumentComponent,
+    VerificationUrlComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +58,11 @@ import { MatInputModule } from '@angular/material/input'
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    ChartsModule,
+    NgxQRCodeModule,
+    ClipboardModule,
+    MatTooltipModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
