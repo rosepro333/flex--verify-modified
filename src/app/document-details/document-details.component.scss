@@ -1,0 +1,96 @@
+.doc-details-wrap {
+    padding: 20px;
+    .top-panel {
+        margin-bottom: 20px !important;
+    }
+    .panel-body {
+        margin-top: 20px;
+    }
+    .title {
+        font-weight: 500;
+        margin-right: 8px;
+    }
+    .exp-header-data {
+        display: inline-flex;
+        color: #000000de;
+        .title {
+            font-weight: 500;
+        }
+        .value {
+            font-size: 14px;
+        }
+    }
+    .user-image {
+        img {
+            width: 146px;
+        }
+    }
+    .data-wrap {
+        margin-bottom: 8px;
+        padding-right: 8px;
+    }
+    .slide-image-large {
+        height: 500px;
+    }
+    .slide-image-small {
+        height: 300px;
+    }
+    .bottom-fix {
+        width: -webkit-fill-available;
+    }
+    .matching-wrap {
+        text-align: center;
+        font-size: 18px;
+        padding: 8px;
+        color: #fff;
+        background: #464646;
+        .material-icons {
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .matching-value {
+            font-size: 18px;
+            font-weight: 500;
+            color: #21b371;
+            margin-left: 8px;
+        }
+    }
+    .photo-matching-img {
+        margin-right: 20px;
+        width: 300px;
+        height: 300px;
+    }
+    .section-header {
+        font-size: 20px;
+        padding: 16px 0;
+        border-bottom: 1px solid #cdcdcd;
+        margin-bottom: 20px;
+        margin-top: 12px;
+        width: 100%;
+    }
+    .button-bar {
+        button {
+            margin-left: 8px;
+            margin-right: 8px;
+        }
+    }
+    .comments-wrap {
+        .comment {
+            margin-bottom: 16px;
+            border-top: 1px solid #cdcdcd;
+            padding-top: 16px;
+            .commented-by {
+                font-weight: 500;
+                font-size: 16px;
+            }
+            .commented-date {
+                font-size: 14px;
+                color: #555;
+            }
+            .value {
+                font-size: 14px;
+                margin-top: 8px;
+            }
+        }
+    }
+}

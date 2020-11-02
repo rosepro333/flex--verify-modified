@@ -29,7 +29,17 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMaskModule } from 'ngx-mask';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatNativeDateModule } from '@angular/material/core'
+import { MatSortModule } from '@angular/material/sort'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatExpansionModule } from '@angular/material/expansion';
+import { from } from 'rxjs';
+import { DocumentDetailsComponent } from './document-details/document-details.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { MatSelectModule } from '@angular/material/select';
+import { SettingsComponent } from './settings/settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +50,9 @@ import { NgxMaskModule } from 'ngx-mask';
     SidebarComponent,
     DocumentComponent,
     VerificationUrlComponent,
+    DocumentDetailsComponent,
+    SettingsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -62,9 +75,17 @@ import { NgxMaskModule } from 'ngx-mask';
     NgxQRCodeModule,
     ClipboardModule,
     MatTooltipModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatExpansionModule,
+    CarouselModule,
+    MatSelectModule
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, MatNativeDateModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

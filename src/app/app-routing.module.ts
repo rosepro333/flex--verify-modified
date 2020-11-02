@@ -5,8 +5,10 @@ import { LoginLayoutComponent } from './layouts/login-layout.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DocumentComponent } from './document/document.component';
+import { DocumentDetailsComponent } from './document-details/document-details.component';
 import { AuthGuard } from './auth/auth.guard';
 import { VerificationUrlComponent } from './verification-url/verification-url.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {
@@ -27,8 +29,16 @@ const routes: Routes = [
         component: DocumentComponent
       },
       {
-        path: 'dashboard/verification-url',
+        path: 'document/details/:details',
+        component: DocumentDetailsComponent
+      },
+      {
+        path: 'verification-url',
         component: VerificationUrlComponent
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent
       },
     ]
   },

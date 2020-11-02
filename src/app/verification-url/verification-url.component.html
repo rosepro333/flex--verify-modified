@@ -22,7 +22,8 @@
                 <mat-icon matPrefix>alternate_email</mat-icon>
                 <input #email type="email" matInput [(ngModel)]="emailValue" (keydown.enter)="send(email.value, 'mail')"
                     placeholder="e-mail id">
-                <button mat-button matSuffix mat-icon-button (click)="send(email.value, 'mail')" aria-label="Send">
+                <button matSuffix mat-icon-button class="primary-button" (click)="send(email.value, 'mail')"
+                    aria-label="Send">
                     <mat-icon>send</mat-icon>
                 </button>
             </mat-form-field>
@@ -31,7 +32,8 @@
                 <mat-icon matPrefix>textsms</mat-icon>
                 <input #phone type="tel" matInput mask="(000) 000 - 0000" [(ngModel)]="smsValue"
                     (keydown.enter)="send(phone.value, 'sms')" placeholder="(000) 000 - 0000">
-                <button mat-button matSuffix mat-icon-button (click)="send(phone.value, 'sms')" aria-label="Send">
+                <button matSuffix mat-icon-button class="primary-button" (click)="send(phone.value, 'sms')"
+                    aria-label="Send">
                     <mat-icon>send</mat-icon>
                 </button>
             </mat-form-field>

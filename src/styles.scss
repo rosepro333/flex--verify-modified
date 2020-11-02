@@ -36,6 +36,9 @@ $flex-verify-dashboard-theme: mat-light-theme(
 
 /* You can add global styles to this file, and also import other style files */
 
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+
 html,
 body {
   height: 100%;
@@ -51,7 +54,13 @@ body {
 }
 .mat-toolbar {
   background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 3;
 }
 input.mat-input-element {
   margin-bottom: 3px;
+}
+.mat-expansion-panel-header.mat-expanded {
+  border-bottom: 1px solid #cdcdcd;
 }

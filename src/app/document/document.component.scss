@@ -1,0 +1,44 @@
+.document-wrap {
+    padding: 20px;
+    .mat-table {
+        .mat-cell {
+            padding: 12px;
+            .title {
+                font-weight: 500;
+            }
+            .data-wrap:nth-child(odd) {
+                margin-bottom: 8px;
+            }
+            .status-icon {
+                margin-right: 12px;
+                mat-icon {
+                    border-radius: 50%;
+                    padding: 4px;
+                    vertical-align: -webkit-baseline-middle;
+                    text-align: center;
+                }
+                &.processing {
+                    mat-icon {
+                        color: #dea806;
+                        background: #dea80630;
+                    }
+                }
+                &.verified {
+                    mat-icon {
+                        color: #21b371;
+                        background: #21b37130;
+                    }
+                }
+                &.declined {
+                    mat-icon {
+                        color: #ff5b5b;
+                        background: #ff5b5b30;
+                    }
+                }
+            }
+        }
+    }
+    .cursor-pointer {
+        cursor: pointer;
+    }
+}
