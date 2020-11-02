@@ -85,6 +85,6 @@ export class DocumentDetailsComponent implements OnInit {
         items: 1,
       }
     },
-    nav: true
+    // nav: true
   }
 }
