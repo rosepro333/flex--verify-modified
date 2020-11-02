@@ -40,6 +40,7 @@ import { DocumentDetailsComponent } from './document-details/document-details.co
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatSelectModule } from '@angular/material/select';
 import { SettingsComponent } from './settings/settings.component';
+import { ApiKeysComponent } from './api-keys/api-keys.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +53,7 @@ import { SettingsComponent } from './settings/settings.component';
     VerificationUrlComponent,
     DocumentDetailsComponent,
     SettingsComponent,
+    ApiKeysComponent,
 
   ],
   imports: [

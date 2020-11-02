@@ -30,13 +30,15 @@ export class SidebarComponent implements OnInit {
   //   this.pageTitle = title;
   // }
 
-  onMouseOver(mode) {
-    this.sidebarMode = mode;
-    this.imgSrc = './../../assets/logo-main.svg';
+  sidebarModeFunc(mode) {
+    if (mode == 'folded') {
+      this.sidebarMode = mode;
+      this.imgSrc = './../../assets/v-logo.svg'
+    }
+    else if (mode == 'unfolded') {
+      this.sidebarMode = mode;
+      this.imgSrc = './../../assets/logo-main.svg';
+    }
   }
 
-  onMouseOut(mode) {
-    this.sidebarMode = mode;
-    this.imgSrc = './../../assets/v-logo.svg'
-  }
 }

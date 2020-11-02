@@ -9,6 +9,7 @@ import { DocumentDetailsComponent } from './document-details/document-details.co
 import { AuthGuard } from './auth/auth.guard';
 import { VerificationUrlComponent } from './verification-url/verification-url.component';
 import { SettingsComponent } from './settings/settings.component';
+import { ApiKeysComponent } from './api-keys/api-keys.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'settings',
         component: SettingsComponent
+      },
+      {
+        path: 'api-keys',
+        component: ApiKeysComponent
       },
     ]
   },

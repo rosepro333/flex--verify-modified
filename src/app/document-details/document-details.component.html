@@ -1,4 +1,7 @@
 <mat-toolbar>
+    <button mat-icon-button [routerLink]="['/document']">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
     <span>Document Details</span>
 </mat-toolbar>
 <div class="doc-details-wrap">
@@ -30,55 +33,55 @@
                     </div>
                 </div>
                 <div fxFlex="85" fxLayout="row wrap" fxLayoutAlign="space-between start">
-                    <div fxFlex.gt-md="25" fxFlex.lt-md="50" fxFlex class="data-wrap">
+                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Nationality</div>
                         <div class="value">
                             <!--dummy--> Indian
                         </div>
                     </div>
-                    <div fxFlex.gt-md="25" fxFlex.lt-md="50" fxFlex class="data-wrap">
+                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">First Name</div>
                         <div class="value">
                             <!--dummy--> Nkhil Govind
                         </div>
                     </div>
-                    <div fxFlex.gt-md="25" fxFlex.lt-md="50" fxFlex class="data-wrap">
+                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Last Name</div>
                         <div class="value">
                             <!--dummy--> K S
                         </div>
                     </div>
-                    <div fxFlex.gt-md="25" fxFlex.lt-md="50" fxFlex class="data-wrap">
+                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">DOB</div>
                         <div class="value">
                             <!--dummy--> 12/07/2020
                         </div>
                     </div>
-                    <div fxFlex.gt-md="25" fxFlex.lt-md="50" fxFlex class="data-wrap">
+                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Buliding No</div>
                         <div class="value">
                             <!--dummy--> 44 building
                         </div>
                     </div>
-                    <div fxFlex.gt-md="25" fxFlex.lt-md="50" fxFlex class="data-wrap">
+                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Street Name</div>
                         <div class="value">
                             <!--dummy--> 2nd cross, btm
                         </div>
                     </div>
-                    <div fxFlex.gt-md="25" fxFlex.lt-md="50" fxFlex class="data-wrap">
+                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">City</div>
                         <div class="value">
                             <!--dummy--> Bangalore
                         </div>
                     </div>
-                    <div fxFlex.gt-md="25" fxFlex.lt-md="50" fxFlex class="data-wrap">
+                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Postal Code</div>
                         <div class="value">
                             <!--dummy--> 560068
                         </div>
                     </div>
-                    <div fxFlex.gt-md="25" fxFlex.lt-md="50" fxFlex class="data-wrap">
+                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Mode</div>
                         <div class="value">
                             <!--dummy--> Production
@@ -176,7 +179,8 @@
                         <mat-datepicker #updatedDatepicker></mat-datepicker>
                     </mat-form-field>
                 </div>
-                <div fxFlex="50" fxLayout="column" fxLayoutAlign="space-between start">
+                <div fxFlex fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" fxFlex.lt-sm="100" fxLayout="column"
+                    fxLayoutAlign="space-between start">
                     <div fxFill>
                         <owl-carousel-o [options]="customOptions">
                             <ng-container>
@@ -191,7 +195,7 @@
                             </ng-container>
                         </owl-carousel-o>
                     </div>
-                    <div fxLayout="row" class="bottom-fix">
+                    <div fxLayout="row" fxLayout.lt-md="column" class="bottom-fix">
                         <div fxFlex="300px">
                             <img class="photo-matching-img" src="./../../assets/user-dummy.svg">
                             <div class="matching-wrap">
@@ -221,37 +225,37 @@
                     <div>
                         <div class="section-header">Scan Results</div>
                         <div fxLayout="row wrap" fxLayoutAlign="space-between start">
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.lt-md="50"
-                                fxFlex>
+                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                                fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
                                 <mat-label>Id card front</mat-label>
                                 <mat-select formControlName="idCardFront">
                                     <mat-option value="clear">Clear</mat-option>
                                     <mat-option value="notClear">Not clear</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.lt-md="50"
-                                fxFlex>
+                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                                fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
                                 <mat-label>Id card back</mat-label>
                                 <mat-select formControlName="idCardBack">
                                     <mat-option value="clear">Clear</mat-option>
                                     <mat-option value="notClear">Not clear</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.lt-md="50"
-                                fxFlex>
+                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                                fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
                                 <mat-label>Selfie photo matching</mat-label>
                                 <input matInput placeholder="%" formControlName="selfieMatching">
                             </mat-form-field>
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.lt-md="50"
-                                fxFlex>
+                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                                fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
                                 <mat-label>Live Check</mat-label>
                                 <mat-select formControlName="liveCheck">
                                     <mat-option value="ok">Ok</mat-option>
                                     <mat-option value="rejected">Rejected</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.lt-md="50"
-                                fxFlex>
+                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                                fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
                                 <mat-label>Scan result</mat-label>
                                 <mat-select formControlName="scanResult">
                                     <mat-option value="incomplete">Incomplete</mat-option>

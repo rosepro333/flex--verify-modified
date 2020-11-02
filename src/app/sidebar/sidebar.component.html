@@ -1,8 +1,8 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" [opened]="true" fixedInViewport="true" [ngClass]="sidebarMode"
-        (mouseover)="onMouseOver('unfolded')" (mouseout)="onMouseOut('folded')">
+        (mouseover)="sidebarModeFunc('unfolded')" (mouseout)="sidebarModeFunc('folded')">
         <mat-nav-list fxLayout="column" fxFill>
-            <div class="nav-logo" fxLayout="column" fxLayoutAlign="center center">
+            <div class="nav-logo" fxLayout="row" fxLayoutAlign="center center">
                 <img src="{{imgSrc}}">
             </div>
             <!-- top-section -->
@@ -24,7 +24,8 @@
                 <mat-icon>insights</mat-icon>
                 <span class="nav-text">Report</span>
             </mat-list-item>
-            <mat-list-item [routerLink]="['/settings']" routerLinkActive="active">
+            <mat-list-item [routerLink]="['/settings']" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
                 <mat-icon>settings</mat-icon>
                 <span class="nav-text">Settings</span>
             </mat-list-item>
