@@ -1,0 +1,25 @@
+.organization-wrap {
+    padding: 20px;
+    .mb-12 {
+        margin-bottom: 12px;
+    }
+    .user-icon {
+        mat-icon {
+            font-size: 36px;
+            vertical-align: middle;
+            height: 36px;
+            width: 36px;
+            color: #757575;
+            margin-right: 8px;
+        }
+    }
+    td {
+        &.mat-cell {
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+    }
+    .mat-column-actions {
+        width: 100px;
+    }
+}

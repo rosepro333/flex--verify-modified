@@ -41,6 +41,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatSelectModule } from '@angular/material/select';
 import { SettingsComponent } from './settings/settings.component';
 import { ApiKeysComponent } from './api-keys/api-keys.component';
+import { OrganizationComponent } from './organization/organization.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +56,8 @@ import { ApiKeysComponent } from './api-keys/api-keys.component';
     DocumentDetailsComponent,
     SettingsComponent,
     ApiKeysComponent,
+    OrganizationComponent,
+    CreateUserComponent,
 
   ],
   imports: [

@@ -1,0 +1,53 @@
+<mat-toolbar>
+    <button mat-icon-button [routerLink]="['/organization']">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>Create User/Tenent</span>
+</mat-toolbar>
+
+<div class="create-user-wrap">
+    <mat-card>
+        <form [formGroup]="form" (ngSubmit)="onSave()">
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                    fxFlex.lt-md="50" fxFlex.lt-sm="100">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type">
+                        <mat-option value="user">User</mat-option>
+                        <mat-option value="tenent">Tenent</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                    fxFlex.lt-md="50" fxFlex.lt-sm="100">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email" formControlName="email">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                    fxFlex.lt-md="50" fxFlex.lt-sm="100">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Name" formControlName="name">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                    fxFlex.lt-md="50" fxFlex.lt-sm="100">
+                    <mat-label>Access</mat-label>
+                    <mat-select formControlName="access">
+                        <mat-option value="flxemOperator">Flxem Operator </mat-option>
+                        <mat-option value="flexAdmin">Flex Admin</mat-option>
+                        <mat-option value="tenentAdmin">Tenent admin</mat-option>
+                        <mat-option value="tenentOperator">Tenent operator</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                    fxFlex.lt-md="50" fxFlex.lt-sm="100">
+                    <mat-label>Tenent</mat-label>
+                    <input matInput placeholder="Tenent" formControlName="tenent">
+                </mat-form-field>
+                <div fxFlex="100" class="button-bar" fxLayout="row wrap" fxLayoutAlign="center center">
+                    <button mat-stroked-button type="button" (click)="clear()">cancel</button>
+                    <button mat-button class="primary-button" type="submit">Save</button>
+                </div>
+            </div>
+
+        </form>
+    </mat-card>
+</div>

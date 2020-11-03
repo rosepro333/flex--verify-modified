@@ -1,14 +1,16 @@
 <div class="login-wrap" fxLayout="row" fxLayoutAlign="center center">
-    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center">
-        <div class="login-left" fxFlex="50">
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center" fxFlex.lt-md="100">
+        <div class="login-left" fxFlex fxFlex.md="50" fxFlex.gt-md="65">
             <div fxLayout="column" fxLayoutAlign="center center">
-                <img src="./../../assets/logo-main.svg" alt="app-logo" class="app-logo">
                 <img src="./../../assets/login.svg" alt="login-bg" class="login-bg">
             </div>
         </div>
-        <div class="login-right" fxFlex="50">
+        <div class="login-right" fxFlex="100" fxFlex.md="50" fxFlex.gt-md="35">
             <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center stretch">
-                <div class="header" align="center">Login</div>
+                <div fxFlex align="center">
+                    <img src="./../../assets/logo-main.svg" alt="app-logo" class="app-logo">
+                </div>
+                <div class="header">Login</div>
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
                     <input type="email" matInput placeholder="Your e-mail here" formControlName="userName" required>
@@ -31,10 +33,11 @@
                     Login
                     <mat-icon>login</mat-icon>
                 </button>
+                <div class="powered-by-wrapper" align="right">
+                    <img src="./../../assets/powered-by-logo.svg" alt="login-bg" class="powered-by">
+                </div>
             </form>
-            <div class="powered-by-wrapper">
-                <img src="./../../assets/powered-by-logo.svg" alt="login-bg" class="powered-by">
-            </div>
+
         </div>
     </div>
 </div>

@@ -93,7 +93,8 @@
         </mat-expansion-panel>
     </mat-accordion>
     <mat-accordion>
-        <mat-expansion-panel>
+        <!-- actual list to be added here instead of [1,2,3] -->
+        <mat-expansion-panel *ngFor="let item of [1,2,3];  let isFirst = first" [expanded]="isFirst">
             <mat-expansion-panel-header>
                 <mat-panel-title fxLayoutAlign="start center">
                     <div class="exp-header-data">
@@ -179,7 +180,7 @@
                         <mat-datepicker #updatedDatepicker></mat-datepicker>
                     </mat-form-field>
                 </div>
-                <div fxFlex fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" fxFlex.lt-sm="100" fxLayout="column"
+                <div fxFlex fxFlex.gt-md="75" fxFlex.md="100" fxFlex.lt-md="100" fxFlex.lt-sm="100" fxLayout="column"
                     fxLayoutAlign="space-between start">
                     <div fxFill>
                         <owl-carousel-o [options]="customOptions">
@@ -224,8 +225,8 @@
                 <div fxFlex="100">
                     <div>
                         <div class="section-header">Scan Results</div>
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between start">
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="alignment-fix">
+                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
                                 fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
                                 <mat-label>Id card front</mat-label>
                                 <mat-select formControlName="idCardFront">
@@ -233,7 +234,7 @@
                                     <mat-option value="notClear">Not clear</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
                                 fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
                                 <mat-label>Id card back</mat-label>
                                 <mat-select formControlName="idCardBack">
@@ -241,12 +242,12 @@
                                     <mat-option value="notClear">Not clear</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
                                 fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
                                 <mat-label>Selfie photo matching</mat-label>
                                 <input matInput placeholder="%" formControlName="selfieMatching">
                             </mat-form-field>
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
                                 fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
                                 <mat-label>Live Check</mat-label>
                                 <mat-select formControlName="liveCheck">
@@ -254,7 +255,7 @@
                                     <mat-option value="rejected">Rejected</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
                                 fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
                                 <mat-label>Scan result</mat-label>
                                 <mat-select formControlName="scanResult">
@@ -263,7 +264,7 @@
                                     <mat-option value="verified">Verified</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex.gt-md="75" fxFlex.lt-md="50"
+                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="75" fxFlex.lt-md="50"
                                 fxFlex>
                                 <mat-label>Reason</mat-label>
                                 <textarea matInput placeholder="reason" rows="3" formControlName="reason"></textarea>
@@ -273,15 +274,13 @@
                                 <button mat-button class="primary-button" type="submit">Save</button>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
                 <div fxFlex="100">
                     <div>
                         <div class="section-header">Comments</div>
                         <div fxLayout="row wrap" fxLayoutAlign="space-between start">
-                            <mat-form-field appearance="outline" class="data-wrap" fxFlex="100">
+                            <mat-form-field appearance="outline" class="field-wrap alignment-fix" fxFlex="100">
                                 <mat-label>Comment</mat-label>
                                 <textarea matInput placeholder="reason" rows="3" formControlName="comment"></textarea>
                                 <button matSuffix mat-icon-button class="primary-button" (click)="sendComment()"
@@ -323,33 +322,6 @@
                     </div>
                 </div>
             </form>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title fxLayoutAlign="start center">
-                    <div class="exp-header-data">
-                        <div class="title">Scan ID:</div>
-                        <div class="value">
-                            <!-- dummy -->S1156d-acf9-4c70-a38a-b3a577
-                        </div>
-                    </div>
-                </mat-panel-title>
-                <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center">
-                    <div class="exp-header-data">
-                        <div class="title">Scan Date: </div>
-                        <div class="value">
-                            <!-- dummy --> 12/07/2020</div>
-                    </div>
-                    <button mat-icon-button (click)="shareDoc($event)">
-                        <mat-icon>content_copy</mat-icon>
-                    </button>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div class="panel-body">
-                <!-- dummy --> Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur fuga dolores adipisci
-                iusto ratione eos magni. A labore cupiditate quidem, neque nemo dicta reiciendis consectetur maxime
-                quas! Illo, placeat assumenda?</div>
         </mat-expansion-panel>
     </mat-accordion>
 </div>

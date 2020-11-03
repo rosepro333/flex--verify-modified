@@ -10,6 +10,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { VerificationUrlComponent } from './verification-url/verification-url.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ApiKeysComponent } from './api-keys/api-keys.component';
+import { OrganizationComponent } from './organization/organization.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 const routes: Routes = [
   {
@@ -44,6 +46,14 @@ const routes: Routes = [
       {
         path: 'api-keys',
         component: ApiKeysComponent
+      },
+      {
+        path: 'organization',
+        component: OrganizationComponent
+      },
+      {
+        path: 'create-user',
+        component: CreateUserComponent
       },
     ]
   },

@@ -15,8 +15,8 @@ export class ApiKeysComponent implements OnInit {
   copyKey() {
     alert('copy key')
   }
-  sandBox() {
-    alert('sandbox')
+  createKey() {
+    alert('create key')
   }
   revoke() {
     alert('revoke')

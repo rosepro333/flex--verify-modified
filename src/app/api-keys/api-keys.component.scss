@@ -1,6 +1,6 @@
 .api-keys-wrap {
-    padding: 20px;
-    margin: -20px;
+    // padding: 20px;
+    // margin: -20px;
     mat-card {
         margin: 20px;
 
@@ -30,13 +30,12 @@
             padding: 12px;
         }
     }
-    .sandbox-button {
-        margin-top: 12px;
-        background: #00aff0;
-        color: #fff;
+    .key-env {
+        margin-left: 4px;
+        font-size: 14px;
+        color: #757575;
     }
     .revoke-button {
-        margin-top: 12px;
         background: #d50000;
         color: #fff;
     }

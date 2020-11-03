@@ -10,8 +10,13 @@
     <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
         <mat-card>
             <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between center">
-                <mat-card-title>Api key</mat-card-title>
-                <button mat-button class="primary-button">
+                <mat-card-title>
+                    <span>Api key</span>
+                    <span class="key-env">
+                        <!--dummy-->(Sandbox)
+                    </span>
+                </mat-card-title>
+                <button mat-button class="primary-button" (click)="createKey()">
                     <mat-icon>add</mat-icon>
                     Create Key
                 </button>
@@ -31,10 +36,7 @@
                             rflhfedggg6554784566.77ggghh
                         </div>
                     </div>
-                    <button mat-button class="sandbox-button" (click)="sandBox()">
-                        <mat-icon>cloud</mat-icon>
-                        Sandbox
-                    </button>
+
                 </div>
                 <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
                     <div fxLayout="row wrap" fxLayoutAlign="start start">
@@ -76,7 +78,12 @@
     <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
         <mat-card>
             <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between center">
-                <mat-card-title>Mobile key</mat-card-title>
+                <mat-card-title>
+                    <span>Mobile key</span>
+                    <span class="key-env">
+                        <!--dummy-->(Sandbox)
+                    </span>
+                </mat-card-title>
                 <button mat-button class="primary-button">
                     <mat-icon>add</mat-icon>
                     Create Key
@@ -97,10 +104,6 @@
                             rflhfedggg6554784566.77ggghh
                         </div>
                     </div>
-                    <button mat-button class="sandbox-button" (click)="sandBox()">
-                        <mat-icon>cloud</mat-icon>
-                        Sandbox
-                    </button>
                 </div>
                 <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
                     <div fxLayout="row wrap" fxLayoutAlign="start start">
