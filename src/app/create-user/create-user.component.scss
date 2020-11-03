@@ -2,6 +2,7 @@
     padding: 20px;
     mat-card {
         padding: 12px;
+        margin-bottom: 20px;
     }
     .field-wrap {
         padding: 0 8px;
@@ -11,5 +12,17 @@
             margin-left: 8px;
             margin-right: 8px;
         }
+    }
+    .mat-tab-group.mat-primary .mat-ink-bar,
+    .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+        background: #21b371;
+    }
+    .mat-tab-body {
+        margin-top: 20px;
+    }
+    .mat-tab-label-active {
+        background: #19a96824;
+        color: #21b371;
+        opacity: 1;
     }
 }

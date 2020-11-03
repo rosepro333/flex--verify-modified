@@ -35,6 +35,7 @@ import { MatNativeDateModule } from '@angular/material/core'
 import { MatSortModule } from '@angular/material/sort'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
 import { from } from 'rxjs';
 import { DocumentDetailsComponent } from './document-details/document-details.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -88,6 +89,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
     MatSortModule,
     MatPaginatorModule,
     MatExpansionModule,
+    MatTabsModule,
     CarouselModule,
     MatSelectModule
   ],
