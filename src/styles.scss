@@ -67,3 +67,17 @@ input.mat-input-element {
 .cursor-pointer {
   cursor: pointer;
 }
+.splash-screen {
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 4s all ease-out;
+  img {
+    width: 200px;
+  }
+}
+.mat-row:hover {
+  background: #fafafa;
+}

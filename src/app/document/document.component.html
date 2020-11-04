@@ -11,6 +11,7 @@
     </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" fxFlex="100" fxFill>
         <ng-container matColumnDef="doc-scan-id">
+            <th mat-header-cell *matHeaderCellDef>Document Id and Scan Id </th>
             <td mat-cell *matCellDef="let element">
                 <div class="data-wrap">
                     <div class="title">Document Id</div>
@@ -23,6 +24,7 @@
             </td>
         </ng-container>
         <ng-container matColumnDef="date-time">
+            <th mat-header-cell *matHeaderCellDef>Created Date and Time </th>
             <td mat-cell *matCellDef="let element">
                 <div class="data-wrap">
                     <div class="title">Created Id</div>
@@ -35,6 +37,7 @@
             </td>
         </ng-container>
         <ng-container matColumnDef="name-nationality">
+            <th mat-header-cell *matHeaderCellDef>Name and Nationality </th>
             <td mat-cell *matCellDef="let element">
                 <div class="data-wrap">
                     <div class="title">Name</div>
@@ -47,6 +50,7 @@
             </td>
         </ng-container>
         <ng-container matColumnDef="tenent-id">
+            <th mat-header-cell *matHeaderCellDef>Tenent Id </th>
             <td mat-cell *matCellDef="let element">
                 <div class="data-wrap">
                     <div class="title">Tenent Id</div>
@@ -55,6 +59,7 @@
             </td>
         </ng-container>
         <ng-container matColumnDef="status-date">
+            <th mat-header-cell *matHeaderCellDef>Status and Date </th>
             <td mat-cell *matCellDef="let element">
                 <div fxLayout="row" fxLayoutAlign="start center">
                     <div class="status-icon {{element.status | lowercase}}">
@@ -68,6 +73,7 @@
             </td>
         </ng-container>
 
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let document; columns: displayedColumns;" class="cursor-pointer"
             (click)="moreDetails(document.id)"></tr>
 
