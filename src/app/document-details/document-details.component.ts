@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DocumentModel } from '../document/models/document.model';
+import { DocumentService } from '../document/services/document.service';
 
 @Component({
   selector: 'app-document-details',
@@ -10,13 +12,32 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   encapsulation: ViewEncapsulation.None
 })
 export class DocumentDetailsComponent implements OnInit {
-  id: any;
+  id: number;
+  document: DocumentModel
   panelOpenState = false;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) { }
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    public documnetService: DocumentService
+  ) {
+    this.document = new DocumentModel();
+  }
 
   ngOnInit(): void {
+
+    this.id = this.route.snapshot.params["id"];
+    //get item details using id
+    this.documnetService.getItem(this.id).subscribe(response => {
+      console.table(response);
+      this.document = response;
+    })
+
+
+
+
+
     this.form = this.fb.group({
       idType: new FormControl(''),
       idNum: new FormControl(''),

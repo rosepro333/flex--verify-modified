@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <button mat-icon-button [routerLink]="['/document']">
+    <button mat-icon-button [routerLink]="['/documents']">
         <mat-icon>arrow_back</mat-icon>
     </button>
     <span>Document Details</span>
@@ -12,14 +12,14 @@
                     <div class="exp-header-data">
                         <div class="title">Document ID:</div>
                         <div class="value">
-                            <!-- dummy -->f8ea556d-acf9-4c70-a38a-b3a577</div>
+                            {{document.docId}}</div>
                     </div>
                 </mat-panel-title>
                 <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center">
                     <div class="exp-header-data">
                         <div class="title">Document Date: </div>
                         <div class="value">
-                            <!-- dummy --> 12/07/2020</div>
+                            {{document.createdAt | date:'mediumDate'}}</div>
                     </div>
                     <button mat-icon-button (click)="shareDoc($event)">
                         <mat-icon>share</mat-icon>
@@ -36,59 +36,58 @@
                     <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Nationality</div>
                         <div class="value">
-                            <!--dummy--> Indian
+                            {{document.nationality}}
                         </div>
                     </div>
                     <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">First Name</div>
                         <div class="value">
-                            <!--dummy--> Nkhil Govind
+                            {{document.firstName}}
                         </div>
                     </div>
                     <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Last Name</div>
                         <div class="value">
-                            <!--dummy--> K S
+                            {{document.lastName}}
                         </div>
                     </div>
                     <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">DOB</div>
                         <div class="value">
-                            <!--dummy--> 12/07/2020
+                            {{document.dob}}
                         </div>
                     </div>
                     <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Buliding No</div>
                         <div class="value">
-                            <!--dummy--> 44 building
+                            {{document.buildingNo}}
                         </div>
                     </div>
                     <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Street Name</div>
                         <div class="value">
-                            <!--dummy--> 2nd cross, btm
+                            {{document.streetName}}
                         </div>
                     </div>
                     <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">City</div>
                         <div class="value">
-                            <!--dummy--> Bangalore
+                            {{document.city}}
                         </div>
                     </div>
                     <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Postal Code</div>
                         <div class="value">
-                            <!--dummy--> 560068
+                            {{document.postalCode}
                         </div>
                     </div>
                     <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
                         <div class="title">Mode</div>
                         <div class="value">
-                            <!--dummy--> Production
+                            {{document.mode}}
                         </div>
                     </div>
                 </div>
-
             </div>
         </mat-expansion-panel>
     </mat-accordion>
@@ -100,14 +99,14 @@
                     <div class="exp-header-data">
                         <div class="title">Scan ID:</div>
                         <div class="value">
-                            <!-- dummy -->S1156d-acf9-4c70-a38a-b3a577</div>
+                            {{document.scanId}}</div>
                     </div>
                 </mat-panel-title>
                 <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center">
                     <div class="exp-header-data">
                         <div class="title">Scan Date: </div>
                         <div class="value">
-                            <!-- dummy --> 12/07/2020
+                            {{document.createdAt | date:'mediumDate'}}
                         </div>
                     </div>
                     <button mat-icon-button (click)="shareDoc($event)">

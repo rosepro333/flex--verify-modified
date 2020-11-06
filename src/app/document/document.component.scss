@@ -2,12 +2,33 @@
     padding: 20px;
     .mat-table {
         .mat-cell {
-            padding: 12px;
+            padding: 12px 12px 12px 0;
+            &:first-of-type {
+                padding-left: 24px;
+            }
             .title {
+                font-size: 12px;
+                letter-spacing: 0.5px;
+            }
+            .value {
+                font-size: 14px;
                 font-weight: 500;
+                letter-spacing: 0.5px;
             }
             .data-wrap:nth-child(odd) {
                 margin-bottom: 8px;
+            }
+            .has-icon {
+                margin-right: 4px;
+                margin-left: -8px;
+                mat-icon {
+                    display: none;
+                    color: #757575;
+                    border-radius: 50%;
+                    padding: 4px;
+                    vertical-align: -webkit-baseline-middle;
+                    text-align: center;
+                }
             }
             .status-icon {
                 margin-right: 12px;

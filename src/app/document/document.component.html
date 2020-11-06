@@ -12,75 +12,76 @@
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" fxFlex="100" fxFill>
         <ng-container matColumnDef="doc-scan-id">
             <th mat-header-cell *matHeaderCellDef>Document Id and Scan Id </th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let document">
                 <div class="data-wrap">
                     <div class="title">Document Id</div>
-                    <div class="value">{{element.docId}}</div>
+                    <div class="value">{{document.docId}}</div>
                 </div>
                 <div class="data-wrap">
                     <div class="title">Scan Id</div>
-                    <div class="value">{{element.scanId}}</div>
+                    <div class="value">{{document.scanId}}</div>
                 </div>
             </td>
         </ng-container>
         <ng-container matColumnDef="date-time">
             <th mat-header-cell *matHeaderCellDef>Created Date and Time </th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let document">
                 <div class="data-wrap">
                     <div class="title">Created Id</div>
-                    <div class="value">{{element.createdAt | date:'mediumDate'}} </div>
+                    <div class="value">{{document.createdAt | date:'mediumDate'}} </div>
                 </div>
                 <div class="data-wrap">
                     <div class="title">Created time</div>
-                    <div class="value">{{element.createdAt | date: 'mediumTime'}} </div>
+                    <div class="value">{{document.createdAt | date: 'mediumTime'}} </div>
                 </div>
             </td>
         </ng-container>
         <ng-container matColumnDef="name-nationality">
             <th mat-header-cell *matHeaderCellDef>Name and Nationality </th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let document">
                 <div class="data-wrap">
                     <div class="title">Name</div>
-                    <div class="value">{{element.name}} </div>
+                    <div class="value">{{document.firstName}} {{document.lastName}}</div>
                 </div>
                 <div class="data-wrap">
                     <div class="title">Nationality</div>
-                    <div class="value">{{element.nationality}} </div>
+                    <div class="value">{{document.nationality}} </div>
                 </div>
             </td>
         </ng-container>
         <ng-container matColumnDef="tenent-id">
             <th mat-header-cell *matHeaderCellDef>Tenent Id </th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let document">
                 <div class="data-wrap">
                     <div class="title">Tenent Id</div>
-                    <div class="value">{{element.tenentId}} </div>
+                    <div class="value">{{document.tenentId}} </div>
                 </div>
             </td>
         </ng-container>
         <ng-container matColumnDef="status-date">
             <th mat-header-cell *matHeaderCellDef>Status and Date </th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let document">
                 <div fxLayout="row" fxLayoutAlign="start center">
-                    <div class="status-icon {{element.status | lowercase}}">
-                        <mat-icon>{{element.icon}}</mat-icon>
+                    <div class="status-icon {{document.status | lowercase}}">
+                        <mat-icon>{{document.icon}}</mat-icon>
                     </div>
                     <div class="data-wrap">
-                        <div class="value">{{element.status}} </div>
-                        <div class="value">{{element.statusDate | date:'mediumDate'}} </div>
+                        <div class="value">{{document.status}} </div>
+                        <div class="value">{{document.statusDate | date:'mediumDate'}} </div>
                     </div>
                 </div>
             </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let document; columns: displayedColumns;" class="cursor-pointer"
-            (click)="moreDetails(document.id)"></tr>
-
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="cursor-pointer"
+            (click)="moreDetails(row.id)"></tr>
+        <!-- [routerLink]="[ '/document/', row.id]" -->
         <!-- Row shown when there is no matching data. -->
         <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="5">No data matching the filter "{{input.value}}"</td>
+            <td class="mat-cell" colspan="5">No record found</td>
         </tr>
     </table>
-    <mat-paginator class="mat-elevation-z2" [pageSizeOptions]="pageSizeOptions" fxFill></mat-paginator>
+    <mat-paginator class="mat-elevation-z2" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons fxFill>
+    </mat-paginator>
 </div>

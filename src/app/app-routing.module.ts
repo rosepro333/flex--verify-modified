@@ -28,11 +28,11 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path: 'document',
+        path: 'documents',
         component: DocumentComponent
       },
       {
-        path: 'document/details/:details',
+        path: 'documents/:id',
         component: DocumentDetailsComponent
       },
       {

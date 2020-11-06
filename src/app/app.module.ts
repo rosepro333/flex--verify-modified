@@ -44,6 +44,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { ApiKeysComponent } from './api-keys/api-keys.component';
 import { OrganizationComponent } from './organization/organization.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { DocumentService } from './document/services/document.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +94,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
     CarouselModule,
     MatSelectModule
   ],
-  providers: [AuthService, AuthGuard, MatNativeDateModule],
+  providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

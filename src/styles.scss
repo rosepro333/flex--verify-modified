@@ -78,6 +78,11 @@ input.mat-input-element {
     width: 200px;
   }
 }
-.mat-row:hover {
-  background: #fafafa;
+.mat-row {
+  &:hover {
+    background: #fafafa !important;
+  }
+  &:nth-child(odd) {
+    background: #eaeaea8c;
+  }
 }
