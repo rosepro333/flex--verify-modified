@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://flexverify.dotcod.in/api',
+  // apiUrl: 'https://verify.flexm.com/api/',
+  apiUrl: 'https://verify.flexm.com/api/',
   dummyApi: 'http://localhost:3000',
   showDataSource: true,
 };
