@@ -34,7 +34,15 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.authService.login(this.form.value);
+      this.authService.login(this.form.value).subscribe(result=>{
+        console.log(result)
+        sessionStorage.setItem('apires', result['apires']);
+        sessionStorage.setItem('data', result['data']);
+        sessionStorage.setItem('LOGIN_STATUS', result['msg']);
+      }, error => {        
+        console.error(error);
+      })
+
     }
     this.formSubmitAttempt = true;
   }

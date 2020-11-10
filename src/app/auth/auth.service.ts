@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from './user';
-import * as CryptoJS from 'crypto-js';
-// import { AES } from 'crypto-js/aes';
+import {map, retry, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
 @Injectable()
 export class AuthService {
     private apiUrl =environment.apiUrl;
@@ -29,15 +29,20 @@ export class AuthService {
     login(user: User) {
         if (user.userName !== '' && user.password !== '') {
             const data ={
-                "contact_Email": "admin@flexm.com",
-                "password": "admin1234" 
+                Contact_Email: user.userName,
+                password: user.password 
             }
-            // var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), 'secret key asdaddadcdcwdasqwdcsdffdcsadxass').toString();
-            return this.http.post(this.apiUrl+"token/authenticate",data,{headers: this.headers}).subscribe((result)=>{
-                console.log(result);  
-            })
-            // this.loggedIn.next(true);
-            // this.router.navigate(['/']);  
+            return this.http.post(this.apiUrl+"token/authenticate",data,{headers:this.headers})
+            .pipe(
+                map((response: Response) => {
+                console.log(response)
+                this.loggedIn.next(true);
+                this.router.navigate(['/']);
+                return response;
+              })
+              ,retry(1),
+              catchError(this.handleError)
+            );
         }
     }
 
@@ -45,4 +50,17 @@ export class AuthService {
         this.loggedIn.next(false);
         this.router.navigate(['/login']);
     }
+    handleError(error) {
+        let errorMessage = '';
+        if (error.error instanceof ErrorEvent) {
+          // Get Client Side Error
+          errorMessage = error.error.messages;
+        } else {
+          // Get Server-Side Error
+          errorMessage = `Error Code : ${error.status}\nMessage : ${error.messsage}`;
+        }
+        window.alert(errorMessage);
+        return throwError(errorMessage);
+    }
+    
 }
