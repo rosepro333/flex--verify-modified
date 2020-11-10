@@ -12,8 +12,8 @@ export interface OrganizationElement {
   expiryDate: Date;
   createdBy: string;
   isBlocked: boolean
-
 }
+
 const ELEMENT_DATA: OrganizationElement[] = [
   {
     id: 1,
@@ -71,20 +71,28 @@ export class OrganizationComponent implements OnInit {
   pageSizeOptions = [10, 25, 50, 100];
 
   displayedColumns: string[] = ['name-email', 'role', 'owner', 'expiryDate', 'createdBy', 'actions'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSourceUser = new MatTableDataSource(ELEMENT_DATA);
+  dataSourceTenant = new MatTableDataSource(ELEMENT_DATA);
   constructor() { }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.dataSourceUser.sort = this.sort;
+    this.dataSourceUser.paginator = this.paginator;
+
+    this.dataSourceTenant.sort = this.sort;
+    this.dataSourceTenant.paginator = this.paginator;
   }
 
-  applyFilter(event: Event) {
+  applyUserFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSourceUser.filter = filterValue.trim().toLowerCase();
+  }
+  applyTenantFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
   }
   blockUser(elm) {
     alert('block ' + elm.name);
@@ -93,7 +101,18 @@ export class OrganizationComponent implements OnInit {
     alert('unblock ' + elm.name)
   }
   deleteUser(elm) {
-    this.dataSource.data = this.dataSource.data
+    this.dataSourceUser.data = this.dataSourceUser.data
+      .filter(i => i !== elm)
+      .map((i, idx) => (i.id = (idx + 1), i));
+  }
+  blockTenant(elm) {
+    alert('block ' + elm.name);
+  }
+  enableTenant(elm) {
+    alert('unblock ' + elm.name)
+  }
+  deleteTenant(elm) {
+    this.dataSourceUser.data = this.dataSourceUser.data
       .filter(i => i !== elm)
       .map((i, idx) => (i.id = (idx + 1), i));
   }
