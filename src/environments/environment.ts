@@ -4,9 +4,14 @@
 
 export const environment = {
   production: false,
+<<<<<<< HEAD
   // apiUrl: 'https://verify.flexm.com/api/',
   apiUrl: 'https://verify.flexm.com/api',
   dummyApi: 'http://localhost:3000/api',
+=======
+  apiUrl: 'http://flexverify.dotcod.in/api',
+  // dummyApi: 'http://localhost:3000',
+>>>>>>> master
   showDataSource: true,
 };
 

@@ -10,7 +10,7 @@ import { catchError, retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DocumentService {
-  url = environment.dummyApi + '/documents';
+  url = environment.apiUrl + '/documents';
   constructor(private httpClient: HttpClient) { }
   // Http Options
   httpOptions = {

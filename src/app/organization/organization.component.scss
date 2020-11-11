@@ -22,4 +22,16 @@
     .mat-column-actions {
         width: 100px;
     }
+    .mat-tab-group.mat-primary .mat-ink-bar,
+    .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+        background: #21b371;
+    }
+    .mat-tab-body {
+        margin-top: 20px;
+    }
+    .mat-tab-label-active {
+        background: #19a96824;
+        color: #21b371;
+        opacity: 1;
+    }
 }
