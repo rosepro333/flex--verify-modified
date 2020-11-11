@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServicesService } from './../service/services.service';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
@@ -28,9 +29,7 @@ export class CreateUserComponent implements OnInit {
       console.log(this.form.value);
       this.service.createTenant(this.form.value).subscribe(result=>{
         console.log(result)
-      //   sessionStorage.setItem('apires', result['apires']);
-      //   sessionStorage.setItem('data', result['data']);
-      //   sessionStorage.setItem('LOGIN_STATUS', result['msg']);
+        console.log(Cookie.get('data'))
       }, error => {        
         console.error(error);
       })

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { AuthService } from './../auth/auth.service';
 
 @Component({
@@ -36,9 +36,9 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.authService.login(this.form.value).subscribe(result=>{
         console.log(result)
-        sessionStorage.setItem('apires', result['apires']);
-        sessionStorage.setItem('data', result['data']);
-        sessionStorage.setItem('LOGIN_STATUS', result['msg']);
+        Cookie.set('apires', result.apires);
+        Cookie.set('data', result.data);
+        Cookie.set('LOGIN_STATUS',result.msg);
       }, error => {        
         console.error(error);
       })

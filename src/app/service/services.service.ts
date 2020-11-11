@@ -7,11 +7,13 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { environment } from 'src/environments/environment';
 import {map, retry, catchError } from 'rxjs/operators';
 import {TenentUser} from './tenent';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { async } from 'rxjs/internal/scheduler/async';
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
-    private apiUrl =environment.apiUrl;
+    private apiUrl =environment.dummyApi;
     private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     get isLoggedIn() {
@@ -21,27 +23,21 @@ export class ServicesService {
     constructor(
         private router: Router,private http: HttpClient
     ) { }
-    headers= new HttpHeaders({
-        'Content-Type': '*',
-        'Access-Control-Allow-Headers':'*',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Methods':'*'
-    })  
+    httpOptions = {
+         headers: new HttpHeaders().set('ACCESS-TOKEN', Cookie.get('data'))
+        
+      };  
     createTenant(tanent: TenentUser) {
         if (tanent.email !== '' && tanent.name !== '' && tanent.tenent !== '') {
             const data ={
                 Contact_Name: tanent.name,
-                Contact_Mail: tanent.email,
+                Contact_Mail: tanent.email,  
                 Name:tanent.tenent
             }
-            return this.http.post(this.apiUrl+"tenent",data,{headers:this.headers})
-            .pipe(
-                map((response: Response) => {
-                console.log(response);             
-                return response;
-              })
-              ,retry(1),
+        //    console.log(this.httpOptions.headers.get('ACCESS-TOKEN'))
+            return this.http.post(this.apiUrl+"/tenent",data,this.httpOptions)
+            .pipe(               
+              retry(1),
               catchError(this.handleError)
             );
         }

@@ -92,7 +92,8 @@ import { DocumentService } from './document/services/document.service'
     MatExpansionModule,
     MatTabsModule,
     CarouselModule,
-    MatSelectModule
+    MatSelectModule,
+      
   ],
   providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService],
   bootstrap: [AppComponent]
