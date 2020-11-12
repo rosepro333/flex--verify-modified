@@ -7,6 +7,8 @@ import { User } from './user';
 import {map, retry, catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { Observable } from 'rxjs/internal/Observable';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 @Injectable()
 export class AuthService {
     private apiUrl =environment.dummyApi;
@@ -21,13 +23,7 @@ export class AuthService {
     ) { }
      
     httpOptions = {
-        headers: new HttpHeaders({
-            'Content-Type': '*',
-            'Access-Control-Allow-Headers':'*',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': 'true',
-            'Access-Control-Allow-Methods':'*'
-        })
+        headers: new HttpHeaders()
       };
   
     login(user: User) : Observable<any>{
@@ -38,19 +34,25 @@ export class AuthService {
             }
             console.log(data); 
             return this.http.post<any>(this.apiUrl+"/token/authenticate",data,this.httpOptions)
-            .pipe( 
-                tap(()=>{                    
-                    // this.loggedIn.next(true);
-                    this.router.navigate(['/']);
-                }),
-                retry(1),catchError(this.handleError));           
+            .pipe(              
+            retry(1),catchError(this.handleError));           
         }
         
     }
 
     logout() {
+        this.deleteAllCookies();
         this.loggedIn.next(false);
         this.router.navigate(['/login']);
+    }
+    deleteAllCookies() {
+        // console.log(Cookie.delete('data'))
+        Cookie.deleteAll ('/', 'localhost');
+        // console.log(cookie)
+        // cookie.forEach(key => {
+        //     Cookie.delete(key);
+        // });
+        // cookie.map(key=>{Cookie.delete(key)})
     }
     handleError(error) {
         let errorMessage = '';

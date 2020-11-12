@@ -9,7 +9,7 @@
     <mat-card>
         <mat-tab-group>
             <mat-tab label="Create User">
-                <form [formGroup]="form" (ngSubmit)="onSave()">
+                <form [formGroup]="form" (ngSubmit)="onSave('user')">
                     <div fxLayout="row wrap">
                         <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
                             fxFlex.lt-md="50" fxFlex.lt-sm="100">
@@ -44,7 +44,7 @@
                 </form>
             </mat-tab>
             <mat-tab label="Create Tenent">
-                <form [formGroup]="form" (ngSubmit)="onSave()">
+                <form [formGroup]="form" (ngSubmit)="onSave('tenent')">
                     <div fxLayout="row wrap">
                         <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
                             fxFlex.lt-md="50" fxFlex.lt-sm="100">

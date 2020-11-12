@@ -24,20 +24,28 @@ export class CreateUserComponent implements OnInit {
 
     });
   }
-  onSave() {
-    if (this.form.valid) {
-      console.log(this.form.value);
-      this.service.createTenant(this.form.value).subscribe(result=>{
-        console.log(result)
-        console.log(Cookie.get('data'))
+  onSave(event: any) {
+    console.log(event)
+    if (event === 'user' && this.form.valid) {
+      this.service.userCreate(this.form.value).subscribe((result) => {
+          console.log(result)        
       }, error => {        
         console.error(error);
       })
-
+    } else if (event === 'tenent' && this.form.valid) {
+       this.service.createTenent(this.form.value).subscribe(result=>{
+        console.log(result)        
+      }, error => {        
+        console.error(error);
+      })
     }
+    // if (this.form.valid) {
+    //   console.log(this.form.value);
+    //   
+
+    // }
     // this.formSubmitAttempt = true;
   // }
-    alert('saved')
   }
   clear() {
     this.router.navigate(['./organization']);
