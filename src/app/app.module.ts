@@ -44,7 +44,9 @@ import { SettingsComponent } from './settings/settings.component';
 import { ApiKeysComponent } from './api-keys/api-keys.component';
 import { OrganizationComponent } from './organization/organization.component';
 import { CreateUserComponent } from './create-user/create-user.component';
-import { DocumentService } from './document/services/document.service'
+import { DocumentService } from './document/services/document.service';
+import { CreateApiKayComponent } from './dialog-box/create-api-kay/create-api-kay.component';
+import { CreateSdyKeyComponent } from './dialog-box/create-sdy-key/create-sdy-key.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +62,8 @@ import { DocumentService } from './document/services/document.service'
     ApiKeysComponent,
     OrganizationComponent,
     CreateUserComponent,
+    CreateApiKayComponent,
+    CreateSdyKeyComponent,
 
   ],
   imports: [

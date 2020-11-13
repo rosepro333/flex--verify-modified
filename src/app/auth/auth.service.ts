@@ -24,7 +24,7 @@ export class AuthService {
      
     httpOptions = {
         headers: new HttpHeaders()
-      };
+    };
   
     login(user: User) : Observable<any>{
         if (user.userName !== '' && user.password !== '') {
@@ -33,13 +33,16 @@ export class AuthService {
                 password: user.password 
             }
             console.log(data); 
-            return this.http.post<any>(this.apiUrl+"/token/authenticate",data,this.httpOptions)
-            .pipe(              
-            retry(1),catchError(this.handleError));           
+            return this.http.post<any>(this.apiUrl + "/token/authenticate", data, this.httpOptions)
+                .pipe(  
+                tap(()=> this.setUpdateCookies(),window.location.reload),
+                retry(1),catchError(this.handleError));           
         }
         
     }
-
+    setUpdateCookies() {
+        this.httpOptions.headers.set('ACCESS-TOKEN', Cookie.get('data'));
+    }
     logout() {
         this.deleteAllCookies();
         this.loggedIn.next(false);

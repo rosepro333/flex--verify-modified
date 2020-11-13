@@ -22,9 +22,7 @@ export class ServicesService {
     
     constructor(
         private router: Router,private http: HttpClient
-    ) {
-      this.httpOptions
-     }
+    ) {}
     httpOptions = {
          headers: new HttpHeaders().set('ACCESS-TOKEN', Cookie.get('data'))
         
@@ -43,6 +41,7 @@ export class ServicesService {
             );
         }
     }
+    
     userCreate(user: any): Observable<any> {
      if (user.email !== '' && user.name !== '' && user.access !== '') {
             const data ={
@@ -52,15 +51,29 @@ export class ServicesService {
                 Tenant_ID:user.tenent
             }
             return this.http.post(this.apiUrl+'/user',data,this.httpOptions)
-            .pipe(               
+              .pipe(  
+              
               retry(1),
               catchError(this.handleError)
             );
         }
       
     }
-    getTenentList():Observable<any> {
+  createSdkKey(data: any): Observable<any> {
+    if (data.Tenent !== '' && data.mode !== '') {
+        return this.http.post(this.apiUrl + '/sdkkey', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));   
+    }
+  }
+  createApiKey(data: any): Observable<any> {
+    if (data.Tenent !== '' && data.mode !== '') {
+        return this.http.post(this.apiUrl + '/apikey', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));   
+    }
+   }
+    getTenentList() : Observable<any> {
         return this.http.get(this.apiUrl + '/tenent/list', this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    }
+    getUserList() : Observable<any> {
+        return this.http.get(this.apiUrl + '/user/list', this.httpOptions).pipe(retry(1), catchError(this.handleError));
     }
   
   

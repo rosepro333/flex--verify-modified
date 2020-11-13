@@ -14,18 +14,8 @@ export interface OrganizationElement {
   createdBy: string;
   isBlocked: boolean
 }
-   const ELEMENT_DATA: OrganizationElement[] = [
-  // {
-  //   id: 1,
-  //   name: 'Sasi Kumar Raman',
-  //   email: 'sasiKumar@gmail.com',
-  //   role: 'Flex Admin',
-  //   owner: 'Flex Admin',
-  //   expiryDate: new Date(2020, 1, 13),
-  //   createdBy: 'Flemop',
-  //   isBlocked: true
-  // },  
-];
+let ELEMENT_DATA_Tenent: OrganizationElement[] = [];
+let ELEMENT_DATA_User: OrganizationElement[]  = [];
 
 
 @Component({
@@ -43,19 +33,26 @@ export class OrganizationComponent implements OnInit {
   pageSizeOptions = [10, 25, 50, 100];
  
 
-  displayedColumns: string[] = ['name-email', 'role', 'owner', 'expiryDate', 'createdBy', 'actions'];
-  dataSourceUser = new MatTableDataSource(ELEMENT_DATA);
-  dataSourceTenant = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['name-email', 'role', 'owner', 'createdBy', 'actions'];
+  dataSourceUser = new MatTableDataSource(ELEMENT_DATA_User);
+  dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
   constructor(private serviceService: ServicesService) { }
 
   ngOnInit(): void {
     this.getTenentList();
+    this.getUserList();
   }
 
   getTenentList() {
-    this.serviceService.getTenentList().subscribe((result) => {
-      console.log(result.data);
+    this.serviceService.getTenentList().subscribe((result) => {    
+      this.dataSourceTenant = result.data;
+      console.log(this.dataSourceTenant)
+    })
+  }
+  getUserList() {
+    this.serviceService.getUserList().subscribe((result) => { 
       this.dataSourceUser = result.data;
+      console.log(this.dataSourceUser)
     })
   }
 
