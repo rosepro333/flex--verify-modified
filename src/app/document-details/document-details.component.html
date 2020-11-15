@@ -1,326 +1,557 @@
 <mat-toolbar>
-    <button mat-icon-button [routerLink]="['/documents']">
-        <mat-icon>arrow_back</mat-icon>
-    </button>
-    <span>Document Details</span>
+  <button mat-icon-button [routerLink]="['/documents']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>Document Details</span>
 </mat-toolbar>
 <div class="doc-details-wrap">
-    <mat-accordion>
-        <mat-expansion-panel class="top-panel" expanded>
-            <mat-expansion-panel-header fxLayout="row">
-                <mat-panel-title fxLayoutAlign="start center">
-                    <div class="exp-header-data">
-                        <div class="title">Document ID:</div>
-                        <div class="value">
-                            {{document.docId}}</div>
-                    </div>
-                </mat-panel-title>
-                <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center">
-                    <div class="exp-header-data">
-                        <div class="title">Document Date: </div>
-                        <div class="value">
-                            {{document.createdAt | date:'mediumDate'}}</div>
-                    </div>
-                    <button mat-icon-button (click)="shareDoc($event)">
-                        <mat-icon>share</mat-icon>
-                    </button>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div class="panel-body" fxLayout="row wrap" fxLayoutAlign="start start">
-                <div fxFlex fxLayout="column" fxLayoutAlign="center center">
-                    <div class="user-image">
-                        <img src="./../../assets/user-dummy.svg">
-                    </div>
-                </div>
-                <div fxFlex="85" fxLayout="row wrap" fxLayoutAlign="space-between start">
-                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
-                        <div class="title">Nationality</div>
-                        <div class="value">
-                            {{document.nationality}}
-                        </div>
-                    </div>
-                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
-                        <div class="title">First Name</div>
-                        <div class="value">
-                            {{document.firstName}}
-                        </div>
-                    </div>
-                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
-                        <div class="title">Last Name</div>
-                        <div class="value">
-                            {{document.lastName}}
-                        </div>
-                    </div>
-                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
-                        <div class="title">DOB</div>
-                        <div class="value">
-                            {{document.dob}}
-                        </div>
-                    </div>
-                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
-                        <div class="title">Buliding No</div>
-                        <div class="value">
-                            {{document.buildingNo}}
-                        </div>
-                    </div>
-                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
-                        <div class="title">Street Name</div>
-                        <div class="value">
-                            {{document.streetName}}
-                        </div>
-                    </div>
-                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
-                        <div class="title">City</div>
-                        <div class="value">
-                            {{document.city}}
-                        </div>
-                    </div>
-                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
-                        <div class="title">Postal Code</div>
-                        <div class="value">
-                            {{document.postalCode}
-                        </div>
-                    </div>
-                    <div fxFlex.gt-md="25" fxFlex.md="50" fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex class="data-wrap">
-                        <div class="title">Mode</div>
-                        <div class="value">
-                            {{document.mode}}
-                        </div>
-                    </div>
-                </div>
+  <mat-accordion>
+    <mat-expansion-panel class="top-panel" expanded>
+      <mat-expansion-panel-header fxLayout="row">
+        <mat-panel-title fxLayoutAlign="start center">
+          <div class="exp-header-data">
+            <div class="title">Document ID:</div>
+            <div class="value">
+              {{ document.Document_ID }}
             </div>
-        </mat-expansion-panel>
-    </mat-accordion>
-    <mat-accordion>
-        <!-- actual list to be added here instead of [1,2,3] -->
-        <mat-expansion-panel *ngFor="let item of [1,2,3];  let isFirst = first" [expanded]="isFirst">
-            <mat-expansion-panel-header>
-                <mat-panel-title fxLayoutAlign="start center">
-                    <div class="exp-header-data">
-                        <div class="title">Scan ID:</div>
-                        <div class="value">
-                            {{document.scanId}}</div>
-                    </div>
-                </mat-panel-title>
-                <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center">
-                    <div class="exp-header-data">
-                        <div class="title">Scan Date: </div>
-                        <div class="value">
-                            {{document.createdAt | date:'mediumDate'}}
-                        </div>
-                    </div>
-                    <button mat-icon-button (click)="shareDoc($event)">
-                        <mat-icon>content_copy</mat-icon>
-                    </button>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <form class="panel-body" [formGroup]="form" (ngSubmit)="onSave()" fxLayout="row wrap"
-                fxLayoutAlign="space-between start" fxLayoutGap="20px">
-                <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>Id type</mat-label>
-                        <mat-select formControlName="idType">
-                            <mat-option value="drivingLicense">Driving License</mat-option>
-                            <mat-option value="passport">Passport</mat-option>
-                            <mat-option value="voterId">Voter ID</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>Id number</mat-label>
-                        <input matInput placeholder="Id #" formControlName="idNum">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>First name</mat-label>
-                        <input matInput placeholder="First name" formControlName="firstName">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>Last Name</mat-label>
-                        <input matInput placeholder="Last name" formControlName="lastName">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>Date of birth</mat-label>
-                        <input matInput [matDatepicker]="dobPicker" formControlName="dobPicker"
-                            placeholder="Date of birth">
-                        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
-                        <mat-datepicker #dobPicker></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>Street name</mat-label>
-                        <input matInput placeholder="Street Name" formControlName="streetName">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>City</mat-label>
-                        <input matInput placeholder="City" formControlName="city">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>Postal code</mat-label>
-                        <input matInput placeholder="Postal Code" formControlName="postalCode">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>Id expiry</mat-label>
-                        <input matInput [matDatepicker]="idExpirypicker" formControlName="idExpirypicker"
-                            placeholder="Id Expiry">
-                        <mat-datepicker-toggle matSuffix [for]="idExpirypicker"></mat-datepicker-toggle>
-                        <mat-datepicker #idExpirypicker></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>User id</mat-label>
-                        <input matInput placeholder="User id" formControlName="userId">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>Mode</mat-label>
-                        <input matInput placeholder="Mode" formControlName="mode">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFill>
-                        <mat-label>Updated date</mat-label>
-                        <input matInput [matDatepicker]="updatedDatepicker" placeholder="Update date"
-                            formControlName="updatedDate">
-                        <mat-datepicker-toggle matSuffix [for]="updatedDatepicker"></mat-datepicker-toggle>
-                        <mat-datepicker #updatedDatepicker></mat-datepicker>
-                    </mat-form-field>
+          </div>
+        </mat-panel-title>
+        <mat-panel-description
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+        >
+          <div class="exp-header-data">
+            <div class="title">Document Date:</div>
+            <div class="value">
+              {{ document.Document_Date | date: "mediumDate" }}
+            </div>
+          </div>
+          <button mat-icon-button (click)="shareDoc($event)">
+            <mat-icon>share</mat-icon>
+          </button>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="panel-body" fxLayout="row wrap" fxLayoutAlign="start start">
+        <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+          <div class="user-image">
+            <img src="./../../assets/user-dummy.svg" />
+          </div>
+        </div>
+        <div
+          fxFlex="85"
+          fxLayout="row wrap"
+          fxLayoutAlign="space-between start"
+        >
+          <div
+            fxFlex.gt-md="25"
+            fxFlex.md="50"
+            fxFlex.lt-md="50"
+            fxFlex.lt-sm="100"
+            fxFlex
+            class="data-wrap"
+          >
+            <div class="title">Nationality</div>
+            <div class="value">
+              {{ document.Nationality }}
+            </div>
+          </div>
+          <div
+            fxFlex.gt-md="25"
+            fxFlex.md="50"
+            fxFlex.lt-md="50"
+            fxFlex.lt-sm="100"
+            fxFlex
+            class="data-wrap"
+          >
+            <div class="title">First Name</div>
+            <div class="value">
+              {{ document.First_Name }}
+            </div>
+          </div>
+          <div
+            fxFlex.gt-md="25"
+            fxFlex.md="50"
+            fxFlex.lt-md="50"
+            fxFlex.lt-sm="100"
+            fxFlex
+            class="data-wrap"
+          >
+            <div class="title">Last Name</div>
+            <div class="value">
+              {{ document.Last_Name }}
+            </div>
+          </div>
+          <div
+            fxFlex.gt-md="25"
+            fxFlex.md="50"
+            fxFlex.lt-md="50"
+            fxFlex.lt-sm="100"
+            fxFlex
+            class="data-wrap"
+          >
+            <div class="title">DOB</div>
+            <div class="value">
+              {{ document.DOB }}
+            </div>
+          </div>
+          <div
+            fxFlex.gt-md="25"
+            fxFlex.md="50"
+            fxFlex.lt-md="50"
+            fxFlex.lt-sm="100"
+            fxFlex
+            class="data-wrap"
+          >
+            <div class="title">Buliding No</div>
+            <div class="value">
+              {{ document.Building_No }}
+            </div>
+          </div>
+          <div
+            fxFlex.gt-md="25"
+            fxFlex.md="50"
+            fxFlex.lt-md="50"
+            fxFlex.lt-sm="100"
+            fxFlex
+            class="data-wrap"
+          >
+            <div class="title">Street Name</div>
+            <div class="value">
+              {{ document.Street_Name }}
+            </div>
+          </div>
+          <div
+            fxFlex.gt-md="25"
+            fxFlex.md="50"
+            fxFlex.lt-md="50"
+            fxFlex.lt-sm="100"
+            fxFlex
+            class="data-wrap"
+          >
+            <div class="title">City</div>
+            <div class="value">
+              {{ document.City }}
+            </div>
+          </div>
+          <div
+            fxFlex.gt-md="25"
+            fxFlex.md="50"
+            fxFlex.lt-md="50"
+            fxFlex.lt-sm="100"
+            fxFlex
+            class="data-wrap"
+          >
+            <div class="title">Postal Code</div>
+            <div class="value">
+              {{ document.postalcode }}
+            </div>
+          </div>
+          <div
+            fxFlex.gt-md="25"
+            fxFlex.md="50"
+            fxFlex.lt-md="50"
+            fxFlex.lt-sm="100"
+            fxFlex
+            class="data-wrap"
+          >
+            <div class="title">Mode</div>
+            <div class="value">
+              {{ document.Mode }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-accordion>
+    <!-- actual list to be added here instead of [1,2,3] -->
+    <mat-expansion-panel
+      *ngFor="let item of [1, 2, 3]; let isFirst = first"
+      [expanded]="isFirst"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title fxLayoutAlign="start center">
+          <div class="exp-header-data">
+            <div class="title">Scan ID:</div>
+            <div class="value">
+              {{ document.Scan_ID }}
+            </div>
+          </div>
+        </mat-panel-title>
+        <mat-panel-description
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+        >
+          <div class="exp-header-data">
+            <div class="title">Scan Date:</div>
+            <div class="value">
+              {{ document.Scaned_Date | date: "mediumDate" }}
+            </div>
+          </div>
+          <button mat-icon-button (click)="shareDoc($event)">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <form
+        class="panel-body"
+        [formGroup]="form"
+        (ngSubmit)="onSave()"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between start"
+        fxLayoutGap="20px"
+      >
+        <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>Id type</mat-label>
+            <mat-select formControlName="idType">
+              <mat-option value="drivingLicense">Driving License</mat-option>
+              <mat-option value="passport">Passport</mat-option>
+              <mat-option value="voterId">Voter ID</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>Id number</mat-label>
+            <input matInput placeholder="Id #" formControlName="idNum" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>First name</mat-label>
+            <input
+              matInput
+              placeholder="First name"
+              formControlName="firstName"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>Last Name</mat-label>
+            <input
+              matInput
+              placeholder="Last name"
+              formControlName="lastName"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>Date of birth</mat-label>
+            <input
+              matInput
+              [matDatepicker]="dobPicker"
+              formControlName="dobPicker"
+              placeholder="Date of birth"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="dobPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #dobPicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>Street name</mat-label>
+            <input
+              matInput
+              placeholder="Street Name"
+              formControlName="streetName"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>City</mat-label>
+            <input matInput placeholder="City" formControlName="city" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>Postal code</mat-label>
+            <input
+              matInput
+              placeholder="Postal Code"
+              formControlName="postalCode"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>Id expiry</mat-label>
+            <input
+              matInput
+              [matDatepicker]="idExpirypicker"
+              formControlName="idExpirypicker"
+              placeholder="Id Expiry"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="idExpirypicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #idExpirypicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>User id</mat-label>
+            <input matInput placeholder="User id" formControlName="userId" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>Mode</mat-label>
+            <input matInput placeholder="Mode" formControlName="mode" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>Updated date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="updatedDatepicker"
+              placeholder="Update date"
+              formControlName="updatedDate"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="updatedDatepicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #updatedDatepicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div
+          fxFlex
+          fxFlex.gt-md="75"
+          fxFlex.md="100"
+          fxFlex.lt-md="100"
+          fxFlex.lt-sm="100"
+          fxLayout="column"
+          fxLayoutAlign="space-between start"
+        >
+          <div fxFill>
+            <owl-carousel-o [options]="customOptions">
+              <ng-container>
+                <ng-template class="slide" carouselSlide>
+                  <img
+                    class="slide-image-large"
+                    src="./../../assets/logo-main.svg"
+                  />
+                </ng-template>
+              </ng-container>
+              <ng-container>
+                <ng-template class="slide" carouselSlide>
+                  <img
+                    class="slide-image-large"
+                    src="./../../assets/login.svg"
+                  />
+                </ng-template>
+              </ng-container>
+            </owl-carousel-o>
+          </div>
+          <div fxLayout="row" fxLayout.lt-md="column" class="bottom-fix">
+            <div fxFlex="300px">
+              <img
+                class="photo-matching-img"
+                src="./../../assets/user-dummy.svg"
+              />
+              <div class="matching-wrap">
+                <mat-icon>check_circle</mat-icon>
+                Matching:
+                <span class="matching-value">
+                  <!--dummy-->
+                  70%</span
+                >
+              </div>
+            </div>
+            <div fxFlex fxFill>
+              <owl-carousel-o [options]="livelinessOptions">
+                <ng-container>
+                  <ng-template class="slide" carouselSlide>
+                    <img
+                      class="slide-image-small"
+                      src="./../../assets/logo-main.svg"
+                    />
+                  </ng-template>
+                </ng-container>
+                <ng-container>
+                  <ng-template class="slide" carouselSlide>
+                    <img
+                      class="slide-image-small"
+                      src="./../../assets/login.svg"
+                    />
+                  </ng-template>
+                </ng-container>
+              </owl-carousel-o>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="100">
+          <div>
+            <div class="section-header">Scan Results</div>
+            <div
+              fxLayout="row wrap"
+              fxLayoutAlign="space-between start"
+              class="alignment-fix"
+            >
+              <mat-form-field
+                appearance="outline"
+                class="field-wrap"
+                fxFlex.gt-md="25"
+                fxFlex.md="50"
+                fxFlex.lt-md="50"
+                fxFlex.lt-sm="100"
+                fxFlex
+              >
+                <mat-label>Id card front</mat-label>
+                <mat-select formControlName="idCardFront">
+                  <mat-option value="clear">Clear</mat-option>
+                  <mat-option value="notClear">Not clear</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field
+                appearance="outline"
+                class="field-wrap"
+                fxFlex.gt-md="25"
+                fxFlex.md="50"
+                fxFlex.lt-md="50"
+                fxFlex.lt-sm="100"
+                fxFlex
+              >
+                <mat-label>Id card back</mat-label>
+                <mat-select formControlName="idCardBack">
+                  <mat-option value="clear">Clear</mat-option>
+                  <mat-option value="notClear">Not clear</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field
+                appearance="outline"
+                class="field-wrap"
+                fxFlex.gt-md="25"
+                fxFlex.md="50"
+                fxFlex.lt-md="50"
+                fxFlex.lt-sm="100"
+                fxFlex
+              >
+                <mat-label>Selfie photo matching</mat-label>
+                <input
+                  matInput
+                  placeholder="%"
+                  formControlName="selfieMatching"
+                />
+              </mat-form-field>
+              <mat-form-field
+                appearance="outline"
+                class="field-wrap"
+                fxFlex.gt-md="25"
+                fxFlex.md="50"
+                fxFlex.lt-md="50"
+                fxFlex.lt-sm="100"
+                fxFlex
+              >
+                <mat-label>Live Check</mat-label>
+                <mat-select formControlName="liveCheck">
+                  <mat-option value="ok">Ok</mat-option>
+                  <mat-option value="rejected">Rejected</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field
+                appearance="outline"
+                class="field-wrap"
+                fxFlex.gt-md="25"
+                fxFlex.md="50"
+                fxFlex.lt-md="50"
+                fxFlex.lt-sm="100"
+                fxFlex
+              >
+                <mat-label>Scan result</mat-label>
+                <mat-select formControlName="scanResult">
+                  <mat-option value="incomplete">Incomplete</mat-option>
+                  <mat-option value="rejected">Rejected</mat-option>
+                  <mat-option value="verified">Verified</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field
+                appearance="outline"
+                class="field-wrap"
+                fxFlex.gt-md="75"
+                fxFlex.lt-md="50"
+                fxFlex
+              >
+                <mat-label>Reason</mat-label>
+                <textarea
+                  matInput
+                  placeholder="reason"
+                  rows="3"
+                  formControlName="reason"
+                ></textarea>
+              </mat-form-field>
+              <div
+                fxFlex="100"
+                class="button-bar"
+                fxLayout="row wrap"
+                fxLayoutAlign="center center"
+              >
+                <button mat-stroked-button type="button" (click)="clear()">
+                  cancel
+                </button>
+                <button mat-button class="primary-button" type="submit">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="100">
+          <div>
+            <div class="section-header">Comments</div>
+            <div fxLayout="row wrap" fxLayoutAlign="space-between start">
+              <mat-form-field
+                appearance="outline"
+                class="field-wrap alignment-fix"
+                fxFlex="100"
+              >
+                <mat-label>Comment</mat-label>
+                <textarea
+                  matInput
+                  placeholder="reason"
+                  rows="3"
+                  formControlName="comment"
+                ></textarea>
+                <button
+                  matSuffix
+                  mat-icon-button
+                  class="primary-button"
+                  (click)="sendComment()"
+                  aria-label="Send"
+                >
+                  <mat-icon>send</mat-icon>
+                </button>
+              </mat-form-field>
+              <div fxFlex="100" fxFlex class="comments-wrap">
+                <div class="comment">
+                  <div class="commented-by">
+                    <!-- dummy -->
+                    Ravi Verma:
+                  </div>
+                  <div class="commented-date">
+                    Commented on:
+                    <span>
+                      <!-- dummy -->
+                      13/07/2020
+                    </span>
+                  </div>
+                  <div class="value">
+                    <!--dummy-->
+                    ID submitted is not clear.
+                  </div>
                 </div>
-                <div fxFlex fxFlex.gt-md="75" fxFlex.md="100" fxFlex.lt-md="100" fxFlex.lt-sm="100" fxLayout="column"
-                    fxLayoutAlign="space-between start">
-                    <div fxFill>
-                        <owl-carousel-o [options]="customOptions">
-                            <ng-container>
-                                <ng-template class="slide" carouselSlide>
-                                    <img class="slide-image-large" src="./../../assets/logo-main.svg">
-                                </ng-template>
-                            </ng-container>
-                            <ng-container>
-                                <ng-template class="slide" carouselSlide>
-                                    <img class="slide-image-large" src="./../../assets/login.svg">
-                                </ng-template>
-                            </ng-container>
-                        </owl-carousel-o>
-                    </div>
-                    <div fxLayout="row" fxLayout.lt-md="column" class="bottom-fix">
-                        <div fxFlex="300px">
-                            <img class="photo-matching-img" src="./../../assets/user-dummy.svg">
-                            <div class="matching-wrap">
-                                <mat-icon>check_circle</mat-icon>
-                                Matching:
-                                <span class="matching-value">
-                                    <!--dummy--> 70%</span>
-                            </div>
-                        </div>
-                        <div fxFlex fxFill>
-                            <owl-carousel-o [options]="livelinessOptions">
-                                <ng-container>
-                                    <ng-template class="slide" carouselSlide>
-                                        <img class="slide-image-small" src="./../../assets/logo-main.svg">
-                                    </ng-template>
-                                </ng-container>
-                                <ng-container>
-                                    <ng-template class="slide" carouselSlide>
-                                        <img class="slide-image-small" src="./../../assets/login.svg">
-                                    </ng-template>
-                                </ng-container>
-                            </owl-carousel-o>
-                        </div>
-                    </div>
+                <div class="comment">
+                  <div class="commented-by">
+                    <!-- dummy -->
+                    Ravi Verma:
+                  </div>
+                  <div class="commented-date">
+                    Commented on:
+                    <span>
+                      <!-- dummy -->
+                      13/07/2020
+                    </span>
+                  </div>
+                  <div class="value">
+                    <!--dummy-->
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Accusamus ea, vero nulla, aspernatur fugiat facere fugit
+                    beatae et ratione nemo obcaecati accusantium id ut neque
+                    aliquid quae fuga natus quis.
+                  </div>
                 </div>
-                <div fxFlex="100">
-                    <div>
-                        <div class="section-header">Scan Results</div>
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="alignment-fix">
-                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
-                                fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
-                                <mat-label>Id card front</mat-label>
-                                <mat-select formControlName="idCardFront">
-                                    <mat-option value="clear">Clear</mat-option>
-                                    <mat-option value="notClear">Not clear</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
-                                fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
-                                <mat-label>Id card back</mat-label>
-                                <mat-select formControlName="idCardBack">
-                                    <mat-option value="clear">Clear</mat-option>
-                                    <mat-option value="notClear">Not clear</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
-                                fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
-                                <mat-label>Selfie photo matching</mat-label>
-                                <input matInput placeholder="%" formControlName="selfieMatching">
-                            </mat-form-field>
-                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
-                                fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
-                                <mat-label>Live Check</mat-label>
-                                <mat-select formControlName="liveCheck">
-                                    <mat-option value="ok">Ok</mat-option>
-                                    <mat-option value="rejected">Rejected</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
-                                fxFlex.lt-md="50" fxFlex.lt-sm="100" fxFlex>
-                                <mat-label>Scan result</mat-label>
-                                <mat-select formControlName="scanResult">
-                                    <mat-option value="incomplete">Incomplete</mat-option>
-                                    <mat-option value="rejected">Rejected</mat-option>
-                                    <mat-option value="verified">Verified</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="75" fxFlex.lt-md="50"
-                                fxFlex>
-                                <mat-label>Reason</mat-label>
-                                <textarea matInput placeholder="reason" rows="3" formControlName="reason"></textarea>
-                            </mat-form-field>
-                            <div fxFlex="100" class="button-bar" fxLayout="row wrap" fxLayoutAlign="center center">
-                                <button mat-stroked-button type="button" (click)="clear()">cancel</button>
-                                <button mat-button class="primary-button" type="submit">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div fxFlex="100">
-                    <div>
-                        <div class="section-header">Comments</div>
-                        <div fxLayout="row wrap" fxLayoutAlign="space-between start">
-                            <mat-form-field appearance="outline" class="field-wrap alignment-fix" fxFlex="100">
-                                <mat-label>Comment</mat-label>
-                                <textarea matInput placeholder="reason" rows="3" formControlName="comment"></textarea>
-                                <button matSuffix mat-icon-button class="primary-button" (click)="sendComment()"
-                                    aria-label="Send">
-                                    <mat-icon>send</mat-icon>
-                                </button>
-                            </mat-form-field>
-                            <div fxFlex="100" fxFlex class="comments-wrap">
-                                <div class="comment">
-                                    <div class="commented-by">
-                                        <!-- dummy --> Ravi Verma:
-                                    </div>
-                                    <div class="commented-date">Commented on:
-                                        <span>
-                                            <!-- dummy --> 13/07/2020
-                                        </span>
-                                    </div>
-                                    <div class="value">
-                                        <!--dummy--> ID submitted is not clear.
-                                    </div>
-                                </div>
-                                <div class="comment">
-                                    <div class="commented-by">
-                                        <!-- dummy --> Ravi Verma:
-                                    </div>
-                                    <div class="commented-date">Commented on:
-                                        <span>
-                                            <!-- dummy --> 13/07/2020
-                                        </span>
-                                    </div>
-                                    <div class="value">
-                                        <!--dummy--> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-                                        ea, vero nulla, aspernatur fugiat facere fugit beatae et ratione nemo obcaecati
-                                        accusantium id ut neque aliquid quae fuga natus quis.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </mat-expansion-panel>
-    </mat-accordion>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
