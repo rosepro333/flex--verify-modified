@@ -34,7 +34,12 @@
       <div class="panel-body" fxLayout="row wrap" fxLayoutAlign="start start">
         <div fxFlex fxLayout="column" fxLayoutAlign="center center">
           <div class="user-image">
-            <img src="./../../assets/user-dummy.svg" />
+            <img
+              src="photo-matching-img"
+              src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{
+                scanDocument.Selfie_Photo
+              }}?alt=media"
+            />
           </div>
         </div>
         <div
@@ -174,7 +179,7 @@
           <div class="exp-header-data">
             <div class="title">Scan ID:</div>
             <div class="value">
-              {{ document.Scan_ID }}
+              {{ scanDocument._id }}
             </div>
           </div>
         </mat-panel-title>
@@ -185,7 +190,7 @@
           <div class="exp-header-data">
             <div class="title">Scan Date:</div>
             <div class="value">
-              {{ document.Scaned_Date | date: "mediumDate" }}
+              {{ scanDocument.Scaned_Date | date: "mediumDate" }}
             </div>
           </div>
           <button mat-icon-button (click)="shareDoc($event)">
@@ -316,7 +321,9 @@
                 <ng-template class="slide" carouselSlide>
                   <img
                     class="slide-image-large"
-                    src="./../../assets/logo-main.svg"
+                    src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{
+                      scanDocument.ID_Card_Front
+                    }}?alt=media"
                   />
                 </ng-template>
               </ng-container>
@@ -324,7 +331,9 @@
                 <ng-template class="slide" carouselSlide>
                   <img
                     class="slide-image-large"
-                    src="./../../assets/login.svg"
+                    src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{
+                      scanDocument.ID_Card_Back
+                    }}?alt=media"
                   />
                 </ng-template>
               </ng-container>
@@ -334,7 +343,9 @@
             <div fxFlex="300px">
               <img
                 class="photo-matching-img"
-                src="./../../assets/user-dummy.svg"
+                src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{
+                  scanDocument.Selfie_Photo
+                }}?alt=media"
               />
               <div class="matching-wrap">
                 <mat-icon>check_circle</mat-icon>
@@ -348,21 +359,27 @@
             <div fxFlex fxFill>
               <owl-carousel-o [options]="livelinessOptions">
                 <ng-container>
-                  <ng-template class="slide" carouselSlide>
+                  <ng-template
+                    class="slide"
+                    carouselSlide
+                    *ngFor="let i of scanDocument.LiveCheck_Photos"
+                  >
                     <img
                       class="slide-image-small"
-                      src="./../../assets/logo-main.svg"
+                      src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{
+                        i
+                      }}?alt=media"
                     />
                   </ng-template>
                 </ng-container>
-                <ng-container>
+                <!-- <ng-container>
                   <ng-template class="slide" carouselSlide>
                     <img
                       class="slide-image-small"
                       src="./../../assets/login.svg"
                     />
                   </ng-template>
-                </ng-container>
+                </ng-container> -->
               </owl-carousel-o>
             </div>
           </div>

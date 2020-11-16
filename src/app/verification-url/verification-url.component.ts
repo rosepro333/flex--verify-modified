@@ -13,7 +13,7 @@ export class VerificationUrlComponent implements OnInit {
   smsValue = "";
   emailValue = "";
   elementType: "url";
-  value: string = "https://www.google.com/";
+  verificaionUrl: string = "";
   tenentList: any = [];
   sdkKey: any = [];
   selectSdk = "";
@@ -47,7 +47,15 @@ export class VerificationUrlComponent implements OnInit {
   clickGenerate() {
     this.serviceService.generateUrl().subscribe(
       (res) => {
-        console.log(res);
+        if (res.url) {
+          console.log(res.url);
+          // this.verificaionUrl = res.url;
+          //localhost:50492/
+          var url = this.verificaionUrl.split("/");
+          console.log(url);
+          console.log(url[2]);
+          window.open(res.url, "_blank");
+        }
       },
       (error) => {
         console.error(error);

@@ -20,6 +20,7 @@ import { ServicesService } from "../service/services.service";
 export class DocumentDetailsComponent implements OnInit {
   id: number;
   document: any = [];
+  scanDocument: any = [];
   panelOpenState = false;
   form: FormGroup;
 
@@ -71,7 +72,7 @@ export class DocumentDetailsComponent implements OnInit {
     this.serviceServive.geScanDocumentList(id).subscribe((response) => {
       console.table(response.data[0]);
       console.log(response.data[0]);
-      this.document = response.data[0];
+      this.scanDocument = response.data[0];
     });
   }
 
