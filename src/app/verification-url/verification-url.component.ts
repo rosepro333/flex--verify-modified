@@ -51,12 +51,13 @@ export class VerificationUrlComponent implements OnInit {
       (res) => {
         if (res.url) {
           console.log(res.url);
+          this.verificaionUrl = res.url;
           // this.verificaionUrl = res.url;
           //localhost:50492/
-          var url = this.verificaionUrl.split("/");
-          console.log(url);
-          console.log(url[2]);
-          window.open(res.url, "_blank");
+          // var url = this.verificaionUrl.split("/");
+          // console.log(url);
+          // console.log(url[2]);
+          // window.open(res.url, "_blank");
         }
       },
       (error) => {

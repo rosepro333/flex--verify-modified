@@ -61,6 +61,7 @@ export class CreateUserComponent implements OnInit {
           if (result.msg == "success") {
             console.log(result);
             this.toster.openSnackBar("User Created Successfully", result.msg);
+            this.userNavigate();
           }
         },
         (error) => {
@@ -75,6 +76,7 @@ export class CreateUserComponent implements OnInit {
           if (result.msg == "success") {
             console.log(result);
             this.toster.openSnackBar("Tenent Created Successfully", result.msg);
+            this.userNavigate();
           }
         },
         (error) => {
@@ -82,14 +84,11 @@ export class CreateUserComponent implements OnInit {
         }
       );
     }
-
-    // if (this.form.valid) {
-    //   console.log(this.form.value);
-    //
-
-    // }
-    // this.formSubmitAttempt = true;
-    // }
+  }
+  userNavigate() {
+    setTimeout(() => {
+      this.router.navigateByUrl("/organization");
+    }, 200);
   }
 
   clear() {

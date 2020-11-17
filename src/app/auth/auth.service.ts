@@ -37,12 +37,14 @@ export class AuthService {
       return this.http
         .post<any>(this.apiUrl + "/token/authenticate", data)
         .pipe(
-          // tap(() => this.setUpdateCookies(), window.location.reload),
+          tap(() => this.loggedIn.next(true)),
           retry(1),
           catchError(this.handleError)
         );
     }
   }
+
+  // this.setUpdateCookies(), window.location.reload
   setUpdateCookies() {
     this.httpOptions.headers.set("ACCESS-TOKEN", Cookie.get("data"));
   }
