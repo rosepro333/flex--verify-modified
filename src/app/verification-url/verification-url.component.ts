@@ -32,6 +32,7 @@ export class VerificationUrlComponent implements OnInit {
   }
   selectSdkKey(value: any) {
     Cookie.set("x-access-token", value);
+    localStorage.setItem("x-access-token", value);
   }
   selectTenent(value: any) {
     console.log(value);
@@ -42,6 +43,7 @@ export class VerificationUrlComponent implements OnInit {
       console.log(res.msg === "success");
       console.log(res.data);
       this.sdkKey = res.data;
+      this.ngOnInit();
     });
   }
   clickGenerate() {

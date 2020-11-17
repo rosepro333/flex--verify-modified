@@ -13,7 +13,8 @@ import { async } from "rxjs/internal/scheduler/async";
   providedIn: "root",
 })
 export class ServicesService {
-  private apiUrl = environment.dummyApi;
+  // private apiUrl = environment.dummyApi;
+  private apiUrl = environment.apiUrl;
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
@@ -71,6 +72,7 @@ export class ServicesService {
         Tenent_ID: data.Tenent,
         Mode: data.mode,
       };
+      console.log();
       return this.http
         .post(this.apiUrl + "/apikey", apiKeyData, this.httpOptions)
         .pipe(retry(1), catchError(this.handleError));

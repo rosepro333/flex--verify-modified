@@ -11,6 +11,8 @@ import { ServicesService } from "src/app/service/services.service";
 })
 export class CreateSdyKeyComponent implements OnInit {
   form: FormGroup;
+  tenentList: any = [];
+  tenentId: string = "";
 
   constructor(
     private fb: FormBuilder,
@@ -20,17 +22,38 @@ export class CreateSdyKeyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.formControl();
+    this.getTenentList();
+  }
+  formControl() {
     this.form = this.fb.group({
       Tenent: new FormControl(""),
       mode: new FormControl(""),
     });
   }
+  getTenentList() {
+    this.service.getTenentList().subscribe((res) => {
+      // console.log(res);
+      if (res.msg === "success") {
+        this.tenentList = res.data;
+      }
+    });
+  }
+  selectTenent(value: any) {
+    this.tenentId = value;
+  }
   onSave(event: any) {
     console.log(event);
+    this.form.value.Tenent = this.tenentId;
     if (this.form.valid) {
       this.service.createSdkKey(this.form.value).subscribe(
         (result) => {
           console.log(result);
+          if (result.msg === "success") {
+            setTimeout(() => {
+              this.clear();
+            });
+          }
         },
         (error) => {
           console.error(error);
