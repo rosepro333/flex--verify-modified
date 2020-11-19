@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
-import { AuthService } from './../auth/auth.service';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { Cookie } from "ng2-cookies/ng2-cookies";
+import { AuthService } from "./../auth/auth.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
@@ -17,13 +17,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router:Router
-  ) { }
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required]
+      userName: ["", Validators.required],
+      password: ["", Validators.required],
     });
   }
 
@@ -36,21 +36,27 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.authService.login(this.form.value).subscribe(result=>{
-        if(result.msg ==='success') {
-                   // this.loggedIn.next(true);
-        console.log(result)
-        Cookie.set('apires', result.apires);
-        Cookie.set('data', result.data);
-        Cookie.set('LOGIN_STATUS',result.msg);
-          this.router.navigate(['/']);
+      this.authService.login(this.form.value).subscribe(
+        (result) => {
+          if (result.msg === "success") {
+            // this.loggedIn.next(true);
+            console.log(result);
+            Cookie.set("Tenant_ID", result.user.Tenant_ID);
+            Cookie.set("id", result.user.ID);
+            Cookie.set("apires", result.apires);
+            Cookie.set("data", result.data);
+            Cookie.set("LOGIN_STATUS", result.msg);
+            this.router.navigate(["/"]);
+          }
+        },
+        (error) => {
+          console.error(error);
         }
-       
-      }, error => {        
-        console.error(error);
-      })
-
+      );
     }
     this.formSubmitAttempt = true;
+  }
+  forgetPassword() {
+    this.router.navigate(["/forget-passowrd"]);
   }
 }

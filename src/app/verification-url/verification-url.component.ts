@@ -31,8 +31,9 @@ export class VerificationUrlComponent implements OnInit {
     });
   }
   selectSdkKey(value: any) {
-    Cookie.set("x-access-token", value);
-    localStorage.setItem("x-access-token", value);
+    this.selectSdk = value;
+    // Cookie.set("x-access-token", value);
+    // localStorage.setItem("x-access-token", value);
   }
   selectTenent(value: any) {
     console.log(value);
@@ -47,7 +48,8 @@ export class VerificationUrlComponent implements OnInit {
     });
   }
   clickGenerate() {
-    this.serviceService.generateUrl().subscribe(
+    const key = this.selectSdk;
+    this.serviceService.generateUrl(key).subscribe(
       (res) => {
         if (res.url) {
           console.log(res.url);

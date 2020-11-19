@@ -1,145 +1,202 @@
 <mat-toolbar>
-    <button mat-icon-button [routerLink]="['/settings']">
-        <mat-icon>arrow_back</mat-icon>
-    </button>
-    <span>API keys</span>
+  <button mat-icon-button [routerLink]="['/settings']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>API keys</span>
 </mat-toolbar>
 
 <div class="api-keys-wrap" fxLayout="row wrap" fxLayoutAlign="start start">
-
-    <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-        <mat-card>
-            <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between center">
-                <mat-card-title>
-                    <span>Api key</span>
-                    <span class="key-env">
-                        <!--dummy-->(Sandbox)
-                    </span>
-                </mat-card-title>
-                <button mat-button class="primary-button" (click)="createKey('api')">
-                    <mat-icon>add</mat-icon>
-                    Create Key
-                </button>
-            </mat-card-header>
-            <mat-card-content fxLayout="row wrap" fxLayoutAlign="start start">
-                <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" fxFlex class="data-wrap">
-                    <div>
-                        <div class="title" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-between center">
-                            <div>KEY</div>
-                            <button mat-icon-button matTooltip="copy key" matTooltipPosition="right"
-                                (click)="copyKey()">
-                                <mat-icon>content_copy</mat-icon>
-                            </button>
-                        </div>
-                        <div class="value api-key-value">
-                            <!--dummy--> api.key.sandbox22444566.77ggghhx2244
-                            rflhfedggg6554784566.77ggghh
-                        </div>
-                    </div>
-
+  <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
+    <mat-card>
+      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <mat-card-title>
+          <span>Api key</span>
+          <span class="key-env"> <!--dummy-->(Sandbox) </span>
+        </mat-card-title>
+        <button mat-button class="primary-button" (click)="createKey('api')">
+          <mat-icon>add</mat-icon>
+          Create Api Key
+        </button>
+      </mat-card-header>
+      <mat-card-content
+        fxLayout="row wrap"
+        fxLayoutAlign="start start"
+        *ngFor="let i of apiKeyData"
+      >
+        <div
+          fxFlex.gt-md="100"
+          fxFlex.md="100"
+          fxFlex.lt-md="100"
+          fxFlex
+          class="data-wrap"
+        >
+          <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
+            <div
+              class="title"
+              fxLayout="row wrap"
+              fxLayoutGap="20px"
+              fxLayoutAlign="space-between center"
+            >
+              <div>KEY</div>
+              <button
+                mat-icon-button
+                matTooltip="copy key"
+                matTooltipPosition="right"
+                (click)="copyKey()"
+              >
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </div>
+            <div class="value api-key-value">
+              {{ i.Api_Key }}
+              <!-- dummy api.key.sandbox22444566.77ggghhx2244
+                            rflhfedggg6554784566.77ggghh -->
+            </div>
+          </div>
+        </div>
+        <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
+          <div fxLayout="row wrap" fxLayoutAlign="start start">
+            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
+              <div class="data-wrap">
+                <div class="title">Created at</div>
+                <div class="value">
+                  <!--dummy-->
+                  {{ i.Created_At | date: "longDate" }}
                 </div>
-                <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
-                    <div fxLayout="row wrap" fxLayoutAlign="start start">
-                        <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-                            <div class="data-wrap">
-                                <div class="title">Created at</div>
-                                <div class="value">
-                                    <!--dummy--> 06/01/2020
-                                </div>
-                            </div>
-                        </div>
-                        <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-                            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" class="data-wrap">
-                                <div class="title">Owner</div>
-                                <div class="value">
-                                    <!--dummy--> 10020011124
-                                </div>
-                            </div>
-                        </div>
-                        <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-                            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" class="data-wrap">
-                                <div class="title">Last Used</div>
-                                <div class="value">
-                                    <!--dummy--> Today
-                                </div>
-                            </div>
-                        </div>
-                        <div fxFlex="100" align="right">
-                            <button mat-button class="revoke-button" (click)="revoke()">
-                                <mat-icon>cancel</mat-icon>
-                                Revoke
-                            </button>
-                        </div>
-                    </div>
+              </div>
+            </div>
+            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
+              <div
+                fxFlex.gt-md="50"
+                fxFlex.md="100"
+                fxFlex.lt-md="100"
+                class="data-wrap"
+              >
+                <div class="title">Owner</div>
+                <div class="value">
+                  <!--dummy-->
+                  {{ i.Tenent_ID }}
                 </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-        <mat-card>
-            <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between center">
-                <mat-card-title>
-                    <span>Mobile key</span>
-                    <span class="key-env">
-                        <!--dummy-->(Sandbox)
-                    </span>
-                </mat-card-title>
-                <button mat-button class="primary-button" (click)="createKey('mobile')">
-                    <mat-icon>add</mat-icon>
-                    Create Key
-                </button>
-            </mat-card-header>
-            <mat-card-content fxLayout="row wrap" fxLayoutAlign="start start">
-                <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" fxFlex class="data-wrap">
-                    <div>
-                        <div class="title" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-between center">
-                            <div>KEY</div>
-                            <button mat-icon-button matTooltip="copy key" matTooltipPosition="right"
-                                (click)="copyKey()">
-                                <mat-icon>content_copy</mat-icon>
-                            </button>
-                        </div>
-                        <div class="value api-key-value">
-                            <!--dummy--> api.key.sandbox22444566.77ggghhx2244
-                            rflhfedggg6554784566.77ggghh
-                        </div>
-                    </div>
+              </div>
+            </div>
+            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
+              <div
+                fxFlex.gt-md="50"
+                fxFlex.md="100"
+                fxFlex.lt-md="100"
+                class="data-wrap"
+              >
+                <div class="title">Last Used</div>
+                <div class="value">
+                  <!--dummy-->
+                  Today
                 </div>
-                <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
-                    <div fxLayout="row wrap" fxLayoutAlign="start start">
-                        <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-                            <div class="data-wrap">
-                                <div class="title">Created at</div>
-                                <div class="value">
-                                    <!--dummy--> 06/01/2020
-                                </div>
-                            </div>
-                        </div>
-                        <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-                            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" class="data-wrap">
-                                <div class="title">Owner</div>
-                                <div class="value">
-                                    <!--dummy--> 10020011124
-                                </div>
-                            </div>
-                        </div>
-                        <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-                            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100" class="data-wrap">
-                                <div class="title">Last Used</div>
-                                <div class="value">
-                                    <!--dummy--> Today
-                                </div>
-                            </div>
-                        </div>
-                        <div fxFlex="100" align="right">
-                            <button mat-button class="revoke-button" (click)="revoke()">
-                                <mat-icon>cancel</mat-icon>
-                                Revoke
-                            </button>
-                        </div>
-                    </div>
+              </div>
+            </div>
+            <div fxFlex="100" align="right">
+              <button mat-button class="revoke-button" (click)="revoke()">
+                <mat-icon>cancel</mat-icon>
+                Revoke
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
+    <mat-card>
+      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <mat-card-title>
+          <span>Mobile key</span>
+          <span class="key-env"> <!--dummy-->(Sandbox) </span>
+        </mat-card-title>
+        <button mat-button class="primary-button" (click)="createKey('mobile')">
+          <mat-icon>add</mat-icon>
+          Create Sdk Key
+        </button>
+      </mat-card-header>
+      <mat-card-content
+        fxLayout="row wrap"
+        fxLayoutAlign="start start"
+        *ngFor="let i of sdkKeyData"
+      >
+        <div
+          fxFlex.gt-md="100"
+          fxFlex.md="100"
+          fxFlex.lt-md="100"
+          fxFlex
+          class="data-wrap"
+        >
+          <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
+            <div
+              class="title"
+              fxLayout="row wrap"
+              fxLayoutGap="20px"
+              fxLayoutAlign="space-between center"
+            >
+              <div>KEY</div>
+              <button
+                mat-icon-button
+                matTooltip="copy key"
+                matTooltipPosition="right"
+                (click)="copyKey()"
+              >
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </div>
+            <div class="value api-key-value">
+              {{ i.SDK_Key }}
+            </div>
+          </div>
+        </div>
+        <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
+          <div fxLayout="row wrap" fxLayoutAlign="start start">
+            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
+              <div class="data-wrap">
+                <div class="title">Created at</div>
+                <div class="value">
+                  {{ i.Created_At | date: "longDate" }}
                 </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
+              </div>
+            </div>
+            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
+              <div
+                fxFlex.gt-md="50"
+                fxFlex.md="100"
+                fxFlex.lt-md="100"
+                class="data-wrap"
+              >
+                <div class="title">Owner</div>
+                <div class="value">
+                  <!--dummy-->
+                  {{ i.Tenent_ID }}
+                </div>
+              </div>
+            </div>
+            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
+              <div
+                fxFlex.gt-md="50"
+                fxFlex.md="100"
+                fxFlex.lt-md="100"
+                class="data-wrap"
+              >
+                <div class="title">Last Used</div>
+                <div class="value">
+                  <!--dummy-->
+                  Today
+                </div>
+              </div>
+            </div>
+            <div fxFlex="100" align="right">
+              <button mat-button class="revoke-button" (click)="revoke()">
+                <mat-icon>cancel</mat-icon>
+                Revoke
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

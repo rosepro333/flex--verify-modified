@@ -1,29 +1,17 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
 import { ServicesService } from "../service/services.service";
 
-export interface OrganizationElement {
-  id: number;
-  name: string;
-  email: string;
-  role: string;
-  owner: string;
-  expiryDate: Date;
-  createdBy: string;
-  isBlocked: boolean;
-}
-let ELEMENT_DATA_Tenent: OrganizationElement[] = [];
-let ELEMENT_DATA_User: OrganizationElement[] = [];
-
+let ELEMENT_DATA_Tenent: any = [];
+let ELEMENT_DATA_User: any = [];
 @Component({
-  selector: "app-organization",
-  templateUrl: "./organization.component.html",
-  styleUrls: ["./organization.component.scss"],
-  encapsulation: ViewEncapsulation.None,
+  selector: "app-flex-user",
+  templateUrl: "./flex-user.component.html",
+  styleUrls: ["./flex-user.component.scss"],
 })
-export class OrganizationComponent implements OnInit {
+export class FlexUserComponent implements OnInit {
   // public data:any=[]
   @ViewChild(MatSort) sort: MatSort;
 

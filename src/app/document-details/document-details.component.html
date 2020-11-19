@@ -23,7 +23,7 @@
           <div class="exp-header-data">
             <div class="title">Document Date:</div>
             <div class="value">
-              {{ document.Document_Date | date: "mediumDate" }}
+              {{ document.Document_Date | date:'shortDate' }}
             </div>
           </div>
           <button mat-icon-button (click)="shareDoc($event)">
@@ -96,7 +96,7 @@
           >
             <div class="title">DOB</div>
             <div class="value">
-              {{ document.DOB }}
+              {{ document.DOB |date:'shortDate' }}
             </div>
           </div>
           <div

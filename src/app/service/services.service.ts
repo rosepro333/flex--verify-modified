@@ -13,8 +13,8 @@ import { async } from "rxjs/internal/scheduler/async";
   providedIn: "root",
 })
 export class ServicesService {
-  // private apiUrl = environment.dummyApi;
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.dummyApi;
+  // private apiUrl = environment.apiUrl;
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
@@ -41,7 +41,11 @@ export class ServicesService {
         .pipe(retry(1), catchError(this.handleError));
     }
   }
-
+  deleteTenent(id: any): Observable<any> {
+    return this.http
+      .delete(this.apiUrl + "/tenent/delete/" + id, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
   userCreate(user: any): Observable<any> {
     if (user.email !== "" && user.name !== "" && user.access !== "") {
       const data = {
@@ -66,6 +70,11 @@ export class ServicesService {
         .pipe(retry(1), catchError(this.handleError));
     }
   }
+  getSdkKeyList(id: any): Observable<any> {
+    return this.http
+      .get(this.apiUrl + "/sdkkey/list/" + id, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
   createApiKey(data: any): Observable<any> {
     if (data.Tenent !== "" && data.mode !== "") {
       const apiKeyData = {
@@ -78,6 +87,12 @@ export class ServicesService {
         .pipe(retry(1), catchError(this.handleError));
     }
   }
+  getApiKeyList(id: any): Observable<any> {
+    return this.http
+      .get(this.apiUrl + "/apikey/list/" + id, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
   getTenentList(): Observable<any> {
     return this.http
       .get(this.apiUrl + "/tenent/list", this.httpOptions)
@@ -88,15 +103,63 @@ export class ServicesService {
       .get(this.apiUrl + "/user/list", this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
+  getUserDetails(id: any): Observable<any> {
+    return this.http
+      .get(this.apiUrl + "/user/" + id, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+  deleteUser(id: any): Observable<any> {
+    return this.http
+      .delete(this.apiUrl + "/user/delete/" + id, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+  resetPassword(data: any): Observable<any> {
+    if (data) {
+      const resetDAta = {
+        Contact_Email: "shamim",
+        password: "shamim1",
+        newpassword: "shamim",
+      };
+      return this.http
+        .post(this.apiUrl + "/user/resetPassword", resetDAta, this.httpOptions)
+        .pipe(retry(1), catchError(this.handleError));
+    }
+  }
+  idFindMyMail(data: any): Observable<any> {
+    if (data) {
+      const formData = {
+        Contact_Email: data.userName,
+      };
+      return this.http
+        .post(this.apiUrl + "/user/idFindByEmail", formData, this.httpOptions)
+        .pipe(retry(1), catchError(this.handleError));
+    }
+  }
+  forgetPassword(data: any): Observable<any> {
+    if (data) {
+      const formData = {
+        Contact_Email: "shamim",
+        password: "shamim1",
+        newpassword: "shamim",
+      };
+      return this.http
+        .post(this.apiUrl + "/user/forgetPassword", formData, this.httpOptions)
+        .pipe(retry(1), catchError(this.handleError));
+    }
+  }
   getTenentSdkList(tenent_id: any): Observable<any> {
     console.log(tenent_id);
     return this.http
       .get(this.apiUrl + "/sdkkey/list/" + tenent_id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  generateUrl(): Observable<any> {
+  generateUrl(key: any): Observable<any> {
+    console.log(key);
+    const data = {
+      header: key,
+    };
     return this.http
-      .post(this.apiUrl + "/generate", {}, this.httpOptions)
+      .post(this.apiUrl + "/generate", data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   documentList(): Observable<any> {

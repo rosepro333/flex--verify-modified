@@ -48,6 +48,14 @@ import { DocumentService } from "./document/services/document.service";
 import { CreateApiKayComponent } from "./dialog-box/create-api-kay/create-api-kay.component";
 import { CreateSdyKeyComponent } from "./dialog-box/create-sdy-key/create-sdy-key.component";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { FlexUserComponent } from './flex-user/flex-user.component';
+import { FlexTenentComponent } from './flex-tenent/flex-tenent.component';
+import { CreateFlexTenentComponent } from './create-flex-tenent/create-flex-tenent.component';
+import { CreateFlexUserComponent } from './create-flex-user/create-flex-user.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { SetPasswordComponent } from './set-password/set-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { NewPasswordComponent } from './new-password/new-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,6 +73,14 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     CreateUserComponent,
     CreateApiKayComponent,
     CreateSdyKeyComponent,
+    FlexUserComponent,
+    FlexTenentComponent,
+    CreateFlexTenentComponent,
+    CreateFlexUserComponent,
+    ForgetPasswordComponent,
+    SetPasswordComponent,
+    ResetPasswordComponent,
+    NewPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -28,10 +28,10 @@
           <div class="title">Document Id</div>
           <div class="value">{{ document.Document_ID }}</div>
         </div>
-        <div class="data-wrap">
+        <!-- <div class="data-wrap">
           <div class="title">Scan Id</div>
           <div class="value">{{ document.scanId }}</div>
-        </div>
+        </div> -->
       </td>
     </ng-container>
     <ng-container matColumnDef="date-time">
@@ -40,13 +40,13 @@
         <div class="data-wrap">
           <div class="title">Created Id</div>
           <div class="value">
-            {{ document.Created_Date | date: "mediumDate" }}
+            {{ document.createdAt | date: "mediumDate" }}
           </div>
         </div>
         <div class="data-wrap">
           <div class="title">Created time</div>
           <div class="value">
-            {{ document.Created_Time | date: "mediumTime" }}
+            {{ document.updatedAt | date: "mediumTime" }}
           </div>
         </div>
       </td>
@@ -83,9 +83,9 @@
             <mat-icon>{{ document.icon }}</mat-icon>
           </div>
           <div class="data-wrap">
-            <div class="value">{{ document.status }}</div>
+            <div class="value">{{ document.Status }}</div>
             <div class="value">
-              {{ document.statusDate | date: "mediumDate" }}
+              {{ document.updatedAt | date: "mediumDate" }}
             </div>
           </div>
         </div>

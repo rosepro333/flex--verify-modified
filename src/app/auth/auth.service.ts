@@ -11,8 +11,8 @@ import { Cookie } from "ng2-cookies/ng2-cookies";
 import { ITS_JUST_ANGULAR } from "@angular/core/src/r3_symbols";
 @Injectable()
 export class AuthService {
-  // private apiUrl = environment.dummyApi;
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.dummyApi;
+  // private apiUrl = environment.apiUrl;
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );

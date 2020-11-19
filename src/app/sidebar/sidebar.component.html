@@ -1,51 +1,68 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" [opened]="true" fixedInViewport="true" [ngClass]="sidebarMode"
-        (mouseover)="sidebarModeFunc('unfolded')" (mouseout)="sidebarModeFunc('folded')">
-        <mat-nav-list fxLayout="column" fxFill>
-            <div class="nav-logo" fxLayout="row" fxLayoutAlign="center center">
-                <img src="{{imgSrc}}">
-            </div>
-            <!-- top-section -->
-            <mat-list-item [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-                <mat-icon>dashboard</mat-icon>
-                <span class="nav-text">Dashboard</span>
-            </mat-list-item> 
-            <!-- <mat-list-item [routerLink]="['/verification-url']" routerLinkActive="active"
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    [opened]="true"
+    fixedInViewport="true"
+    [ngClass]="sidebarMode"
+    (mouseover)="sidebarModeFunc('unfolded')"
+    (mouseout)="sidebarModeFunc('folded')"
+  >
+    <mat-nav-list fxLayout="column" fxFill>
+      <div class="nav-logo" fxLayout="row" fxLayoutAlign="center center">
+        <img src="{{ imgSrc }}" />
+      </div>
+      <!-- top-section -->
+      <mat-list-item
+        [routerLink]="['./']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <mat-icon>dashboard</mat-icon>
+        <span class="nav-text">Dashboard</span>
+      </mat-list-item>
+      <!-- <mat-list-item [routerLink]="['/verification-url']" routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact:true}">
                 <mat-icon>link</mat-icon>
                 <span class="nav-text">Verification Url</span>
             </mat-list-item> -->
-            <mat-list-item [routerLink]="['/documents']" routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact:true}">
-                <mat-icon>assignment</mat-icon>
-                <span class="nav-text">Document</span>
-            </mat-list-item>
-            <mat-list-item>
-                <mat-icon>insights</mat-icon>
-                <span class="nav-text">Report</span>
-            </mat-list-item>
-            <mat-list-item [routerLink]="['/settings']" routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact:true}">
-                <mat-icon>settings</mat-icon>
-                <span class="nav-text">Settings</span>
-            </mat-list-item>
-            <!-- bottom section -->
-            <span fxFlex></span>
-            <mat-list-item>
-                <mat-icon>account_circle</mat-icon>
-                <span class="nav-text">User Name</span>
-            </mat-list-item>
-            <mat-list-item (click)="logout()">
-                <mat-icon>power_settings_new</mat-icon>
-                <span class="nav-text">Logout</span>
-            </mat-list-item>
-            <mat-list-item>
-                <mat-icon>info</mat-icon>
-                <span class="nav-text">About</span>
-            </mat-list-item>
-        </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content [ngClass]="sidebarMode">
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
+      <mat-list-item
+        [routerLink]="['/documents']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <mat-icon>assignment</mat-icon>
+        <span class="nav-text">Document</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon>insights</mat-icon>
+        <span class="nav-text">Report</span>
+      </mat-list-item>
+      <mat-list-item
+        [routerLink]="['/settings']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <mat-icon>settings</mat-icon>
+        <span class="nav-text">Settings</span>
+      </mat-list-item>
+      <!-- bottom section -->
+      <span fxFlex></span>
+      <mat-list-item>
+        <mat-icon>account_circle</mat-icon>
+        <span class="nav-text">{{ userName }}</span>
+      </mat-list-item>
+      <mat-list-item (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+        <span class="nav-text">Logout</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon>info</mat-icon>
+        <span class="nav-text">About</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content [ngClass]="sidebarMode">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
 </mat-sidenav-container>

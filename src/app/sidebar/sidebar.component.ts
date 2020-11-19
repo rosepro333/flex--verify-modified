@@ -1,29 +1,34 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from './../auth/auth.service';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Router } from "@angular/router";
+import { Cookie } from "ng2-cookies";
+import { ServicesService } from "../service/services.service";
+import { AuthService } from "./../auth/auth.service";
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+  selector: "app-sidebar",
+  templateUrl: "./sidebar.component.html",
+  styleUrls: ["./sidebar.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
 export class SidebarComponent implements OnInit {
   // pageTitle: string;
-  imgSrc: string = './../../assets/v-logo.svg';
-  sidebarMode: string = 'folded';
+  imgSrc: string = "./../../assets/v-logo.svg";
+  sidebarMode: string = "folded";
+  userName: string = "";
   constructor(
     private authService: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private service: ServicesService
+  ) {}
 
   ngOnInit(): void {
+    this.getUserDetails();
     // this.pageTitle = 'Dashboard';
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['login']);
+    this.router.navigate(["login"]);
   }
 
   // navigate(title: string) {
@@ -31,14 +36,20 @@ export class SidebarComponent implements OnInit {
   // }
 
   sidebarModeFunc(mode) {
-    if (mode == 'folded') {
+    if (mode == "folded") {
       this.sidebarMode = mode;
-      this.imgSrc = './../../assets/v-logo.svg'
-    }
-    else if (mode == 'unfolded') {
+      this.imgSrc = "./../../assets/v-logo.svg";
+    } else if (mode == "unfolded") {
       this.sidebarMode = mode;
-      this.imgSrc = './../../assets/logo-main.svg';
+      this.imgSrc = "./../../assets/logo-main.svg";
     }
   }
-
+  getUserDetails() {
+    const id = Cookie.get("id");
+    this.service.getUserDetails(id).subscribe((res) => {
+      console.log("2");
+      // console.log(res.data.Contact_Name);
+      this.userName = res.data.Contact_Name;
+    });
+  }
 }
