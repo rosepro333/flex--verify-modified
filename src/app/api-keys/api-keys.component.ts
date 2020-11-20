@@ -29,15 +29,22 @@ export class ApiKeysComponent implements OnInit {
         height: "350px",
         width: "600px",
       });
+      dialogRef.afterClosed().subscribe(() => {
+        this.ngOnInit();
+      });
     } else if (value === "mobile") {
       const dialogRef = this.dialog.open(CreateSdyKeyComponent, {
         height: "350px",
         width: "600px",
       });
+      dialogRef.afterClosed().subscribe(() => {
+        this.ngOnInit();
+      });
     }
   }
   getApiKeyList() {
     const id = Cookie.get("Tenant_ID");
+    console.log(id);
     this.service.getApiKeyList(id).subscribe((res) => {
       // console.log(res);
       // if ()

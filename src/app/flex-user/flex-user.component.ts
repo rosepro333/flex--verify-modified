@@ -21,6 +21,7 @@ export class FlexUserComponent implements OnInit {
   displayedColumns: string[] = [
     "name-email",
     "role",
+    "name-status",
     "owner",
     "createdBy",
     "actions",

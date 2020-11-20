@@ -49,8 +49,8 @@ export class ServicesService {
   userCreate(user: any): Observable<any> {
     if (user.email !== "" && user.name !== "" && user.access !== "") {
       const data = {
-        Contact_Email: user.name,
-        Contact_Name: user.email,
+        Contact_Email: user.email,
+        Contact_Name: user.name,
         Access_Type: user.access,
         Tenant_ID: user.tenent,
       };
@@ -70,9 +70,14 @@ export class ServicesService {
         .pipe(retry(1), catchError(this.handleError));
     }
   }
-  getSdkKeyList(id: any): Observable<any> {
+  getSdkKeyListById(id: any): Observable<any> {
     return this.http
       .get(this.apiUrl + "/sdkkey/list/" + id, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+  getSdkKeyList(id: any): Observable<any> {
+    return this.http
+      .get(this.apiUrl + "/sdkkey/list", this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   createApiKey(data: any): Observable<any> {
@@ -87,9 +92,14 @@ export class ServicesService {
         .pipe(retry(1), catchError(this.handleError));
     }
   }
-  getApiKeyList(id: any): Observable<any> {
+  getApiKeyListById(id: any): Observable<any> {
     return this.http
       .get(this.apiUrl + "/apikey/list/" + id, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+  getApiKeyList(id: any): Observable<any> {
+    return this.http
+      .get(this.apiUrl + "/apikey/list", this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
 
