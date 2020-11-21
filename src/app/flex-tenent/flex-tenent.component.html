@@ -4,134 +4,221 @@
   </button>
   <span>Tenent</span>
 </mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="over" position="end">
+    <div class="create-user-wrap">
+      <mat-card>
+        <form [formGroup]="form" (ngSubmit)="onSave()">
+          <div fxLayout="row wrap">
+            <mat-form-field
+              appearance="outline"
+              class="field-wrap"
+              fxFlex.gt-md="100"
+              fxFlex.md="100"
+              fxFlex.lt-md="100"
+              fxFlex.lt-sm="100"
+            >
+              <mat-label>Tenent Name</mat-label>
+              <input
+                matInput
+                placeholder="Tenent Name"
+                formControlName="tenent"
+              />
+            </mat-form-field>
 
-<div class="organization-wrap">
-  <!-- <mat-tab-group> -->
-  <!-- <mat-tab label="Tenent"> -->
-  <div fxLayout="column" fxLayoutAlign="start start">
-    <div fxLayout="row wrap" fxLayoutAlign="end center" fxFill class="mb-12">
-      <button
-        mat-button
-        class="primary-button"
-        [routerLink]="['/cretae-flexm-tenent']"
-      >
-        <mat-icon>person_add</mat-icon> Create Tenent
-      </button>
+            <mat-form-field
+              appearance="outline"
+              class="field-wrap"
+              fxFlex.gt-md="100"
+              fxFlex.md="100"
+              fxFlex.lt-md="100"
+              fxFlex.lt-sm="100"
+            >
+              <mat-label>Contact Name</mat-label>
+              <input matInput placeholder="Name" formControlName="name" />
+            </mat-form-field>
+            <mat-form-field
+              appearance="outline"
+              class="field-wrap"
+              fxFlex.gt-md="100"
+              fxFlex.md="100"
+              fxFlex.lt-md="100"
+              fxFlex.lt-sm="100"
+            >
+              <mat-label>Contact Email</mat-label>
+              <input matInput placeholder="Email" formControlName="email" />
+            </mat-form-field>
+            <!-- <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
+                            fxFlex.lt-md="50" fxFlex.lt-sm="100">
+                            <mat-label>Access</mat-label>
+                            <mat-select formControlName="access">
+                                <mat-option value="flxemOperator">Flxem Operator </mat-option>
+                                <mat-option value="flexAdmin">Flex Admin</mat-option>
+                                <mat-option value="tenentAdmin">Tenent admin</mat-option>
+                                <mat-option value="tenentOperator">Tenent operator</mat-option>
+                            </mat-select>
+                        </mat-form-field> -->
+
+            <div
+              fxFlex="100"
+              class="button-bar"
+              fxLayout="row wrap"
+              fxLayoutAlign="center center"
+            >
+              <button
+                mat-stroked-button
+                type="button"
+                (click)="drawer.toggle()"
+              >
+                cancel
+              </button>
+              <button mat-button class="primary-button" type="submit">
+                Create
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-card>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="space-between start" fxFill>
-      <mat-form-field appearance="outline" fxFlex>
-        <mat-label>Filter</mat-label>
-        <input
-          matInput
-          (keyup)="applyTenantFilter($event)"
-          placeholder="Filter text"
-          #input
-        />
-      </mat-form-field>
-    </div>
-
-    <table
-      mat-table
-      [dataSource]="dataSourceTenant"
-      class="mat-elevation-z2"
-      matSort
-      fxFlex="100"
-      fxFill
-    >
-      <ng-container matColumnDef="name-email">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let element">
-          <div fxLayout="row" fxLayoutAlign="start center">
-            <div class="user-icon">
-              <mat-icon>account_circle</mat-icon>
-            </div>
-            <div class="data-wrap">
-              <div class="value">{{ element.Name }}</div>
-              <!-- <div class="value">{{element.email}}</div> -->
-            </div>
-          </div>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="role">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact Email</th>
-        <td mat-cell *matCellDef="let element">
-          <div class="data-wrap">
-            <div class="value">{{ element.Contact_Mail }}</div>
-          </div>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="owner">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact Name</th>
-        <td mat-cell *matCellDef="let element">
-          <div class="data-wrap">
-            <div class="value">{{ element.Contact_Name }}</div>
-          </div>
-        </td>
-      </ng-container>
-      <!-- <ng-container matColumnDef="expiryDate"> -->
-      <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header> Expiry Date </th>
-                        <td mat-cell *matCellDef="let element">
-                            <div class="data-wrap">
-                                <div class="value">{{element.expiryDate | date:'mediumDate'}} </div>
-                            </div>
-                        </td> -->
-      <!-- </ng-container> -->
-      <ng-container matColumnDef="createdBy">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Created At</th>
-        <td mat-cell *matCellDef="let element">
-          <div class="data-wrap">
-            <div class="value">
-              {{ element.createdAt | date: "dd-MM-yyyy" }}
-            </div>
-          </div>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let element">
-          <button
-            mat-icon-button
-            matTooltip="Block"
-            (click)="blockTenant(element)"
-            *ngIf="!element.isBlocked"
-            color="accent"
-          >
-            <mat-icon aria-label="Edit">remove_circle</mat-icon>
+  </mat-drawer>
+  <div class="example-sidenav-content">
+    <div class="organization-wrap">
+      <!-- <mat-tab-group> -->
+      <!-- <mat-tab label="Tenent"> -->
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <div
+          fxLayout="row wrap"
+          fxLayoutAlign="end center"
+          fxFill
+          class="mb-12"
+        >
+          <button mat-button class="primary-button" (click)="drawer.toggle()">
+            <mat-icon>person_add</mat-icon> Create Tenent
           </button>
-          <button
-            mat-icon-button
-            matTooltip="Unblock"
-            (click)="enableTenant(element)"
-            *ngIf="element.isBlocked"
-            color="primary"
-          >
-            <mat-icon aria-label="Edit">add_circle</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            matTooltip="Delete"
-            (click)="deleteTenant(element._id)"
-            color="warn"
-          >
-            <mat-icon aria-label="Delete">delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
+        </div>
+        <div fxLayout="row wrap" fxLayoutAlign="space-between start" fxFill>
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label>Filter</mat-label>
+            <input
+              matInput
+              (keyup)="applyTenantFilter($event)"
+              placeholder="Filter text"
+              #input
+            />
+          </mat-form-field>
+        </div>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let document; columns: displayedColumns"></tr>
+        <table
+          mat-table
+          [dataSource]="dataSourceTenant"
+          class="mat-elevation-z2"
+          matSort
+          fxFlex="100"
+          fxFill
+        >
+          <ng-container matColumnDef="name-email">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <div class="user-icon">
+                  <mat-icon>account_circle</mat-icon>
+                </div>
+                <div class="data-wrap">
+                  <div class="value">{{ element.Name }}</div>
+                  <!-- <div class="value">{{element.email}}</div> -->
+                </div>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Contact Email
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="data-wrap">
+                <div class="value">{{ element.Contact_Mail }}</div>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="owner">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Contact Name
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="data-wrap">
+                <div class="value">{{ element.Contact_Name }}</div>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td mat-cell *matCellDef="let element">
+              <div class="data-wrap">
+                <div class="value">{{ element.status }}</div>
+              </div>
+            </td>
+          </ng-container>
 
-      <!-- Row shown when there is no matching data. -->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="5">No Record Found</td>
-      </tr>
-    </table>
-    <mat-paginator
-      [pageSizeOptions]="pageSizeOptions"
-      class="mat-elevation-z2"
-      fxFill
-    ></mat-paginator>
-  </div>
-  <!-- </mat-tab>
+          <ng-container matColumnDef="createdBy">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Created At
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="data-wrap">
+                <div class="value">
+                  {{ element.createdAt | date: "dd-MM-yyyy" }}
+                </div>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                matTooltip="Block"
+                (click)="blockTenant(element._id, element.Name)"
+                *ngIf="!element.isBlocked"
+                color="accent"
+              >
+                <mat-icon aria-label="Edit">remove_circle</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                matTooltip="Unblock"
+                (click)="enableTenant(element)"
+                *ngIf="element.isBlocked"
+                color="primary"
+              >
+                <mat-icon aria-label="Edit">add_circle</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                matTooltip="Delete"
+                (click)="deleteTenant(element._id, element.Contact_Name)"
+                color="warn"
+              >
+                <mat-icon aria-label="Delete">delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let document; columns: displayedColumns"></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="5">No Record Found</td>
+          </tr>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="pageSizeOptions"
+          class="mat-elevation-z2"
+          fxFill
+        ></mat-paginator>
+      </div>
+      <!-- </mat-tab>
   </mat-tab-group> -->
-</div>
+    </div>
+  </div>
+</mat-drawer-container>

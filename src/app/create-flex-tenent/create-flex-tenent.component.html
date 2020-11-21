@@ -2,7 +2,7 @@
   <button mat-icon-button [routerLink]="['/organization']">
     <mat-icon>arrow_back</mat-icon>
   </button>
-  <span>Create User/Tenent</span>
+  <span>Create Tenent</span>
 </mat-toolbar>
 
 <div class="create-user-wrap">
@@ -19,9 +19,14 @@
               fxFlex.lt-md="50"
               fxFlex.lt-sm="100"
             >
-              <mat-label>Contact Email</mat-label>
-              <input matInput placeholder="Email" formControlName="email" />
+              <mat-label>Tenent Name</mat-label>
+              <input
+                matInput
+                placeholder="Tenent Name"
+                formControlName="tenent"
+              />
             </mat-form-field>
+
             <mat-form-field
               appearance="outline"
               class="field-wrap"
@@ -33,6 +38,17 @@
               <mat-label>Contact Name</mat-label>
               <input matInput placeholder="Name" formControlName="name" />
             </mat-form-field>
+            <mat-form-field
+              appearance="outline"
+              class="field-wrap"
+              fxFlex.gt-md="25"
+              fxFlex.md="50"
+              fxFlex.lt-md="50"
+              fxFlex.lt-sm="100"
+            >
+              <mat-label>Contact Email</mat-label>
+              <input matInput placeholder="Email" formControlName="email" />
+            </mat-form-field>
             <!-- <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
                             fxFlex.lt-md="50" fxFlex.lt-sm="100">
                             <mat-label>Access</mat-label>
@@ -43,21 +59,7 @@
                                 <mat-option value="tenentOperator">Tenent operator</mat-option>
                             </mat-select>
                         </mat-form-field> -->
-            <mat-form-field
-              appearance="outline"
-              class="field-wrap"
-              fxFlex.gt-md="25"
-              fxFlex.md="50"
-              fxFlex.lt-md="50"
-              fxFlex.lt-sm="100"
-            >
-              <mat-label>Tenent Name</mat-label>
-              <input
-                matInput
-                placeholder="Tenent Name"
-                formControlName="tenent"
-              />
-            </mat-form-field>
+
             <div
               fxFlex="100"
               class="button-bar"

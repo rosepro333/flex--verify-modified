@@ -1,16 +1,28 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
-import { ServicesService } from "../service/services.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSidenav } from '@angular/material/sidenav';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { BlockTenentComponent } from '../model/block-tenent/block-tenent.component';
+import { BlockUserComponent } from '../model/block-user/block-user.component';
+import { DeleteTenentComponent } from '../model/delete-tenent/delete-tenent.component';
+import { ServicesService } from '../service/services.service';
+import { TosterService } from '../toster/toster.service';
 
 let ELEMENT_DATA_Tenent: any = [];
 @Component({
-  selector: "app-flex-tenent",
-  templateUrl: "./flex-tenent.component.html",
-  styleUrls: ["./flex-tenent.component.scss"],
+  selector: 'app-flex-tenent',
+  templateUrl: './flex-tenent.component.html',
+  styleUrls: ['./flex-tenent.component.scss'],
 })
 export class FlexTenentComponent implements OnInit {
+  showFiller = false;
+  form: FormGroup;
+  tenentList: any = [];
+  tenentId: string = '';
   // public data:any=[]
   @ViewChild(MatSort) sort: MatSort;
 
@@ -18,22 +30,31 @@ export class FlexTenentComponent implements OnInit {
   pageSizeOptions = [10, 25, 50, 100];
 
   displayedColumns: string[] = [
-    "name-email",
-    "role",
-    "owner",
-    "createdBy",
-    "actions",
+    'name-email',
+    'role',
+    'owner',
+    'status',
+    'createdBy',
+    'actions',
   ];
   dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
-  constructor(private serviceService: ServicesService) {}
+  constructor(
+    private service: ServicesService,
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private router: Router,
+    private toster: TosterService
+  ) {}
 
   ngOnInit(): void {
     this.getTenentList();
+    this.formControl();
   }
 
   getTenentList() {
-    this.serviceService.getTenentList().subscribe((result) => {
+    this.service.getTenentList().subscribe((result) => {
       this.dataSourceTenant = result.data;
+      this.tenentList = result.data;
       console.log(this.dataSourceTenant);
     });
   }
@@ -48,25 +69,65 @@ export class FlexTenentComponent implements OnInit {
     this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
   }
   blockUser(elm) {
-    alert("block " + elm.name);
+    alert('block ' + elm.name);
   }
   enableUser(elm) {
-    alert("unblock " + elm.name);
+    alert('unblock ' + elm.name);
   }
 
-  blockTenant(elm) {
-    alert("block " + elm.name);
+  blockTenant(id, name) {
+    console.log(id, name);
+    const dialogRef = this.dialog.open(BlockTenentComponent, {
+      height: '160px',
+      width: '400px',
+      data: { id: id, name: name },
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.ngOnInit();
+    });
   }
   enableTenant(elm) {
-    alert("unblock " + elm.name);
+    alert('unblock ' + elm.name);
   }
-  deleteTenant(elm) {
-    console.log(elm);
-    this.serviceService.deleteTenent(elm).subscribe((res) => {
-      console.log(res);
-      if (res.msg === "success") {
-        this.getTenentList();
-      }
+  deleteTenant(id, name) {
+    const dialogRef = this.dialog.open(DeleteTenentComponent, {
+      height: '160px',
+      width: '400px',
+      data: { id: id, name: name },
     });
+    dialogRef.afterClosed().subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+  formControl() {
+    this.form = this.fb.group({
+      type: new FormControl(''),
+      email: new FormControl(''),
+      name: new FormControl(''),
+      access: new FormControl(''),
+      tenent: new FormControl(''),
+    });
+  }
+
+  selectTenent(value: any) {
+    this.tenentId = value;
+  }
+  onSave() {
+    if (this.form.valid) {
+      console.log(this.form.value);
+      this.service.createTenent(this.form.value).subscribe(
+        (result) => {
+          console.log(result);
+          if (result.msg == 'success') {
+            console.log(result);
+            this.toster.openSnackBar('Tenent Created Successfully', result.msg);
+            this.ngOnInit();
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
   }
 }
