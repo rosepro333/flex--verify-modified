@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "flex-verify-dashboard"
+  "defaultProject": "flex-verify-dashboard",
+  "cli": {
+    "analytics": "b201797e-7d6a-4c89-be62-8efcbb9d6593"
+  }
 }
