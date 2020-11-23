@@ -5,7 +5,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { BlockTenentComponent } from '../model/block-tenent/block-tenent.component';
+import { BlockUserComponent } from '../model/block-user/block-user.component';
 import { DeleteUserComponent } from '../model/delete-user/delete-user.component';
 import { ServicesService } from '../service/services.service';
 import { TosterService } from '../toster/toster.service';
@@ -38,6 +40,9 @@ export class FlexUserComponent implements OnInit {
   dataSourceUser = new MatTableDataSource(ELEMENT_DATA_User);
   dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
   form: FormGroup;
+  accessType: string = '';
+  tenetId: string = '';
+  userId: string = '';
   constructor(
     private serviceService: ServicesService,
     public dialog: MatDialog,
@@ -48,16 +53,29 @@ export class FlexUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.accessType = Cookie.get('Access_Type');
+    this.tenetId = Cookie.get('Tenant_ID');
+    this.userId = Cookie.get('id');
     this.getTenentList();
     this.getUserList();
     this.formControl();
   }
 
   getUserList() {
-    this.serviceService.getUserList().subscribe((result) => {
-      this.dataSourceUser = result.data;
-      console.log(this.dataSourceUser);
-    });
+    if (this.accessType === '1') {
+      this.serviceService.getUserList().subscribe((result) => {
+        this.dataSourceUser = result.data;
+      });
+    } else if (this.accessType === '3') {
+      const userId = this.userId;
+      console.log('tenent' + userId);
+      this.service.findUserById(userId).subscribe((res) => {
+        console.log(res);
+        if (res.msg === 'success') {
+          this.dataSourceUser = res.data;
+        }
+      });
+    }
   }
 
   ngAfterViewInit() {
@@ -77,27 +95,35 @@ export class FlexUserComponent implements OnInit {
     this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
   }
   blockUser(id, name) {
-    const dialogRef = this.dialog.open(BlockTenentComponent, {
-      height: '160px',
-      width: '400px',
-      data: { id: id, name: name },
-    });
-    dialogRef.afterClosed().subscribe(() => {
-      this.ngOnInit();
-    });
+    if (id != this.userId) {
+      const dialogRef = this.dialog.open(BlockUserComponent, {
+        height: '160px',
+        width: '400px',
+        data: { id: id, name: name },
+      });
+      dialogRef.afterClosed().subscribe(() => {
+        this.ngOnInit();
+      });
+    } else {
+      this.toster.openSnackBar('You can not block ownself', 'failed');
+    }
   }
   enableUser(elm) {
     alert('unblock ' + elm.name);
   }
   deleteUser(id, name) {
-    const dialogRef = this.dialog.open(DeleteUserComponent, {
-      height: '160px',
-      width: '400px',
-      data: { id: id, name: name },
-    });
-    dialogRef.afterClosed().subscribe(() => {
-      this.ngOnInit();
-    });
+    if (id != this.userId) {
+      const dialogRef = this.dialog.open(DeleteUserComponent, {
+        height: '160px',
+        width: '400px',
+        data: { id: id, name: name },
+      });
+      dialogRef.afterClosed().subscribe(() => {
+        this.ngOnInit();
+      });
+    } else {
+      this.toster.openSnackBar('You can not delete ownself', 'failed');
+    }
   }
   blockTenant(elm) {
     alert('block ' + elm.name);
@@ -106,7 +132,6 @@ export class FlexUserComponent implements OnInit {
     alert('unblock ' + elm.name);
   }
   deleteTenant(elm) {
-    console.log(elm);
     this.serviceService.deleteTenent(elm).subscribe((res) => {
       console.log(res);
       if (res.msg === 'success') {
@@ -125,12 +150,25 @@ export class FlexUserComponent implements OnInit {
     });
   }
   getTenentList() {
-    this.service.getTenentList().subscribe((res) => {
-      // console.log(res);
-      if (res.msg === 'success') {
-        this.tenentList = res.data;
-      }
-    });
+    if (this.accessType === '1') {
+      this.service.getTenentList().subscribe((res) => {
+        // console.log(res);
+        if (res.msg === 'success') {
+          this.tenentList = res.data;
+        }
+      });
+    } else if (this.accessType === '3') {
+      console.log('acces 3' + this.accessType);
+      const tenetId = this.tenetId;
+      console.log('tenent' + tenetId);
+      this.service.findTenetListById(tenetId).subscribe((res) => {
+        console.log(res);
+        if (res.msg === 'success') {
+          this.tenentList = res.data;
+          console.log(this.tenentList);
+        }
+      });
+    }
   }
   selectTenent(value: any) {
     this.tenentId = value;

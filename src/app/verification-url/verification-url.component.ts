@@ -1,34 +1,57 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { Cookie } from "ng2-cookies";
-import { ServicesService } from "../service/services.service";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Cookie } from 'ng2-cookies';
+import { ServicesService } from '../service/services.service';
 
 @Component({
-  selector: "app-verification-url",
-  templateUrl: "./verification-url.component.html",
-  styleUrls: ["./verification-url.component.scss"],
+  selector: 'app-verification-url',
+  templateUrl: './verification-url.component.html',
+  styleUrls: ['./verification-url.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class VerificationUrlComponent implements OnInit {
-  title: "Verification Url";
-  smsValue = "";
-  emailValue = "";
-  elementType: "url";
-  verificaionUrl: string = "";
+  title: 'Verification Url';
+  smsValue = '';
+  emailValue = '';
+  elementType: 'url';
+  verificaionUrl: string = '';
   tenentList: any = [];
   sdkKey: any = [];
-  selectSdk = "";
+  selectSdk = '';
+  tenetId: string = '';
+  accessType: string = '';
   constructor(private serviceService: ServicesService) {}
 
   ngOnInit(): void {
+    this.accessType = Cookie.get('Access_Type');
+    this.tenetId = Cookie.get('Tenant_ID');
     this.getTenentList();
   }
   getTenentList() {
-    this.serviceService.getTenentList().subscribe((res) => {
-      // console.log(res);
-      if (res.msg === "success") {
-        this.tenentList = res.data;
-      }
-    });
+    if (this.accessType === '1') {
+      this.serviceService.getTenentList().subscribe((res) => {
+        // console.log(res);
+        if (res.msg === 'success') {
+          this.tenentList = res.data;
+        }
+      });
+    } else if (this.accessType === '3') {
+      console.log('acces 3' + this.accessType);
+      const tenetId = this.tenetId;
+      console.log('tenent' + tenetId);
+      this.serviceService.findTenetListById(tenetId).subscribe((res) => {
+        console.log(res);
+        if (res.msg === 'success') {
+          this.tenentList = res.data;
+          console.log(this.tenentList);
+        }
+      });
+    }
+    // this.serviceService.getTenentList().subscribe((res) => {
+    //   // console.log(res);
+    //   if (res.msg === 'success') {
+    //     this.tenentList = res.data;
+    //   }
+    // });
   }
   selectSdkKey(value: any) {
     this.selectSdk = value;
@@ -41,7 +64,7 @@ export class VerificationUrlComponent implements OnInit {
   }
   getSdkId(value: any) {
     this.serviceService.getTenentSdkList(value).subscribe((res) => {
-      console.log(res.msg === "success");
+      console.log(res.msg === 'success');
       console.log(res.data);
       this.sdkKey = res.data;
       this.ngOnInit();
@@ -68,10 +91,10 @@ export class VerificationUrlComponent implements OnInit {
     );
   }
   send(value: string, a: string) {
-    if (a === "mail") {
-      alert("mail sent to " + value);
+    if (a === 'mail') {
+      alert('mail sent to ' + value);
     } else {
-      alert("sms sent to " + value);
+      alert('sms sent to ' + value);
     }
 
     console.log(a);

@@ -130,16 +130,33 @@ export class ServicesService {
   }
   blockUser(id: any): Observable<any> {
     return this.http
-      .get(this.apiUrl + '/user/blockTenent/' + id, this.httpOptions)
+      .get(this.apiUrl + '/user/blockUser/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
+  findUserById(id: any): Observable<any> {
+    if (id) {
+      const formData = {
+        id: id,
+      };
+      console.log(id);
+      return this.http
+        .post(
+          this.apiUrl + '/user/findTenedByUserId',
+          formData,
+          this.httpOptions
+        )
+        .pipe(retry(1), catchError(this.handleError));
+    }
+  }
   resetPassword(data: any): Observable<any> {
+    console.log(data);
     if (data) {
       const resetDAta = {
-        Contact_Email: 'shamim',
-        password: 'shamim1',
-        newpassword: 'shamim',
+        id: data.id,
+        password: data.currentPassword,
+        newpassword: data.newPassword,
       };
+      console.log(resetDAta);
       return this.http
         .post(this.apiUrl + '/user/resetPassword', resetDAta, this.httpOptions)
         .pipe(retry(1), catchError(this.handleError));
@@ -155,15 +172,31 @@ export class ServicesService {
         .pipe(retry(1), catchError(this.handleError));
     }
   }
+
   forgetPassword(data: any): Observable<any> {
+    console.log();
     if (data) {
       const formData = {
-        Contact_Email: 'shamim',
-        password: 'shamim1',
-        newpassword: 'shamim',
+        email: data.userName,
       };
       return this.http
         .post(this.apiUrl + '/user/forgetPassword', formData, this.httpOptions)
+        .pipe(retry(1), catchError(this.handleError));
+    }
+  }
+  setForgetPassword(data: any): Observable<any> {
+    console.log();
+    if (data) {
+      const formData = {
+        id: data.id,
+        password: data.password,
+      };
+      return this.http
+        .post(
+          this.apiUrl + '/user/setForgetPassword',
+          formData,
+          this.httpOptions
+        )
         .pipe(retry(1), catchError(this.handleError));
     }
   }
@@ -172,6 +205,21 @@ export class ServicesService {
     return this.http
       .get(this.apiUrl + '/sdkkey/list/' + tenent_id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
+  }
+  findTenetListById(id: any): Observable<any> {
+    if (id) {
+      const formData = {
+        id: id,
+      };
+      console.log(id);
+      return this.http
+        .post(
+          this.apiUrl + '/tenent/findTenedByUserId',
+          formData,
+          this.httpOptions
+        )
+        .pipe(retry(1), catchError(this.handleError));
+    }
   }
   generateUrl(key: any): Observable<any> {
     console.log(key);

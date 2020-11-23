@@ -1,109 +1,116 @@
 .dashboard-wrap {
-    padding: 20px;
-    .tiles-wrap {
-        margin-bottom: 40px;
-        .tile {
-            height: 180px;
-            border-radius: 10px;
-            box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
-            &:hover {
-                box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.15);
-            }
-            &.month {
-                .header {
-                    background: -webkit-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
-                }
-                .body {
-                    color: #11998e;
-                }
-            }
-            &.today {
-                .header {
-                    background: -webkit-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
-                }
-                .body {
-                    color: #ee0979;
-                }
-            }
-            &.balance {
-                .header {
-                    background: -webkit-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
-                }
-                .body {
-                    color: #45b649;
-                }
-            }
-            .header {
-                height: 100%; //120px
-                // border-radius: 4px 4px 0 0;
-                color: #fff;
-                font-weight: 500;
-                .count {
-                    font-size: 48px;
-                    text-align: center;
-                    padding: 10px 0 0;
-                }
-                .title {
-                    font-size: 20px;
-                    text-align: center;
-                    margin-top: 20px;
-                }
-            }
-            &.verification {
-                cursor: pointer;
-                .header {
-                    font-weight: 500;
-                    background: -webkit-linear-gradient(90deg, #6721b3 0%, #c78aff 100%);
-                    color: #fff;
-                    .material-icons {
-                        font-size: 48px;
-                        text-align: center;
-                    }
-                }
-            }
-            // .body {
-            //     height: 60px;
-            //     .title {
-            //         font-size: 16px;
-            //         padding: 8px;
-            //     }
-            // }
+  padding: 20px;
+  .tiles-wrap {
+    margin-bottom: 40px;
+    .tile {
+      height: 180px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
+      &:hover {
+        box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.15);
+      }
+      &.month {
+        .header {
+          background: -webkit-linear-gradient(90deg, #ffffff 0%, #ffffff 100%);
+          border-bottom: 7px solid #21b371;
         }
+        .body {
+          color: #11998e;
+        }
+      }
+      &.today {
+        .header {
+          background: -webkit-linear-gradient(90deg, #ffffff 0%, #ffffff 100%);
+          border-bottom: 7px solid #21b371;
+        }
+        .body {
+          color: #ee0979;
+        }
+      }
+      &.balance {
+        .header {
+          background: -webkit-linear-gradient(90deg, #ffffff 0%, #ffffff 100%);
+          border-bottom: 7px solid #21b371;
+        }
+        .body {
+          color: #45b649;
+        }
+      }
+      .header {
+        height: 100%; //120px
+        // border-radius: 4px 4px 0 0;
+        color: #fff;
+        font-weight: 500;
+        .count {
+          color: #21b371;
+          font-size: 48px;
+          text-align: center;
+          padding: 10px 0 0;
+        }
+        .title {
+          color: #21b371;
+          font-size: 20px;
+          text-align: center;
+          margin-top: 20px;
+        }
+      }
+      &.verification {
+        cursor: pointer;
+        .header {
+          font-weight: 500;
+          background: -webkit-linear-gradient(90deg, #ffffff 0%, #ffffff 100%);
+          color: #fff;
+          border-bottom: 7px solid #21b371;
+          .material-icons {
+            color: #21b371;
+            font-size: 48px;
+            text-align: center;
+          }
+        }
+      }
+      // .body {
+      //     height: 60px;
+      //     .title {
+      //         font-size: 16px;
+      //         padding: 8px;
+      //     }
+      // }
     }
+  }
 
-    .chart-wrap {
-        margin-bottom: 40px;
-        margin-top: 40px;
-        .bar-chart {
-            // max-width: 50%;
-            max-width: 72%;
-            width: -webkit-fill-available;
-        }
+  .chart-wrap {
+    margin-bottom: 40px;
+    margin-top: 40px;
+    .bar-chart {
+      // max-width: 50%;
+      max-width: 72%;
+      width: -webkit-fill-available;
     }
-    // .link-wrap {
-    //     margin-bottom: 40px;
-    //     margin-top: 40px;
-    //     .verification-tile {
-    //         cursor: pointer;
-    //         border-radius: 10px;
-    //         box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
-    //         &:hover {
-    //             box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.15);
-    //         }
-    //         .header {
-    //             font-weight: 500;
-    //             //  background: -webkit-linear-gradient(90deg, #21B371 0%, #ff6a00 100%);
-    //             background: #21b371;
-    //             color: #fff;
-    //             .material-icons {
-    //                 font-size: 48px;
-    //                 text-align: center;
-    //             }
-    //             .title {
-    //                 font-size: 16px;
-    //                 text-align: center;
-    //             }
-    //         }
-    //     }
-    // }
+  }
+  // .link-wrap {
+  //     margin-bottom: 40px;
+  //     margin-top: 40px;
+  //     .verification-tile {
+  //         cursor: pointer;
+  //         border-radius: 10px;
+  //         box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
+  //         &:hover {
+  //             box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.15);
+  //         }
+  //         .header {
+  //             font-weight: 500;
+  //             //  background: -webkit-linear-gradient(90deg, #21B371 0%, #ff6a00 100%);
+  //             background: #21b371;
+  //             color: #fff;
+  //             .material-icons {
+  //                 font-size: 48px;
+  //                 text-align: center;
+  //             }
+  //             .title {
+  //                 font-size: 16px;
+  //                 text-align: center;
+  //             }
+  //         }
+  //     }
+  // }
 }

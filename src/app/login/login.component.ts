@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
-import { Cookie } from "ng2-cookies/ng2-cookies";
-import { AuthService } from "./../auth/auth.service";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { TosterService } from '../toster/toster.service';
+import { AuthService } from './../auth/auth.service';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
@@ -17,13 +18,14 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toast: TosterService
   ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
-      userName: ["", Validators.required],
-      password: ["", Validators.required],
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
@@ -38,15 +40,19 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.authService.login(this.form.value).subscribe(
         (result) => {
-          if (result.msg === "success") {
+          console.log(result);
+          if (result.msg === 'success') {
             // this.loggedIn.next(true);
             console.log(result);
-            Cookie.set("Tenant_ID", result.user.Tenant_ID);
-            Cookie.set("id", result.user.ID);
-            Cookie.set("apires", result.apires);
-            Cookie.set("data", result.data);
-            Cookie.set("LOGIN_STATUS", result.msg);
-            this.router.navigate(["/"]);
+            Cookie.set('Tenant_ID', result.user.Tenant_ID);
+            Cookie.set('id', result.user.ID);
+            Cookie.set('apires', result.apires);
+            Cookie.set('data', result.data);
+            Cookie.set('LOGIN_STATUS', result.msg);
+            Cookie.set('Access_Type', result.user.Access_Type);
+            this.router.navigate(['/']);
+          } else {
+            this.toast.openSnackBar('', result.msg);
           }
         },
         (error) => {
@@ -57,6 +63,6 @@ export class LoginComponent implements OnInit {
     this.formSubmitAttempt = true;
   }
   forgetPassword() {
-    this.router.navigate(["/forget-passowrd"]);
+    this.router.navigate(['/forget-passowrd']);
   }
 }
