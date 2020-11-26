@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
           console.log(result);
           if (result.msg === 'success') {
             // this.loggedIn.next(true);
+            console.log('1');
             console.log(result);
             Cookie.set('Tenant_ID', result.user.Tenant_ID);
             Cookie.set('id', result.user.ID);

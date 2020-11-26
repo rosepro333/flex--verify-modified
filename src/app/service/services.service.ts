@@ -13,8 +13,8 @@ import { async } from 'rxjs/internal/scheduler/async';
   providedIn: 'root',
 })
 export class ServicesService {
-  private apiUrl = environment.dummyApi;
-  // private apiUrl = environment.apiUrl;
+  // private apiUrl = environment.dummyApi;
+  private apiUrl = environment.apiUrl;
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
