@@ -80,7 +80,7 @@ export class ServicesService {
       .get(this.apiUrl + '/sdkkey/list/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  getSdkKeyList(id: any): Observable<any> {
+  getSdkKeyList(): Observable<any> {
     return this.http
       .get(this.apiUrl + '/sdkkey/list', this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
@@ -102,7 +102,7 @@ export class ServicesService {
       .get(this.apiUrl + '/apikey/list/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  getApiKeyList(id: any): Observable<any> {
+  getApiKeyList(): Observable<any> {
     return this.http
       .get(this.apiUrl + '/apikey/list', this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
@@ -142,6 +142,21 @@ export class ServicesService {
       return this.http
         .post(
           this.apiUrl + '/user/findTenedByUserId',
+          formData,
+          this.httpOptions
+        )
+        .pipe(retry(1), catchError(this.handleError));
+    }
+  }
+  findUserByTenentId(id: any): Observable<any> {
+    if (id) {
+      const formData = {
+        id: id,
+      };
+      console.log(id);
+      return this.http
+        .post(
+          this.apiUrl + '/user/findUserByTenentId',
           formData,
           this.httpOptions
         )
@@ -221,6 +236,21 @@ export class ServicesService {
         .pipe(retry(1), catchError(this.handleError));
     }
   }
+  findTenetListByTenentID(id: any): Observable<any> {
+    if (id) {
+      const formData = {
+        Tenant_ID: id,
+      };
+      console.log(id);
+      return this.http
+        .post(
+          this.apiUrl + '/tenent/findTenedByTenentId',
+          formData,
+          this.httpOptions
+        )
+        .pipe(retry(1), catchError(this.handleError));
+    }
+  }
   generateUrl(key: any): Observable<any> {
     console.log(key);
     const data = {
@@ -245,10 +275,15 @@ export class ServicesService {
       .get(this.apiUrl + '/document/' + id, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
+  approvedScanDocument(id: any, data: any): Observable<any> {
+    return this.http
+      .patch(this.apiUrl + '/scans/' + id, data, this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
+  }
 
   geScanDocumentList(id: any): Observable<any> {
     return this.http
-      .get(this.apiUrl + '/scans/scanIdByDocument/' + id, this.httpOptions)
+      .get(this.apiUrl + '/scans/allScanByDocumentId/' + id, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   handleError(error) {

@@ -19,22 +19,24 @@ export class VerificationUrlComponent implements OnInit {
   selectSdk = '';
   tenetId: string = '';
   accessType: string = '';
+  id: string = '';
   constructor(private serviceService: ServicesService) {}
 
   ngOnInit(): void {
+    this.id = Cookie.get('id');
     this.accessType = Cookie.get('Access_Type');
     this.tenetId = Cookie.get('Tenant_ID');
     this.getTenentList();
   }
   getTenentList() {
-    if (this.accessType === '1') {
+    if (this.accessType === '1' || this.accessType === '2') {
       this.serviceService.getTenentList().subscribe((res) => {
         // console.log(res);
         if (res.msg === 'success') {
           this.tenentList = res.data;
         }
       });
-    } else if (this.accessType === '3') {
+    } else if (this.accessType === '3' || this.accessType === '4') {
       console.log('acces 3' + this.accessType);
       const tenetId = this.tenetId;
       console.log('tenent' + tenetId);

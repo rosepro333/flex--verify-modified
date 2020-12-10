@@ -23,7 +23,7 @@
           <div class="exp-header-data">
             <div class="title">Document Date:</div>
             <div class="value">
-              {{ document.Document_Date | date:'shortDate' }}
+              {{ document.Document_Date | date: "shortDate" }}
             </div>
           </div>
           <button mat-icon-button (click)="shareDoc($event)">
@@ -37,7 +37,7 @@
             <img
               src="photo-matching-img"
               src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{
-                scanDocument.Selfie_Photo
+                scanDocument[0].Selfie_Photo
               }}?alt=media"
             />
           </div>
@@ -55,9 +55,9 @@
             fxFlex
             class="data-wrap"
           >
-            <div class="title">Nationality</div>
+            <div class="title">First Name</div>
             <div class="value">
-              {{ document.Nationality }}
+              {{ document.First_Name }}
             </div>
           </div>
           <div
@@ -68,9 +68,9 @@
             fxFlex
             class="data-wrap"
           >
-            <div class="title">First Name</div>
+            <div class="title">Nationality</div>
             <div class="value">
-              {{ document.First_Name }}
+              {{ document.Nationality }}
             </div>
           </div>
           <div
@@ -96,7 +96,7 @@
           >
             <div class="title">DOB</div>
             <div class="value">
-              {{ document.DOB |date:'shortDate' }}
+              {{ document.DOB | date: "shortDate" }}
             </div>
           </div>
           <div
@@ -170,16 +170,19 @@
   </mat-accordion>
   <mat-accordion>
     <!-- actual list to be added here instead of [1,2,3] -->
+
+    <!-- *ngfor="let scanDocument of scanDocuments" -->
+
     <mat-expansion-panel
-      *ngFor="let item of [1, 2, 3]; let isFirst = first"
       [expanded]="isFirst"
+      *ngFor="let doc of scanDocument; let isFirst = first"
     >
       <mat-expansion-panel-header>
         <mat-panel-title fxLayoutAlign="start center">
           <div class="exp-header-data">
             <div class="title">Scan ID:</div>
             <div class="value">
-              {{ scanDocument._id }}
+              {{ doc._id }}
             </div>
           </div>
         </mat-panel-title>
@@ -190,7 +193,7 @@
           <div class="exp-header-data">
             <div class="title">Scan Date:</div>
             <div class="value">
-              {{ scanDocument.Scaned_Date | date: "mediumDate" }}
+              {{ doc.Scaned_Date | date: "mediumDate" }}
             </div>
           </div>
           <button mat-icon-button (click)="shareDoc($event)">
@@ -210,18 +213,26 @@
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Id type</mat-label>
             <mat-select formControlName="idType">
-              <mat-option value="drivingLicense">Driving License</mat-option>
-              <mat-option value="passport">Passport</mat-option>
-              <mat-option value="voterId">Voter ID</mat-option>
+              <mat-option value="{{ doc.ID_Type }}">{{
+                doc.ID_Type
+              }}</mat-option>
+              <!-- <mat-option value="passport">Passport</mat-option>
+              <mat-option value="voterId">Voter ID</mat-option> -->
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Id number</mat-label>
-            <input matInput placeholder="Id #" formControlName="idNum" />
+            <input
+              [readonly]="disabled"
+              matInput
+              placeholder="Id #"
+              formControlName="idNum"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>First name</mat-label>
             <input
+              [readonly]="disabled"
               matInput
               placeholder="First name"
               formControlName="firstName"
@@ -231,6 +242,7 @@
             <mat-label>Last Name</mat-label>
             <input
               matInput
+              [readonly]="disabled"
               placeholder="Last name"
               formControlName="lastName"
             />
@@ -239,6 +251,7 @@
             <mat-label>Date of birth</mat-label>
             <input
               matInput
+              [readonly]="disabled"
               [matDatepicker]="dobPicker"
               formControlName="dobPicker"
               placeholder="Date of birth"
@@ -246,6 +259,7 @@
             <mat-datepicker-toggle
               matSuffix
               [for]="dobPicker"
+              [readonly]="disabled"
             ></mat-datepicker-toggle>
             <mat-datepicker #dobPicker></mat-datepicker>
           </mat-form-field>
@@ -253,18 +267,25 @@
             <mat-label>Street name</mat-label>
             <input
               matInput
+              [readonly]="disabled"
               placeholder="Street Name"
               formControlName="streetName"
             />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>City</mat-label>
-            <input matInput placeholder="City" formControlName="city" />
+            <input
+              matInput
+              [readonly]="disabled"
+              placeholder="City"
+              formControlName="city"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Postal code</mat-label>
             <input
               matInput
+              [readonly]="disabled"
               placeholder="Postal Code"
               formControlName="postalCode"
             />
@@ -273,6 +294,7 @@
             <mat-label>Id expiry</mat-label>
             <input
               matInput
+              [readonly]="disabled"
               [matDatepicker]="idExpirypicker"
               formControlName="idExpirypicker"
               placeholder="Id Expiry"
@@ -285,15 +307,28 @@
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>User id</mat-label>
-            <input matInput placeholder="User id" formControlName="userId" />
+            <input
+              [readonly]="true"
+              matInput
+              placeholder="User id"
+              formControlName="userId"
+              [(ngModel)]="doc.Tenant_ID"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Mode</mat-label>
-            <input matInput placeholder="Mode" formControlName="mode" />
+            <input
+              [readonly]="true"
+              matInput
+              placeholder="Mode"
+              formControlName="mode"
+              [(ngModel)]="doc.Mode"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Updated date</mat-label>
             <input
+              [readonly]="disabled"
               matInput
               [matDatepicker]="updatedDatepicker"
               placeholder="Update date"
@@ -322,7 +357,7 @@
                   <img
                     class="slide-image-large"
                     src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{
-                      scanDocument.ID_Card_Front
+                      doc.ID_Card_Front
                     }}?alt=media"
                   />
                 </ng-template>
@@ -332,19 +367,24 @@
                   <img
                     class="slide-image-large"
                     src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{
-                      scanDocument.ID_Card_Back
+                      doc.ID_Card_Back
                     }}?alt=media"
                   />
                 </ng-template>
               </ng-container>
             </owl-carousel-o>
           </div>
-          <div fxLayout="row" fxLayout.lt-md="column" class="bottom-fix">
+          <div
+            fxLayout="row"
+            fxLayout.lt-md="column"
+            fxLayoutGap="30px"
+            class="bottom-fix"
+          >
             <div fxFlex="300px">
               <img
                 class="photo-matching-img"
                 src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{
-                  scanDocument.Selfie_Photo
+                  doc.Selfie_Photo
                 }}?alt=media"
               />
               <div class="matching-wrap">
@@ -356,13 +396,14 @@
                 >
               </div>
             </div>
-            <div fxFlex fxFill>
+            <!-- fxFill -->
+            <div fxFlex="300px">
               <owl-carousel-o [options]="livelinessOptions">
                 <ng-container>
                   <ng-template
                     class="slide"
                     carouselSlide
-                    *ngFor="let i of scanDocument.LiveCheck_Photos"
+                    *ngFor="let i of doc.LiveCheck_Photos"
                   >
                     <img
                       class="slide-image-small"
@@ -402,7 +443,7 @@
                 fxFlex
               >
                 <mat-label>Id card front</mat-label>
-                <mat-select formControlName="idCardFront">
+                <mat-select formControlName="idCardFront" [disabled]="disabled">
                   <mat-option value="clear">Clear</mat-option>
                   <mat-option value="notClear">Not clear</mat-option>
                 </mat-select>
@@ -417,7 +458,7 @@
                 fxFlex
               >
                 <mat-label>Id card back</mat-label>
-                <mat-select formControlName="idCardBack">
+                <mat-select formControlName="idCardBack" [disabled]="disabled">
                   <mat-option value="clear">Clear</mat-option>
                   <mat-option value="notClear">Not clear</mat-option>
                 </mat-select>
@@ -436,6 +477,7 @@
                   matInput
                   placeholder="%"
                   formControlName="selfieMatching"
+                  [readonly]="disabled"
                 />
               </mat-form-field>
               <mat-form-field
@@ -448,7 +490,7 @@
                 fxFlex
               >
                 <mat-label>Live Check</mat-label>
-                <mat-select formControlName="liveCheck">
+                <mat-select formControlName="liveCheck" [disabled]="disabled">
                   <mat-option value="ok">Ok</mat-option>
                   <mat-option value="rejected">Rejected</mat-option>
                 </mat-select>
@@ -463,7 +505,7 @@
                 fxFlex
               >
                 <mat-label>Scan result</mat-label>
-                <mat-select formControlName="scanResult">
+                <mat-select formControlName="scanResult" [disabled]="disabled">
                   <mat-option value="incomplete">Incomplete</mat-option>
                   <mat-option value="rejected">Rejected</mat-option>
                   <mat-option value="verified">Verified</mat-option>
@@ -478,6 +520,7 @@
               >
                 <mat-label>Reason</mat-label>
                 <textarea
+                  [readonly]="disabled"
                   matInput
                   placeholder="reason"
                   rows="3"
@@ -493,7 +536,12 @@
                 <button mat-stroked-button type="button" (click)="clear()">
                   cancel
                 </button>
-                <button mat-button class="primary-button" type="submit">
+                <button
+                  mat-button
+                  class="primary-button"
+                  type="submit"
+                  [disabled]="disabled"
+                >
                   Save
                 </button>
               </div>

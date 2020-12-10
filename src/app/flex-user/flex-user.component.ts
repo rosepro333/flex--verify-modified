@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSidenav } from '@angular/material/sidenav';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -43,6 +44,7 @@ export class FlexUserComponent implements OnInit {
   accessType: string = '';
   tenetId: string = '';
   userId: string = '';
+  isOPen: boolean = false;
   constructor(
     private serviceService: ServicesService,
     public dialog: MatDialog,
@@ -67,9 +69,9 @@ export class FlexUserComponent implements OnInit {
         this.dataSourceUser = result.data;
       });
     } else if (this.accessType === '3') {
-      const userId = this.userId;
-      console.log('tenent' + userId);
-      this.service.findUserById(userId).subscribe((res) => {
+      const tenetId = this.tenetId;
+      console.log('tenent' + tenetId);
+      this.service.findUserByTenentId(tenetId).subscribe((res) => {
         console.log(res);
         if (res.msg === 'success') {
           this.dataSourceUser = res.data;

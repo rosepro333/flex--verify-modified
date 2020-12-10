@@ -38,7 +38,7 @@
       <th mat-header-cell *matHeaderCellDef>Created Date and Time</th>
       <td mat-cell *matCellDef="let document">
         <div class="data-wrap">
-          <div class="title">Created Id</div>
+          <div class="title">Created At</div>
           <div class="value">
             {{ document.createdAt | date: "mediumDate" }}
           </div>
@@ -67,11 +67,11 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="tenent-id">
-      <th mat-header-cell *matHeaderCellDef>Tenent Id</th>
+      <th mat-header-cell *matHeaderCellDef>Tenent Name</th>
       <td mat-cell *matCellDef="let document">
         <div class="data-wrap">
-          <div class="title">Tenent Id</div>
-          <div class="value">{{ document.Tenant_ID }}</div>
+          <div class="title">Tenent Name</div>
+          <div class="value">{{ document.Tenant_ID.Name }}</div>
         </div>
       </td>
     </ng-container>

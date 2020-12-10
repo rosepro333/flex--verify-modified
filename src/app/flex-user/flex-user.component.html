@@ -54,8 +54,12 @@
             >
               <mat-label>Access</mat-label>
               <mat-select formControlName="access">
-                <mat-option value="1">Flex Admin</mat-option>
-                <mat-option value="2">Flxem Operator </mat-option>
+                <mat-option value="1" *ngIf="accessType != '3'"
+                  >Flex Admin</mat-option
+                >
+                <mat-option value="2" *ngIf="accessType != '3'"
+                  >Flxem Operator
+                </mat-option>
                 <mat-option value="3">Tenent admin</mat-option>
                 <mat-option value="4">Tenent operator</mat-option>
               </mat-select>

@@ -6,7 +6,8 @@ export const environment = {
   production: false,
 
   // apiUrl: 'https://verify.flexm.com/api',
-  apiUrl: 'http://localhost:3000/api',
+  apiUrl: 'http://localhost:3001/api',
+  // apiUrl: 'http://34.96.241.161/api',
 
   showDataSource: true,
 };

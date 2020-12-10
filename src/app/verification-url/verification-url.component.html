@@ -4,11 +4,18 @@
 
 <div class="verification-wrap">
   <mat-card fxFlex="35">
-    <!-- <div align="center" class="title">Perform KYC by scanning the following QR</div>
-        <div fxLayout="row wrap" fxLayoutAlign="center center">
-            <ngx-qrcode [elementType]="elementType" [value]="value" cssClass="aclass" errorCorrectionLevel="L">
-            </ngx-qrcode>
-        </div> -->
+    <div align="center" class="title">
+      Perform KYC by scanning the following QR
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+      <ngx-qrcode
+        [elementType]="elementType"
+        [value]="verificaionUrl"
+        cssClass="aclass"
+        errorCorrectionLevel="L"
+      >
+      </ngx-qrcode>
+    </div>
     <div fxLayout="column" fxLayoutAlign="start stretch">
       <div align="center" class="url-wrap">
         <div>KYC verification url:</div>
