@@ -4,7 +4,7 @@
 
 <div class="document-wrap" fxLayout="column" fxLayoutAlign="start start">
   <div fxLayout="row wrap" fxLayoutAlign="space-between start" fxFill>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" *ngIf ="accessType ==='1' || accessType ==='2'">
       <mat-label>Select Tenent</mat-label>
         <mat-select
           disableRipple
@@ -17,19 +17,30 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">
-  <mat-label>Choose start date</mat-label>
-  <input matInput [matDatepicker]="picker1" [formControl]="date">
-  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-  <mat-datepicker #picker1></mat-datepicker>
-</mat-form-field>
+      <mat-label>Status</mat-label>
+        <mat-select
+          disableRipple
+        >
+        <mat-option *ngFor="let status of statusColumn" [value]="status.value">{{
+          status.name
+          }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-<mat-form-field appearance="fill">
-  <mat-label>Choose end date</mat-label>
-  <input matInput [matDatepicker]="picker2"
-         [formControl]="serializedDate">
-  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-  <mat-datepicker #picker2></mat-datepicker>
-</mat-form-field>
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Choose start date</mat-label>
+        <input matInput [matDatepicker]="picker1" [formControl]="date">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose end date</mat-label>
+      <input matInput [matDatepicker]="picker2"
+            [formControl]="serializedDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Filter</mat-label>
       <input
@@ -38,7 +49,7 @@
         placeholder="Filter text"
         #input
       />
-    </mat-form-field>
+    </mat-form-field> -->
   </div>
   <table
     mat-table
@@ -53,12 +64,12 @@
       <td mat-cell *matCellDef="let document">
         <div class="data-wrap">
           <div class="title">Document Id</div>
-          <div class="value">{{ document.Document_ID }}</div>
+          <div class="value">{{ document.Document_ID.Document_ID }}</div>
         </div>
-        <!-- <div class="data-wrap">
+        <div class="data-wrap">
           <div class="title">Scan Id</div>
-          <div class="value">{{ document.scanId }}</div>
-        </div> -->
+          <div class="value">{{ document.Scan_ID }}</div>
+        </div>
       </td>
     </ng-container>
     <ng-container matColumnDef="date-time">
@@ -84,12 +95,12 @@
         <div class="data-wrap">
           <div class="title">Name</div>
           <div class="value">
-            {{ document.First_Name }} {{ document.Last_Name }}
+            {{ document.Document_ID.First_Name }} {{ document.Document_ID.Last_Name }}
           </div>
         </div>
         <div class="data-wrap">
           <div class="title">Nationality</div>
-          <div class="value">{{ document.Nationality }}</div>
+          <div class="value">{{ document.Document_ID.Nationality }}</div>
         </div>
       </td>
     </ng-container>
@@ -110,9 +121,9 @@
             <mat-icon>{{ document.icon }}</mat-icon>
           </div>
           <div class="data-wrap">
-            <div class="value">{{ document.Status }}</div>
+            <div class="value">{{ document.scanResultStatus }}</div>
             <div class="value">
-              {{ document.updatedAt | date: "mediumDate" }}
+              {{ document.createdAt | date: "mediumDate" }}
             </div>
           </div>
         </div>
@@ -124,7 +135,7 @@
       mat-row
       *matRowDef="let row; columns: displayedColumns"
       class="cursor-pointer"
-      (click)="moreDetails(row._id)"
+      (click)="moreDetails(row.Document_ID._id)"
     ></tr>
     <!-- [routerLink]="[ '/document/', row.id]" -->
     <!-- Row shown when there is no matching data. -->

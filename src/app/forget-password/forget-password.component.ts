@@ -22,13 +22,15 @@ export class ForgetPasswordComponent implements OnInit {
     private toast: TosterService
   ) {}
 
-  ngOnInit = () => {
+  // tslint:disable-next-line:typedef
+  ngOnInit(){
     this.form = this.fb.group({
       userName: ['', Validators.required],
     });
   }
 
-  isFieldInvalid = (field: string) => {
+  // tslint:disable-next-line:typedef
+  isFieldInvalid(field: string){
     return (
       (!this.form.get(field).valid && this.form.get(field).touched) ||
       (this.form.get(field).untouched && this.formSubmitAttempt)

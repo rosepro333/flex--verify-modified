@@ -23,7 +23,8 @@ export class NewPasswordComponent implements OnInit {
     private service: ServicesService
   ) {}
 
-  ngOnInit = () => {
+  // tslint:disable-next-line:typedef
+  ngOnInit(){
     // tslint:disable-next-line:no-string-literal
     this.id = this.route.snapshot.params['resetUser'];
     console.log(this.id);
@@ -43,6 +44,7 @@ export class NewPasswordComponent implements OnInit {
 
   onSubmit = () => {
     this.form.value.id = this.id;
+    console.log(this.form);
     if (this.form.valid) {
       if (this.form.value.newPassword === this.form.value.confirmPassword) {
         console.log(this.form.value);

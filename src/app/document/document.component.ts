@@ -16,6 +16,12 @@ import { FormControl } from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 })
 export class DocumentComponent implements OnInit {
+  statusColumn: any = [
+    { name: 'Submitted', value: 'submitted' },
+    { name: 'Incomplete', value: 'Incomplete' },
+    { name: 'Rejected', value: 'Rejected' },
+    { name: 'Verified', value: 'Verified' },
+  ];
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
   id = '';
@@ -45,12 +51,21 @@ export class DocumentComponent implements OnInit {
     this.accessType = Cookie.get('Access_Type');
     this.tenetId = Cookie.get('Tenant_ID');
     this.getTenentList();
-    this.loadAllDocuments();
+    // this.loadAllDocuments();
+    this.scanDocList();
   }
   loadAllDocuments = () => {
     this.serviceService.documentList().subscribe((response: any) => {
       console.log(response.data);
       this.dataSource.data = response;
+      console.log(this.dataSource.data);
+    });
+  }
+  scanDocList = () => {
+    this.serviceService.scanDocList().subscribe((res: any) => {
+      if ( res.msg === 'success'){
+        this.dataSource.data = res.data;
+      }
       console.log(this.dataSource.data);
     });
   }
@@ -64,6 +79,7 @@ export class DocumentComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   moreDetails = (id: number) => {
+    console.log(id);
     this.router.navigate(['documents/' + id]);
   }
    getTenentList = () => {
@@ -89,5 +105,11 @@ export class DocumentComponent implements OnInit {
   }
    selectTenent = (value: any) => {
     console.log(value);
+    const data = { Tenant_ID: value};
+    this.serviceService.scanDocByTenent(data).subscribe((res) => {
+      if ( res.msg === 'success'){
+        this.dataSource.data = res.data;
+      }
+    });
   }
 }

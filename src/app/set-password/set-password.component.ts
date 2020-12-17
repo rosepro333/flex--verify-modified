@@ -21,7 +21,9 @@ export class SetPasswordComponent implements OnInit {
     private toast: TosterService
   ) {}
 
-  ngOnInit = () => {
+  // tslint:disable-next-line:typedef
+  ngOnInit(){
+    // tslint:disable-next-line:no-string-literal
     const id = this.route.snapshot.params['forgetPasswordId'];
     console.log(id);
     this.id = id;

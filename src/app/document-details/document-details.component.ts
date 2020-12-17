@@ -105,7 +105,7 @@ export class DocumentDetailsComponent implements OnInit {
             moment(i.updatedDate, 'DD-MM-YYYY').format('MM/DD/YYYY')
           );
           this.getAllComment(i._id, i.Document_ID);
-          this.scanDocument[index].push(obj)
+          this.scanDocument[index].push(obj);
         });
         console.log(this.scanDocument);
       })
@@ -150,10 +150,10 @@ export class DocumentDetailsComponent implements OnInit {
     });
   }
   checkAccessType = () => {
-    if (this.accessType === '2' || this.accessType === '4') {
+    if (this.accessType === '3' || this.accessType === '4') {
       console.log('2,4');
       this.disabled = true;
-    } else if (this.accessType === '1' || this.accessType === '3') {
+    } else if (this.accessType === '1' || this.accessType === '2') {
       console.log('1,3');
       this.disabled = false;
     }
@@ -221,7 +221,6 @@ export class DocumentDetailsComponent implements OnInit {
 
     console.log(form.value);
     const id = scanId;
-
     this.serviceServive.approvedScanDocument(id, form.value).subscribe(
       (response) => {
         console.log(response);

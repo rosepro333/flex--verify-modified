@@ -277,6 +277,16 @@ export class ServicesService {
       .get(this.apiUrl + '/document/' + id, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
+  scanDocList(): Observable<any> {
+    return this.http
+      .post(this.apiUrl + '/scans/docsScanList', {}, this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+  scanDocByTenent(data: any): Observable<any> {
+    return this.http
+      .post(this.apiUrl + '/scans/scanDocByTenent', data, this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
+  }
   approvedScanDocument(id: any, data: any): Observable<any> {
     return this.http
       .put(
