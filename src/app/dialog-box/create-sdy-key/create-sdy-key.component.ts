@@ -1,18 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { MatDialogRef } from "@angular/material/dialog";
-import { Router } from "@angular/router";
-import { ServicesService } from "src/app/service/services.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { ServicesService } from 'src/app/service/services.service';
 
 @Component({
-  selector: "app-create-sdy-key",
-  templateUrl: "./create-sdy-key.component.html",
-  styleUrls: ["./create-sdy-key.component.scss"],
+  selector: 'app-create-sdy-key',
+  templateUrl: './create-sdy-key.component.html',
+  styleUrls: ['./create-sdy-key.component.scss'],
 })
 export class CreateSdyKeyComponent implements OnInit {
   form: FormGroup;
   tenentList: any = [];
-  tenentId: string = "";
+  tenentId = '';
 
   constructor(
     private fb: FormBuilder,
@@ -25,31 +25,31 @@ export class CreateSdyKeyComponent implements OnInit {
     this.formControl();
     this.getTenentList();
   }
-  formControl() {
+  formControl = () => {
     this.form = this.fb.group({
-      Tenent: new FormControl(""),
-      mode: new FormControl(""),
+      Tenent: new FormControl(''),
+      mode: new FormControl(''),
     });
   }
-  getTenentList() {
+  getTenentList = () =>{
     this.service.getTenentList().subscribe((res) => {
       // console.log(res);
-      if (res.msg === "success") {
+      if (res.msg === 'success') {
         this.tenentList = res.data;
       }
     });
   }
-  selectTenent(value: any) {
+  selectTenent = (value: any) => {
     this.tenentId = value;
   }
-  onSave(event: any) {
+  onSave =  (event: any) => {
     console.log(event);
     this.form.value.Tenent = this.tenentId;
     if (this.form.valid) {
       this.service.createSdkKey(this.form.value).subscribe(
         (result) => {
           console.log(result);
-          if (result.msg === "success") {
+          if (result.msg === 'success') {
             setTimeout(() => {
               this.clear();
             });
@@ -61,7 +61,7 @@ export class CreateSdyKeyComponent implements OnInit {
       );
     }
   }
-  clear() {
+  clear = () => {
     this.dialogRef.close();
   }
 }

@@ -1,18 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
-import { ServicesService } from "../service/services.service";
-import { TosterService } from "../toster/toster.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ServicesService } from '../service/services.service';
+import { TosterService } from '../toster/toster.service';
 
 @Component({
-  selector: "app-create-flex-tenent",
-  templateUrl: "./create-flex-tenent.component.html",
-  styleUrls: ["./create-flex-tenent.component.scss"],
+  selector: 'app-create-flex-tenent',
+  templateUrl: './create-flex-tenent.component.html',
+  styleUrls: ['./create-flex-tenent.component.scss'],
 })
 export class CreateFlexTenentComponent implements OnInit {
   form: FormGroup;
   tenentList: any = [];
-  tenentId: string = "";
+  tenentId = '';
 
   constructor(
     private fb: FormBuilder,
@@ -25,35 +25,35 @@ export class CreateFlexTenentComponent implements OnInit {
     this.formControl();
     this.getTenentList();
   }
-  formControl() {
+  formControl = () => {
     this.form = this.fb.group({
-      type: new FormControl(""),
-      email: new FormControl(""),
-      name: new FormControl(""),
-      access: new FormControl(""),
-      tenent: new FormControl(""),
+      type: new FormControl(''),
+      email: new FormControl(''),
+      name: new FormControl(''),
+      access: new FormControl(''),
+      tenent: new FormControl(''),
     });
   }
-  getTenentList() {
+  getTenentList = () => {
     this.service.getTenentList().subscribe((res) => {
       // console.log(res);
-      if (res.msg === "success") {
+      if (res.msg === 'success') {
         this.tenentList = res.data;
       }
     });
   }
-  selectTenent(value: any) {
+  selectTenent = (value: any) => {
     this.tenentId = value;
   }
-  onSave() {
+  onSave = () => {
     if (this.form.valid) {
       console.log(this.form.value);
       this.service.createTenent(this.form.value).subscribe(
         (result) => {
           console.log(result);
-          if (result.msg == "success") {
+          if (result.msg === 'success') {
             console.log(result);
-            this.toster.openSnackBar("Tenent Created Successfully", result.msg);
+            this.toster.openSnackBar('Tenent Created Successfully', result.msg);
             this.userNavigate();
           }
         },
@@ -63,13 +63,13 @@ export class CreateFlexTenentComponent implements OnInit {
       );
     }
   }
-  userNavigate() {
+  userNavigate = () => {
     setTimeout(() => {
-      this.router.navigateByUrl("/flexm-tenent");
+      this.router.navigateByUrl('/flexm-tenent');
     }, 200);
   }
 
-  clear() {
-    this.router.navigate(["./flexm-tenent"]);
+  clear = () => {
+    this.router.navigate(['./flexm-tenent']);
   }
 }

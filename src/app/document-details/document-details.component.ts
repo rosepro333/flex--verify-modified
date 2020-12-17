@@ -1,132 +1,274 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { DocumentModel } from '../document/models/document.model';
-import { DocumentService } from '../document/services/document.service';
+import { FormArray, FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ServicesService } from '../service/services.service';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
+import * as moment from 'moment';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-document-details',
   templateUrl: './document-details.component.html',
   styleUrls: ['./document-details.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentDetailsComponent implements OnInit {
-  disabled: Boolean = false;
-  accessType: string = '';
-  id: number;
+  disabled = false;
+  accessType  = '';
+  public id: number;
+  public panelOpenState = false;
+  // tslint:disable-next-line:variable-name
+  public comments: any[] = [];
+  public comment = '';
+  // qtd: any[] = [];
+  public userName = '';
+  // tslint:disable-next-line:variable-name
+  public ID_Type = '';
+  public userId = '';
+  public idCardNo = '';
+  public firstName = '';
+  public lastName = '';
+  public dob = '';
+  public streetName = '';
+  public city = '';
+  public postalCode = '';
+  public idExpiryDate = '';
+  public updatedDate = '';
+  public idCardFrontStatus = '';
+  public idCardBackStatus = '';
+  public liveCheckingStatus = '';
+  public scanResultStatus = '';
+  public selfiePhotoMatchStatus = '';
+  public reason = '';
+  form: FormGroup;
+  dateOfBirth: any;
   document: any = [];
   scanDocument: any = [];
-  panelOpenState = false;
-  form: FormGroup;
-
+  commentsData: any = [];
+  documentIdType: any = [
+    { value: 'Nationality Identify Card' },
+    { value: 'Driving Licence' },
+    { value: 'Passport' },
+  ];
+  idCardForntType: any = [
+    { name: 'clear', value: 'clear' },
+    { name: 'Not Clear', value: 'not_clear' },
+  ];
+  idCardBackType: any = [
+    { name: 'clear', value: 'clear' },
+    { name: 'Not Clear', value: 'not_clear' },
+  ];
+  liveCheckType: any = [
+    { name: 'Ok', value: 'Ok' },
+    { name: 'Rejected', value: 'Rejected' },
+  ];
+  scanResultType: any = [
+    { name: 'Incomplete', value: 'Incomplete' },
+    { name: 'Rejected', value: 'Rejected' },
+    { name: 'Verified', value: 'Verified' },
+  ];
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private serviceServive: ServicesService
+    private serviceServive: ServicesService,
+    private cd: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.accessType = Cookie.get('Access_Type');
-    console.log();
+    this.userId = Cookie.get('id');
+    this.getUserDetails();
+    // tslint:disable-next-line:no-string-literal
     this.id = this.route.snapshot.params['id'];
     this.checkAccessType();
-    this.formModule();
+    await this.getAllScanDocumentById(this.id)
+      .then((res) => {
+        this.scanDocument = res;
+        this.scanDocument.map((i: any, index: string | number) => {
+          console.log(i.idExpiryDate);
+          const obj = {};
+          this.scanDocument[index].dob = new Date(
+            moment(i.dob, 'DD-MM-YYYY').format('MM/DD/YYYY')
+          );
+          this.scanDocument[index].idExpiryDate = new Date(
+            moment(i.idExpiryDate, 'DD-MM-YYYY').format('MM/DD/YYYY')
+          );
+          this.scanDocument[index].updatedDate = new Date(
+            moment(i.updatedDate, 'DD-MM-YYYY').format('MM/DD/YYYY')
+          );
+          this.getAllComment(i._id, i.Document_ID);
+          this.scanDocument[index].push(obj)
+        });
+        console.log(this.scanDocument);
+      })
+      .catch(() => console.error('some error'));
     this.getDocument(this.id);
-    this.getAllScanDocumentById(this.id);
-  }
-  checkAccessType() {
-    if (this.accessType === '2' || this.accessType === '4') {
-      this.disabled = true;
-    } else if (this.accessType === '1' || this.accessType === '3') {
-      this.disabled = false;
-    }
-  }
-  formModule() {
-    this.form = this.fb.group({
-      idType: new FormControl(''),
-      idNum: new FormControl(''),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      dobPicker: new FormControl(''),
-      streetName: new FormControl(''),
-      city: new FormControl(''),
-      postalCode: new FormControl(''),
-      idExpirypicker: new FormControl(''),
-      userId: new FormControl(''),
-      mode: new FormControl(''),
-      updatedDate: new FormControl(''),
-      idCardFront: new FormControl(''),
-      idCardBack: new FormControl(''),
-      selfieMatching: new FormControl(''),
-      liveCheck: new FormControl(''),
-      scanResult: new FormControl(''),
-      reason: new FormControl(''),
-      comment: new FormControl(''),
-    });
-  }
 
-  getDocument(id: any) {
-    //get item details using id
-    this.serviceServive.getDocumentBy(id).subscribe((response) => {
-      // console.table(response.data);
-      console.log(response);
-      this.document = response.data;
-    });
   }
-  getAllScanDocumentById(id: any) {
-    this.serviceServive.geScanDocumentList(id).subscribe((response) => {
-      console.table(response.data);
-      if (response.msg == 'success') {
-        console.table(response.data);
-        console.log(response.data);
-        this.scanDocument = response.data;
+  getAllComment = ( scanId: string, documentId: any ) => {
+    const  data = {
+      scanId,
+      documentId
+    };
+    console.log(data);
+    this.serviceServive.getAllComment(data).subscribe( (res) => {
+      // console.log(res);
+      if (res.msg === 'success'){
+        const obj = {};
+        // tslint:disable-next-line:no-string-literal
+        obj['id'] = scanId;
+        // tslint:disable-next-line:no-string-literal
+        obj['data'] = res.data;
+        this.commentsData.push(obj);
       }
     });
   }
+  filterComments = ( scanId: string, documentId: any ) => {
+    const  data = {
+      scanId,
+      documentId
+    };
+    console.log(data);
+    this.serviceServive.getAllComment(data).subscribe( (res) => {
+      console.log(res);
+      if (res.msg === 'success'){
+        console.log(res);
+        this.commentsData.map((i: any, index: any) => {
+          if (this.commentsData[index].id === scanId) {
+            this.commentsData[index].data = res.data;
+          }
+        });
+      }
+    });
+  }
+  checkAccessType = () => {
+    if (this.accessType === '2' || this.accessType === '4') {
+      console.log('2,4');
+      this.disabled = true;
+    } else if (this.accessType === '1' || this.accessType === '3') {
+      console.log('1,3');
+      this.disabled = false;
+    }
+  }
 
-  shareDoc($event) {
+  getDocument = (id: any) => {
+    // get item details using id
+    this.serviceServive.getDocumentBy(id).subscribe((response) => {
+      this.document = response.data;
+    });
+  }
+  getAllScanDocumentById = (id: any) => {
+    return new Promise((resolve, reject) => {
+      this.serviceServive.geScanDocumentList(id).subscribe(
+        (response) => {
+          if (response.msg === 'success') {
+            resolve(response.data);
+          }
+        },
+        // tslint:disable-next-line:no-shadowed-variable
+        (error) => reject(error)
+      );
+    });
+  }
+  getUserDetails = () => {
+    const id = this.userId;
+    this.serviceServive.getUserDetails(id).subscribe((res) => {
+      console.log('2');
+      // console.log(res.data.Contact_Name);
+      this.userName = res.data.Contact_Name;
+    });
+  }
+
+  shareDoc = ( $event: any ) => {
     $event.stopPropagation();
     alert('shared');
   }
-  onSave() {
-    // alert('saved');
-    const id = '5fc8a980298e600b185f34e6';
-    const data = {
-      _id: id,
-      Id_Card_No: '12',
-      First_Name: 'edees',
-      Last_Name: 'dsad',
-      DOB: 'dad',
-      Street_Name: 'daad',
-      City: 'dad',
-      postalcode: 'dad',
-      ID_Expiry_Date: 'adada',
-      Updated_Date_Time: Date.now(),
-      idCardFrontStatus: 'ded',
-      idCardBackStatus: 'dad',
-      selfiePhotoMatchStatus: 'dada',
-      liveCheckingStatus: 'dad',
-      scanResultStatus: 'dada',
-      reason: 'dada',
-    };
-    this.serviceServive.approvedScanDocument(id, data).subscribe((response) => {
-      console.log(response);
-    });
+  SelectIdType = (idType: any) => {
+    console.log(idType.value);
+    this.ID_Type = idType;
   }
-  clear() {
+  selectIdFront = (idfront: any) => {
+    console.log(idfront.value);
+    this.idCardFrontStatus = idfront.value;
+  }
+  selectIdBack = (idBack: any) => {
+    console.log(idBack.value);
+    this.idCardBackStatus = idBack.value;
+  }
+  selectLiveCheck = (liveCheck: any) => {
+    console.log(liveCheck.value);
+    this.liveCheckingStatus = liveCheck.value;
+  }
+  selectResultType = (resultType: any) => {
+    console.log(resultType.value);
+    this.scanResultStatus = resultType.value;
+  }
+
+  onSave = (form: NgForm, scanId: any) => {
+    form.value.scanResultStatus = this.scanResultStatus;
+    form.value.ID_Type = this.ID_Type;
+    form.value.idCardFrontStatus = this.idCardFrontStatus;
+    form.value.idCardBackStatus = this.idCardBackStatus;
+    form.value.liveCheckingStatus = this.liveCheckingStatus;
+
+    console.log(form.value);
+    const id = scanId;
+
+    this.serviceServive.approvedScanDocument(id, form.value).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      // tslint:disable-next-line:no-shadowed-variable
+      ( error: any ) => {
+        console.log(error.error);
+      }
+    );
+  }
+  selectDate = ( event: any ) => {
+    this.dateOfBirth = event;
+    console.log(event.target.value);
+  }
+  clear = () => {
     this.form.reset();
   }
-  sendComment() {
-    alert('comment sent');
+  sendComment = (scanId: any ) => {
+    const doctId = this.id;
+    console.log(doctId + ' vghgvh');
+    console.log(scanId);
+    console.log(this.comments[0]);
+    this.comments.map((i: any, index: number) => {
+      console.log(i);
+      if ( this.comments[index] === i ){
+        this.comment = i;
+        this.comments.splice(index, this.comments.length);
+      }
+    });
+    console.log(this.comment);
+    const  data = {
+        documentId: this.id,
+        scanId,
+        userId: this.userId,
+        username: this.userName,
+        text: this.comment,
+        mode: 'dadasdas'
+    };
+    console.log(data);
+    this.serviceServive.userComment(data).subscribe((res) => {
+      if (res.msg === 'success'){
+        this.filterComments(scanId, this.id);
+      }
+      console.log(res);
+    });
   }
+  // tslint:disable-next-line:member-ordering
   customOptions: OwlOptions = {
     loop: false,
     autoplay: false,
@@ -141,6 +283,7 @@ export class DocumentDetailsComponent implements OnInit {
     },
     nav: true,
   };
+  // tslint:disable-next-line:member-ordering
   livelinessOptions: OwlOptions = {
     loop: false,
     autoplay: false,

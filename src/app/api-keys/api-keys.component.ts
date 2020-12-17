@@ -15,9 +15,9 @@ export class ApiKeysComponent implements OnInit {
   apiKeyData: any = [];
   sdkKeyData: any = [];
   constructor(public dialog: MatDialog, private service: ServicesService) {}
-  accessType: string = '';
-  tenetId: string = '';
-  userId: string = '';
+  accessType = '';
+  tenetId = '';
+  userId = '';
   ngOnInit(): void {
     this.accessType = Cookie.get('Access_Type');
     this.tenetId = Cookie.get('Tenant_ID');
@@ -25,10 +25,10 @@ export class ApiKeysComponent implements OnInit {
     this.getApiKeyList();
     this.getSdkKeyList();
   }
-  copyKey() {
+  copyKey = () => {
     alert('copy key');
   }
-  createKey(value: string) {
+  createKey = (value: string) => {
     if (value === 'api') {
       const dialogRef = this.dialog.open(CreateApiKayComponent, {
         height: '350px',
@@ -47,35 +47,35 @@ export class ApiKeysComponent implements OnInit {
       });
     }
   }
-  getApiKeyList() {
-    if (this.accessType == '1' || this.accessType == '2') {
+  getApiKeyList = () => {
+    if (this.accessType === '1' || this.accessType === '2') {
       this.service.getApiKeyList().subscribe((res) => {
-        this.apiKeyData = res.msg == 'success' ? res.data : '';
+        this.apiKeyData = res.msg === 'success' ? res.data : '';
         console.log(this.apiKeyData);
       });
-    } else if (this.accessType == '3' || this.accessType == '4') {
+    } else if (this.accessType === '3' || this.accessType === '4') {
       const tenentId = Cookie.get('Tenant_ID');
       this.service.getApiKeyListById(tenentId).subscribe((res) => {
-        this.apiKeyData = res.msg == 'success' ? res.data : '';
+        this.apiKeyData = res.msg === 'success' ? res.data : '';
         console.log(this.apiKeyData);
       });
     }
   }
-  getSdkKeyList() {
-    if (this.accessType == '1' || this.accessType == '2') {
+  getSdkKeyList = () => {
+    if (this.accessType === '1' || this.accessType === '2') {
       this.service.getSdkKeyList().subscribe((res) => {
-        this.sdkKeyData = res.msg == 'success' ? res.data : '';
+        this.sdkKeyData = res.msg === 'success' ? res.data : '';
         console.log(this.sdkKeyData);
       });
-    } else if (this.accessType == '3' || this.accessType == '4') {
+    } else if (this.accessType === '3' || this.accessType === '4') {
       const tenetId = Cookie.get('Tenant_ID');
       this.service.getSdkKeyListById(tenetId).subscribe((res) => {
-        this.sdkKeyData = res.msg == 'success' ? res.data : '';
+        this.sdkKeyData = res.msg === 'success' ? res.data : '';
         console.log(this.sdkKeyData);
       });
     }
   }
-  revoke() {
+  revoke = () => {
     alert('revoke');
   }
 }

@@ -17,10 +17,10 @@ export class DocumentService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
-  }
+  };
 
   // Handle API errors
-  handleError(error: HttpErrorResponse) {
+  handleError = (error: HttpErrorResponse) => {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
@@ -34,7 +34,7 @@ export class DocumentService {
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
-  };
+  }
 
   getAllDocList(): Observable<DocumentModel> {
     return this.httpClient
@@ -42,26 +42,26 @@ export class DocumentService {
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 
-  getItem(id): Observable<DocumentModel> {
+  getItem(id: any): Observable<DocumentModel> {
     return this.httpClient
       .get<DocumentModel>(this.url + '/' + id)
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 
   // Update item by id
-  updateItem(id, item): Observable<DocumentModel> {
+  updateItem(id: any, item: any): Observable<DocumentModel> {
     return this.httpClient
       .put<DocumentModel>(this.url + '/' + id, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 }
 

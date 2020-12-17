@@ -37,7 +37,7 @@
             <img
               src="photo-matching-img"
               src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{
-                scanDocument[0].Selfie_Photo
+                scanDocument[0]?.Selfie_Photo
               }}?alt=media"
             />
           </div>
@@ -172,17 +172,23 @@
     <!-- actual list to be added here instead of [1,2,3] -->
 
     <!-- *ngfor="let scanDocument of scanDocuments" -->
-
-    <mat-expansion-panel
+    <!-- <mat-expansion-panel
       [expanded]="isFirst"
       *ngFor="let doc of scanDocument; let isFirst = first"
+    > -->
+    <!-- formArrayName="formArray"
+      *ngFor="let doc of formArray.controls; let isFirst = first"
+      [formGroupName]="isFirst" -->
+    <mat-expansion-panel
+      [expanded]="isFirst"
+      *ngFor="let doc of scanDocument; let isFirst = first; let i=index"
     >
       <mat-expansion-panel-header>
         <mat-panel-title fxLayoutAlign="start center">
           <div class="exp-header-data">
             <div class="title">Scan ID:</div>
             <div class="value">
-              {{ doc._id }}
+              {{ doc.Scan_ID }}
             </div>
           </div>
         </mat-panel-title>
@@ -201,10 +207,11 @@
           </button>
         </mat-panel-description>
       </mat-expansion-panel-header>
+
       <form
         class="panel-body"
-        [formGroup]="form"
-        (ngSubmit)="onSave()"
+        (ngSubmit)="onSave(heroForm, doc._id)"
+        #heroForm="ngForm"
         fxLayout="row wrap"
         fxLayoutAlign="space-between start"
         fxLayoutGap="20px"
@@ -212,10 +219,17 @@
         <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Id type</mat-label>
-            <mat-select formControlName="idType">
-              <mat-option value="{{ doc.ID_Type }}">{{
-                doc.ID_Type
-              }}</mat-option>
+            <mat-select
+              name="ID_Type"
+              [disabled]="disabled"
+              [(ngModel)]="doc.ID_Type"
+              (selectionChange)="SelectIdType($event)"
+            >
+              <mat-option
+                *ngFor="let type of documentIdType"
+                [value]="type.value"
+                >{{ type.value }}</mat-option
+              >
               <!-- <mat-option value="passport">Passport</mat-option>
               <mat-option value="voterId">Voter ID</mat-option> -->
             </mat-select>
@@ -223,43 +237,48 @@
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Id number</mat-label>
             <input
-              [readonly]="disabled"
               matInput
+              [disabled]="disabled"
               placeholder="Id #"
-              formControlName="idNum"
+              name="idCardNo"
+              [(ngModel)]="doc.idCardNo"
             />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>First name</mat-label>
+            <!--  -->
             <input
-              [readonly]="disabled"
               matInput
+              [disabled]="disabled"
               placeholder="First name"
-              formControlName="firstName"
+              name="firstName"
+              [(ngModel)]="doc.firstName"
             />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Last Name</mat-label>
             <input
               matInput
-              [readonly]="disabled"
+              [disabled]="disabled"
               placeholder="Last name"
-              formControlName="lastName"
+              name="lastName"
+              [(ngModel)]="doc.lastName"
             />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Date of birth</mat-label>
+
+            <!-- (dateChange)="selectDate($event)" -->
             <input
               matInput
-              [readonly]="disabled"
               [matDatepicker]="dobPicker"
-              formControlName="dobPicker"
               placeholder="Date of birth"
+              name="dob"
+              [(ngModel)]="doc.dob"
             />
             <mat-datepicker-toggle
               matSuffix
               [for]="dobPicker"
-              [readonly]="disabled"
             ></mat-datepicker-toggle>
             <mat-datepicker #dobPicker></mat-datepicker>
           </mat-form-field>
@@ -267,37 +286,41 @@
             <mat-label>Street name</mat-label>
             <input
               matInput
-              [readonly]="disabled"
+              [disabled]="disabled"
               placeholder="Street Name"
-              formControlName="streetName"
+              name="streetName"
+              [(ngModel)]="doc.streetName"
             />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>City</mat-label>
             <input
               matInput
-              [readonly]="disabled"
+              [disabled]="disabled"
               placeholder="City"
-              formControlName="city"
+              name="city"
+              [(ngModel)]="doc.city"
             />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Postal code</mat-label>
             <input
               matInput
-              [readonly]="disabled"
+              [disabled]="disabled"
               placeholder="Postal Code"
-              formControlName="postalCode"
+              name="postalCode"
+              [(ngModel)]="doc.postalCode"
             />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Id expiry</mat-label>
             <input
               matInput
-              [readonly]="disabled"
+              [disabled]="disabled"
               [matDatepicker]="idExpirypicker"
-              formControlName="idExpirypicker"
               placeholder="Id Expiry"
+              name="idExpiryDate"
+              [(ngModel)]="doc.idExpiryDate"
             />
             <mat-datepicker-toggle
               matSuffix
@@ -308,31 +331,32 @@
           <mat-form-field appearance="outline" fxFill>
             <mat-label>User id</mat-label>
             <input
-              [readonly]="true"
               matInput
+              [disabled]="disabled"
               placeholder="User id"
-              formControlName="userId"
-              [(ngModel)]="doc.Tenant_ID"
+              name="firstName"
+              [(ngModel)]="doc.firstName"
             />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Mode</mat-label>
             <input
-              [readonly]="true"
               matInput
+              [disabled]="disabled"
               placeholder="Mode"
-              formControlName="mode"
+              name="Mode"
               [(ngModel)]="doc.Mode"
             />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Updated date</mat-label>
             <input
-              [readonly]="disabled"
               matInput
+              [disabled]="disabled"
               [matDatepicker]="updatedDatepicker"
               placeholder="Update date"
-              formControlName="updatedDate"
+              name="updateDate"
+              [(ngModel)]="doc.updatedDate"
             />
             <mat-datepicker-toggle
               matSuffix
@@ -384,7 +408,7 @@
               <img
                 class="photo-matching-img"
                 src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{
-                  doc.Selfie_Photo
+                  doc?.Selfie_Photo
                 }}?alt=media"
               />
               <div class="matching-wrap">
@@ -443,9 +467,17 @@
                 fxFlex
               >
                 <mat-label>Id card front</mat-label>
-                <mat-select formControlName="idCardFront" [disabled]="disabled">
-                  <mat-option value="clear">Clear</mat-option>
-                  <mat-option value="notClear">Not clear</mat-option>
+                <mat-select
+                  [disabled]="disabled"
+                  name="idCardFrontStatus"
+                  [(ngModel)]="doc.idCardFrontStatus"
+                  (selectionChange)="selectIdFront($event)"
+                >
+                  <mat-option
+                    [value]="type.value"
+                    *ngFor="let type of idCardForntType"
+                    >{{ type.name }}</mat-option
+                  >
                 </mat-select>
               </mat-form-field>
               <mat-form-field
@@ -458,9 +490,17 @@
                 fxFlex
               >
                 <mat-label>Id card back</mat-label>
-                <mat-select formControlName="idCardBack" [disabled]="disabled">
-                  <mat-option value="clear">Clear</mat-option>
-                  <mat-option value="notClear">Not clear</mat-option>
+                <mat-select
+                  name="idCardBackStatus"
+                  [disabled]="disabled"
+                  [(ngModel)]="doc.idCardBackStatus"
+                  (selectionChange)="selectIdBack($event)"
+                >
+                  <mat-option
+                    [value]="type.value"
+                    *ngFor="let type of idCardBackType"
+                    >{{ type.name }}</mat-option
+                  >
                 </mat-select>
               </mat-form-field>
               <mat-form-field
@@ -475,9 +515,11 @@
                 <mat-label>Selfie photo matching</mat-label>
                 <input
                   matInput
+                  [disabled]="disabled"
                   placeholder="%"
-                  formControlName="selfieMatching"
                   [readonly]="disabled"
+                  name="selfiePhotoMatchStatus"
+                  [(ngModel)]="doc.selfiePhotoMatchStatus"
                 />
               </mat-form-field>
               <mat-form-field
@@ -490,9 +532,17 @@
                 fxFlex
               >
                 <mat-label>Live Check</mat-label>
-                <mat-select formControlName="liveCheck" [disabled]="disabled">
-                  <mat-option value="ok">Ok</mat-option>
-                  <mat-option value="rejected">Rejected</mat-option>
+                <mat-select
+                  name="liveCheckingStatus"
+                  [disabled]="disabled"
+                  [(ngModel)]="doc.liveCheckingStatus"
+                  (selectionChange)="selectLiveCheck($event)"
+                >
+                  <mat-option
+                    [value]="type.value"
+                    *ngFor="let type of liveCheckType"
+                    >{{ type.name }}</mat-option
+                  >
                 </mat-select>
               </mat-form-field>
               <mat-form-field
@@ -505,10 +555,17 @@
                 fxFlex
               >
                 <mat-label>Scan result</mat-label>
-                <mat-select formControlName="scanResult" [disabled]="disabled">
-                  <mat-option value="incomplete">Incomplete</mat-option>
-                  <mat-option value="rejected">Rejected</mat-option>
-                  <mat-option value="verified">Verified</mat-option>
+                <mat-select
+                  name="scanResultStatus"
+                  [disabled]="disabled"
+                  [(ngModel)]="doc.scanResultStatus"
+                  (selectionChange)="selectResultType($event)"
+                >
+                  <mat-option
+                    [value]="type.value"
+                    *ngFor="let type of scanResultType"
+                    >{{ type.name }}</mat-option
+                  >
                 </mat-select>
               </mat-form-field>
               <mat-form-field
@@ -521,10 +578,12 @@
                 <mat-label>Reason</mat-label>
                 <textarea
                   [readonly]="disabled"
+                  [disabled]="disabled"
                   matInput
                   placeholder="reason"
+                  name="reason"
+                  [(ngModel)]="doc.reason"
                   rows="3"
-                  formControlName="reason"
                 ></textarea>
               </mat-form-field>
               <div
@@ -536,12 +595,7 @@
                 <button mat-stroked-button type="button" (click)="clear()">
                   cancel
                 </button>
-                <button
-                  mat-button
-                  class="primary-button"
-                  type="submit"
-                  [disabled]="disabled"
-                >
+                <button [disabled]="((doc.scanResultStatus == 'Incomplete') ||(doc.scanResultStatus =='Rejected') || (doc.scanResultStatus =='Verified'))? true: false " mat-button class="primary-button" type="submit">
                   Save
                 </button>
               </div>
@@ -551,68 +605,67 @@
         <div fxFlex="100">
           <div>
             <div class="section-header">Comments</div>
-            <div fxLayout="row wrap" fxLayoutAlign="space-between start">
+            <div fxLayout="row wrap" fxLayoutAlign="space-between start" >
               <mat-form-field
                 appearance="outline"
                 class="field-wrap alignment-fix"
                 fxFlex="100"
               >
                 <mat-label>Comment</mat-label>
-                <textarea
-                  matInput
-                  placeholder="reason"
-                  rows="3"
-                  formControlName="comment"
-                ></textarea>
+                <!-- [type]="passwordVisible ? 'text' : 'password'" -->
+                <textarea matInput placeholder="reason" name="comments" [(ngModel)] ='comments[i]'  rows="3"></textarea>
                 <button
                   matSuffix
                   mat-icon-button
                   class="primary-button"
-                  (click)="sendComment()"
-                  aria-label="Send"
+
+                  aria-label="Send" type="button"
                 >
-                  <mat-icon>send</mat-icon>
+                  <mat-icon  (click)="sendComment(doc._id)">send</mat-icon>
                 </button>
               </mat-form-field>
-              <div fxFlex="100" fxFlex class="comments-wrap">
-                <div class="comment">
+              <div *ngIf="commentsData.length>0">
+                <div></div>
+                <div fxFlex="100" fxFlex class="comments-wrap" *ngFor="let comment of commentsData" >
+                  <div  *ngIf="doc._id == comment.id">
+                     <div class="comment"  *ngFor="let j of comment.data">
                   <div class="commented-by">
-                    <!-- dummy -->
-                    Ravi Verma:
+                    {{j.username}}
                   </div>
                   <div class="commented-date">
                     Commented on:
                     <span>
-                      <!-- dummy -->
-                      13/07/2020
+                     {{j.createdAt | date: "dd/mm/yyyy HH:mm:ss"}}
                     </span>
                   </div>
                   <div class="value">
                     <!--dummy-->
-                    ID submitted is not clear.
+                    {{j.text}}
                   </div>
                 </div>
-                <div class="comment">
+                  </div>
+
+                <!-- <div class="comment">
                   <div class="commented-by">
-                    <!-- dummy -->
+
                     Ravi Verma:
                   </div>
                   <div class="commented-date">
                     Commented on:
                     <span>
-                      <!-- dummy -->
                       13/07/2020
                     </span>
                   </div>
                   <div class="value">
-                    <!--dummy-->
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Accusamus ea, vero nulla, aspernatur fugiat facere fugit
                     beatae et ratione nemo obcaecati accusantium id ut neque
                     aliquid quae fuga natus quis.
                   </div>
-                </div>
+                </div> -->
               </div>
+              </div>
+
             </div>
           </div>
         </div>

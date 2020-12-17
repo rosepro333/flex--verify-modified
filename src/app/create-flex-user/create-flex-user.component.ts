@@ -1,18 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
-import { ServicesService } from "../service/services.service";
-import { TosterService } from "../toster/toster.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ServicesService } from '../service/services.service';
+import { TosterService } from '../toster/toster.service';
 
 @Component({
-  selector: "app-create-flex-user",
-  templateUrl: "./create-flex-user.component.html",
-  styleUrls: ["./create-flex-user.component.scss"],
+  selector: 'app-create-flex-user',
+  templateUrl: './create-flex-user.component.html',
+  styleUrls: ['./create-flex-user.component.scss'],
 })
 export class CreateFlexUserComponent implements OnInit {
   form: FormGroup;
   tenentList: any = [];
-  tenentId: string = "";
+  tenentId = '';
 
   constructor(
     private fb: FormBuilder,
@@ -25,35 +25,35 @@ export class CreateFlexUserComponent implements OnInit {
     this.formControl();
     this.getTenentList();
   }
-  formControl() {
+  formControl = () => {
     this.form = this.fb.group({
-      type: new FormControl(""),
-      email: new FormControl(""),
-      name: new FormControl(""),
-      access: new FormControl(""),
-      tenent: new FormControl(""),
+      type: new FormControl(''),
+      email: new FormControl(''),
+      name: new FormControl(''),
+      access: new FormControl(''),
+      tenent: new FormControl(''),
     });
   }
-  getTenentList() {
+  getTenentList = () =>{
     this.service.getTenentList().subscribe((res) => {
       // console.log(res);
-      if (res.msg === "success") {
+      if (res.msg === 'success') {
         this.tenentList = res.data;
       }
     });
   }
-  selectTenent(value: any) {
+  selectTenent = (value: any) => {
     this.tenentId = value;
   }
-  onSave() {
+  onSave = () => {
     if (this.form.valid) {
       this.form.value.tenent = this.tenentId;
       this.service.userCreate(this.form.value).subscribe(
         (result) => {
           console.log(result);
-          if (result.msg == "success") {
+          if (result.msg == 'success') {
             console.log(result);
-            this.toster.openSnackBar("User Created Successfully", result.msg);
+            this.toster.openSnackBar('User Created Successfully', result.msg);
             this.userNavigate();
           }
         },
@@ -63,13 +63,13 @@ export class CreateFlexUserComponent implements OnInit {
       );
     }
   }
-  userNavigate() {
+  userNavigate = () => {
     setTimeout(() => {
-      this.router.navigateByUrl("/flexm-user");
+      this.router.navigateByUrl('/flexm-user');
     }, 200);
   }
 
-  clear() {
-    this.router.navigate(["./flexm-user"]);
+  clear = () => {
+    this.router.navigate(['./flexm-user']);
   }
 }

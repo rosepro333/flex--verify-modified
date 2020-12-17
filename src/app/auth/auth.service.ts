@@ -17,6 +17,7 @@ export class AuthService {
     false
   );
 
+  // tslint:disable-next-line:typedef
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
@@ -45,15 +46,15 @@ export class AuthService {
   }
 
   // this.setUpdateCookies(), window.location.reload
-  setUpdateCookies() {
+  setUpdateCookies = ()  => {
     this.httpOptions.headers.set('ACCESS-TOKEN', Cookie.get('data'));
   }
-  logout() {
+  logout = () => {
     this.deleteAllCookies();
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }
-  deleteAllCookies() {
+  deleteAllCookies = () => {
     // console.log(Cookie.delete('data'))
     Cookie.deleteAll('/', 'localhost');
     // console.log(cookie)
@@ -62,7 +63,7 @@ export class AuthService {
     // });
     // cookie.map(key=>{Cookie.delete(key)})
   }
-  handleError(error) {
+  handleError = (error: any ) => {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get Client Side Error

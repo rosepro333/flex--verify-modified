@@ -1,23 +1,23 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { Router } from "@angular/router";
-import { ServicesService } from "./../service/services.service";
-import { TosterService } from "./../toster/toster.service";
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { ServicesService } from './../service/services.service';
+import { TosterService } from './../toster/toster.service';
 @Component({
-  selector: "app-create-user",
-  templateUrl: "./create-user.component.html",
-  styleUrls: ["./create-user.component.scss"],
+  selector: 'app-create-user',
+  templateUrl: './create-user.component.html',
+  styleUrls: ['./create-user.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class CreateUserComponent implements OnInit {
   form: FormGroup;
   tenentList: any = [];
-  tenentId: string = "";
+  tenentId = '';
 
   constructor(
     private fb: FormBuilder,
@@ -30,37 +30,37 @@ export class CreateUserComponent implements OnInit {
     this.formControl();
     this.getTenentList();
   }
-  formControl() {
+  formControl = () => {
     this.form = this.fb.group({
-      type: new FormControl(""),
-      email: new FormControl(""),
-      name: new FormControl(""),
-      access: new FormControl(""),
-      tenent: new FormControl(""),
+      type: new FormControl(''),
+      email: new FormControl(''),
+      name: new FormControl(''),
+      access: new FormControl(''),
+      tenent: new FormControl(''),
     });
   }
-  getTenentList() {
+  getTenentList = () => {
     this.service.getTenentList().subscribe((res) => {
       // console.log(res);
-      if (res.msg === "success") {
+      if (res.msg === 'success') {
         this.tenentList = res.data;
       }
     });
   }
-  selectTenent(value: any) {
+  selectTenent = (value: any) => {
     this.tenentId = value;
   }
-  onSave(event: any) {
+  onSave = (event: any) => {
     console.log(event);
 
-    if (event === "user" && this.form.valid) {
+    if (event === 'user' && this.form.valid) {
       this.form.value.tenent = this.tenentId;
       this.service.userCreate(this.form.value).subscribe(
         (result) => {
           console.log(result);
-          if (result.msg == "success") {
+          if (result.msg === 'success') {
             console.log(result);
-            this.toster.openSnackBar("User Created Successfully", result.msg);
+            this.toster.openSnackBar('User Created Successfully', result.msg);
             this.userNavigate();
           }
         },
@@ -68,14 +68,14 @@ export class CreateUserComponent implements OnInit {
           console.error(error);
         }
       );
-    } else if (event === "tenent" && this.form.valid) {
+    } else if (event === 'tenent' && this.form.valid) {
       console.log(this.form.value);
       this.service.createTenent(this.form.value).subscribe(
         (result) => {
           console.log(result);
-          if (result.msg == "success") {
+          if (result.msg === 'success') {
             console.log(result);
-            this.toster.openSnackBar("Tenent Created Successfully", result.msg);
+            this.toster.openSnackBar('Tenent Created Successfully', result.msg);
             this.userNavigate();
           }
         },
@@ -85,13 +85,13 @@ export class CreateUserComponent implements OnInit {
       );
     }
   }
-  userNavigate() {
+  userNavigate = () => {
     setTimeout(() => {
-      this.router.navigateByUrl("/organization");
+      this.router.navigateByUrl('/organization');
     }, 200);
   }
 
-  clear() {
-    this.router.navigate(["./organization"]);
+  clear = () => {
+    this.router.navigate(['./organization']);
   }
 }
