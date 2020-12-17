@@ -19,6 +19,7 @@ export class ServicesService {
     false
   );
 
+  // tslint:disable-next-line:typedef
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
@@ -136,7 +137,7 @@ export class ServicesService {
   findUserById(id: any): Observable<any> {
     if (id) {
       const formData = {
-        id: id,
+        id,
       };
       console.log(id);
       return this.http
@@ -151,7 +152,7 @@ export class ServicesService {
   findUserByTenentId(id: any): Observable<any> {
     if (id) {
       const formData = {
-        id: id,
+        id,
       };
       console.log(id);
       return this.http
@@ -215,6 +216,7 @@ export class ServicesService {
         .pipe(retry(1), catchError(this.handleError));
     }
   }
+  // tslint:disable-next-line:variable-name
   getTenentSdkList(tenent_id: any): Observable<any> {
     console.log(tenent_id);
     return this.http
@@ -224,7 +226,7 @@ export class ServicesService {
   findTenetListById(id: any): Observable<any> {
     if (id) {
       const formData = {
-        id: id,
+        id,
       };
       console.log(id);
       return this.http
@@ -277,7 +279,29 @@ export class ServicesService {
   }
   approvedScanDocument(id: any, data: any): Observable<any> {
     return this.http
-      .patch(this.apiUrl + '/scans/' + id, data, this.httpOptions)
+      .put(
+        this.apiUrl + '/scans/updateScanDocument/' + id,
+        data,
+        this.httpOptions
+      )
+      .pipe(retry(2), catchError(this.handleError));
+  }
+  getAllComment(data: any): Observable<any> {
+    return this.http
+      .post(
+        this.apiUrl + '/comments/list',
+        data,
+        this.httpOptions
+      )
+      .pipe(retry(2), catchError(this.handleError));
+  }
+  userComment(data: any): Observable<any> {
+    return this.http
+      .post(
+        this.apiUrl + '/comments',
+        data,
+        this.httpOptions
+      )
       .pipe(retry(2), catchError(this.handleError));
   }
 
@@ -286,7 +310,7 @@ export class ServicesService {
       .get(this.apiUrl + '/scans/allScanByDocumentId/' + id, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
-  handleError(error) {
+  handleError = (error: any) => {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get Client Side Error

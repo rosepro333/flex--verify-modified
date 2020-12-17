@@ -12,7 +12,8 @@ import { DeleteTenentComponent } from '../model/delete-tenent/delete-tenent.comp
 import { ServicesService } from '../service/services.service';
 import { TosterService } from '../toster/toster.service';
 
-let ELEMENT_DATA_Tenent: any = [];
+// tslint:disable-next-line:variable-name
+const ELEMENT_DATA_Tenent: any = [];
 @Component({
   selector: 'app-flex-tenent',
   templateUrl: './flex-tenent.component.html',
@@ -22,7 +23,7 @@ export class FlexTenentComponent implements OnInit {
   showFiller = false;
   form: FormGroup;
   tenentList: any = [];
-  tenentId: string = '';
+  tenentId = '';
   // public data:any=[]
   @ViewChild(MatSort) sort: MatSort;
 
@@ -51,7 +52,7 @@ export class FlexTenentComponent implements OnInit {
     this.formControl();
   }
 
-  getTenentList() {
+  getTenentList = () => {
     this.service.getTenentList().subscribe((result) => {
       this.dataSourceTenant = result.data;
       this.tenentList = result.data;
@@ -59,47 +60,47 @@ export class FlexTenentComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit = () => {
     this.dataSourceTenant.sort = this.sort;
     this.dataSourceTenant.paginator = this.paginator;
   }
 
-  applyTenantFilter(event: Event) {
+  applyTenantFilter = (event: Event) => {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
   }
-  blockUser(elm) {
+  blockUser = (elm: any) => {
     alert('block ' + elm.name);
   }
-  enableUser(elm) {
+  enableUser = (elm: any) => {
     alert('unblock ' + elm.name);
   }
 
-  blockTenant(id, name) {
+  blockTenant = (id: any, name: any) => {
     console.log(id, name);
     const dialogRef = this.dialog.open(BlockTenentComponent, {
       height: '160px',
       width: '400px',
-      data: { id: id, name: name },
+      data: { id, name },
     });
     dialogRef.afterClosed().subscribe(() => {
       this.ngOnInit();
     });
   }
-  enableTenant(elm) {
+  enableTenant = (elm: any) => {
     alert('unblock ' + elm.name);
   }
-  deleteTenant(id, name) {
+  deleteTenant = (id: any, name: any) => {
     const dialogRef = this.dialog.open(DeleteTenentComponent, {
       height: '160px',
       width: '400px',
-      data: { id: id, name: name },
+      data: { id, name },
     });
     dialogRef.afterClosed().subscribe(() => {
       this.ngOnInit();
     });
   }
-  formControl() {
+  formControl = () => {
     this.form = this.fb.group({
       type: new FormControl(''),
       email: new FormControl(''),
@@ -109,16 +110,16 @@ export class FlexTenentComponent implements OnInit {
     });
   }
 
-  selectTenent(value: any) {
+  selectTenent = (value: any) => {
     this.tenentId = value;
   }
-  onSave() {
+  onSave = () => {
     if (this.form.valid) {
       console.log(this.form.value);
       this.service.createTenent(this.form.value).subscribe(
         (result) => {
           console.log(result);
-          if (result.msg == 'success') {
+          if (result.msg === 'success') {
             console.log(result);
             this.toster.openSnackBar('Tenent Created Successfully', result.msg);
             this.ngOnInit();

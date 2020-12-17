@@ -22,20 +22,20 @@ export class ForgetPasswordComponent implements OnInit {
     private toast: TosterService
   ) {}
 
-  ngOnInit() {
+  ngOnInit = () => {
     this.form = this.fb.group({
       userName: ['', Validators.required],
     });
   }
 
-  isFieldInvalid(field: string) {
+  isFieldInvalid = (field: string) => {
     return (
       (!this.form.get(field).valid && this.form.get(field).touched) ||
       (this.form.get(field).untouched && this.formSubmitAttempt)
     );
   }
 
-  onSubmit() {
+  onSubmit = () => {
     if (this.form.valid) {
       this.service.forgetPassword(this.form.value).subscribe(
         (result) => {
@@ -55,5 +55,5 @@ export class ForgetPasswordComponent implements OnInit {
     }
     // this.formSubmitAttempt = true;
   }
-  forgetPassword() {}
+  forgetPassword = () =>  {};
 }

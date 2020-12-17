@@ -25,7 +25,7 @@ export class BlockTenentComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  blockTenent() {
+  blockTenent = () => {
     const id = this.tenentId;
     this.service.blockTenent(id).subscribe((res) => {
       console.log(res);
@@ -34,7 +34,7 @@ export class BlockTenentComponent implements OnInit {
       }
     });
   }
-  clear() {
+  clear = () => {
     this.dialogRef.close();
   }
 }

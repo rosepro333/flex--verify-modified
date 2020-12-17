@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { ServicesService } from "../service/services.service";
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { ServicesService } from '../service/services.service';
 
 export interface OrganizationElement {
   id: number;
@@ -14,13 +14,15 @@ export interface OrganizationElement {
   createdBy: string;
   isBlocked: boolean;
 }
-let ELEMENT_DATA_Tenent: OrganizationElement[] = [];
-let ELEMENT_DATA_User: OrganizationElement[] = [];
+// tslint:disable-next-line:variable-name
+const ELEMENT_DATA_Tenent: OrganizationElement[] = [];
+// tslint:disable-next-line:variable-name
+const ELEMENT_DATA_User: OrganizationElement[] = [];
 
 @Component({
-  selector: "app-organization",
-  templateUrl: "./organization.component.html",
-  styleUrls: ["./organization.component.scss"],
+  selector: 'app-organization',
+  templateUrl: './organization.component.html',
+  styleUrls: ['./organization.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class OrganizationComponent implements OnInit {
@@ -31,11 +33,11 @@ export class OrganizationComponent implements OnInit {
   pageSizeOptions = [10, 25, 50, 100];
 
   displayedColumns: string[] = [
-    "name-email",
-    "role",
-    "owner",
-    "createdBy",
-    "actions",
+    'name-email',
+    'role',
+    'owner',
+    'createdBy',
+    'actions',
   ];
   dataSourceUser = new MatTableDataSource(ELEMENT_DATA_User);
   dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
@@ -46,20 +48,20 @@ export class OrganizationComponent implements OnInit {
     this.getUserList();
   }
 
-  getTenentList() {
+  getTenentList = () => {
     this.serviceService.getTenentList().subscribe((result) => {
       this.dataSourceTenant = result.data;
       console.log(this.dataSourceTenant);
     });
   }
-  getUserList() {
+  getUserList = () => {
     this.serviceService.getUserList().subscribe((result) => {
       this.dataSourceUser = result.data;
       console.log(this.dataSourceUser);
     });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit = () => {
     this.dataSourceUser.sort = this.sort;
     this.dataSourceUser.paginator = this.paginator;
 
@@ -67,25 +69,25 @@ export class OrganizationComponent implements OnInit {
     this.dataSourceTenant.paginator = this.paginator;
   }
 
-  applyUserFilter(event: Event) {
+  applyUserFilter = (event: Event) => {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceUser.filter = filterValue.trim().toLowerCase();
   }
-  applyTenantFilter(event: Event) {
+  applyTenantFilter = (event: Event) => {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
   }
-  blockUser(elm) {
-    alert("block " + elm.name);
+  blockUser = (elm: any) =>  {
+    alert('block ' + elm.name);
   }
-  enableUser(elm) {
-    alert("unblock " + elm.name);
+  enableUser = (elm: any) => {
+    alert('unblock ' + elm.name);
   }
-  deleteUser(elm) {
+  deleteUser = (elm: any) =>{
     console.log(elm);
     this.serviceService.deleteUser(elm).subscribe((res) => {
       console.log(res);
-      if (res.msg === "success") {
+      if (res.msg === 'success') {
         this.getUserList();
       }
       // this.dataSourceUser.data.splice(this.dataSourceUser.data.indexOf(elm));
@@ -96,17 +98,17 @@ export class OrganizationComponent implements OnInit {
       // .map((i, idx) => ((i.id = idx + 1), i));
     });
   }
-  blockTenant(elm) {
-    alert("block " + elm.name);
+  blockTenant = (elm: any) => {
+    alert('block ' + elm.name);
   }
-  enableTenant(elm) {
-    alert("unblock " + elm.name);
+  enableTenant = (elm: any) =>{
+    alert('unblock ' + elm.name);
   }
-  deleteTenant(elm) {
+  deleteTenant = (elm: any) =>{
     console.log(elm);
     this.serviceService.deleteTenent(elm).subscribe((res) => {
       console.log(res);
-      if (res.msg === "success") {
+      if (res.msg === 'success') {
         this.getTenentList();
       }
     });

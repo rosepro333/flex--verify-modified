@@ -10,8 +10,8 @@ import { ServicesService } from 'src/app/service/services.service';
   styleUrls: ['./block-user.component.scss'],
 })
 export class BlockUserComponent implements OnInit {
-  userId: string = '';
-  name: string = '';
+  userId = '';
+  name = '';
   constructor(
     // private fb: FormBuilder,
     private router: Router,
@@ -26,7 +26,7 @@ export class BlockUserComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  blockUser() {
+  blockUser = () => {
     const id = this.userId;
     this.service.blockUser(id).subscribe((res) => {
       console.log(res);
@@ -36,7 +36,7 @@ export class BlockUserComponent implements OnInit {
     });
   }
 
-  clear() {
+  clear = () => {
     this.dialogRef.close();
   }
 }

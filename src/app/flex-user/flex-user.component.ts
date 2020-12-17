@@ -13,8 +13,10 @@ import { DeleteUserComponent } from '../model/delete-user/delete-user.component'
 import { ServicesService } from '../service/services.service';
 import { TosterService } from '../toster/toster.service';
 
-let ELEMENT_DATA_Tenent: any = [];
-let ELEMENT_DATA_User: any = [];
+// tslint:disable-next-line:variable-name
+const ELEMENT_DATA_Tenent: any = [];
+// tslint:disable-next-line:variable-name
+const ELEMENT_DATA_User: any = [];
 @Component({
   selector: 'app-flex-user',
   templateUrl: './flex-user.component.html',
@@ -24,7 +26,7 @@ export class FlexUserComponent implements OnInit {
   // public data:any=[]
   showFiller = false;
   tenentList: any = [];
-  tenentId: string = '';
+  tenentId = '';
   @ViewChild(MatSort) sort: MatSort;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -41,10 +43,10 @@ export class FlexUserComponent implements OnInit {
   dataSourceUser = new MatTableDataSource(ELEMENT_DATA_User);
   dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
   form: FormGroup;
-  accessType: string = '';
-  tenetId: string = '';
-  userId: string = '';
-  isOPen: boolean = false;
+  accessType = '';
+  tenetId = '';
+  userId = '';
+  isOPen = false;
   constructor(
     private serviceService: ServicesService,
     public dialog: MatDialog,
@@ -63,7 +65,7 @@ export class FlexUserComponent implements OnInit {
     this.formControl();
   }
 
-  getUserList() {
+  getUserList = () => {
     if (this.accessType === '1') {
       this.serviceService.getUserList().subscribe((result) => {
         this.dataSourceUser = result.data;
@@ -80,7 +82,7 @@ export class FlexUserComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit = () => {
     this.dataSourceUser.sort = this.sort;
     this.dataSourceUser.paginator = this.paginator;
 
@@ -88,20 +90,20 @@ export class FlexUserComponent implements OnInit {
     this.dataSourceTenant.paginator = this.paginator;
   }
 
-  applyUserFilter(event: Event) {
+  applyUserFilter = (event: Event) => {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceUser.filter = filterValue.trim().toLowerCase();
   }
-  applyTenantFilter(event: Event) {
+  applyTenantFilter = (event: Event) => {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
   }
-  blockUser(id, name) {
-    if (id != this.userId) {
+  blockUser = (id: any, name: any) => {
+    if (id !== this.userId) {
       const dialogRef = this.dialog.open(BlockUserComponent, {
         height: '160px',
         width: '400px',
-        data: { id: id, name: name },
+        data: { id, name },
       });
       dialogRef.afterClosed().subscribe(() => {
         this.ngOnInit();
@@ -110,15 +112,15 @@ export class FlexUserComponent implements OnInit {
       this.toster.openSnackBar('You can not block ownself', 'failed');
     }
   }
-  enableUser(elm) {
+  enableUser = (elm): any => {
     alert('unblock ' + elm.name);
   }
-  deleteUser(id, name) {
-    if (id != this.userId) {
+  deleteUser = (id: any , name: any ) => {
+    if (id !== this.userId) {
       const dialogRef = this.dialog.open(DeleteUserComponent, {
         height: '160px',
         width: '400px',
-        data: { id: id, name: name },
+        data: { id, name },
       });
       dialogRef.afterClosed().subscribe(() => {
         this.ngOnInit();
@@ -127,13 +129,13 @@ export class FlexUserComponent implements OnInit {
       this.toster.openSnackBar('You can not delete ownself', 'failed');
     }
   }
-  blockTenant(elm) {
+  blockTenant = (elm: any ) => {
     alert('block ' + elm.name);
   }
-  enableTenant(elm) {
+  enableTenant = (elm: any) => {
     alert('unblock ' + elm.name);
   }
-  deleteTenant(elm) {
+  deleteTenant = (elm: any) => {
     this.serviceService.deleteTenent(elm).subscribe((res) => {
       console.log(res);
       if (res.msg === 'success') {
@@ -142,7 +144,7 @@ export class FlexUserComponent implements OnInit {
     });
   }
 
-  formControl() {
+  formControl = () => {
     this.form = this.fb.group({
       type: new FormControl(''),
       email: new FormControl(''),
@@ -151,7 +153,7 @@ export class FlexUserComponent implements OnInit {
       tenent: new FormControl(''),
     });
   }
-  getTenentList() {
+  getTenentList = () => {
     if (this.accessType === '1') {
       this.service.getTenentList().subscribe((res) => {
         // console.log(res);
@@ -172,16 +174,16 @@ export class FlexUserComponent implements OnInit {
       });
     }
   }
-  selectTenent(value: any) {
+  selectTenent = (value: any) => {
     this.tenentId = value;
   }
-  onSave() {
+  onSave = ()  => {
     if (this.form.valid) {
       this.form.value.tenent = this.tenentId;
       this.service.userCreate(this.form.value).subscribe(
         (result) => {
           console.log(result);
-          if (result.msg == 'success') {
+          if (result.msg === 'success') {
             console.log(result);
             this.toster.openSnackBar('User Created Successfully', result.msg);
             this.ngOnInit();
@@ -193,7 +195,7 @@ export class FlexUserComponent implements OnInit {
       );
     }
   }
-  userNavigate() {
+  userNavigate = () => {
     setTimeout(() => {}, 200);
   }
 }

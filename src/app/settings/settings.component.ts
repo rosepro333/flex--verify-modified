@@ -7,13 +7,13 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  accessType: string = '';
+  accessType = '';
   constructor() {}
 
   ngOnInit(): void {
     this.getAccessType();
   }
-  getAccessType() {
+  getAccessType = () => {
     this.accessType = Cookie.get('Access_Type');
     console.log(this.accessType);
     console.log(this.accessType);

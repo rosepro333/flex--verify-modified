@@ -12,10 +12,10 @@ import { AuthService } from './../auth/auth.service';
 })
 export class SidebarComponent implements OnInit {
   // pageTitle: string;
-  imgSrc: string = './../../assets/v-logo.svg';
-  sidebarMode: string = 'folded';
-  userName: string = '';
-  accessType: string = '';
+  imgSrc = './../../assets/v-logo.svg';
+  sidebarMode = 'folded';
+  userName = '';
+  accessType = '';
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -27,13 +27,13 @@ export class SidebarComponent implements OnInit {
     this.getAccessType();
     // this.pageTitle = 'Dashboard';
   }
-  getAccessType() {
+  getAccessType = () => {
     this.accessType = Cookie.get('Access_Type');
     console.log(this.accessType);
     console.log(this.accessType);
   }
 
-  logout() {
+  logout = () => {
     this.authService.logout();
     this.router.navigate(['login']);
   }
@@ -42,16 +42,16 @@ export class SidebarComponent implements OnInit {
   //   this.pageTitle = title;
   // }
 
-  sidebarModeFunc(mode) {
-    if (mode == 'folded') {
+  sidebarModeFunc = (mode) => {
+    if (mode === 'folded') {
       this.sidebarMode = mode;
       this.imgSrc = './../../assets/v-logo.svg';
-    } else if (mode == 'unfolded') {
+    } else if (mode === 'unfolded') {
       this.sidebarMode = mode;
       this.imgSrc = './../../assets/logo-main.svg';
     }
   }
-  getUserDetails() {
+  getUserDetails = () => {
     const id = Cookie.get('id');
     this.service.getUserDetails(id).subscribe((res) => {
       console.log('2');

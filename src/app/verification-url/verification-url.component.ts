@@ -13,13 +13,13 @@ export class VerificationUrlComponent implements OnInit {
   smsValue = '';
   emailValue = '';
   elementType: 'url';
-  verificaionUrl: string = '';
+  verificaionUrl = '';
   tenentList: any = [];
   sdkKey: any = [];
   selectSdk = '';
-  tenetId: string = '';
-  accessType: string = '';
-  id: string = '';
+  tenetId = '';
+  accessType = '';
+  id = '';
   constructor(private serviceService: ServicesService) {}
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class VerificationUrlComponent implements OnInit {
     this.tenetId = Cookie.get('Tenant_ID');
     this.getTenentList();
   }
-  getTenentList() {
+  getTenentList = () => {
     if (this.accessType === '1' || this.accessType === '2') {
       this.serviceService.getTenentList().subscribe((res) => {
         // console.log(res);
@@ -55,16 +55,16 @@ export class VerificationUrlComponent implements OnInit {
     //   }
     // });
   }
-  selectSdkKey(value: any) {
+  selectSdkKey = (value: any) => {
     this.selectSdk = value;
     // Cookie.set("x-access-token", value);
     // localStorage.setItem("x-access-token", value);
   }
-  selectTenent(value: any) {
+  selectTenent = (value: any) => {
     console.log(value);
     this.getSdkId(value);
   }
-  getSdkId(value: any) {
+  getSdkId = (value: any) => {
     this.serviceService.getTenentSdkList(value).subscribe((res) => {
       console.log(res.msg === 'success');
       console.log(res.data);
@@ -72,7 +72,7 @@ export class VerificationUrlComponent implements OnInit {
       this.ngOnInit();
     });
   }
-  clickGenerate() {
+  clickGenerate = () => {
     const key = this.selectSdk;
     this.serviceService.generateUrl(key).subscribe(
       (res) => {
@@ -80,7 +80,7 @@ export class VerificationUrlComponent implements OnInit {
           console.log(res.url);
           this.verificaionUrl = res.url;
           // this.verificaionUrl = res.url;
-          //localhost:50492/
+          // localhost:50492/
           // var url = this.verificaionUrl.split("/");
           // console.log(url);
           // console.log(url[2]);
@@ -92,7 +92,7 @@ export class VerificationUrlComponent implements OnInit {
       }
     );
   }
-  send(value: string, a: string) {
+  send = (value: string, a: string) => {
     if (a === 'mail') {
       alert('mail sent to ' + value);
     } else {

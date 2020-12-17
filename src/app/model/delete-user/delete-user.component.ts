@@ -9,8 +9,8 @@ import { ServicesService } from 'src/app/service/services.service';
   styleUrls: ['./delete-user.component.scss'],
 })
 export class DeleteUserComponent implements OnInit {
-  userId: string = '';
-  name: string = '';
+  userId = '';
+  name = '';
   constructor(
     // private fb: FormBuilder,
     private router: Router,
@@ -25,7 +25,7 @@ export class DeleteUserComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  deleteTenent() {
+  deleteTenent = () => {
     const id = this.userId;
     this.service.deleteUser(id).subscribe((res) => {
       console.log(res);
@@ -35,7 +35,7 @@ export class DeleteUserComponent implements OnInit {
     });
   }
 
-  clear() {
+  clear = () => {
     this.dialogRef.close();
   }
 }

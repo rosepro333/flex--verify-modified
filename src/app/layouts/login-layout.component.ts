@@ -7,4 +7,4 @@ import { Component, OnInit } from '@angular/core';
   `,
     styles: []
 })
-export class LoginLayoutComponent { }
+export class LoginLayoutComponent { };

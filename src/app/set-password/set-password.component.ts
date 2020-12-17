@@ -12,7 +12,7 @@ import { TosterService } from '../toster/toster.service';
 export class SetPasswordComponent implements OnInit {
   form: FormGroup;
   private formSubmitAttempt: boolean;
-  id: string = '';
+  id = '';
   constructor(
     private fb: FormBuilder,
     private service: ServicesService,
@@ -21,7 +21,7 @@ export class SetPasswordComponent implements OnInit {
     private toast: TosterService
   ) {}
 
-  ngOnInit() {
+  ngOnInit = () => {
     const id = this.route.snapshot.params['forgetPasswordId'];
     console.log(id);
     this.id = id;
@@ -31,14 +31,14 @@ export class SetPasswordComponent implements OnInit {
     });
   }
 
-  isFieldInvalid(field: string) {
+  isFieldInvalid = (field: string) => {
     return (
       (!this.form.get(field).valid && this.form.get(field).touched) ||
       (this.form.get(field).untouched && this.formSubmitAttempt)
     );
   }
 
-  onSubmit() {
+  onSubmit = () => {
     // this.router.navigate(["/login"]);
     if (
       this.form.valid &&
@@ -69,7 +69,7 @@ export class SetPasswordComponent implements OnInit {
     }
     this.formSubmitAttempt = true;
   }
-  forgetPassword() {
+  forgetPassword = () => {
     this.router.navigate(['/forget-passowrd']);
   }
 }
