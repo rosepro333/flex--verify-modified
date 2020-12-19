@@ -42,7 +42,7 @@ export class DocumentComponent implements OnInit {
   endDate = '';
   selectStatustype = '';
   selectedDocs = '';
-  disabled = true;
+  disabled = false;
   dataSource = new MatTableDataSource();
   pageSizeOptions = [10, 25, 50, 100];
   displayedColumns: string[] = [
@@ -86,7 +86,12 @@ export class DocumentComponent implements OnInit {
     // }
   }
   clear = () => {
-
+    this.search = '';
+    this.selectStatustype = '';
+    this.startDate = '';
+    this.endDate = '';
+    this.selectedDocs = '';
+    this.docdumentsList();
   }
   scanDocList = () => {
     this.serviceService.scanDocList().subscribe((res: any) => {
@@ -204,11 +209,16 @@ export class DocumentComponent implements OnInit {
     fieldValue: '',
     status: this.selectStatustype
     };
+    console.log(data);
     this.serviceService.scanDocByTenent(data).subscribe((res) => {
       console.log(res);
       if ( res.msg === 'success'){
-        this.dataSource.data = res.data;
-        console.log(res.data);
+        console.log(res);
+        if (  res.data){
+          this.dataSource.data = res.data;
+          console.log(res.data);
+        }else{
+        }
       }
     });
   }

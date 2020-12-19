@@ -39,7 +39,7 @@
           disableRipple
           (selectionChange)="selectDocsType($event.value)"
         >
-        <mat-option [disabled]="doc.value === 'Document_ID'" *ngFor="let doc of selectdocumentType"  [value]="doc.value">{{
+        <mat-option  *ngFor="let doc of selectdocumentType"  [value]="doc.value">{{
           doc.name
           }}
         </mat-option>
@@ -69,7 +69,7 @@
         More
       </button>
 
-      <button class='strock-button' mat-stroked-button>
+      <button class='strock-button' mat-stroked-button (click) ="clear()">
         Clear
       </button>
   </div>

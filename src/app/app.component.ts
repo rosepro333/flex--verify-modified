@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
       console.log(this.deviceInfo.deviceType);
       console.log(this.deviceInfo.os);
       console.log(this.deviceInfo.os_version);
-      // Cookie.set('')
       const  data = {
         browser: this.deviceInfo.browser,
         browser_version: this.deviceInfo.browser_version,
@@ -28,8 +27,8 @@ export class AppComponent implements OnInit {
         os: this.deviceInfo.os,
         os_version: this.deviceInfo.os_version,
       };
-      Cookie.set('browserinfo', JSON.stringify(data));
-      console.log(Cookie.get('browserinfo'));
+      Cookie.set('user-device', JSON.stringify(data));
+      console.log(Cookie.get('user-device'));
     }
   ngOnInit(): void {}
 }

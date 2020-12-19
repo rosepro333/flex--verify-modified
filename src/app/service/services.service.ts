@@ -30,7 +30,7 @@ export class ServicesService {
     headers: new HttpHeaders()
       .set('ACCESS-TOKEN', Cookie.get('data'))
       .set('x-access-token', Cookie.get('x-access-token'))
-      .set('browserInfo', Cookie.get('browserinfo'))
+      .set('user-device', Cookie.get('user-device'))
   };
   createTenent(tanent: TenentUser): Observable<any> {
     if (tanent.email !== '' && tanent.name !== '' && tanent.tenent !== '') {
