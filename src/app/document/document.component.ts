@@ -21,6 +21,7 @@ export class DocumentComponent implements OnInit {
   showFiller = false;
   @Output() dateChange: EventEmitter<MatDatepickerInputEvent<any>> = new EventEmitter();
   statusColumn: any = [
+    { name: 'All', value: 'All' },
     { name: 'Submitted', value: 'submitted' },
     { name: 'Incomplete', value: 'Incomplete' },
     { name: 'Rejected', value: 'Rejected' },
@@ -87,8 +88,8 @@ export class DocumentComponent implements OnInit {
   selectDate2 = (value: any) => {
     this.endDate = moment(value).utc().toISOString();
     console.log(moment(value).utc().toISOString());
-    if ( value){
-      this.loadAllDocuments();
+    if (value){
+      this.docdumentsList();
     }
   }
   ngAfterViewInit = () => {
@@ -114,11 +115,39 @@ export class DocumentComponent implements OnInit {
     this.docdumentsList();
   }
    getTenentList = () => {
+    this.tenentList.slice(0, this.tenentList.length);
     if (this.accessType === '1' || this.accessType === '2') {
       this.serviceService.getTenentList().subscribe((res) => {
         // console.log(res);
         if (res.msg === 'success') {
-          this.tenentList = res.data;
+          // this.tenentList = res.data;
+          res.data.map((i: any, index) => {
+            console.log(i.Name);
+            const obj = {};
+            if ( index === 0){
+              console.log('index ' + index);
+              const objs = {};
+              // tslint:disable-next-line:no-string-literal
+              objs['_id'] = 'All';
+              // tslint:disable-next-line:no-string-literal
+              objs['Name'] = 'All';
+              this.tenentList.push(objs);
+
+              // tslint:disable-next-line:no-string-literal
+              obj['_id'] = i._id;
+              // tslint:disable-next-line:no-string-literal
+              obj['Name'] = i.Name;
+              this.tenentList.push(obj);
+              console.log(this.tenentList);
+            }else{
+              // tslint:disable-next-line:no-string-literal
+              obj['_id'] = i._id;
+              // tslint:disable-next-line:no-string-literal
+              obj['Name'] = i.Name;
+              this.tenentList.push(obj);
+              // console.log(this.tenentList);
+            }
+          });
           console.log(this.tenentList);
         }
       });
@@ -149,8 +178,8 @@ export class DocumentComponent implements OnInit {
     pageNo: '1',
     order: '-1',
     search: '',
-    startDate: '2020-11-08T18:30:00.000Z',
-    endDate: '2020-12-23T18:30:00.000Z',
+    startDate: this.startDate,
+    endDate: this.endDate,
     fieldName: '',
     fieldValue: '',
     status: this.selectStatustype
