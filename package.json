@@ -31,6 +31,7 @@
     "ng2-charts": "^2.4.2",
     "ng2-cookies": "^1.0.12",
     "ngx-cookie-service": "^10.1.1",
+    "ngx-device-detector": "^2.0.4",
     "ngx-mask": "^10.0.4",
     "ngx-owl-carousel-o": "^4.0.0",
     "ngx-spinner": "^10.0.1",

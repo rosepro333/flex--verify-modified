@@ -39,7 +39,7 @@
           disableRipple
           (selectionChange)="selectDocsType($event.value)"
         >
-        <mat-option *ngFor="let doc of selectdocumentType" [value]="doc.value">{{
+        <mat-option [disabled]="doc.value === 'Document_ID'" *ngFor="let doc of selectdocumentType"  [value]="doc.value">{{
           doc.name
           }}
         </mat-option>
@@ -48,7 +48,7 @@
 
     <mat-form-field appearance="outline" fxFlex>
       <input class="search-field1"
-        matInput
+        matInput [disabled]="disabled"
         (keyup)="applyFilter($event)"
         placeholder="Filter text"
         #input
@@ -116,7 +116,7 @@
         <div class="data-wrap">
           <div class="title">Name</div>
           <div class="value">
-            {{ document.Document_ID.First_Name }} {{ document.Document_ID.Last_Name }}
+            {{ document.firstName }} {{ document.lastName }}
           </div>
         </div>
         <div class="data-wrap">

@@ -10,7 +10,6 @@ import { Cookie } from 'ng2-cookies';
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import * as moment from 'moment';
-
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
@@ -42,7 +41,8 @@ export class DocumentComponent implements OnInit {
   startDate = '';
   endDate = '';
   selectStatustype = '';
-  selectedDocs = 'Document_ID';
+  selectedDocs = '';
+  disabled = true;
   dataSource = new MatTableDataSource();
   pageSizeOptions = [10, 25, 50, 100];
   displayedColumns: string[] = [
@@ -58,8 +58,9 @@ export class DocumentComponent implements OnInit {
   constructor(
     private router: Router,
     private documentService: DocumentService,
-    private serviceService: ServicesService
-  ) {}
+    private serviceService: ServicesService) {
+
+  }
 
   ngOnInit(): void {
     this.id = Cookie.get('id');
@@ -68,10 +69,24 @@ export class DocumentComponent implements OnInit {
     this.loadAllDocuments();
   }
   loadAllDocuments = () => {
+    this.scanDocList();
     if (this.accessType === '1' || this.accessType === '2'){
       this.getTenentList();
     }
     this.docdumentsList();
+  }
+  checkSelectButton = () => {
+    // console.log(this.selectedDocs);
+    // if (!this.selectedDocs) {
+    //   console.log(this.selectedDocs);
+    //   this.disabled = true;
+    // }else{
+    //   console.log(this.selectedDocs);
+    //   this.disabled = false;
+    // }
+  }
+  clear = () => {
+
   }
   scanDocList = () => {
     this.serviceService.scanDocList().subscribe((res: any) => {
@@ -96,8 +111,13 @@ export class DocumentComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   selectDocsType = (value: any) => {
-    console.log(value);
     this.selectedDocs = value;
+    console.log(this.selectedDocs);
+    // if (this.selectedDocs){
+    this.disabled = false;
+    // console.log(this.disabled);
+    // }
+    // this.checkSelectButton();
   }
   applyFilter = (event: any) => {
     this.search = event;
@@ -177,10 +197,10 @@ export class DocumentComponent implements OnInit {
     limit: '10',
     pageNo: '1',
     order: '-1',
-    search: '',
+    search: this.search,
     startDate: this.startDate,
     endDate: this.endDate,
-    fieldName: '',
+    fieldName: this.selectedDocs,
     fieldValue: '',
     status: this.selectStatustype
     };

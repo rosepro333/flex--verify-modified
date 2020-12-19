@@ -61,6 +61,7 @@ import { DeleteUserComponent } from './model/delete-user/delete-user.component';
 import { BlockUserComponent } from './model/block-user/block-user.component';
 import { BlockTenentComponent } from './model/block-tenent/block-tenent.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { ServicesService } from './service/services.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -125,7 +126,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSelectModule,
     MatSnackBarModule,
   ],
-  providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService],
+  providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService, ServicesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -24,11 +24,13 @@ export class ServicesService {
     return this.loggedIn.asObservable();
   }
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) {
+  }
   httpOptions = {
     headers: new HttpHeaders()
       .set('ACCESS-TOKEN', Cookie.get('data'))
-      .set('x-access-token', Cookie.get('x-access-token')),
+      .set('x-access-token', Cookie.get('x-access-token'))
+      .set('browserInfo', Cookie.get('browserinfo'))
   };
   createTenent(tanent: TenentUser): Observable<any> {
     if (tanent.email !== '' && tanent.name !== '' && tanent.tenent !== '') {
