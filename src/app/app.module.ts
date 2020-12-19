@@ -60,6 +60,7 @@ import { DeleteTenentComponent } from './model/delete-tenent/delete-tenent.compo
 import { DeleteUserComponent } from './model/delete-user/delete-user.component';
 import { BlockUserComponent } from './model/block-user/block-user.component';
 import { BlockTenentComponent } from './model/block-tenent/block-tenent.component';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -115,6 +116,7 @@ import { BlockTenentComponent } from './model/block-tenent/block-tenent.componen
     MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatMenuModule,
     MatSortModule,
     MatPaginatorModule,
     MatExpansionModule,

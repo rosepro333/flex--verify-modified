@@ -287,6 +287,11 @@ export class ServicesService {
       .post(this.apiUrl + '/scans/scanDocByTenent', data, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
+  scanDocByAdmin(data: any): Observable<any> {
+    return this.http
+      .post(this.apiUrl + '/scans/scanDocByAdmin', data, this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
+  }
   approvedScanDocument(id: any, data: any): Observable<any> {
     return this.http
       .put(
