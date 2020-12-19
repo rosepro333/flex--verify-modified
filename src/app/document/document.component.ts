@@ -40,6 +40,7 @@ export class DocumentComponent implements OnInit {
   tenentList: any = [];
   startDate = '';
   endDate = '';
+  selectStatustype = '';
   selectedDocs = 'Document_ID';
   dataSource = new MatTableDataSource();
   pageSizeOptions = [10, 25, 50, 100];
@@ -107,6 +108,11 @@ export class DocumentComponent implements OnInit {
     console.log(id);
     this.router.navigate(['documents/' + id]);
   }
+  selectStatus = (value) => {
+    console.log(value);
+    this.selectStatustype = value;
+    this.docdumentsList();
+  }
    getTenentList = () => {
     if (this.accessType === '1' || this.accessType === '2') {
       this.serviceService.getTenentList().subscribe((res) => {
@@ -147,7 +153,7 @@ export class DocumentComponent implements OnInit {
     endDate: '2020-12-23T18:30:00.000Z',
     fieldName: '',
     fieldValue: '',
-    status: ''
+    status: this.selectStatustype
     };
     this.serviceService.scanDocByTenent(data).subscribe((res) => {
       console.log(res);
