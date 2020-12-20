@@ -28,10 +28,16 @@ export class ServicesService {
   }
   httpOptions = {
     headers: new HttpHeaders()
-      .set('ACCESS-TOKEN', Cookie.get('data'))
-      .set('x-access-token', Cookie.get('x-access-token'))
-      .set('user-device', Cookie.get('user-device'))
+      // .set('ACCESS-TOKEN', Cookie.get('data'))
+      // .set('x-access-token', Cookie.get('x-access-token'))
+      // .set('user-device', Cookie.get('user-device'))
   };
+  getToken = () => {
+    return Cookie.get('data');
+  }
+  userDevice = () => {
+    return Cookie.get('user-device');
+  }
   createTenent(tanent: TenentUser): Observable<any> {
     if (tanent.email !== '' && tanent.name !== '' && tanent.tenent !== '') {
       const data = {
@@ -88,6 +94,11 @@ export class ServicesService {
       .get(this.apiUrl + '/sdkkey/list', this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
+  deleteSdyKey(id: any): Observable<any> {
+    return this.http
+      .delete(this.apiUrl + '/sdkkey/delete/' + id, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
   createApiKey(data: any): Observable<any> {
     if (data.Tenent !== '' && data.mode !== '') {
       const apiKeyData = {
@@ -110,8 +121,13 @@ export class ServicesService {
       .get(this.apiUrl + '/apikey/list', this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-
+  deleteApiKey(id: any): Observable<any> {
+    return this.http
+      .delete(this.apiUrl + '/apikey/delete/' + id, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
   getTenentList(): Observable<any> {
+    console.log(this.httpOptions.headers);
     return this.http
       .get(this.apiUrl + '/tenent/list', this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));

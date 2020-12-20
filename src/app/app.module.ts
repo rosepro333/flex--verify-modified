@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
@@ -62,6 +62,7 @@ import { BlockUserComponent } from './model/block-user/block-user.component';
 import { BlockTenentComponent } from './model/block-tenent/block-tenent.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { ServicesService } from './service/services.service';
+import { MainInterceptor } from './interceptor/main.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -126,7 +127,8 @@ import { ServicesService } from './service/services.service';
     MatSelectModule,
     MatSnackBarModule,
   ],
-  providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService, ServicesService],
+  providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService, ServicesService,
+   { provide: HTTP_INTERCEPTORS, useClass: MainInterceptor, multi: true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

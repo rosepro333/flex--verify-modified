@@ -38,11 +38,13 @@ export class DocumentComponent implements OnInit {
   selectedTenentId = '';
   search = '';
   tenentList: any = [];
-  startDate = '';
-  endDate = '';
+  startDate: any = moment().startOf('day').toISOString();
+  endDate: any = moment().endOf('day').toISOString();
   selectStatustype = '';
   selectedDocs = '';
   disabled = false;
+  selectedDocStatus = '';
+  selectedTenentType = '';
   dataSource = new MatTableDataSource();
   pageSizeOptions = [10, 25, 50, 100];
   displayedColumns: string[] = [
@@ -86,12 +88,18 @@ export class DocumentComponent implements OnInit {
     // }
   }
   clear = () => {
+    const start = moment().startOf('day').toISOString();
+    const end = moment().endOf('day').toISOString();
     this.search = '';
     this.selectStatustype = '';
-    this.startDate = '';
-    this.endDate = '';
+    this.startDate = new Date(start);
+    this.endDate =  new Date(end) ;
     this.selectedDocs = '';
+    this.tenentId = 'All';
+    this.selectedTenentType = 'All';
+    this.selectedDocStatus = 'All';
     this.docdumentsList();
+    // All
   }
   scanDocList = () => {
     this.serviceService.scanDocList().subscribe((res: any) => {
@@ -125,7 +133,8 @@ export class DocumentComponent implements OnInit {
     // this.checkSelectButton();
   }
   applyFilter = (event: any) => {
-    this.search = event;
+    this.search = event.target.value;
+    // console.log()
     this.docdumentsList();
     // const filterValue = (event.target as HTMLInputElement).value;
     // this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -150,7 +159,6 @@ export class DocumentComponent implements OnInit {
             console.log(i.Name);
             const obj = {};
             if ( index === 0){
-              console.log('index ' + index);
               const objs = {};
               // tslint:disable-next-line:no-string-literal
               objs['_id'] = 'All';
@@ -211,13 +219,25 @@ export class DocumentComponent implements OnInit {
     };
     console.log(data);
     this.serviceService.scanDocByTenent(data).subscribe((res) => {
-      console.log(res);
       if ( res.msg === 'success'){
-        console.log(res);
-        if (  res.data){
+        if ( res.data){
           this.dataSource.data = res.data;
           console.log(res.data);
+        }else if (!res.datas){
+          this.dataSource.data.slice(0, this.dataSource.data.length);
+          console.log(res.datas);
+          res.datas.map(( i: any) => {
+            console.log(i.docs);
+            if ( i.docs ){
+              this.dataSource.data.push(i.doc);
+            }else{
+              this.dataSource.data = [];
+              // .push(i.doc);
+            }
+          });
         }else{
+          this.dataSource.data.slice(0, this.dataSource.data.length);
+          this.dataSource.data = res.datas;
         }
       }
     });

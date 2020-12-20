@@ -3,7 +3,7 @@
      <div class="document-wrap">
        <mat-form-field class='form-rows' appearance="outline">
       <mat-label>Tenent Filter</mat-label>
-        <mat-select
+        <mat-select [(ngModel)]="selectedTenentType"
           disableRipple
           (selectionChange)="selectTenent($event.value)"
         >
@@ -16,7 +16,7 @@
       <mat-form-field appearance="outline">
       <mat-label>Status</mat-label>
         <mat-select
-          disableRipple  (selectionChange)="selectStatus($event.value)"
+          disableRipple  (selectionChange)="selectStatus($event.value)" [(ngModel)]="selectedDocStatus"
         >
         <mat-option *ngFor="let status of statusColumn" [value]="status.value">{{
           status.name
@@ -24,6 +24,11 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <div class="button-bar"  fxLayout="row wrap" fxLayoutAlign="center right">
+        <button mat-button class="primary-button" type="submit" (click)="clear()">
+          Clear
+        </button>
+    </div>
      </div>
 
   </mat-drawer>
@@ -58,8 +63,8 @@
     <mat-form-field appearance="outline">
       <mat-label>Date</mat-label>
       <mat-date-range-input [rangePicker]="picker" >
-        <input matStartDate placeholder="Start date" #startDate (dateChange)="selectDate1($event.target.value)">
-        <input matEndDate placeholder="End date" (dateChange)="selectDate2($event.target.value)">
+        <input matStartDate placeholder="Start date" [(ngModel)]="startDate"  (dateChange)="selectDate1($event.target.value)">
+        <input matEndDate placeholder="End date" [(ngModel)]="endDate" (dateChange)="selectDate2($event.target.value)">
       </mat-date-range-input>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>

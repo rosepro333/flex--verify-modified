@@ -41,6 +41,7 @@
               <button
                 mat-icon-button
                 matTooltip="copy key"
+                [cdkCopyToClipboard]="i.Api_Key"
                 matTooltipPosition="right"
                 (click)="copyKey()"
               >
@@ -75,7 +76,7 @@
                 <div class="title">Owner</div>
                 <div class="value">
                   <!--dummy-->
-                  {{ i.Tenent_ID }}
+                  {{ i.Tenent_ID.Name }}
                 </div>
               </div>
             </div>
@@ -94,7 +95,7 @@
               </div>
             </div>
             <div fxFlex="100" align="right">
-              <button mat-button class="revoke-button" (click)="revoke()">
+              <button mat-button class="revoke-button" (click)="revoke('apiKey',i._id)">
                 <mat-icon>cancel</mat-icon>
                 Revoke
               </button>
@@ -139,6 +140,7 @@
               <button
                 mat-icon-button
                 matTooltip="copy key"
+                [cdkCopyToClipboard]="i.SDK_Key"
                 matTooltipPosition="right"
                 (click)="copyKey()"
               >
@@ -170,7 +172,7 @@
                 <div class="title">Owner</div>
                 <div class="value">
                   <!--dummy-->
-                  {{ i.Tenent_ID }}
+                  {{ i.Tenent_ID.Name }}
                 </div>
               </div>
             </div>
@@ -189,7 +191,7 @@
               </div>
             </div>
             <div fxFlex="100" align="right">
-              <button mat-button class="revoke-button" (click)="revoke()">
+              <button mat-button class="revoke-button" (click)="revoke('sdkKey',i._id)">
                 <mat-icon>cancel</mat-icon>
                 Revoke
               </button>

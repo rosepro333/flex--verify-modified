@@ -26,7 +26,7 @@ export class ApiKeysComponent implements OnInit {
     this.getSdkKeyList();
   }
   copyKey = () => {
-    alert('copy key');
+    // alert('copy key');
   }
   createKey = (value: string) => {
     if (value === 'api') {
@@ -75,7 +75,27 @@ export class ApiKeysComponent implements OnInit {
       });
     }
   }
-  revoke = () => {
-    alert('revoke');
+  revoke = (key: any, value: any) => {
+    if ( key === 'apiKey'){
+       console.log(key, value);
+       this.service.deleteApiKey(value).subscribe(( res: any) => {
+         console.log(res);
+         if (res.msg === 'success'){
+           this.getApiKeyList();
+         }
+       }, (error: any) => {
+         console.log(error);
+       });
+    }else if (key === 'sdkKey'){
+      console.log(key, value);
+      this.service.deleteSdyKey(value).subscribe(( res: any) => {
+        console.log(res);
+        if (res.msg === 'success'){
+          this.getSdkKeyList();
+        }
+      }, (error: any) => {
+        console.log(error);
+      });
+    }
   }
 }
