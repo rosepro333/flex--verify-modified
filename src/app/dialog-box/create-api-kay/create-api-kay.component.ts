@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { ServicesService } from 'src/app/service/services.service';
 
 @Component({
@@ -48,6 +49,13 @@ export class CreateApiKayComponent implements OnInit {
             setTimeout(() => {
               this.clear();
             });
+            const datas = {
+            user: Cookie.get('id'),
+            tenentId: Cookie.get('Tenant_ID'),
+            activity: 'Create API Key',
+            details: JSON.stringify({api_key_id: result.data.Api_Key , tenant_id: result.data.Tenent_ID })
+            };
+            this.audits(datas);
           }
         },
         (error) => {
@@ -59,5 +67,12 @@ export class CreateApiKayComponent implements OnInit {
 
   clear = () => {
     this.dialogRef.close();
+  }
+  audits = (data: any) => {
+    this.service.audit(data).subscribe((res) => {
+    console.log(res);
+    }, (err) => {
+      console.log(err);
+    });
   }
 }

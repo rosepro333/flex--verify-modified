@@ -220,16 +220,21 @@ export class DocumentDetailsComponent implements OnInit {
     form.value.idCardFrontStatus = this.idCardFrontStatus;
     form.value.idCardBackStatus = this.idCardBackStatus;
     form.value.liveCheckingStatus = this.liveCheckingStatus;
-
     console.log(form.value);
     const id = scanId;
     this.serviceServive.approvedScanDocument(id, form.value).subscribe(
       (response) => {
         console.log(response);
+        const data = {
+        user: Cookie.get('id'),
+        tenentId: Cookie.get('Tenant_ID'),
+        activity: 'Save Scan',
+        details: JSON.stringify({document_id: this.docId, scan_id: scanId})
+        };
+        this.audits(data);
       },
-      // tslint:disable-next-line:no-shadowed-variable
-      ( error: any ) => {
-        console.log(error.error);
+      ( err: any ) => {
+        console.log(err);
       }
     );
   }

@@ -126,7 +126,7 @@ export class FlexTenentComponent implements OnInit {
               user: Cookie.get('id'),
               tenentId: Cookie.get('Tenant_ID'),
               activity: 'Create Tenant',
-              details: JSON.stringify({})
+              details: JSON.stringify({tenentId: result.data._id, tenentName: result.data.Name })
             };
             this.audits(data);
             this.toster.openSnackBar('Tenent Created Successfully', result.msg);

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { ServicesService } from 'src/app/service/services.service';
 
 @Component({
@@ -34,9 +35,23 @@ export class DeleteTenentComponent implements OnInit {
         this.clear();
       }
     });
+    const datas = {
+      user: Cookie.get('id'),
+      tenentId: Cookie.get('Tenant_ID'),
+      activity: 'Delete Tenant',
+      details: JSON.stringify({tenentId: id })
+      };
+    this.audits(datas);
   }
 
   clear = () => {
     this.dialogRef.close();
+  }
+  audits = (data: any) => {
+    this.service.audit(data).subscribe((res) => {
+    console.log(res);
+    }, (err) => {
+      console.log(err);
+    });
   }
 }

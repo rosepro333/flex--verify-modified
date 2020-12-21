@@ -28,22 +28,19 @@ export class DeleteUserComponent implements OnInit {
 
   deleteTenent = () => {
     const id = this.userId;
+    this.service.deleteUser(id).subscribe((res) => {
+      console.log(res);
+      if (res.msg === 'success') {
+        this.clear();
+      }
+    });
     const datas = {
       user: Cookie.get('id'),
       tenentId: Cookie.get('Tenant_ID'),
       activity: 'Delete User',
       details: JSON.stringify({'Delete User': id })
       };
-    console.log('122');
     this.audits(datas);
-    this.service.deleteUser(id).subscribe((res) => {
-      console.log(res);
-      if (res.msg === 'success') {
-        console.log('122');
-        this.clear();
-      }
-    });
-
   }
 
   clear = () => {
