@@ -141,6 +141,13 @@ export class DocumentComponent implements OnInit {
   }
   moreDetails = (id: number) => {
     console.log(id);
+    const data = {
+      user: Cookie.get('id'),
+      tenentId: Cookie.get('Tenant_ID'),
+      activity: 'View Document',
+      details: JSON.stringify({document_id: id})
+    };
+    this.audits(data);
     this.router.navigate(['documents/' + id]);
   }
   selectStatus = (value) => {
@@ -240,6 +247,13 @@ export class DocumentComponent implements OnInit {
           this.dataSource.data = res.datas;
         }
       }
+    });
+  }
+   audits = (data: any) => {
+    this.serviceService.audit(data).subscribe((res) => {
+    console.log(res);
+    }, (error: any) => {
+      console.log(error);
     });
   }
 }

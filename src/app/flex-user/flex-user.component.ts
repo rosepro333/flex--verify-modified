@@ -185,8 +185,15 @@ export class FlexUserComponent implements OnInit {
           console.log(result);
           if (result.msg === 'success') {
             console.log(result);
+            const data = {
+              user: Cookie.get('id'),
+              tenentId: Cookie.get('Tenant_ID'),
+              activity: 'Create User',
+              details: JSON.stringify({id: result.docs._id, name: result.docs.Contact_Name, tenentId: result.docs.Tenant_ID})
+            };
+            this.audits(data);
             this.toster.openSnackBar('User Created Successfully', result.msg);
-            this.ngOnInit();
+            this.getUserList();
           }
         },
         (error) => {
@@ -197,5 +204,12 @@ export class FlexUserComponent implements OnInit {
   }
   userNavigate = () => {
     setTimeout(() => {}, 200);
+  }
+  audits = (data: any) => {
+    this.service.audit(data).subscribe((res) => {
+    console.log(res);
+    }, (error: any) => {
+      console.log(error);
+    });
   }
 }

@@ -20,6 +20,7 @@ export class VerificationUrlComponent implements OnInit {
   tenetId = '';
   accessType = '';
   id = '';
+  selectedTenent = '';
   constructor(private serviceService: ServicesService) {}
 
   ngOnInit(): void {
@@ -61,6 +62,7 @@ export class VerificationUrlComponent implements OnInit {
     // localStorage.setItem("x-access-token", value);
   }
   selectTenent = (value: any) => {
+    this.selectedTenent = value;
     console.log(value);
     this.getSdkId(value);
   }
@@ -85,6 +87,13 @@ export class VerificationUrlComponent implements OnInit {
           // console.log(url);
           // console.log(url[2]);
           // window.open(res.url, "_blank");
+          const data = {
+              user: Cookie.get('id'),
+              tenentId: Cookie.get('Tenant_ID'),
+              activity: 'Generate url ',
+              details: JSON.stringify({tenant_id: this.selectedTenent, sdk_key: key})
+            };
+          this.audits(data);
         }
       },
       (error) => {
@@ -100,5 +109,12 @@ export class VerificationUrlComponent implements OnInit {
     }
 
     console.log(a);
+  }
+  audits = (data: any) => {
+    this.serviceService.audit(data).subscribe((res) => {
+    console.log(res);
+    }, (error: any) => {
+      console.log(error);
+    });
   }
 }

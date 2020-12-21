@@ -38,6 +38,9 @@ export class ServicesService {
   userDevice = () => {
     return Cookie.get('user-device');
   }
+  audit(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/audit/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   createTenent(tanent: TenentUser): Observable<any> {
     if (tanent.email !== '' && tanent.name !== '' && tanent.tenent !== '') {
       const data = {

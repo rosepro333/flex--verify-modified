@@ -53,6 +53,7 @@ export class DocumentDetailsComponent implements OnInit {
   document: any = [];
   scanDocument: any = [];
   commentsData: any = [];
+  docId = '';
   documentIdType: any = [
     { value: 'Nationality Identify Card' },
     { value: 'Driving Licence' },
@@ -163,6 +164,7 @@ export class DocumentDetailsComponent implements OnInit {
     // get item details using id
     this.serviceServive.getDocumentBy(id).subscribe((response) => {
       this.document = response.data;
+      this.docId = response.data._id;
     });
   }
   getAllScanDocumentById = (id: any) => {
@@ -266,6 +268,13 @@ export class DocumentDetailsComponent implements OnInit {
       }
       console.log(res);
     });
+    // const data1 = {
+    //   user: Cookie.get('id'),
+    //   tenentId: Cookie.get('Tenant_ID'),
+    //   activity: 'Comment Scan',
+    //   details: JSON.stringify({document_id: this.docId, scanId})
+    // };
+    // this.audits(data1);
   }
   // tslint:disable-next-line:member-ordering
   customOptions: OwlOptions = {
@@ -303,4 +312,12 @@ export class DocumentDetailsComponent implements OnInit {
     },
     // nav: true
   };
+   audits = (data: any) => {
+    this.serviceServive.audit(data).subscribe((res) => {
+    console.log(res);
+    // tslint:disable-next-line:no-shadowed-variable
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
 }

@@ -2,6 +2,7 @@ import { Inject, Optional } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { ServicesService } from 'src/app/service/services.service';
 
 @Component({

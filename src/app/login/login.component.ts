@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { audit } from 'rxjs/operators';
+import { ServicesService } from '../service/services.service';
 import { TosterService } from '../toster/toster.service';
 import { AuthService } from './../auth/auth.service';
 @Component({
@@ -20,7 +22,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private toast: TosterService,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private service: ServicesService
   ) {}
 
   // tslint:disable-next-line:typedef
@@ -55,6 +58,13 @@ export class LoginComponent implements OnInit {
             Cookie.set('data', result.data);
             Cookie.set('LOGIN_STATUS', result.msg);
             Cookie.set('Access_Type', result.user.Access_Type);
+            const data = {
+              user: result.user.ID,
+              tenentId: result.user.Tenant_ID,
+              activity: 'Login',
+              details: ''
+            };
+            this.audits(data);
             this.router.navigate(['/']);
           } else {
             this.toast.openSnackBar('', result.msg);
@@ -66,6 +76,11 @@ export class LoginComponent implements OnInit {
       );
     }
     this.formSubmitAttempt = true;
+  }
+  audits = (data: any) => {
+    this.service.audit(data).subscribe((res) => {
+    console.log(res);
+    });
   }
   forgetPassword = () => {
     this.router.navigate(['/forget-passowrd']);

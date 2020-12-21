@@ -6,6 +6,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { BlockTenentComponent } from '../model/block-tenent/block-tenent.component';
 import { BlockUserComponent } from '../model/block-user/block-user.component';
 import { DeleteTenentComponent } from '../model/delete-tenent/delete-tenent.component';
@@ -121,6 +122,13 @@ export class FlexTenentComponent implements OnInit {
           console.log(result);
           if (result.msg === 'success') {
             console.log(result);
+            const data = {
+              user: Cookie.get('id'),
+              tenentId: Cookie.get('Tenant_ID'),
+              activity: 'Create Tenant',
+              details: JSON.stringify({})
+            };
+            this.audits(data);
             this.toster.openSnackBar('Tenent Created Successfully', result.msg);
             this.ngOnInit();
           }
@@ -130,5 +138,12 @@ export class FlexTenentComponent implements OnInit {
         }
       );
     }
+  }
+  audits = (data: any) => {
+    this.service.audit(data).subscribe((res) => {
+    console.log(res);
+    }, (error: any) => {
+      console.log(error);
+    });
   }
 }
