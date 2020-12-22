@@ -23,6 +23,9 @@ mat-sidenav-container {
                 }
                 color: #757575 !important;
             }
+            .mat-list-item:focus {
+                background: #ffffff;
+            }
         }
         &.folded {
             width: 56px;
