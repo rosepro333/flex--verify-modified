@@ -6,10 +6,10 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent  {
+export class AppComponent {
   title = 'flex-verify-dashboard';
   deviceInfo: any = [];
-  constructor( ){
+  constructor() {
   }
 
 }

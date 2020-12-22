@@ -22,7 +22,7 @@ import { error } from '@angular/compiler/src/util';
 })
 export class DocumentDetailsComponent implements OnInit {
   disabled = false;
-  accessType  = '';
+  accessType = '';
   public id: number;
   public panelOpenState = false;
   // tslint:disable-next-line:variable-name
@@ -76,12 +76,16 @@ export class DocumentDetailsComponent implements OnInit {
     { name: 'Rejected', value: 'Rejected' },
     { name: 'Verified', value: 'Verified' },
   ];
+  isDocumentDetails: boolean;
+  isScanHistory: boolean;
+  isScanResult: boolean;
+  isComments: boolean;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private serviceServive: ServicesService,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.accessType = Cookie.get('Access_Type');
@@ -114,15 +118,15 @@ export class DocumentDetailsComponent implements OnInit {
     this.getDocument(this.id);
 
   }
-  getAllComment = ( scanId: string, documentId: any ) => {
-    const  data = {
+  getAllComment = (scanId: string, documentId: any) => {
+    const data = {
       scanId,
       documentId
     };
     console.log(data);
-    this.serviceServive.getAllComment(data).subscribe( (res) => {
+    this.serviceServive.getAllComment(data).subscribe((res) => {
       // console.log(res);
-      if (res.msg === 'success'){
+      if (res.msg === 'success') {
         const obj = {};
         // tslint:disable-next-line:no-string-literal
         obj['id'] = scanId;
@@ -132,15 +136,15 @@ export class DocumentDetailsComponent implements OnInit {
       }
     });
   }
-  filterComments = ( scanId: string, documentId: any ) => {
-    const  data = {
+  filterComments = (scanId: string, documentId: any) => {
+    const data = {
       scanId,
       documentId
     };
     console.log(data);
-    this.serviceServive.getAllComment(data).subscribe( (res) => {
+    this.serviceServive.getAllComment(data).subscribe((res) => {
       console.log(res);
-      if (res.msg === 'success'){
+      if (res.msg === 'success') {
         console.log(res);
         this.commentsData.map((i: any, index: any) => {
           if (this.commentsData[index].id === scanId) {
@@ -189,7 +193,7 @@ export class DocumentDetailsComponent implements OnInit {
     });
   }
 
-  shareDoc = ( $event: any ) => {
+  shareDoc = ($event: any) => {
     $event.stopPropagation();
     alert('shared');
   }
@@ -226,49 +230,49 @@ export class DocumentDetailsComponent implements OnInit {
       (response) => {
         console.log(response);
         const data = {
-        user: Cookie.get('id'),
-        tenentId: Cookie.get('Tenant_ID'),
-        activity: 'Save Scan',
-        details: JSON.stringify({document_id: this.docId, scan_id: scanId})
+          user: Cookie.get('id'),
+          tenentId: Cookie.get('Tenant_ID'),
+          activity: 'Save Scan',
+          details: JSON.stringify({ document_id: this.docId, scan_id: scanId })
         };
         this.audits(data);
       },
-      ( err: any ) => {
+      (err: any) => {
         console.log(err);
       }
     );
   }
-  selectDate = ( event: any ) => {
+  selectDate = (event: any) => {
     this.dateOfBirth = event;
     console.log(event.target.value);
   }
   clear = () => {
     this.form.reset();
   }
-  sendComment = (scanId: any ) => {
+  sendComment = (scanId: any) => {
     const doctId = this.id;
     console.log(doctId + ' vghgvh');
     console.log(scanId);
     console.log(this.comments[0]);
     this.comments.map((i: any, index: number) => {
       console.log(i);
-      if ( this.comments[index] === i ){
+      if (this.comments[index] === i) {
         this.comment = i;
         this.comments.splice(index, this.comments.length);
       }
     });
     console.log(this.comment);
-    const  data = {
-        documentId: this.id,
-        scanId,
-        userId: this.userId,
-        username: this.userName,
-        text: this.comment,
-        mode: 'dadasdas'
+    const data = {
+      documentId: this.id,
+      scanId,
+      userId: this.userId,
+      username: this.userName,
+      text: this.comment,
+      mode: 'dadasdas'
     };
     console.log(data);
     this.serviceServive.userComment(data).subscribe((res) => {
-      if (res.msg === 'success'){
+      if (res.msg === 'success') {
         this.filterComments(scanId, this.id);
       }
       console.log(res);
@@ -286,15 +290,23 @@ export class DocumentDetailsComponent implements OnInit {
     loop: false,
     autoplay: false,
     center: true,
-    dots: true,
+    dots: false,
     autoHeight: true,
     autoWidth: true,
     responsive: {
       0: {
         items: 1,
       },
+      600: {
+        items: 1,
+      },
+      1000: {
+        items: 1,
+      },
     },
     nav: true,
+    navText: ['<span> <i class="material-icons">keyboard_arrow_left</i> <span>Front</span> </span>',
+      '<span> <span>Back</span> <i class="material-icons">keyboard_arrow_right</i> </span>']
   };
   // tslint:disable-next-line:member-ordering
   livelinessOptions: OwlOptions = {
@@ -317,12 +329,47 @@ export class DocumentDetailsComponent implements OnInit {
     },
     // nav: true
   };
-   audits = (data: any) => {
+  audits = (data: any) => {
     this.serviceServive.audit(data).subscribe((res) => {
-    console.log(res);
-    // tslint:disable-next-line:no-shadowed-variable
+      console.log(res);
+      // tslint:disable-next-line:no-shadowed-variable
     }, (error: any) => {
       console.log(error);
     });
+  }
+  open(a) {
+    if (a == 'document-details') {
+      this.isDocumentDetails = true;
+      this.isScanHistory = false;
+      this.isScanResult = false;
+      this.isComments = false;
+    } else if (a == 'scan-history') {
+      this.isDocumentDetails = false;
+      this.isScanHistory = true;
+      this.isScanResult = false;
+      this.isComments = false;
+
+    }
+    else if (a == 'scan-result') {
+      this.isDocumentDetails = false;
+      this.isScanHistory = false;
+      this.isScanResult = true;
+      this.isComments = false;
+
+    }
+    else if (a = 'comments') {
+      this.isDocumentDetails = false;
+      this.isScanHistory = false;
+      this.isScanResult = false;
+      this.isComments = true;
+
+    }
+    else {
+      this.isDocumentDetails = false;
+      this.isScanHistory = false;
+      this.isScanResult = false;
+      this.isComments = false;
+
+    }
   }
 }

@@ -48,6 +48,7 @@ import { DocumentService } from './document/services/document.service';
 import { CreateApiKayComponent } from './dialog-box/create-api-kay/create-api-kay.component';
 import { CreateSdyKeyComponent } from './dialog-box/create-sdy-key/create-sdy-key.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FlexUserComponent } from './flex-user/flex-user.component';
 import { FlexTenentComponent } from './flex-tenent/flex-tenent.component';
 import { CreateFlexTenentComponent } from './create-flex-tenent/create-flex-tenent.component';
@@ -60,9 +61,10 @@ import { DeleteTenentComponent } from './model/delete-tenent/delete-tenent.compo
 import { DeleteUserComponent } from './model/delete-user/delete-user.component';
 import { BlockUserComponent } from './model/block-user/block-user.component';
 import { BlockTenentComponent } from './model/block-tenent/block-tenent.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { ServicesService } from './service/services.service';
 import { MainInterceptor } from './interceptor/main.interceptor';
+import { ShortNamePipe } from './short-name.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,6 +94,7 @@ import { MainInterceptor } from './interceptor/main.interceptor';
     DeleteUserComponent,
     BlockUserComponent,
     BlockTenentComponent,
+    ShortNamePipe
   ],
   imports: [
     BrowserModule,
@@ -126,9 +129,10 @@ import { MainInterceptor } from './interceptor/main.interceptor';
     CarouselModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatProgressBarModule
   ],
   providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService, ServicesService,
-   { provide: HTTP_INTERCEPTORS, useClass: MainInterceptor, multi: true}],
+    { provide: HTTP_INTERCEPTORS, useClass: MainInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
