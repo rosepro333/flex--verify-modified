@@ -23,7 +23,7 @@ import { TosterService } from '../toster/toster.service';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentDetailsComponent implements OnInit {
-  displayedColumns: string[] = ['Scan_ID', 'Scan_ID', 'Scan_ID'];
+  displayedColumns: string[] = ['scanId', 'scanDate', 'status'];
   dataSource: any = [];
   // new MatTableDataSource();
   disabled = false;
@@ -72,7 +72,8 @@ export class DocumentDetailsComponent implements OnInit {
   scanDocument: any = [];
   commentsData: any = [];
   docId = '';
-
+  scanId= '';
+  resutData: any = [];
 
   documentIdType: any = [
     { value: 'Nationality Identify Card' },
@@ -122,11 +123,13 @@ export class DocumentDetailsComponent implements OnInit {
     await this.getAllScanDocumentById(this.id)
       .then((res) => {
         if(res[0]){
+          this.scanDocument.slice(0, this.scanDocument.length)
           this.scanDocument.push(res[0]);
-          //  = res;
+          this.scanId = res[0]._id;
+          this.scanDocumentById(this.scanId);
         }
         console.log(res);
-        // this.dataSource = res;
+        this.dataSource = res;
         // console.log(this.dataSource);
         // this.scanDocument = res;
         console.log(res[0])
@@ -225,7 +228,23 @@ export class DocumentDetailsComponent implements OnInit {
       this.userName = res.data.Contact_Name;
     });
   }
+  nextScan(id: any){
+    // console.log(id);
 
+    this.serviceServive.getScanDocumentById(id).subscribe((res) =>{
+      console.log(res)
+      this.scanDocument.slice(0, this.scanDocument.length)
+       if(res.msg === 'success'){
+          // this.scanDocument.push(res.data)
+          this.scanDocument = [res.data];
+          console.log(this.scanDocument);
+        }
+    },(err) => {
+      console.log(err);
+      this.toast.openSnackBar('Something Went Wrong',"failed")
+
+    })
+  }
   shareDoc = ($event: any) => {
     $event.stopPropagation();
     alert('shared');
@@ -263,47 +282,31 @@ export class DocumentDetailsComponent implements OnInit {
     }
     // this.ID_Type = idType;
   }
-  submitScanResult = () => {
-  //    idCardSelect =''
-  //  idCardTypeComment = '';
-  //  addressStatus ='';
-  //  addressComments ='';
-  //  LiveCheckData = '';
-  //  liveCheckComments = '';
-  //  selefieMatchPercengates = '';
-  //  scanResults = '';
-  //  scanResultComment = '';
-
-    // console.log(this.idCardSelect)
-    // console.log(this.idCardTypeComment)
-    // console.log(this.addressStatus)
-    // console.log(this.addressComments)
-    // console.log(this.idCardSelect)
-    // console.log(this.liveCheckComments)
-    // console.log(this.selefieMatchPercengates)
-    // console.log(this.scanResults)
-    // console.log(this.scanResultComment)
+  submitScanResult = (form: NgForm) => {
     const data = {
-      "liveCheckingStatus":this.LiveCheckData,
-      "scanResultStatus":this.scanResults,
-      "selfiePhotoMatchStatus":this.selefieMatchPercengates,
-      "scanResultComment":this.scanResultComment,
-      "idCardStatus":this.idCardSelect,
-      "addressStatus":this.addressStatus,
-      "idCardComment":this.idCardTypeComment,
-      "livecheckStatusComment":this.liveCheckComments,
-      "addressStatusComment":this.addressComments
+      "liveCheckingStatus":form?.value?.LiveCheck,
+      "scanResultStatus":form?.value?.scanResult,
+      "selfiePhotoMatchStatus":form?.value?.selefieMatchPercengates,
+      "scanResultComment":form?.value?.scanResultComment ,
+      "idCardStatus":form?.value?.ID_Type,
+      "addressStatus":form?.value?.Address,
+      "idCardComment":form?.value?.idCardTypeComment,
+      "livecheckStatusComment":form?.value?.liveCheckComments,
+      "addressStatusComment":form?.value?.addressComments
     }
-    const id ="5fe07ea652e22637b18fcf1b"
+    console.log(data)
+    const id = this.scanId;
+    console.log(id);
       this.serviceServive.scanResults(id,data).subscribe((res)=> {
         if(res.status === 'success'){
             this.toast.openSnackBar('Success',res.status)
+            this.scanDocumentById(id);
         }
       // console.log(res)
       this
     },(err)=>{
       console.log(err);
-       this.toast.openSnackBar('Something Went Wrong',"failed")
+      this.toast.openSnackBar('Something Went Wrong',"failed")
     })
   }
   selectIdFront = (idfront: any) => {
@@ -353,6 +356,20 @@ export class DocumentDetailsComponent implements OnInit {
   }
   clear = () => {
     this.form.reset();
+  }
+  scanDocumentById = (id:any) => {
+    // const id = '';
+    this.serviceServive.getScanDocumentById(id).subscribe((res) =>{
+      console.log(res)
+       if(res.msg === 'success'){
+          this.resutData = res.data;
+          console.log(this.resutData);
+        }
+    },(err) => {
+      console.log(err);
+      this.toast.openSnackBar('Something Went Wrong',"failed")
+
+    })
   }
   sendComment = (scanId: any) => {
     const doctId = this.id;

@@ -80,38 +80,21 @@
         </div>
       </mat-toolbar>
       <div class="drawer-data" fxLayout="column">
-        <!-- <table mat-table [dataSource]="dataSource">
+        <table mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="scanId">
             <th mat-header-cell *matHeaderCellDef> Scan ID. </th>
             <td mat-cell *matCellDef="let element"> {{element.Scan_ID}} </td>
           </ng-container>
           <ng-container matColumnDef="scanDate">
             <th mat-header-cell *matHeaderCellDef> Scan Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.Scan_ID}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.createdAt | date: "mediumDate"}} </td>
           </ng-container>
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef> Status </th>
-            <td mat-cell *matCellDef="let element"> {{element.Scan_ID}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.scanResultStatus}} </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table> -->
-        <table>
-          <thead>
-            <tr>
-              <th>Scan ID</th>
-              <th>Scan Date</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let doc of scanDocument; let isFirst = first; let i=index">
-              <td>{{doc.Scan_ID}}</td>
-              <td>{{doc.Scaned_Date}}</td>
-              <td>{{doc.Status}}</td>
-            </tr>
-
-          </tbody>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="nextScan(row._id)"></tr>
         </table>
       </div>
     </div>
@@ -126,7 +109,7 @@
           </button>
         </div>
       </mat-toolbar>
-      <form class="drawer-data scan-result-wrap" fxLayout="column">
+      <form class="drawer-data scan-result-wrap" fxLayout="column" (ngSubmit)="submitScanResult(result)" #result="ngForm">
         <div fxLayout="row" class="top">
           <div fxFlex="150px" fxLayoutAlign="center center">
             <div class="shortname">{{ document.First_Name | shortName}}</div>
@@ -142,7 +125,7 @@
             <div class="data-wrap">
               <div class="title">Scan ID</div>
               <div class="value">
-                {{ document.Scan_ID }}
+                {{document.Scan_ID}}
               </div>
             </div>
           </div>
@@ -150,79 +133,61 @@
         <div fxLayout="column">
           <mat-form-field appearance="outline" fxFill>
             <mat-label>ID Card Status</mat-label>
-            <mat-select name="ID_Type" (selectionChange)="SelectType('ID_Type',$event.value)" [(ngModel)] = 'idCardSelect'>
+            <mat-select name="ID_Type" [disabled]= '!resutData.isActive'  (selectionChange)="SelectType('ID_Type',$event.value)" [(ngModel)] = 'resutData.idCardStatus'>
               <mat-option *ngFor="let type of idCardType" [value]="type.value">{{ type.name }}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline" *ngIf="isIdStatus">
             <mat-label>Comment</mat-label>
-            <textarea matInput name="comments" rows="3" [(ngModel)] = 'idCardTypeComment'></textarea>
+            <textarea matInput [disabled]= '!resutData.isActive'  name="idCardTypeComment" rows="3" [(ngModel)] = 'resutData.idCardComment'></textarea>
           </mat-form-field>
 
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Address Status</mat-label>
-            <mat-select name="Address" (selectionChange)="SelectType('Address',$event.value)"  [(ngModel)] = 'addressStatus' >
+            <mat-select name="Address" [disabled]= '!resutData.isActive'  (selectionChange)="SelectType('Address',$event.value)"  [(ngModel)] = 'resutData.addressStatus' >
               <mat-option *ngFor="let i of addressType" [value]="i.value">{{i.name}}</mat-option>
-              <!-- <mat-option [value]="address2">Address 2</mat-option>
-              <mat-option [value]="address3">Address 3</mat-option> -->
+
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline" *ngIf="isAddressStatus">
             <mat-label>Comment</mat-label>
-            <textarea matInput name="comments" rows="3"  [(ngModel)] = 'addressComments'></textarea>
+            <textarea matInput name="addressComments" rows="3" [disabled]= '!resutData.isActive'   [(ngModel)] = 'resutData.addressStatusComment'></textarea>
           </mat-form-field>
 
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Live Check</mat-label>
-            <mat-select name="LiveCheck" (selectionChange)="SelectType('LiveCheck',$event.value)"  [(ngModel)] = 'LiveCheckData'>
+            <mat-select name="LiveCheck" [disabled]= '!resutData.isActive'  (selectionChange)="SelectType('LiveCheck',$event.value)"  [(ngModel)] = 'resutData.liveCheckingStatus'>
               <mat-option [value]="i.value" *ngFor="let i of liveCheckType">{{i.name}}</mat-option>
-              <!-- <mat-option [value]="livecheck2">Live check 2</mat-option>
-              <mat-option [value]="livecheck3">Live check 3</mat-option> -->
+
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline" *ngIf="isLiveCheck">
             <mat-label>Comment</mat-label>
-            <textarea matInput name="comments" rows="3"  [(ngModel)] = 'liveCheckComments'></textarea>
+            <textarea matInput name="liveCheckComments" [disabled]= '!resutData.isActive'  rows="3"  [(ngModel)] = 'resutData.livecheckStatusComment'></textarea>
           </mat-form-field>
-
-
-          <!-- <mat-form-field appearance="outline" fxFill>
-            <mat-label>Address Status</mat-label>
-            <mat-select name="Address Status">
-              <mat-option [value]="addressStatus">Address Status 1</mat-option>
-              <mat-option [value]="addressStatus2">Address Status 2</mat-option>
-              <mat-option [value]="addressStatus3">Address Status 3</mat-option>
-            </mat-select>
-          </mat-form-field> -->
-          <!-- <mat-form-field appearance="outline">
-            <mat-label>Comment</mat-label>
-            <textarea matInput name="comments" rows="3"  [(ngModel)] = 'idCardSelect'></textarea>
-          </mat-form-field> -->
-
           <mat-form-field appearance="outline">
             <mat-label>Selfie Match Percentage</mat-label>
-            <input matInput type="number" min="0" max="100" name="selefieMatchPercengates" [(ngModel)] = 'selefieMatchPercengates'>
+            <input matInput type="number" [disabled]= '!resutData.isActive'  min="0" max="100" name="selefieMatchPercengates" [(ngModel)] = 'resutData.selfiePhotoMatchStatus'>
             <mat-icon matSuffix>%</mat-icon>
           </mat-form-field>
 
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Scan Result</mat-label>
-            <mat-select name="scanResult"  (selectionChange)="SelectType('scanResult',$event.value)"  [(ngModel)] = 'scanResults'>
-              <mat-option [value]="i.value" *ngFor ="let i of scanResultType">{{i.name}}</mat-option>
-              <!-- <mat-option [value]="scanResult2">Scan Result 2</mat-option>
-              <mat-option [value]="scanResult3">Scan Result 3</mat-option> -->
+            <mat-select name="scanResult" [disabled]= '!resutData.isActive'  (selectionChange)="SelectType('scanResult',$event.value)"  [(ngModel)] = 'resutData.scanResultStatus'>
+              <mat-option  *ngFor ="let i of scanResultType" [value]="i.value">{{i.name}}</mat-option>
+
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline" *ngIf="isScanResults">
             <mat-label>Comment</mat-label>
-            <textarea matInput name="comments" rows="3"  [(ngModel)] = 'scanResultComment'></textarea>
+            <textarea [disabled]= '!resutData.isActive' matInput name="scanResultComment" rows="3"  [(ngModel)] = 'resutData.scanResultComment'></textarea>
           </mat-form-field>
           <div class="sticky-bottom-bar">
             <div class="button-wrap">
-              <button mat-button type="button" class="cancel-button" (click)="clear()">
+              <button mat-button type="button"  class="cancel-button" (click)="rightDrawer.close()">
                 cancel
               </button>
-              <button mat-button class="primary-button" type="button" (click)="submitScanResult()" >
+              <button mat-button class="primary-button" [disabled]= '!resutData.isActive' type="submit" (click)="submitScanResult()" >
                 Save
               </button>
             </div>
@@ -283,8 +248,7 @@
                   <mat-select name="ID_Type" [disabled]="disabled ||!doc.isActive" [(ngModel)]="doc.ID_Type"
                     (selectionChange)="SelectIdType($event)">
                     <mat-option *ngFor="let type of documentIdType" [value]="type.value">{{ type.value }}</mat-option>
-                    <!-- <mat-option value="passport">Passport</mat-option>
-                        <mat-option value="voterId">Voter ID</mat-option> -->
+
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFill>
