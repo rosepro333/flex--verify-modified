@@ -304,7 +304,7 @@ export class ServicesService {
   }
   getScanDocumentById(id: any): Observable<any> {
     return this.http
-      .get(this.apiUrl + '/scans' + id, this.httpOptions)
+      .get(this.apiUrl + '/scans/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   getDocumentBy(id: any): Observable<any> {
