@@ -13,6 +13,7 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
 import * as moment from 'moment';
 import { error } from '@angular/compiler/src/util';
 import { MatTableDataSource } from '@angular/material/table';
+import { TosterService } from '../toster/toster.service';
 
 @Component({
   selector: 'app-document-details',
@@ -107,7 +108,8 @@ export class DocumentDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private serviceServive: ServicesService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private toast: TosterService
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -292,9 +294,16 @@ export class DocumentDetailsComponent implements OnInit {
       "livecheckStatusComment":this.liveCheckComments,
       "addressStatusComment":this.addressComments
     }
-    const id ="5fdb5c43cca5a933cc0d34cc"
+    const id ="5fe07ea652e22637b18fcf1b"
       this.serviceServive.scanResults(id,data).subscribe((res)=> {
-      console.log(res)
+        if(res.status === 'success'){
+            this.toast.openSnackBar('Success',res.status)
+        }
+      // console.log(res)
+      this
+    },(err)=>{
+      console.log(err);
+       this.toast.openSnackBar('Something Went Wrong',"failed")
     })
   }
   selectIdFront = (idfront: any) => {
