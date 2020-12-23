@@ -2,66 +2,44 @@
   <span>Dashboard</span>
 </mat-toolbar>
 <div class="dashboard-wrap">
-  <div
-    class="tiles-wrap"
-    fxLayout="row wrap"
-    fxLayoutGap="20px"
-    fxLayoutAlign="space-evenly center"
-  >
-    <div class="tile verification" fxFlex [routerLink]="['/verification-url']">
-      <mat-card class="header" fxLayout="column" fxLayoutAlign="center center">
-        <i class="material-icons">link</i>
-        <div class="title">Verfication Url</div>
-      </mat-card>
-    </div>
-    <div class="tile today" fxFlex>
-      <mat-card class="header" fxLayout="column" fxLayoutAlign="center center">
-        <mat-card-content>
-          <div class="count">20</div>
-          <div class="title">Today Verfication</div>
-        </mat-card-content>
-      </mat-card>
-
-      <!-- <div class="body" fxLayout="column" fxLayoutAlign="center center">
-                <div class="title">Today Verfication</div>
-            </div> -->
-    </div>
-    <div class="tile month" fxFlex>
-      <mat-card class="header" fxLayout="column" fxLayoutAlign="center center">
+  <div class="tiles-wrap" fxLayout="row wrap" fxLayoutAlign="start start">
+    <mat-card class="tile" [routerLink]="['/verification-url']" fxLayout="column" fxLayoutAlign="end center">
+      <i class="material-icons fs-40">link</i>
+      <div class="title">Verfication Url</div>
+    </mat-card>
+    <mat-card class="tile" fxLayout="column" fxLayoutAlign="end center">
+      <mat-card-header>
+        <mat-card-title><i class="material-icons">check</i></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="count">20</div>
+        <div class="title">Today Verfication</div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="tile" fxLayout="column" fxLayoutAlign="end center">
+      <mat-card-header>
+        <mat-card-title> <i class="material-icons">check</i></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
         <div class="count">15</div>
         <div class="title">Month Verfication</div>
-      </mat-card>
-      <!-- <div class="body" fxLayout="column" fxLayoutAlign="center center">
-                <div class="title">Month Verfication</div>
-            </div> -->
-    </div>
-    <div class="tile balance" fxFlex>
-      <mat-card class="header" fxLayout="column" fxLayoutAlign="center center">
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="tile" fxLayout="column" fxLayoutAlign="end center">
+      <mat-card-header>
+        <mat-card-title> <i class="material-icons">check</i></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
         <div class="count">80</div>
         <div class="title">Balance SMS</div>
-      </mat-card>
-      <!-- <div class="body" fxLayout="column" fxLayoutAlign="center center">
-                <div class="title">Balance SMS</div>
-            </div> -->
-    </div>
+      </mat-card-content>
+    </mat-card>
   </div>
   <mat-divider></mat-divider>
-  <div
-    class="chart-wrap"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-evenly center"
-  >
+  <div class="chart-wrap" fxLayout="row wrap" fxLayoutAlign="space-evenly center">
     <mat-card class="bar-chart">
-      <canvas
-        baseChart
-        [datasets]="barChartData"
-        [labels]="barChartLabels"
-        [options]="barChartOptions"
-        responsive="true"
-        maintainAspectRatio="true"
-        [legend]="barChartLegend"
-        [chartType]="barChartType"
-      >
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+        responsive="true" maintainAspectRatio="true" [legend]="barChartLegend" [chartType]="barChartType">
       </canvas>
     </mat-card>
   </div>

@@ -128,7 +128,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
+.mat-drawer-container {
+  background: #ffffff;
+}
 .mat-form-field-appearance-outline .mat-form-field-outline-thick {
   color: #68af8f;
 }
