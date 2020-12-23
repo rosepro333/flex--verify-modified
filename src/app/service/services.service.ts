@@ -130,9 +130,18 @@ export class ServicesService {
       .pipe(retry(1), catchError(this.handleError));
   }
   getTenentList(): Observable<any> {
-    console.log(this.httpOptions.headers);
+    const data ={
+        "Tenant_ID":"",
+        "limit":"10",
+        "pageNo":"1",
+        "order":"-1",
+        "search":"",
+        "startDate":"",
+        "endDate":"",
+        "status":""
+    }
     return this.http
-      .get(this.apiUrl + '/tenent/list', this.httpOptions)
+      .post(this.apiUrl + '/tenent/list',data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   getUserList(): Observable<any> {
@@ -143,6 +152,11 @@ export class ServicesService {
   getUserDetails(id: any): Observable<any> {
     return this.http
       .get(this.apiUrl + '/user/' + id, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+  scanResults(id:any,data: any): Observable<any> {
+    return this.http
+      .put(this.apiUrl + '/scans/scanResult/' + id,data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   deleteUser(id: any): Observable<any> {

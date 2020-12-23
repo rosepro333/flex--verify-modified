@@ -12,6 +12,7 @@ import { ServicesService } from '../service/services.service';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import * as moment from 'moment';
 import { error } from '@angular/compiler/src/util';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-document-details',
@@ -21,6 +22,9 @@ import { error } from '@angular/compiler/src/util';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentDetailsComponent implements OnInit {
+  displayedColumns: string[] = ['Scan_ID', 'Scan_ID', 'Scan_ID'];
+  dataSource: any = [];
+  // new MatTableDataSource();
   disabled = false;
   accessType = '';
   public id: number;
@@ -48,12 +52,27 @@ export class DocumentDetailsComponent implements OnInit {
   public scanResultStatus = '';
   public selfiePhotoMatchStatus = '';
   public reason = '';
+  public idCardSelect =''
+  public idCardTypeComment = '';
+  public addressStatus ='';
+  public addressComments ='';
+  public LiveCheckData = '';
+  public liveCheckComments = '';
+  public selefieMatchPercengates = '';
+  public scanResults = '';
+  public scanResultComment = '';
+  isIdStatus = true;
+  isAddressStatus = true;
+  isLiveCheck = true;
+  isScanResults = true;
   form: FormGroup;
   dateOfBirth: any;
   document: any = [];
   scanDocument: any = [];
   commentsData: any = [];
   docId = '';
+
+
   documentIdType: any = [
     { value: 'Nationality Identify Card' },
     { value: 'Driving Licence' },
@@ -63,13 +82,17 @@ export class DocumentDetailsComponent implements OnInit {
     { name: 'clear', value: 'clear' },
     { name: 'Not Clear', value: 'not_clear' },
   ];
-  idCardBackType: any = [
+  idCardType: any = [
     { name: 'clear', value: 'clear' },
     { name: 'Not Clear', value: 'not_clear' },
   ];
   liveCheckType: any = [
     { name: 'Ok', value: 'Ok' },
     { name: 'Rejected', value: 'Rejected' },
+  ];
+  addressType: any = [
+    { name: 'clear', value: 'clear' },
+    { name: 'Not Clear', value: 'not_clear' },
   ];
   scanResultType: any = [
     { name: 'Incomplete', value: 'Incomplete' },
@@ -96,7 +119,15 @@ export class DocumentDetailsComponent implements OnInit {
     this.checkAccessType();
     await this.getAllScanDocumentById(this.id)
       .then((res) => {
-        this.scanDocument = res;
+        if(res[0]){
+          this.scanDocument.push(res[0]);
+          //  = res;
+        }
+        console.log(res);
+        // this.dataSource = res;
+        // console.log(this.dataSource);
+        // this.scanDocument = res;
+        console.log(res[0])
         this.scanDocument.map((i: any, index: string | number) => {
           console.log(i.idExpiryDate);
           const obj = {};
@@ -197,9 +228,74 @@ export class DocumentDetailsComponent implements OnInit {
     $event.stopPropagation();
     alert('shared');
   }
-  SelectIdType = (idType: any) => {
-    console.log(idType.value);
-    this.ID_Type = idType;
+  SelectType = (type:any, value: any) => {
+    console.log(type);
+    console.log(value);
+    if(type === 'ID_Type'){
+      if(value == 'clear'){
+        this.isIdStatus =false
+      }else{
+        this.isIdStatus =true
+      }
+    }
+    if(type === 'Address'){
+      if(value == 'clear'){
+        this.isAddressStatus =false
+      }else{
+        this.isAddressStatus =true
+      }
+    }
+    if(type === 'LiveCheck'){
+      if(value == 'Ok'){
+        this.isLiveCheck =false
+      }else{
+        this.isLiveCheck =true
+      }
+    }
+    if(type === 'scanResult'){
+      // if(value == 'clear'){
+      //   this.isScanResults =false
+      // }else{
+      //   this.isScanResults =true
+      // }
+    }
+    // this.ID_Type = idType;
+  }
+  submitScanResult = () => {
+  //    idCardSelect =''
+  //  idCardTypeComment = '';
+  //  addressStatus ='';
+  //  addressComments ='';
+  //  LiveCheckData = '';
+  //  liveCheckComments = '';
+  //  selefieMatchPercengates = '';
+  //  scanResults = '';
+  //  scanResultComment = '';
+
+    // console.log(this.idCardSelect)
+    // console.log(this.idCardTypeComment)
+    // console.log(this.addressStatus)
+    // console.log(this.addressComments)
+    // console.log(this.idCardSelect)
+    // console.log(this.liveCheckComments)
+    // console.log(this.selefieMatchPercengates)
+    // console.log(this.scanResults)
+    // console.log(this.scanResultComment)
+    const data = {
+      "liveCheckingStatus":this.LiveCheckData,
+      "scanResultStatus":this.scanResults,
+      "selfiePhotoMatchStatus":this.selefieMatchPercengates,
+      "scanResultComment":this.scanResultComment,
+      "idCardStatus":this.idCardSelect,
+      "addressStatus":this.addressStatus,
+      "idCardComment":this.idCardTypeComment,
+      "livecheckStatusComment":this.liveCheckComments,
+      "addressStatusComment":this.addressComments
+    }
+    const id ="5fdb5c43cca5a933cc0d34cc"
+      this.serviceServive.scanResults(id,data).subscribe((res)=> {
+      console.log(res)
+    })
   }
   selectIdFront = (idfront: any) => {
     console.log(idfront.value);
