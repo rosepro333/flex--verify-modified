@@ -21,7 +21,8 @@ export class VerificationUrlComponent implements OnInit {
   accessType = '';
   id = '';
   selectedTenent = '';
-  constructor(private serviceService: ServicesService) {}
+  emailId = '';
+  constructor(private serviceService: ServicesService) { }
 
   ngOnInit(): void {
     this.id = Cookie.get('id');
@@ -88,11 +89,11 @@ export class VerificationUrlComponent implements OnInit {
           // console.log(url[2]);
           // window.open(res.url, "_blank");
           const data = {
-              user: Cookie.get('id'),
-              tenentId: Cookie.get('Tenant_ID'),
-              activity: 'Generate url ',
-              details: JSON.stringify({tenant_id: this.selectedTenent, sdk_key: key})
-            };
+            user: Cookie.get('id'),
+            tenentId: Cookie.get('Tenant_ID'),
+            activity: 'Generate url ',
+            details: JSON.stringify({ tenant_id: this.selectedTenent, sdk_key: key })
+          };
           this.audits(data);
         }
       },
@@ -112,9 +113,12 @@ export class VerificationUrlComponent implements OnInit {
   }
   audits = (data: any) => {
     this.serviceService.audit(data).subscribe((res) => {
-    console.log(res);
+      console.log(res);
     }, (error: any) => {
       console.log(error);
     });
+  }
+  sendEmail(): void {
+    alert('email send to ' + this.emailId)
   }
 }

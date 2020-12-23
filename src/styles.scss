@@ -47,7 +47,23 @@ body {
   margin: 0;
   font-family: "Roboto", sans-serif;
 }
-
+.header {
+  .name {
+    font-size: 20px;
+    font-weight: 400;
+    // font-family: "Roboto", sans-serif;
+  }
+  .header-doc-id-wrap {
+    color: #333333;
+    font-weight: 400;
+    font-size: 18px;
+    .header-doc-id {
+      color: #21b371;
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+}
 .primary-button {
   background: #21b371;
   color: #fff;
@@ -60,6 +76,15 @@ body {
   background-color: #ebebeb;
   color: #949494;
   margin: 0 12px !important;
+  i {
+    margin: 0 8px;
+  }
+}
+.clear-button {
+  background-color: #ebebeb;
+  color: #444444;
+  margin: 0 12px !important;
+  border: 1px solid #969696 !important;
   i {
     margin: 0 8px;
   }
@@ -113,10 +138,7 @@ input.mat-input-element {
 }
 .mat-row {
   &:hover {
-    background: #fafafa !important;
-  }
-  &:nth-child(odd) {
-    background: #eaeaea8c;
+    background: #e3f6ee !important;
   }
 }
 
@@ -234,4 +256,7 @@ body {
       }
     }
   }
+}
+.mat-drawer-content {
+  height: 100vh !important;
 }

@@ -72,7 +72,7 @@ export class DocumentComponent implements OnInit {
   }
   loadAllDocuments = () => {
     this.scanDocList();
-    if (this.accessType === '1' || this.accessType === '2'){
+    if (this.accessType === '1' || this.accessType === '2') {
       this.getTenentList();
     }
     this.docdumentsList();
@@ -93,7 +93,7 @@ export class DocumentComponent implements OnInit {
     this.search = '';
     this.selectStatustype = '';
     this.startDate = new Date(start);
-    this.endDate =  new Date(end) ;
+    this.endDate = new Date(end);
     this.selectedDocs = '';
     this.tenentId = 'All';
     this.selectedTenentType = 'All';
@@ -103,20 +103,20 @@ export class DocumentComponent implements OnInit {
   }
   scanDocList = () => {
     this.serviceService.scanDocList().subscribe((res: any) => {
-      if ( res.msg === 'success'){
+      if (res.msg === 'success') {
         this.dataSource.data = res.data;
       }
       console.log(this.dataSource.data);
     });
   }
   selectDate1 = (value: any) => {
-    console.log( value);
+    console.log(value);
     this.startDate = moment(value).utc().toISOString();
- }
+  }
   selectDate2 = (value: any) => {
     this.endDate = moment(value).utc().toISOString();
     console.log(moment(value).utc().toISOString());
-    if (value){
+    if (value) {
       this.docdumentsList();
     }
   }
@@ -145,7 +145,7 @@ export class DocumentComponent implements OnInit {
       user: Cookie.get('id'),
       tenentId: Cookie.get('Tenant_ID'),
       activity: 'View Document',
-      details: JSON.stringify({document_id: id})
+      details: JSON.stringify({ document_id: id })
     };
     this.audits(data);
     this.router.navigate(['documents/' + id]);
@@ -155,7 +155,7 @@ export class DocumentComponent implements OnInit {
     this.selectStatustype = value;
     this.docdumentsList();
   }
-   getTenentList = () => {
+  getTenentList = () => {
     this.tenentList.slice(0, this.tenentList.length);
     if (this.accessType === '1' || this.accessType === '2') {
       this.serviceService.getTenentList().subscribe((res) => {
@@ -165,7 +165,7 @@ export class DocumentComponent implements OnInit {
           res.data.map((i: any, index) => {
             console.log(i.Name);
             const obj = {};
-            if ( index === 0){
+            if (index === 0) {
               const objs = {};
               // tslint:disable-next-line:no-string-literal
               objs['_id'] = 'All';
@@ -179,7 +179,7 @@ export class DocumentComponent implements OnInit {
               obj['Name'] = i.Name;
               this.tenentList.push(obj);
               console.log(this.tenentList);
-            }else{
+            } else {
               // tslint:disable-next-line:no-string-literal
               obj['_id'] = i._id;
               // tslint:disable-next-line:no-string-literal
@@ -203,55 +203,55 @@ export class DocumentComponent implements OnInit {
       });
     }
   }
-   selectTenent = (value: any) => {
+  selectTenent = (value: any) => {
     console.log(value);
     this.tenentId = value;
     this.docdumentsList();
   }
   docdumentsList = () => {
-    if (this.tenentId === 'undefined'){
+    if (this.tenentId === 'undefined') {
       this.tenentId = '';
     }
     const data = {
-    Tenant_ID: this.tenentId,
-    limit: '10',
-    pageNo: '1',
-    order: '-1',
-    search: this.search,
-    startDate: this.startDate,
-    endDate: this.endDate,
-    fieldName: this.selectedDocs,
-    fieldValue: '',
-    status: this.selectStatustype
+      Tenant_ID: this.tenentId,
+      limit: '10',
+      pageNo: '1',
+      order: '-1',
+      search: this.search,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      fieldName: this.selectedDocs,
+      fieldValue: '',
+      status: this.selectStatustype
     };
     console.log(data);
     this.serviceService.scanDocByTenent(data).subscribe((res) => {
-      if ( res.msg === 'success'){
-        if ( res.data){
+      if (res.msg === 'success') {
+        if (res.data) {
           this.dataSource.data = res.data;
           console.log(res.data);
-        }else if (!res.datas){
+        } else if (!res.datas) {
           this.dataSource.data.slice(0, this.dataSource.data.length);
           console.log(res.datas);
-          res.datas.map(( i: any) => {
+          res.datas.map((i: any) => {
             console.log(i.docs);
-            if ( i.docs ){
+            if (i.docs) {
               this.dataSource.data.push(i.doc);
-            }else{
+            } else {
               this.dataSource.data = [];
               // .push(i.doc);
             }
           });
-        }else{
+        } else {
           this.dataSource.data.slice(0, this.dataSource.data.length);
           this.dataSource.data = res.datas;
         }
       }
     });
   }
-   audits = (data: any) => {
+  audits = (data: any) => {
     this.serviceService.audit(data).subscribe((res) => {
-    console.log(res);
+      console.log(res);
     }, (error: any) => {
       console.log(error);
     });

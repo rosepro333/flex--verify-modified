@@ -1,16 +1,26 @@
 .verification-wrap {
-    padding: 20px;
+    padding: 28px;
+    .title {
+        color: #646464;
+        font-size: 16px;
+        margin-bottom: 28px;
+    }
     .aclass {
+        margin: 28px;
         img {
             width: 200px;
         }
     }
     .url-wrap {
+        font-size: 16px;
+        color: #646464;
+        font-weight: 400;
+        margin: 12px 0;
         .url {
-            background: yellow;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
             padding: 2px 6px;
+            color: #21b371;
         }
     }
 }
