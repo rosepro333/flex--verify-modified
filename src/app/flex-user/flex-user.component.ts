@@ -62,7 +62,7 @@ export class FlexUserComponent implements OnInit {
     this.accessType = Cookie.get('Access_Type');
     this.tenetId = Cookie.get('Tenant_ID');
     this.userId = Cookie.get('id');
-    // this.getTenentList();
+    this.getTenentList();
     this.getUserList();
     this.formControl();
   }
@@ -244,10 +244,27 @@ export class FlexUserComponent implements OnInit {
             this.audits(data);
             this.toster.openSnackBar('User Created Successfully', result.msg);
             this.getUserList();
+            const data1 ={
+              "fromUser":this.userId,
+              "tenentId":this.tenentId,
+              "recipientEmail":this.form.value.email,
+              "user":"user",
+              "type":"User Invitation",
+              "data":JSON.stringify({UserId: result.docs._id, name: result.docs.Contact_Name, tenentId: result.docs.Tenant_ID})
+            }
+            this.serviceService.sendEmail(data1).subscribe((res) =>{
+              console.log(res)
+            },(err) =>{
+              console.log(err);
+            })
+          }else if(result.msg === 'failure'){
+             this.toster.openSnackBar(result.error, 'failed');
           }
+
+
         },
-        (error) => {
-          console.error(error);
+        (error: any) => {
+          console.log(error);
         }
       );
     }

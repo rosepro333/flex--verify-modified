@@ -127,10 +127,8 @@ export class VerificationUrlComponent implements OnInit {
         "fromUser":this.id,
         "tenentId":this.selectedTenent,
         "recipientEmail":this.emailId,
-        "type":"sdcdc",
-        "deviceSignature":"cdsc",
-        "ipAddress":"csdc",
-        "details":"cscsccs"
+        "type":"Verification url",
+        "data":JSON.stringify({url: this.verificaionUrl, sdk:this.selectSdk })
       }
       this.serviceService.sendEmail(data).subscribe((res) =>{
         console.log(res)
