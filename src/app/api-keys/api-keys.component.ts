@@ -14,7 +14,7 @@ import { ServicesService } from '../service/services.service';
 export class ApiKeysComponent implements OnInit {
   apiKeyData: any = [];
   sdkKeyData: any = [];
-  constructor(public dialog: MatDialog, private service: ServicesService) {}
+  constructor(public dialog: MatDialog, private service: ServicesService) { }
   accessType = '';
   tenetId = '';
   userId = '';
@@ -31,16 +31,16 @@ export class ApiKeysComponent implements OnInit {
   createKey = (value: string) => {
     if (value === 'api') {
       const dialogRef = this.dialog.open(CreateApiKayComponent, {
-        height: '350px',
-        width: '600px',
+        // height: '300',
+        width: '480px',
       });
       dialogRef.afterClosed().subscribe(() => {
         this.ngOnInit();
       });
     } else if (value === 'mobile') {
       const dialogRef = this.dialog.open(CreateSdyKeyComponent, {
-        height: '350px',
-        width: '600px',
+        // height: '300',
+        width: '480px',
       });
       dialogRef.afterClosed().subscribe(() => {
         this.ngOnInit();
@@ -76,36 +76,36 @@ export class ApiKeysComponent implements OnInit {
     }
   }
   revoke = (key: any, value: any) => {
-    if ( key === 'apiKey'){
-       console.log(key, value._id);
-       this.service.deleteApiKey(value._id).subscribe(( res: any) => {
-         console.log(res);
-         if (res.msg === 'success'){
-           this.getApiKeyList();
-         }
-         const datas = {
+    if (key === 'apiKey') {
+      console.log(key, value._id);
+      this.service.deleteApiKey(value._id).subscribe((res: any) => {
+        console.log(res);
+        if (res.msg === 'success') {
+          this.getApiKeyList();
+        }
+        const datas = {
           user: Cookie.get('id'),
           tenentId: Cookie.get('Tenant_ID'),
           activity: 'Revoke API Key',
-          details: JSON.stringify({api_key_id: value._id, tenant_id: value.Tenent_ID._id })
-          };
-         this.audits(datas);
-       }, (error: any) => {
-         console.log(error);
-       });
-    }else if (key === 'sdkKey'){
+          details: JSON.stringify({ api_key_id: value._id, tenant_id: value.Tenent_ID._id })
+        };
+        this.audits(datas);
+      }, (error: any) => {
+        console.log(error);
+      });
+    } else if (key === 'sdkKey') {
       console.log(key, value._id);
-      this.service.deleteSdyKey(value._id).subscribe(( res: any) => {
+      this.service.deleteSdyKey(value._id).subscribe((res: any) => {
         console.log(res);
-        if (res.msg === 'success'){
+        if (res.msg === 'success') {
           this.getSdkKeyList();
         }
         const datas = {
           user: Cookie.get('id'),
           tenentId: Cookie.get('Tenant_ID'),
           activity: 'Revoke SDK Key',
-          details: JSON.stringify({api_key_id: value._id, tenant_id: value.Tenent_ID._id })
-          };
+          details: JSON.stringify({ api_key_id: value._id, tenant_id: value.Tenent_ID._id })
+        };
         this.audits(datas);
       }, (error: any) => {
         console.log(error);
@@ -114,7 +114,7 @@ export class ApiKeysComponent implements OnInit {
   }
   audits = (data: any) => {
     this.service.audit(data).subscribe((res) => {
-    console.log(res);
+      console.log(res);
     }, (err) => {
       console.log(err);
     });

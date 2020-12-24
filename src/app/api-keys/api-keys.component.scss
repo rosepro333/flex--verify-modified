@@ -1,42 +1,41 @@
 .api-keys-wrap {
-    // padding: 20px;
-    // margin: -20px;
+    padding: 20px;
+    mat-form-field {
+        margin-right: 12px;
+    }
+    .section {
+        padding: 0 28px;
+    }
     mat-card {
-        margin: 20px;
-
-        mat-card-header {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #cdcdcd;
-            .mat-card-header-text {
-                margin-left: 0;
-                .mat-card-title {
-                    margin-bottom: 0;
+        margin-bottom: 28px;
+        border-left: 12px solid #21b371;
+        box-shadow: 5px 6px 12px 0px rgb(228 228 228) !important;
+        .top {
+            margin-bottom: 28px;
+            .key-wrapper {
+                font-size: 16px;
+                font-weight: 500;
+                color: #333333;
+                .api-key-value {
+                    font-size: 20px;
+                    font-weight: 500;
+                    color: #37b97e;
                 }
             }
         }
-    }
-    .data-wrap {
-        margin-bottom: 8px;
-        padding-right: 8px;
-        .title {
-            font-weight: 500;
+        .data-wrap {
+            margin-bottom: 8px;
+            padding-right: 8px;
+            .title {
+                font-weight: 500;
+                color: #b1b1b1;
+                font-size: 16px;
+            }
+            .value {
+                font-size: 14px;
+                font-size: 16px;
+                color: #333333;
+            }
         }
-        .value {
-            font-size: 14px;
-        }
-        .api-key-value {
-            border: 1px solid #cdcdcd;
-            padding: 12px;
-        }
-    }
-    .key-env {
-        margin-left: 4px;
-        font-size: 14px;
-        color: #757575;
-    }
-    .revoke-button {
-        background: #d50000;
-        color: #fff;
     }
 }

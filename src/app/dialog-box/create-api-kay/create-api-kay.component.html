@@ -1,60 +1,38 @@
-<mat-toolbar>
-  <span>Create Api Key</span>
-</mat-toolbar>
-<mat-card>
-  <form class="example-form" [formGroup]="form" (ngSubmit)="onSave('user')">
+<h2 class="dialogue-title" mat-dialog-title>Create Api Key</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSave('user')">
     <div fxLayout="row wrap">
       <!-- <mat-form-field appearance="fill">
-       
-      </mat-form-field> -->
-      <mat-form-field
-        appearance="outline"
-        class="field-wrap"
-        fxFlex.gt-md="100"
-        fxFlex.md="100"
-        fxFlex.lt-md="100"
-        fxFlex.lt-sm="100"
-      >
+         
+        </mat-form-field> -->
+      <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100"
+        fxFlex.lt-sm="100">
         <mat-label>Select Tenent</mat-label>
-        <mat-select
-          disableRipple
-          (selectionChange)="selectTenent($event.value)"
-        >
+        <mat-select disableRipple (selectionChange)="selectTenent($event.value)">
           <mat-option *ngFor="let tenent of tenentList" [value]="tenent._id">{{
             tenent.Name
-          }}</mat-option>
+            }}</mat-option>
         </mat-select>
       </mat-form-field>
       <!-- <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100"
-                fxFlex.lt-sm="100">
-                <mat-label>Mode</mat-label>
-                <input matInput placeholder="Mode" formControlName="Mode">
-            </mat-form-field> -->
-      <mat-form-field
-        appearance="outline"
-        class="field-wrap"
-        fxFlex.gt-md="100"
-        fxFlex.md="100"
-        fxFlex.lt-md="100"
-        fxFlex.lt-sm="100"
-      >
+                  fxFlex.lt-sm="100">
+                  <mat-label>Mode</mat-label>
+                  <input matInput placeholder="Mode" formControlName="Mode">
+              </mat-form-field> -->
+      <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100"
+        fxFlex.lt-sm="100">
         <mat-label>Mode</mat-label>
         <mat-select formControlName="mode">
           <mat-option value="flxemOperator">Sandbox </mat-option>
           <mat-option value="flexAdmin">Production</mat-option>
         </mat-select>
       </mat-form-field>
-      <div
-        fxFlex="100"
-        class="button-bar"
-        fxLayout="row wrap"
-        fxLayoutAlign="center center"
-      >
-        <button mat-stroked-button type="button" (click)="clear()">
+      <div fxFlex="100" class="button-bar" fxLayout="row wrap" fxLayoutAlign="center center">
+        <button mat-button class="cancel-button" type="button" (click)="clear()">
           cancel
         </button>
         <button mat-button class="primary-button" type="submit">Create</button>
       </div>
     </div>
   </form>
-</mat-card>
+</div>
