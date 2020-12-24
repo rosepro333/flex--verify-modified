@@ -43,7 +43,7 @@
       <span>Document List</span>
     </mat-toolbar>
     <div class="document-wrap" fxLayout="column" fxLayoutAlign="start start">
-      <div fxLayout="row wrap" class="w-100" fxLayoutAlign="space-between center">
+      <div fxLayout="row wrap" class="w-100 filter-wrap" fxLayoutAlign="space-between center">
         <div fxFlex>
           <mat-form-field class='form-rows' appearance="outline" fxFlex>
             <mat-label>Document Id</mat-label>
@@ -55,7 +55,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline" fxFlex>
             <mat-label>Filter text</mat-label>
-            <input class="search-field1" matInput [disabled]="disabled" (keyup)="applyFilter($event)" #input />
+            <input matInput [disabled]="disabled" (keyup)="applyFilter($event)" #input />
             <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search">
               <mat-icon matSuffix>search</mat-icon>
             </button>

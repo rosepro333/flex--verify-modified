@@ -36,11 +36,12 @@ export class FlexUserComponent implements OnInit {
   currentPage = 1;
   displayedColumns: string[] = [
     'name',
-    'email',
-    'status',
+    // 'email',
     'accessType',
-    'createdAt',
-    'actions',
+    'owner',
+    'status',
+    // 'createdAt',
+    // 'actions',
   ];
   dataSourceUser = new MatTableDataSource(ELEMENT_DATA_User);
   dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
@@ -49,6 +50,8 @@ export class FlexUserComponent implements OnInit {
   tenetId = '';
   userId = '';
   isOPen = false;
+  isCreateUser: boolean;
+  isUserDetails: boolean;
   constructor(
     private serviceService: ServicesService,
     public dialog: MatDialog,
@@ -56,7 +59,7 @@ export class FlexUserComponent implements OnInit {
     private router: Router,
     private service: ServicesService,
     private toster: TosterService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.accessType = Cookie.get('Access_Type');
@@ -68,19 +71,19 @@ export class FlexUserComponent implements OnInit {
   }
 
   getUserList = () => {
-      const data = {
-      "Tenant_ID":"",
-      "limit":this.pageSize,
-      "pageNo":"1",
-      "order":"-1",
-      "search":"",
-      "startDate":"",
-      "endDate":"",
-      "status":""
-      }
+    const data = {
+      "Tenant_ID": "",
+      "limit": this.pageSize,
+      "pageNo": "1",
+      "order": "-1",
+      "search": "",
+      "startDate": "",
+      "endDate": "",
+      "status": ""
+    }
     if (this.accessType === '1') {
       this.serviceService.getUserList(data).subscribe((result) => {
-        if(result.msg === 'success'){
+        if (result.msg === 'success') {
           this.totalSize = result.length;
           this.dataSourceUser = result.data;
         }
@@ -115,21 +118,21 @@ export class FlexUserComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
   }
-  handlePage(value: any){
+  handlePage(value: any) {
     console.log(value);
-    if(value.pageIndex){
+    if (value.pageIndex) {
       console.log(value.pageIndex)
-      const pageIndex  = (value.pageIndex === 0 )? 1:value.pageIndex;
-        this.currentPage = pageIndex;
-        console.log(this.currentPage);
-        // this.getTenentList();
+      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
+      this.currentPage = pageIndex;
+      console.log(this.currentPage);
+      // this.getTenentList();
       // }
 
     }
-    if(value.pageSize){
+    if (value.pageSize) {
       console.log(value.pageSize)
       this.pageSize = value.pageSize;
-      const pageIndex  = (value.pageIndex === 0 )? 1:value.pageIndex;
+      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
       this.currentPage = pageIndex;
       this.getTenentList();
     }
@@ -155,7 +158,7 @@ export class FlexUserComponent implements OnInit {
   enableUser = (elm): any => {
     alert('unblock ' + elm.name);
   }
-  deleteUser = (id: any , name: any ) => {
+  deleteUser = (id: any, name: any) => {
     if (id !== this.userId) {
       const dialogRef = this.dialog.open(DeleteUserComponent, {
         height: '160px',
@@ -169,7 +172,7 @@ export class FlexUserComponent implements OnInit {
       this.toster.openSnackBar('You can not delete ownself', 'failed');
     }
   }
-  blockTenant = (elm: any ) => {
+  blockTenant = (elm: any) => {
     alert('block ' + elm.name);
   }
   enableTenant = (elm: any) => {
@@ -195,16 +198,16 @@ export class FlexUserComponent implements OnInit {
   }
   getTenentList = () => {
     if (this.accessType === '1') {
-      const data ={
-        "Tenant_ID":"",
+      const data = {
+        "Tenant_ID": "",
         "limit": 10,
-        "pageNo":1,
-        "order":"-1",
-        "search":"",
-        "startDate":"",
-        "endDate":"",
-        "status":""
-    }
+        "pageNo": 1,
+        "order": "-1",
+        "search": "",
+        "startDate": "",
+        "endDate": "",
+        "status": ""
+      }
       this.service.getTenentList(data).subscribe((res) => {
         // console.log(res);
         if (res.msg === 'success') {
@@ -227,7 +230,7 @@ export class FlexUserComponent implements OnInit {
   selectTenent = (value: any) => {
     this.tenentId = value;
   }
-  onSave = ()  => {
+  onSave = () => {
     if (this.form.valid) {
       this.form.value.tenent = this.tenentId;
       this.service.userCreate(this.form.value).subscribe(
@@ -239,7 +242,7 @@ export class FlexUserComponent implements OnInit {
               user: Cookie.get('id'),
               tenentId: Cookie.get('Tenant_ID'),
               activity: 'Create User',
-              details: JSON.stringify({id: result.docs._id, name: result.docs.Contact_Name, tenentId: result.docs.Tenant_ID})
+              details: JSON.stringify({ id: result.docs._id, name: result.docs.Contact_Name, tenentId: result.docs.Tenant_ID })
             };
             this.audits(data);
             this.toster.openSnackBar('User Created Successfully', result.msg);
@@ -253,13 +256,27 @@ export class FlexUserComponent implements OnInit {
     }
   }
   userNavigate = () => {
-    setTimeout(() => {}, 200);
+    setTimeout(() => { }, 200);
   }
   audits = (data: any) => {
     this.service.audit(data).subscribe((res) => {
-    console.log(res);
+      console.log(res);
     }, (error: any) => {
       console.log(error);
     });
+  }
+  clicked(a, id) {
+    if (a == 'create-user') {
+      this.isCreateUser = true;
+      this.isUserDetails = false;
+    } else if (a == 'user-details') {
+      this.isCreateUser = false;
+      this.isUserDetails = true;
+    }
+    else {
+      this.isCreateUser = false;
+      this.isUserDetails = false;
+    }
+    console.log(id);
   }
 }
