@@ -49,13 +49,15 @@ export class OrganizationComponent implements OnInit {
   }
 
   getTenentList = () => {
-    this.serviceService.getTenentList().subscribe((result) => {
+    const data ={}
+    this.serviceService.getTenentList(data).subscribe((result) => {
       this.dataSourceTenant = result.data;
       console.log(this.dataSourceTenant);
     });
   }
   getUserList = () => {
-    this.serviceService.getUserList().subscribe((result) => {
+     const data ={}
+    this.serviceService.getUserList(data).subscribe((result) => {
       this.dataSourceUser = result.data;
       console.log(this.dataSourceUser);
     });

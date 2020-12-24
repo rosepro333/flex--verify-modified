@@ -158,7 +158,8 @@ export class DocumentComponent implements OnInit {
   getTenentList = () => {
     this.tenentList.slice(0, this.tenentList.length);
     if (this.accessType === '1' || this.accessType === '2') {
-      this.serviceService.getTenentList().subscribe((res) => {
+      const data = {}
+      this.serviceService.getTenentList(data).subscribe((res) => {
         // console.log(res);
         if (res.msg === 'success') {
           // this.tenentList = res.data;
