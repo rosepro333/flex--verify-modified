@@ -29,8 +29,10 @@ export class FlexTenentComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  pageSizeOptions = [10, 25, 50, 100];
-
+  pageSizeOptions = [2, 25, 50, 100];
+  pageSize = 10;
+  totalSize = 0;
+  currentPage = 1;
   displayedColumns: string[] = [
     'name-email',
     'role',
@@ -54,10 +56,27 @@ export class FlexTenentComponent implements OnInit {
   }
 
   getTenentList = () => {
-    this.service.getTenentList().subscribe((result) => {
-      this.dataSourceTenant = result.data;
-      this.tenentList = result.data;
+     const data ={
+        "Tenant_ID":"",
+        "limit": this.pageSize,
+        "pageNo":this.currentPage,
+        "order":"-1",
+        "search":"",
+        "startDate":"",
+        "endDate":"",
+        "status":""
+    }
+    console.log(data)
+    this.service.getTenentList(data).subscribe((result) => {
+      console.log(result);
+      if(result.msg === "success"){
+        this.totalSize = result.length;
+        this.dataSourceTenant = result.data;
+      // this.tenentList = result.data;
       console.log(this.dataSourceTenant);
+      }
+
+
     });
   }
 
@@ -67,14 +86,40 @@ export class FlexTenentComponent implements OnInit {
   }
 
   applyTenantFilter = (event: Event) => {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
+    console.log(event.target);
+    // const filterValue = (event.target as HTMLInputElement).value;
+    // this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
   }
   blockUser = (elm: any) => {
     alert('block ' + elm.name);
   }
   enableUser = (elm: any) => {
     alert('unblock ' + elm.name);
+  }
+  handlePage(value: any){
+    console.log(value);
+    if(value.pageIndex){
+      console.log(value.pageIndex)
+      const pageIndex  = (value.pageIndex === 0 )? 1:value.pageIndex;
+        this.currentPage = pageIndex;
+        console.log(this.currentPage);
+        // this.getTenentList();
+      // }
+
+    }
+    if(value.pageSize){
+      console.log(value.pageSize)
+      this.pageSize = value.pageSize;
+      const pageIndex  = (value.pageIndex === 0 )? 1:value.pageIndex;
+      this.currentPage = pageIndex;
+      this.getTenentList();
+    }
+
+
+    // console.log(value.pageSize)
+
+    // this.currentPage = value.pageIndex;
+
   }
 
   blockTenant = (id: any, name: any) => {
@@ -121,6 +166,7 @@ export class FlexTenentComponent implements OnInit {
         (result) => {
           console.log(result);
           if (result.msg === 'success') {
+            this.getTenentList();
             console.log(result);
             const data = {
               user: Cookie.get('id'),
@@ -130,7 +176,7 @@ export class FlexTenentComponent implements OnInit {
             };
             this.audits(data);
             this.toster.openSnackBar('Tenent Created Successfully', result.msg);
-            this.ngOnInit();
+            this.form.reset();
           }
         },
         (error) => {
@@ -138,6 +184,9 @@ export class FlexTenentComponent implements OnInit {
         }
       );
     }
+  }
+  reset = () => {
+     this.form.reset();
   }
   audits = (data: any) => {
     this.service.audit(data).subscribe((res) => {

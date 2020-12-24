@@ -30,8 +30,10 @@ export class FlexUserComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  pageSizeOptions = [10, 25, 50, 100];
-
+  pageSizeOptions = [2, 25, 50, 100];
+  pageSize = 10;
+  totalSize = 0;
+  currentPage = 1;
   displayedColumns: string[] = [
     'name',
     'email',
@@ -60,15 +62,30 @@ export class FlexUserComponent implements OnInit {
     this.accessType = Cookie.get('Access_Type');
     this.tenetId = Cookie.get('Tenant_ID');
     this.userId = Cookie.get('id');
-    this.getTenentList();
+    // this.getTenentList();
     this.getUserList();
     this.formControl();
   }
 
   getUserList = () => {
+      const data = {
+      "Tenant_ID":"",
+      "limit":this.pageSize,
+      "pageNo":"1",
+      "order":"-1",
+      "search":"",
+      "startDate":"",
+      "endDate":"",
+      "status":""
+      }
     if (this.accessType === '1') {
-      this.serviceService.getUserList().subscribe((result) => {
-        this.dataSourceUser = result.data;
+      this.serviceService.getUserList(data).subscribe((result) => {
+        if(result.msg === 'success'){
+          this.totalSize = result.length;
+          this.dataSourceUser = result.data;
+        }
+
+        console.log(result.msg === 'success');
       });
     } else if (this.accessType === '3') {
       const tenetId = this.tenetId;
@@ -97,6 +114,29 @@ export class FlexUserComponent implements OnInit {
   applyTenantFilter = (event: Event) => {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
+  }
+  handlePage(value: any){
+    console.log(value);
+    if(value.pageIndex){
+      console.log(value.pageIndex)
+      const pageIndex  = (value.pageIndex === 0 )? 1:value.pageIndex;
+        this.currentPage = pageIndex;
+        console.log(this.currentPage);
+        // this.getTenentList();
+      // }
+
+    }
+    if(value.pageSize){
+      console.log(value.pageSize)
+      this.pageSize = value.pageSize;
+      const pageIndex  = (value.pageIndex === 0 )? 1:value.pageIndex;
+      this.currentPage = pageIndex;
+      this.getTenentList();
+    }
+    // console.log(value.pageSize)
+
+    // this.currentPage = value.pageIndex;
+
   }
   blockUser = (id: any, name: any) => {
     if (id !== this.userId) {
@@ -155,7 +195,17 @@ export class FlexUserComponent implements OnInit {
   }
   getTenentList = () => {
     if (this.accessType === '1') {
-      this.service.getTenentList().subscribe((res) => {
+      const data ={
+        "Tenant_ID":"",
+        "limit": 10,
+        "pageNo":1,
+        "order":"-1",
+        "search":"",
+        "startDate":"",
+        "endDate":"",
+        "status":""
+    }
+      this.service.getTenentList(data).subscribe((res) => {
         // console.log(res);
         if (res.msg === 'success') {
           this.tenentList = res.data;

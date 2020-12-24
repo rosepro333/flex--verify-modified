@@ -250,8 +250,9 @@
             <td class="mat-cell" colspan="6">No Record Found</td>
           </tr>
         </table>
-        <mat-paginator
-          [pageSizeOptions]="pageSizeOptions"
+        <mat-paginator #paginator [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true" [length]="totalSize"
+          [pageIndex]="currentPage" (page)="handlePage($event)"
           class="mat-elevation-z2"
           fxFill
         ></mat-paginator>

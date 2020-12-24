@@ -129,24 +129,14 @@ export class ServicesService {
       .delete(this.apiUrl + '/apikey/delete/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  getTenentList(): Observable<any> {
-    const data ={
-        "Tenant_ID":"",
-        "limit":"10",
-        "pageNo":"1",
-        "order":"-1",
-        "search":"",
-        "startDate":"",
-        "endDate":"",
-        "status":""
-    }
+  getTenentList(data: any): Observable<any> {
     return this.http
       .post(this.apiUrl + '/tenent/list',data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  getUserList(): Observable<any> {
+  getUserList(data: any): Observable<any> {
     return this.http
-      .get(this.apiUrl + '/user/list', this.httpOptions)
+      .post(this.apiUrl + '/user/list', data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   getUserDetails(id: any): Observable<any> {

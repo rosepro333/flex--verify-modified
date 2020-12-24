@@ -74,6 +74,7 @@ export class DocumentDetailsComponent implements OnInit {
   docId = '';
   scanId= '';
   resutData: any = [];
+  scanId$ = '';
 
   documentIdType: any = [
     { value: 'Nationality Identify Card' },
@@ -126,6 +127,7 @@ export class DocumentDetailsComponent implements OnInit {
           this.scanDocument.slice(0, this.scanDocument.length)
           this.scanDocument.push(res[0]);
           this.scanId = res[0]._id;
+          this.scanId$ = res[0].Scan_ID;
           this.scanDocumentById(this.scanId);
         }
         console.log(res);
@@ -171,6 +173,9 @@ export class DocumentDetailsComponent implements OnInit {
         this.commentsData.push(obj);
       }
     });
+  }
+  SelectIdType = (value: any) => {
+    console.log(value);
   }
   filterComments = (scanId: string, documentId: any) => {
     const data = {
@@ -237,6 +242,7 @@ export class DocumentDetailsComponent implements OnInit {
        if(res.msg === 'success'){
           // this.scanDocument.push(res.data)
           this.scanDocument = [res.data];
+          this.scanId$ = res.data.Scan_ID;
           console.log(this.scanDocument);
         }
     },(err) => {
@@ -334,8 +340,24 @@ export class DocumentDetailsComponent implements OnInit {
     form.value.liveCheckingStatus = this.liveCheckingStatus;
     console.log(form.value);
     const id = scanId;
-    this.serviceServive.approvedScanDocument(id, form.value).subscribe(
+    const data = {
+      ID_Type:form.value.scanResultStatus,
+      idCardNo: form.value.idCardNo,
+      firstName: form.value.firstName,
+      lastName: form.value.lastName,
+      dob:form.value.dob,
+      idExpiryDate: form.value.idExpiryDate,
+      building_No: form.value.building_No,
+      streetName: form.value.streetName,
+      city: form.value.city,
+      postalCode: form.value.postalCode,
+    }
+    console.log(id)
+    this.serviceServive.approvedScanDocument(id, data).subscribe(
       (response) => {
+        if(response.msg = 'success'){
+           this.toast.openSnackBar('Success',response.status);
+        }
         console.log(response);
         const data = {
           user: Cookie.get('id'),
@@ -344,11 +366,11 @@ export class DocumentDetailsComponent implements OnInit {
           details: JSON.stringify({ document_id: this.docId, scan_id: scanId })
         };
         this.audits(data);
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+      },(err) => {
+      console.log(err);
+      this.toast.openSnackBar('Something Went Wrong',"failed")
+
+    })
   }
   selectDate = (event: any) => {
     this.dateOfBirth = event;
