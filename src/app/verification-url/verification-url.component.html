@@ -37,7 +37,7 @@
   </div>
   <mat-form-field appearance="outline" fxFill *ngIf="verificaionUrl">
     <mat-label>Email To</mat-label>
-    <input matInput type="email" [(ngModel)]="emailId" (keydown.enter)="sendEmail()">
+    <input matInput type="email" name="emailId" [(ngModel)]="emailId" (keydown.enter)="sendEmail()" >
     <button mat-button *ngIf="emailId" matSuffix mat-icon-button aria-label="Send" (click)="sendEmail()">
       <mat-icon>send</mat-icon>
     </button>

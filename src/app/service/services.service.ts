@@ -38,6 +38,9 @@ export class ServicesService {
   userDevice = () => {
     return Cookie.get('user-device');
   }
+  sendEmail(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/email/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   audit(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/audit/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }

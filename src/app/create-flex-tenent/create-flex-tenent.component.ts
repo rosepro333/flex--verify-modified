@@ -35,7 +35,8 @@ export class CreateFlexTenentComponent implements OnInit {
     });
   }
   getTenentList = () => {
-    this.service.getTenentList().subscribe((res) => {
+    const data = {}
+    this.service.getTenentList(data).subscribe((res) => {
       // console.log(res);
       if (res.msg === 'success') {
         this.tenentList = res.data;

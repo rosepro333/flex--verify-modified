@@ -32,7 +32,8 @@ export class VerificationUrlComponent implements OnInit {
   }
   getTenentList = () => {
     if (this.accessType === '1' || this.accessType === '2') {
-      this.serviceService.getTenentList().subscribe((res) => {
+      const data ={};
+      this.serviceService.getTenentList(data).subscribe((res) => {
         // console.log(res);
         if (res.msg === 'success') {
           this.tenentList = res.data;
@@ -102,15 +103,16 @@ export class VerificationUrlComponent implements OnInit {
       }
     );
   }
-  send = (value: string, a: string) => {
-    if (a === 'mail') {
-      alert('mail sent to ' + value);
-    } else {
-      alert('sms sent to ' + value);
-    }
+  // send = (value: string, a: string) => {
+  //   if (a === 'mail') {
 
-    console.log(a);
-  }
+  //     // alert('mail sent to ' + value);
+  //   } else {
+  //     alert('sms sent to ' + value);
+  //   }
+
+  //   console.log(a);
+  // }
   audits = (data: any) => {
     this.serviceService.audit(data).subscribe((res) => {
       console.log(res);
@@ -119,6 +121,21 @@ export class VerificationUrlComponent implements OnInit {
     });
   }
   sendEmail(): void {
-    alert('email send to ' + this.emailId)
+    // alert('email send to ' + this.emailId)
+    console.log(this.selectedTenent)
+     const data ={
+        "fromUser":this.id,
+        "tenentId":this.selectedTenent,
+        "recipientEmail":this.emailId,
+        "type":"sdcdc",
+        "deviceSignature":"cdsc",
+        "ipAddress":"csdc",
+        "details":"cscsccs"
+      }
+      this.serviceService.sendEmail(data).subscribe((res) =>{
+        console.log(res)
+      },(err) =>{
+        console.log(err);
+      })
   }
 }
