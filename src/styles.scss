@@ -68,7 +68,9 @@ body {
   background: #21b371;
   color: #fff;
   margin: 0 12px !important;
-  i {
+  i,
+  mat-icon,
+  .material-icons {
     margin: 0 8px;
   }
 }
@@ -76,7 +78,9 @@ body {
   background-color: #ebebeb;
   color: #949494;
   margin: 0 12px !important;
-  i {
+  i,
+  mat-icon,
+  .material-icons {
     margin: 0 8px;
   }
 }
@@ -85,7 +89,9 @@ body {
   color: #444444;
   margin: 0 12px !important;
   border: 1px solid #969696 !important;
-  i {
+  i,
+  mat-icon,
+  .material-icons {
     margin: 0 8px;
   }
 }
@@ -93,7 +99,9 @@ body {
   background-color: #e04d4d;
   color: #ffffff;
   margin: 0 12px !important;
-  i {
+  i,
+  mat-icon,
+  .material-icons {
     margin: 0 8px;
   }
 }
@@ -105,7 +113,20 @@ body {
   color: #21b371;
   border: 1px solid #21b371 !important;
   margin: 0 12px !important;
-  i {
+  i,
+  mat-icon,
+  .material-icons {
+    margin-right: 8px;
+  }
+}
+.bordered-light-red-button {
+  background: #fde6e6;
+  color: #e04d4d;
+  border: 1px solid #e04d4d !important;
+  margin: 0 12px !important;
+  i,
+  mat-icon,
+  .material-icons {
     margin-right: 8px;
   }
 }
@@ -137,6 +158,11 @@ input.mat-input-element {
   }
 }
 .mat-row {
+  &.no-data {
+    &:hover {
+      background: none !important;
+    }
+  }
   &:hover {
     background: #e3f6ee !important;
   }
@@ -259,4 +285,49 @@ body {
 }
 .mat-drawer-content {
   height: 100vh !important;
+}
+.sub-section-header {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  padding: 12px 0;
+  margin-bottom: 28px;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.section-header {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+  padding: 12px 0;
+  margin-bottom: 28px;
+  // border-bottom: 1px solid #dfdfdf;
+}
+
+.input-suffix-button {
+  border-radius: 0px 4px 4px 0 !important;
+  right: -9px;
+  top: 0;
+  height: 3em;
+  text-align: center;
+  padding: 12px 20px !important;
+  margin: 0 !important;
+  font-size: 14px;
+}
+.dialogue-title {
+  border-bottom: 3px solid #21b371;
+  padding-bottom: 8px;
+  margin-bottom: 24px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0.6em 0;
+  top: -0.26em;
+}
+.mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+  transform: translateY(0%) !important;
+}
+.mat-button:last-of-type,
+.mat-stroked-button:last-of-type {
+  margin-right: 0 !important;
 }

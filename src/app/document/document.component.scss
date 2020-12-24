@@ -1,5 +1,13 @@
 .document-wrap {
     padding: 20px;
+    .w-100 {
+        width: 100%;
+    }
+    .filter-button-wrap {
+        button {
+            margin: 6px 12px;
+        }
+    }
     .mat-table {
         .mat-cell {
             padding: 12px 12px 12px 0;
@@ -14,6 +22,7 @@
                 font-size: 14px;
                 font-weight: 500;
                 letter-spacing: 0.5px;
+                margin-top: 4px;
             }
             .data-wrap:nth-child(odd) {
                 margin-bottom: 8px;
@@ -30,38 +39,43 @@
                     text-align: center;
                 }
             }
-            .status-icon {
-                margin-right: 12px;
-                mat-icon {
-                    border-radius: 50%;
-                    padding: 4px;
-                    vertical-align: -webkit-baseline-middle;
-                    text-align: center;
-                }
-                &.processing {
-                    mat-icon {
-                        color: #dea806;
-                        background: #dea80630;
-                    }
-                }
-                &.verified {
-                    mat-icon {
-                        color: #21b371;
-                        background: #21b37130;
-                    }
-                }
-                &.declined {
-                    mat-icon {
-                        color: #ff5b5b;
-                        background: #ff5b5b30;
-                    }
-                }
+        }
+        .no-data {
+            .mat-cell {
+                border: none;
             }
         }
     }
-}
-mat-form-field {
-    margin-right: 12px;
+    mat-form-field {
+        margin-right: 12px;
+    }
+    .status {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 4px 8px;
+        border-radius: 4px;
+        &.incomplete {
+            background: #f1dbdb;
+            color: #e04d4d;
+            border: 1px solid #e04d4d;
+        }
+        &.verified {
+            background: #e2fff2;
+            color: #21b371;
+            border: 1px solid #21b371;
+        }
+        &.inprogress {
+            background: #fdfee8;
+            color: #ffc107;
+            border: 1px solid #ffc107;
+        }
+    }
+    .mat-paginator {
+        position: sticky;
+        // height: auto !important;
+        // max-height: unset !important;
+        bottom: 0;
+    }
 }
 
 .search-field1 {

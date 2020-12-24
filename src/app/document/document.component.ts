@@ -52,7 +52,7 @@ export class DocumentComponent implements OnInit {
     'date-time',
     'name-nationality',
     'tenent-id',
-    'status-date',
+    // 'status-date',
   ];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

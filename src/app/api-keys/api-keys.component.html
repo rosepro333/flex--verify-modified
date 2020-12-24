@@ -6,199 +6,131 @@
 </mat-toolbar>
 
 <div class="api-keys-wrap" fxLayout="row wrap" fxLayoutAlign="start start">
-  <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-    <mat-card>
-      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between center">
-        <mat-card-title>
-          <span>Api key</span>
-          <span class="key-env"> <!--dummy-->(Sandbox) </span>
-        </mat-card-title>
-        <button mat-button class="primary-button" (click)="createKey('api')">
-          <mat-icon>add</mat-icon>
-          Create Api Key
-        </button>
-      </mat-card-header>
-      <mat-card-content
-        fxLayout="row wrap"
-        fxLayoutAlign="start start"
-        *ngFor="let i of apiKeyData"
-      >
-        <div
-          fxFlex.gt-md="100"
-          fxFlex.md="100"
-          fxFlex.lt-md="100"
-          fxFlex
-          class="data-wrap"
-        >
+  <div fxLayout="row wrap" fxLayoutAlign="start start" fxFill>
+    <mat-form-field appearance="outline" fxFlex="25">
+      <mat-label>Tenent</mat-label>
+      <mat-select disableRipple>
+        <mat-option value="tenent1">Tenent 1</mat-option>
+        <mat-option value="tenent2">Tenent 2</mat-option>
+        <mat-option value="tenent3">Tenent 3</mat-option>
+        <mat-option value="tenent4">Tenent 4</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="25">
+      <mat-label>Mode</mat-label>
+      <mat-select disableRipple>
+        <mat-option value="mode1">Mode 1</mat-option>
+        <mat-option value="mode2">Mode 2</mat-option>
+        <mat-option value="mode3">Mode 3</mat-option>
+        <mat-option value="mode4">Mode 4</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="25">
+      <mat-label>Date</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date">
+        <input matEndDate placeholder="End date">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+  </div>
+  <section class="section" fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
+    <div class="section-header" fxLayout="row" fxLayoutAlign="space-between center">
+      <span>Api Key</span>
+      <button mat-button class="primary-button" (click)="createKey('api')">
+        <mat-icon>add</mat-icon>
+        Create Api Key
+      </button>
+    </div>
+    <mat-card *ngFor="let i of apiKeyData">
+      <mat-card-content fxLayout="row wrap" fxLayoutAlign="start start">
+        <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex class="top">
           <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
-            <div
-              class="title"
-              fxLayout="row wrap"
-              fxLayoutGap="20px"
-              fxLayoutAlign="space-between center"
-            >
-              <div>KEY</div>
-              <button
-                mat-icon-button
-                matTooltip="copy key"
-                [cdkCopyToClipboard]="i.Api_Key"
-                matTooltipPosition="right"
-                (click)="copyKey()"
-              >
-                <mat-icon>content_copy</mat-icon>
-              </button>
-            </div>
-            <div class="value api-key-value">
-              {{ i.Api_Key }}
-              <!-- dummy api.key.sandbox22444566.77ggghhx2244
-                            rflhfedggg6554784566.77ggghh -->
+            <div class="title" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+              <div class="key-wrapper">Key: <span class="api-key-value">{{ i.Api_Key }}</span></div>
+              <div>
+                <button mat-button class="bordered-light-green-button" [cdkCopyToClipboard]="i.Api_Key"
+                  (click)="copyKey()">
+                  Copy Key
+                </button>
+                <button mat-button class="bordered-light-red-button" (click)="revoke('apiKey',i)">
+                  Revoke
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
-          <div fxLayout="row wrap" fxLayoutAlign="start start">
-            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-              <div class="data-wrap">
-                <div class="title">Created at</div>
-                <div class="value">
-                  <!--dummy-->
-                  {{ i.Created_At | date: "longDate" }}
-                </div>
-              </div>
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex>
+          <div class="data-wrap">
+            <div class="title">Created at</div>
+            <div class="value">
+              {{ i.Created_At | date: "longDate" }}
             </div>
-            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-              <div
-                fxFlex.gt-md="50"
-                fxFlex.md="100"
-                fxFlex.lt-md="100"
-                class="data-wrap"
-              >
-                <div class="title">Owner</div>
-                <div class="value">
-                  <!--dummy-->
-                  {{ i.Tenent_ID.Name }}
-                </div>
-              </div>
+          </div>
+          <div class="data-wrap">
+            <div class="title">Owner</div>
+            <div class="value">
+              {{ i.Tenent_ID.Name }}
             </div>
-            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-              <div
-                fxFlex.gt-md="50"
-                fxFlex.md="100"
-                fxFlex.lt-md="100"
-                class="data-wrap"
-              >
-                <div class="title">Last Used</div>
-                <div class="value">
-                  <!--dummy-->
-                  Today
-                </div>
-              </div>
-            </div>
-            <div fxFlex="100" align="right">
-              <button mat-button class="revoke-button" (click)="revoke('apiKey',i)">
-                <mat-icon>cancel</mat-icon>
-                Revoke
-              </button>
+          </div>
+          <div class="data-wrap" fxFlex="200px">
+            <div class="title">Mode</div>
+            <div class="value">
+              {{i.Mode}}
             </div>
           </div>
         </div>
       </mat-card-content>
     </mat-card>
-  </div>
-  <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-    <mat-card>
-      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between center">
-        <mat-card-title>
-          <span>Mobile key</span>
-          <span class="key-env"> <!--dummy-->(Sandbox) </span>
-        </mat-card-title>
-        <button mat-button class="primary-button" (click)="createKey('mobile')">
-          <mat-icon>add</mat-icon>
-          Create Sdk Key
-        </button>
-      </mat-card-header>
-      <mat-card-content
-        fxLayout="row wrap"
-        fxLayoutAlign="start start"
-        *ngFor="let i of sdkKeyData"
-      >
-        <div
-          fxFlex.gt-md="100"
-          fxFlex.md="100"
-          fxFlex.lt-md="100"
-          fxFlex
-          class="data-wrap"
-        >
+  </section>
+  <section class="section" fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
+    <div class="section-header" fxLayout="row" fxLayoutAlign="space-between center">
+      <span>Mobile key</span>
+      <button mat-button class="primary-button" (click)="createKey('mobile')">
+        <mat-icon>add</mat-icon>
+        Create Sdk Key
+      </button>
+    </div>
+    <mat-card *ngFor="let i of sdkKeyData">
+      <mat-card-content fxLayout="row wrap" fxLayoutAlign="start start">
+        <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex class="top">
           <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
-            <div
-              class="title"
-              fxLayout="row wrap"
-              fxLayoutGap="20px"
-              fxLayoutAlign="space-between center"
-            >
-              <div>KEY</div>
-              <button
-                mat-icon-button
-                matTooltip="copy key"
-                [cdkCopyToClipboard]="i.SDK_Key"
-                matTooltipPosition="right"
-                (click)="copyKey()"
-              >
-                <mat-icon>content_copy</mat-icon>
-              </button>
-            </div>
-            <div class="value api-key-value">
-              {{ i.SDK_Key }}
+            <div class="title" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+              <div class="key-wrapper">Key: <span class="api-key-value">{{ i.SDK_Key }}</span></div>
+              <div>
+                <button mat-button class="bordered-light-green-button" [cdkCopyToClipboard]="i.SDK_Key"
+                  matTooltipPosition="right" (click)="copyKey()">
+                  Copy Key
+                </button>
+                <button mat-button class="bordered-light-red-button" (click)="revoke('sdkKey',i)">
+                  Revoke
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
-          <div fxLayout="row wrap" fxLayoutAlign="start start">
-            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-              <div class="data-wrap">
-                <div class="title">Created at</div>
-                <div class="value">
-                  {{ i.Created_At | date: "longDate" }}
-                </div>
-              </div>
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex>
+          <div class="data-wrap">
+            <div class="title">Created at</div>
+            <div class="value">
+              {{ i.Created_At | date: "longDate" }}
             </div>
-            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-              <div
-                fxFlex.gt-md="50"
-                fxFlex.md="100"
-                fxFlex.lt-md="100"
-                class="data-wrap"
-              >
-                <div class="title">Owner</div>
-                <div class="value">
-                  <!--dummy-->
-                  {{ i.Tenent_ID.Name }}
-                </div>
-              </div>
+          </div>
+          <div class="data-wrap">
+            <div class="title">Owner</div>
+            <div class="value">
+              {{ i.Tenent_ID.Name }}
             </div>
-            <div fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
-              <div
-                fxFlex.gt-md="50"
-                fxFlex.md="100"
-                fxFlex.lt-md="100"
-                class="data-wrap"
-              >
-                <div class="title">Last Used</div>
-                <div class="value">
-                  <!--dummy-->
-                  Today
-                </div>
-              </div>
-            </div>
-            <div fxFlex="100" align="right">
-              <button mat-button class="revoke-button" (click)="revoke('sdkKey',i)">
-                <mat-icon>cancel</mat-icon>
-                Revoke
-              </button>
+          </div>
+          <div class="data-wrap" fxFlex="200px">
+            <div class="title">Mode</div>
+            <div class="value">
+              {{i.Mode}}
             </div>
           </div>
         </div>
       </mat-card-content>
     </mat-card>
-  </div>
+  </section>
 </div>
