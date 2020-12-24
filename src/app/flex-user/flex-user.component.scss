@@ -34,15 +34,16 @@
       color: #21b371;
       border: 1px solid #21b371;
     }
-    &.accepted {
+    &.accepted,
+    &.invitation {
       background: #fdfee8;
       color: #ffc107;
       border: 1px solid #ffc107;
     }
-    &.invitation {
-      background: #ebebeb;
-      color: #949494;
-      border: 1px solid #949494;
-    }
+    // &.invitation {
+    //   background: #ebebeb;
+    //   color: #949494;
+    //   border: 1px solid #949494;
+    // }
   }
 }

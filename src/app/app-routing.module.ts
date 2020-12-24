@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
 import { LoginLayoutComponent } from './layouts/login-layout.component';
@@ -21,6 +21,7 @@ import { SetPasswordComponent } from './set-password/set-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { NewPasswordComponent } from './new-password/new-password.component';
 import { ReportsComponent } from './reports/reports.component';
+import { MobileActivityReportComponent } from './reports/mobile-activity-report/mobile-activity-report.component';
 const routes: Routes = [
   {
     path: '',
@@ -50,6 +51,11 @@ const routes: Routes = [
       {
         path: 'reports',
         component: ReportsComponent,
+
+      },
+      {
+        path: 'mobile-activity',
+        component: MobileActivityReportComponent
       },
       {
         path: 'settings',
