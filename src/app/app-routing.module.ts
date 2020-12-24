@@ -20,6 +20,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { SetPasswordComponent } from './set-password/set-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { NewPasswordComponent } from './new-password/new-password.component';
+import { ReportsComponent } from './reports/reports.component';
 const routes: Routes = [
   {
     path: '',
@@ -45,6 +46,10 @@ const routes: Routes = [
       {
         path: 'verification-url',
         component: VerificationUrlComponent,
+      },
+      {
+        path: 'reports',
+        component: ReportsComponent,
       },
       {
         path: 'settings',
@@ -112,4 +117,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -20,7 +20,7 @@
         <mat-icon>assignment</mat-icon>
         <span class="nav-text">Document</span>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item [routerLink]="['/reports']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <mat-icon>insights</mat-icon>
         <span class="nav-text">Report</span>
       </mat-list-item>
