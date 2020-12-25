@@ -1,16 +1,47 @@
-.organization-wrap {
+.tenent-list-wrap {
   padding: 20px;
-  .mb-12 {
-    margin-bottom: 12px;
-  }
   .user-icon {
     mat-icon {
       font-size: 36px;
       vertical-align: middle;
       height: 36px;
       width: 36px;
-      color: #757575;
+      color: #00a185;
       margin-right: 8px;
+    }
+  }
+  .shortname {
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 50%;
+    line-height: 1;
+    width: 24px;
+    background: #00a185;
+    height: 24px;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    border: 4px solid #0cdfba;
+  }
+  .data-wrap {
+    .title {
+      font-weight: 500;
+      color: #b1b1b1;
+      font-size: 16px;
+    }
+    .value {
+      font-size: 16px;
+      color: #3a3a3a;
+    }
+    .name {
+      color: #3a3a3a;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .email {
+      color: #7c7c7c;
+      font-size: 14px;
+      font-weight: 400;
     }
   }
   td {
@@ -19,32 +50,27 @@
       padding-bottom: 12px;
     }
   }
-  .mat-column-actions {
+  .status {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px;
+    border-radius: 4px;
     width: 100px;
+    text-align: center;
+    &.expired {
+      background: #f1dbdb;
+      color: #e04d4d;
+      border: 1px solid #e04d4d;
+    }
+    &.active {
+      background: #e2fff2;
+      color: #21b371;
+      border: 1px solid #21b371;
+    }
+    &.created {
+      background: #fdfee8;
+      color: #ffc107;
+      border: 1px solid #ffc107;
+    }
   }
-  .mat-tab-group.mat-primary .mat-ink-bar,
-  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-    background: #21b371;
-  }
-  .mat-tab-body {
-    margin-top: 20px;
-  }
-  .mat-tab-label-active {
-    background: #19a96824;
-    color: #21b371;
-    opacity: 1;
-  }
-}
-
-.example-container {
-  width: 100%;
-  height: 88%;
-}
-
-.example-sidenav {
-  width: 40%;
-}
-.field-wrap1 {
-  padding-bottom: 5px;
-  font-weight: 400;
 }

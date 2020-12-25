@@ -1,0 +1,20 @@
+<mat-toolbar>
+    <span>Reports</span>
+</mat-toolbar>
+<div class="reports-wrap">
+    <div class="tiles-wrap" fxLayout="row wrap" fxLayoutAlign="start start">
+        <mat-card class="tile cursor-pointer" [routerLink]="['/mobile-activity']" fxLayout="column"
+            fxLayoutAlign="end center">
+            <i class="material-icons fs-40">smartphone</i>
+            <div class="title">Mobile Activity Report</div>
+        </mat-card>
+        <mat-card class="tile cursor-pointer" fxLayout="column" fxLayoutAlign="end center">
+            <i class="material-icons fs-40">laptop</i>
+            <div class="title">Portal Activity Report</div>
+        </mat-card>
+        <mat-card class="tile cursor-pointer" fxLayout="column" fxLayoutAlign="end center">
+            <i class="material-icons fs-40">scanner</i>
+            <div class="title">Scan <br> Report</div>
+        </mat-card>
+    </div>
+</div>

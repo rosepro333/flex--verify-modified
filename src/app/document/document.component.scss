@@ -1,13 +1,6 @@
 .document-wrap {
     padding: 20px;
-    .w-100 {
-        width: 100%;
-    }
-    .filter-button-wrap {
-        button {
-            margin: 6px 12px;
-        }
-    }
+
     .mat-table {
         .mat-cell {
             padding: 12px 12px 12px 0;
@@ -46,9 +39,7 @@
             }
         }
     }
-    mat-form-field {
-        margin-right: 12px;
-    }
+
     .status {
         font-size: 14px;
         font-weight: 500;
@@ -70,17 +61,8 @@
             border: 1px solid #ffc107;
         }
     }
-    .mat-paginator {
-        position: sticky;
-        // height: auto !important;
-        // max-height: unset !important;
-        bottom: 0;
-    }
 }
 
-.search-field1 {
-    color: white;
-}
 .matInput {
     background-color: white;
 }

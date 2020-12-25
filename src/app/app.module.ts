@@ -65,6 +65,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ServicesService } from './service/services.service';
 import { MainInterceptor } from './interceptor/main.interceptor';
 import { ShortNamePipe } from './short-name.pipe';
+import { ReportsComponent } from './reports/reports.component';
+import { MobileActivityReportComponent } from './reports/mobile-activity-report/mobile-activity-report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +96,9 @@ import { ShortNamePipe } from './short-name.pipe';
     DeleteUserComponent,
     BlockUserComponent,
     BlockTenentComponent,
-    ShortNamePipe
+    ShortNamePipe,
+    ReportsComponent,
+    MobileActivityReportComponent
   ],
   imports: [
     BrowserModule,

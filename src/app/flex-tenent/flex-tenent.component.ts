@@ -34,21 +34,22 @@ export class FlexTenentComponent implements OnInit {
   totalSize = 0;
   currentPage = 1;
   displayedColumns: string[] = [
-    'name-email',
-    'role',
+    'name',
     'owner',
-    'status',
     'createdBy',
-    'actions',
+    'status',
+    // 'actions',
   ];
   dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
+  isCreateTenant: boolean;
+  isTenantDetails: boolean;
   constructor(
     private service: ServicesService,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private router: Router,
     private toster: TosterService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getTenentList();
@@ -56,24 +57,24 @@ export class FlexTenentComponent implements OnInit {
   }
 
   getTenentList = () => {
-     const data ={
-        "Tenant_ID":"",
-        "limit": this.pageSize,
-        "pageNo":this.currentPage,
-        "order":"-1",
-        "search":"",
-        "startDate":"",
-        "endDate":"",
-        "status":""
+    const data = {
+      "Tenant_ID": "",
+      "limit": this.pageSize,
+      "pageNo": this.currentPage,
+      "order": "-1",
+      "search": "",
+      "startDate": "",
+      "endDate": "",
+      "status": ""
     }
     console.log(data)
     this.service.getTenentList(data).subscribe((result) => {
       console.log(result);
-      if(result.msg === "success"){
+      if (result.msg === "success") {
         this.totalSize = result.length;
         this.dataSourceTenant = result.data;
-      // this.tenentList = result.data;
-      console.log(this.dataSourceTenant);
+        // this.tenentList = result.data;
+        console.log(this.dataSourceTenant);
       }
 
 
@@ -96,21 +97,21 @@ export class FlexTenentComponent implements OnInit {
   enableUser = (elm: any) => {
     alert('unblock ' + elm.name);
   }
-  handlePage(value: any){
+  handlePage(value: any) {
     console.log(value);
-    if(value.pageIndex){
+    if (value.pageIndex) {
       console.log(value.pageIndex)
-      const pageIndex  = (value.pageIndex === 0 )? 1:value.pageIndex;
-        this.currentPage = pageIndex;
-        console.log(this.currentPage);
-        // this.getTenentList();
+      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
+      this.currentPage = pageIndex;
+      console.log(this.currentPage);
+      // this.getTenentList();
       // }
 
     }
-    if(value.pageSize){
+    if (value.pageSize) {
       console.log(value.pageSize)
       this.pageSize = value.pageSize;
-      const pageIndex  = (value.pageIndex === 0 )? 1:value.pageIndex;
+      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
       this.currentPage = pageIndex;
       this.getTenentList();
     }
@@ -172,7 +173,7 @@ export class FlexTenentComponent implements OnInit {
               user: Cookie.get('id'),
               tenentId: Cookie.get('Tenant_ID'),
               activity: 'Create Tenant',
-              details: JSON.stringify({tenentId: result.data._id, tenentName: result.data.Name })
+              details: JSON.stringify({ tenentId: result.data._id, tenentName: result.data.Name })
             };
             this.audits(data);
             this.toster.openSnackBar('Tenent Created Successfully', result.msg);
@@ -186,13 +187,27 @@ export class FlexTenentComponent implements OnInit {
     }
   }
   reset = () => {
-     this.form.reset();
+    this.form.reset();
   }
   audits = (data: any) => {
     this.service.audit(data).subscribe((res) => {
-    console.log(res);
+      console.log(res);
     }, (error: any) => {
       console.log(error);
     });
+  }
+  clicked(a, id) {
+    if (a == 'create-tenant') {
+      this.isCreateTenant = true;
+      this.isTenantDetails = false;
+    } else if (a == 'tenant-details') {
+      this.isCreateTenant = false;
+      this.isTenantDetails = true;
+    }
+    else {
+      this.isCreateTenant = false;
+      this.isTenantDetails = false;
+    }
+    console.log(id);
   }
 }

@@ -1,50 +1,49 @@
-.organization-wrap {
+.user-list-wrap {
   padding: 20px;
-  .mb-12 {
-    margin-bottom: 12px;
-  }
   .user-icon {
     mat-icon {
       font-size: 36px;
       vertical-align: middle;
       height: 36px;
       width: 36px;
-      color: #757575;
+      color: #00a185;
       margin-right: 8px;
     }
   }
+
   td {
     &.mat-cell {
       padding-top: 12px;
       padding-bottom: 12px;
     }
   }
-  .mat-column-actions {
+  .status {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px;
+    border-radius: 4px;
     width: 100px;
+    text-align: center;
+    &.suspended {
+      background: #f1dbdb;
+      color: #e04d4d;
+      border: 1px solid #e04d4d;
+    }
+    &.active {
+      background: #e2fff2;
+      color: #21b371;
+      border: 1px solid #21b371;
+    }
+    &.accepted,
+    &.invitation {
+      background: #fdfee8;
+      color: #ffc107;
+      border: 1px solid #ffc107;
+    }
+    // &.invitation {
+    //   background: #ebebeb;
+    //   color: #949494;
+    //   border: 1px solid #949494;
+    // }
   }
-  .mat-tab-group.mat-primary .mat-ink-bar,
-  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-    background: #21b371;
-  }
-  .mat-tab-body {
-    margin-top: 20px;
-  }
-  .mat-tab-label-active {
-    background: #19a96824;
-    color: #21b371;
-    opacity: 1;
-  }
-}
-
-.example-container {
-  width: 100%;
-  height: 88%;
-}
-
-.example-sidenav {
-  width: 40%;
-}
-.field-wrap1 {
-  padding-bottom: 5px;
-  font-weight: 400;
 }
