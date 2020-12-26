@@ -376,9 +376,7 @@ export class DocumentDetailsComponent implements OnInit {
     this.dateOfBirth = event;
     console.log(event.target.value);
   }
-  clear = () => {
-    this.form.reset();
-  }
+
   scanDocumentById = (id:any) => {
     // const id = '';
     this.serviceServive.getScanDocumentById(id).subscribe((res) =>{

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -34,15 +34,18 @@ export class FlexUserComponent implements OnInit {
   pageSize = 10;
   totalSize = 0;
   currentPage = 1;
+  search = '';
+  role:any = [{name:'All',value:'All'},{name:'Flex Admin',value:'1'},{name:'Flex Operator',value:'2'},{name:'Tenent Admin',value:'3'},{name:'Tenent Operator',value:'4'}]
   displayedColumns: string[] = [
     'name',
     // 'email',
     'accessType',
     'owner',
     'status',
-    // 'createdAt',
+    'createdAt',
     // 'actions',
   ];
+  detailsDetails: any = [];
   dataSourceUser = new MatTableDataSource(ELEMENT_DATA_User);
   dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
   form: FormGroup;
@@ -52,6 +55,9 @@ export class FlexUserComponent implements OnInit {
   isOPen = false;
   isCreateUser: boolean;
   isUserDetails: boolean;
+  tenentUser = 'All';
+  selectedRole = 'All';
+  userEdit: any = [];
   constructor(
     private serviceService: ServicesService,
     public dialog: MatDialog,
@@ -69,23 +75,35 @@ export class FlexUserComponent implements OnInit {
     this.getUserList();
     this.formControl();
   }
-
+  selectTenentUser = (value: any) => {
+     console.log(value)
+     this.tenentUser = value;
+     this.getUserList();
+  }
+  selectRole = (value: any) => {
+    console.log(value)
+    this.selectedRole = value;
+    this.getUserList();
+  }
   getUserList = () => {
     const data = {
-      "Tenant_ID": "",
+      "Tenant_ID": this.tenentUser,
       "limit": this.pageSize,
       "pageNo": "1",
       "order": "-1",
-      "search": "",
+      "search": this.search,
       "startDate": "",
       "endDate": "",
-      "status": ""
+      "status": "",
+      "role": this.selectedRole
     }
     if (this.accessType === '1') {
       this.serviceService.getUserList(data).subscribe((result) => {
         if (result.msg === 'success') {
           this.totalSize = result.length;
           this.dataSourceUser = result.data;
+          console.log(this.dataSourceUser)
+          // this.clear();
         }
 
         console.log(result.msg === 'success');
@@ -105,18 +123,21 @@ export class FlexUserComponent implements OnInit {
   ngAfterViewInit = () => {
     this.dataSourceUser.sort = this.sort;
     this.dataSourceUser.paginator = this.paginator;
-
     this.dataSourceTenant.sort = this.sort;
     this.dataSourceTenant.paginator = this.paginator;
   }
-
-  applyUserFilter = (event: Event) => {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSourceUser.filter = filterValue.trim().toLowerCase();
+  clear = () => {
+    this.search = '';
   }
-  applyTenantFilter = (event: Event) => {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
+  applyUserFilter = () => {
+    console.log(this.search)
+    this.getUserList();
+    // const filterValue = (event.target as HTMLInputElement).value;
+    // this.dataSourceUser.filter = filterValue.trim().toLowerCase();
+  }
+  applyTenantFilter = ( event: Event) => {
+    // const filterValue = (event.target as HTMLInputElement).value;
+    // this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
   }
   handlePage(value: any) {
     console.log(value);
@@ -141,7 +162,7 @@ export class FlexUserComponent implements OnInit {
     // this.currentPage = value.pageIndex;
 
   }
-  blockUser = (id: any, name: any) => {
+  blockUser = (name: any,id: any)=> {
     if (id !== this.userId) {
       const dialogRef = this.dialog.open(BlockUserComponent, {
         height: '160px',
@@ -158,7 +179,7 @@ export class FlexUserComponent implements OnInit {
   enableUser = (elm): any => {
     alert('unblock ' + elm.name);
   }
-  deleteUser = (id: any, name: any) => {
+  deleteUser = (name: any,id: any) => {
     if (id !== this.userId) {
       const dialogRef = this.dialog.open(DeleteUserComponent, {
         height: '160px',
@@ -189,7 +210,7 @@ export class FlexUserComponent implements OnInit {
 
   formControl = () => {
     this.form = this.fb.group({
-      type: new FormControl(''),
+      type: new FormControl('',),
       email: new FormControl(''),
       name: new FormControl(''),
       access: new FormControl(''),
@@ -211,7 +232,24 @@ export class FlexUserComponent implements OnInit {
       this.service.getTenentList(data).subscribe((res) => {
         // console.log(res);
         if (res.msg === 'success') {
-          this.tenentList = res.data;
+          this.tenentList.splice(0,this.tenentList.length);
+          res.data.map((i: any, index: number) =>{
+            const obj = {};
+            if(index === 0){
+              const obj1 = {};
+              obj1['_id']= "All";
+              obj1['Name']= "All";
+              this.tenentList.push(obj1);
+              obj['_id'] = i._id;
+              obj['Name'] = i.Name;
+              this.tenentList.push(obj);
+            } else{
+              obj['_id'] = i._id;
+              obj['Name'] = i.Name;
+              this.tenentList.push(obj);
+            }
+            console.log(this.tenentList)
+          })
         }
       });
     } else if (this.accessType === '3') {
@@ -229,6 +267,25 @@ export class FlexUserComponent implements OnInit {
   }
   selectTenent = (value: any) => {
     this.tenentId = value;
+  }
+  editUser = () => {
+    const id = this.userEdit._id;
+    console.log(id);
+    const name = this.form.get('name').value;
+    console.log(name)
+    const data = {
+      Contact_Name: name
+    }
+    this.service.updateUser(id,data).subscribe((res)=>{
+      console.log(res);
+      if(res.msg === 'success'){
+        this.getUserList();
+        this.toster.openSnackBar('Successfully Updated', res.msg);
+      }
+    },(err) => {
+      console.log(err);
+       this.toster.openSnackBar(err.error, 'failed');
+    })
   }
   onSave = () => {
     if (this.form.valid) {
@@ -282,18 +339,37 @@ export class FlexUserComponent implements OnInit {
       console.log(error);
     });
   }
-  clicked(a, id) {
+  clicked(a, data) {
+    console.log(a,data);
     if (a == 'create-user') {
-      this.isCreateUser = true;
-      this.isUserDetails = false;
+      if(data === null){
+        this.userEdit = '';
+        this.form.reset();
+        this.form.get('email').enable();
+        this.form.get('access').enable();
+        this.form.get('tenent').enable();
+      }else if(data){
+        this.userEdit = data;
+        this.form.patchValue({name: this.userEdit.Contact_Name,email: this.userEdit.Contact_Email,access: this.userEdit.Access_Type,tenent: this.userEdit.Tenant_ID._id})
+        console.log(data);
+        this.form.get('email').disable();
+        this.form.get('access').disable();
+        this.form.get('tenent').disable();
+      }
+        this.isCreateUser = true;
+        this.isUserDetails = false;
+
     } else if (a == 'user-details') {
+      this.detailsDetails = data;
+      console.log(this.detailsDetails);
       this.isCreateUser = false;
       this.isUserDetails = true;
     }
     else {
+      console.log('3')
       this.isCreateUser = false;
       this.isUserDetails = false;
     }
-    console.log(id);
+    // console.log(id);
   }
 }

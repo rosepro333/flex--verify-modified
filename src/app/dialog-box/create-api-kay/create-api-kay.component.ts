@@ -28,6 +28,7 @@ export class CreateApiKayComponent implements OnInit {
       mode: new FormControl(''),
     });
   }
+
   getTenentList = () => {
     const data = {}
     this.service.getTenentList(data).subscribe((res) => {

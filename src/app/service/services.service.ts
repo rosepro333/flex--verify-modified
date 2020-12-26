@@ -38,18 +38,24 @@ export class ServicesService {
   userDevice = () => {
     return Cookie.get('user-device');
   }
+  updateUser(id:string,data: any): Observable<any> {
+    return this.http.patch(this.apiUrl + '/user/update/'+ id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  updateTenent(id:string,data: any): Observable<any> {
+    return this.http.patch(this.apiUrl + '/tenent/update/'+ id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   sendEmail(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/email/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   audit(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/audit/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
-  createTenent(tanent: TenentUser): Observable<any> {
-    if (tanent.email !== '' && tanent.name !== '' && tanent.tenent !== '') {
+  createTenent(tanent: any): Observable<any> {
+    if (tanent.name !== '' && tanent.contactName !== '' && tanent.contactEmail !== '') {
       const data = {
-        Contact_Name: tanent.name,
-        Contact_Mail: tanent.email,
-        Name: tanent.tenent,
+        Contact_Name: tanent.contactName,
+        Contact_Mail: tanent.contactEmail,
+        Name: tanent.name,
       };
       return this.http
         .post(this.apiUrl + '/tenent', data, this.httpOptions)
@@ -95,9 +101,9 @@ export class ServicesService {
       .get(this.apiUrl + '/sdkkey/list/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  getSdkKeyList(): Observable<any> {
+  getSdkKeyList(data: any): Observable<any> {
     return this.http
-      .get(this.apiUrl + '/sdkkey/list', this.httpOptions)
+      .post(this.apiUrl + '/sdkkey/list',data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   deleteSdyKey(id: any): Observable<any> {
@@ -122,9 +128,9 @@ export class ServicesService {
       .get(this.apiUrl + '/apikey/list/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  getApiKeyList(): Observable<any> {
+  getApiKeyList(data: any): Observable<any> {
     return this.http
-      .get(this.apiUrl + '/apikey/list', this.httpOptions)
+      .post(this.apiUrl + '/apikey/list',data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   deleteApiKey(id: any): Observable<any> {

@@ -2,9 +2,12 @@
   <mat-drawer #rightDrawer class="right-side-drawer" mode="over" position="end">
     <div *ngIf="isCreateTenant">
       <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
-        <div>
+        <div *ngIf="!tenentData;else elseBlock">
           Create Tenant
         </div>
+        <ng-template #elseBlock>
+          Edit Tenant
+        </ng-template>
         <div class="header-buttons">
           <button mat-icon-button (click)="rightDrawer.close()" class="close-button">
             <mat-icon>close</mat-icon>
@@ -14,16 +17,16 @@
       <form [formGroup]="form" class="drawer-data" (ngSubmit)="onSave()">
         <div fxLayout="column">
           <mat-form-field appearance="outline" fxFill>
-            <mat-label>Contact Name</mat-label>
-            <input matInput formControlName="tenent" />
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Contact Name</mat-label>
-            <input matInput placeholder="Name" formControlName="name" />
+            <input matInput placeholder="Name" formControlName="contactName" />
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill>
             <mat-label>Contact Email</mat-label>
-            <input matInput placeholder="Email" formControlName="email" />
+            <input matInput placeholder="Email"  formControlName="contactEmail" />
           </mat-form-field>
           <!-- <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="25" fxFlex.md="50"
                             fxFlex.lt-md="50" fxFlex.lt-sm="100">
@@ -40,7 +43,10 @@
               <button mat-button type="button" class="cancel-button" (click)="reset();rightDrawer.close()">
                 cancel
               </button>
-              <button mat-button class="primary-button" type="submit">
+              <button mat-button class="primary-button" type="submit" *ngIf="!tenentData;">
+                Save
+              </button>
+              <button mat-button class="primary-button" *ngIf="tenentData;" type="button" (click)="editTenent()">
                 Save
               </button>
             </div>
@@ -52,15 +58,14 @@
       <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
         <div fxFlex="65px" fxLayoutAlign="start start">
           <div class="shortname">
-            <!-- dummy -->
-            H
-            <!-- {{j.tenantName | shortName}} -->
+
+            {{tenentData.Name | shortName}}
           </div>
         </div>
         <div fxFlex>
           <div>
             <!-- dummy -->
-            HDFC Bank
+           {{tenentData.Name}}
           </div>
         </div>
         <div class="header-buttons">
@@ -74,57 +79,51 @@
           <div class="title">Email Id</div>
           <div class="value">
             <!-- dummy -->
-            hdgcbank@email.com
+            {{tenentData.Contact_Mail}}
           </div>
         </div>
         <div class="data-wrap">
           <div class="title">Contact</div>
           <div class="value">
-            <!-- dummy -->
-            Contact Name
+            {{tenentData.Contact_Name}}
           </div>
         </div>
         <div class="data-wrap">
           <div class="title">Created on</div>
           <div class="value">
-            <!-- dummy -->
-            10/12/2020
-            <!-- {{ document.DOB | date: "shortDate" }} -->
+            {{tenentData.createdAt | date: "mediumDate"}}
           </div>
         </div>
-        <div class="data-wrap">
+        <!-- <div class="data-wrap">
           <div class="title">Expiry Date</div>
           <div class="value">
-            <!-- dummy -->
             10/12/2020
-            <!-- {{ document.DOB | date: "shortDate" }} -->
           </div>
         </div>
         <div class="data-wrap">
           <div class="title">Created By</div>
           <div class="value">
-            <!-- dummy -->
             Williamson George
           </div>
-        </div>
+        </div> -->
         <div class="sticky-bottom-bar">
           <div class="button-wrap" fxLayout="row wrap" fxLayoutAlign="space-between center">
             <button mat-button type="button" class="delete-button-black"
-              (click)="deleteTenant(element._id, element.Contact_Name)">
+              (click)="deleteTenant(tenentData.Contact_Name,tenentData ._id)">
               <mat-icon>delete</mat-icon>
               Delete
             </button>
-            <button mat-button class="primary-button" type="button">
+            <button mat-button class="primary-button" type="button"  (click)="rightDrawer.open();clicked('create-tenant',tenentData)">
               Edit
             </button>
-            <button mat-button class="clear-button" type="button" (click)="blockTenant(element._id, element.Name)">
+            <button mat-button class="clear-button" type="button" (click)="blockTenant(tenentData.Contact_Name,tenentData ._id)">
               <!-- *ngIf="!element.isBlocked" -->
               <mat-icon>block</mat-icon>
               Block
             </button>
             <!-- <button mat-button class="primary-button" type="button" (click)="enableTenant(element)"
             *ngIf="element.isBlocked">
-            
+
               <mat-icon aria-label="Edit">check_circle_outline</mat-icon>
             </button> -->
           </div>
@@ -151,18 +150,18 @@
         <div fxFlex>
           <mat-form-field class='form-rows' appearance="outline" fxFlex="50">
             <mat-label>Status</mat-label>
-            <mat-select>
-              <mat-option value="Status1">Status 1</mat-option>
-              <mat-option value="Status2">Status 2</mat-option>
-              <mat-option value="Status3">Status 3</mat-option>
+            <mat-select (selectionChange)="selectStatus($event.value)">
+              <mat-option *ngFor="let i of tenentStatus" [value]="i.value">{{i.name}}</mat-option>
+              <!-- <mat-option value="Status2">Status 2</mat-option>
+              <mat-option value="Status3">Status 3</mat-option> -->
             </mat-select>
           </mat-form-field>
         </div>
         <div fxFlex fxLayoutAlign="end none">
           <mat-form-field appearance="outline" fxFlex="50">
             <mat-label>Search</mat-label>
-            <input matInput (keyup)="applyTenantFilter($event)" #input />
-            <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search">
+            <input matInput [(ngModel)]="search" #input />
+            <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search" (click)="applyTenantFilter()">
               <mat-icon matSuffix>search</mat-icon>
             </button>
           </mat-form-field>
@@ -237,7 +236,7 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let document; columns: displayedColumns"
-          (click)="rightDrawer.open();clicked('tenant-details','row.tenent_ID')"></tr>
+          (click)="rightDrawer.open();clicked('tenant-details',document)"></tr>
 
         <!-- Row shown when there is no matching data. -->
         <tr class="mat-row" *matNoDataRow>

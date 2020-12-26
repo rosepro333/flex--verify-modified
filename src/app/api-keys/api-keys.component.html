@@ -9,23 +9,22 @@
   <div fxLayout="row wrap" fxLayoutAlign="start start" fxFill>
     <mat-form-field appearance="outline" fxFlex="25">
       <mat-label>Tenent</mat-label>
-      <mat-select disableRipple>
-        <mat-option value="tenent1">Tenent 1</mat-option>
-        <mat-option value="tenent2">Tenent 2</mat-option>
-        <mat-option value="tenent3">Tenent 3</mat-option>
-        <mat-option value="tenent4">Tenent 4</mat-option>
+      <!-- (selectionChange)="selectTenent($event.value)"  formControlName="tenent" -->
+      <mat-select disableRipple  (selectionChange)="selectTenent($event.value)">
+        <mat-option *ngFor="let tenent of tenentList"  [value]="tenent._id">{{ tenent?.Name }}</mat-option>
       </mat-select>
+
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="25">
       <mat-label>Mode</mat-label>
-      <mat-select disableRipple>
-        <mat-option value="mode1">Mode 1</mat-option>
-        <mat-option value="mode2">Mode 2</mat-option>
+      <mat-select disableRipple  (selectionChange)="selectMode($event.value)">
+        <mat-option *ngFor="let i of mode" [value]="i.value">{{i.name}}</mat-option>
+        <!-- <mat-option value="mode2">Mode 2</mat-option>
         <mat-option value="mode3">Mode 3</mat-option>
-        <mat-option value="mode4">Mode 4</mat-option>
+        <mat-option value="mode4">Mode 4</mat-option> -->
       </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="outline" fxFlex="25">
+    <!-- <mat-form-field appearance="outline" fxFlex="25">
       <mat-label>Date</mat-label>
       <mat-date-range-input [rangePicker]="picker">
         <input matStartDate placeholder="Start date">
@@ -33,7 +32,7 @@
       </mat-date-range-input>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
+    </mat-form-field> -->
   </div>
   <section class="section" fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
     <div class="section-header" fxLayout="row" fxLayoutAlign="space-between center">
@@ -48,9 +47,9 @@
         <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex class="top">
           <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
             <div class="title" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-between center">
-              <div class="key-wrapper">Key: <span class="api-key-value">{{ i.Api_Key }}</span></div>
+              <div class="key-wrapper">Key: <span class="api-key-value">{{ i?.Api_Key }}</span></div>
               <div>
-                <button mat-button class="bordered-light-green-button" [cdkCopyToClipboard]="i.Api_Key"
+                <button mat-button class="bordered-light-green-button" [cdkCopyToClipboard]="i?.Api_Key"
                   (click)="copyKey()">
                   Copy Key
                 </button>
@@ -65,19 +64,19 @@
           <div class="data-wrap">
             <div class="title">Created at</div>
             <div class="value">
-              {{ i.Created_At | date: "longDate" }}
+              {{ i?.Created_At | date: "longDate" }}
             </div>
           </div>
           <div class="data-wrap">
             <div class="title">Owner</div>
             <div class="value">
-              {{ i.Tenent_ID.Name }}
+              {{ i?.Tenent_ID?.Name }}
             </div>
           </div>
           <div class="data-wrap" fxFlex="200px">
             <div class="title">Mode</div>
             <div class="value">
-              {{i.Mode}}
+              {{i?.Mode}}
             </div>
           </div>
         </div>
@@ -97,7 +96,7 @@
         <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex class="top">
           <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
             <div class="title" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-between center">
-              <div class="key-wrapper">Key: <span class="api-key-value">{{ i.SDK_Key }}</span></div>
+              <div class="key-wrapper">Key: <span class="api-key-value">{{ i?.SDK_Key }}</span></div>
               <div>
                 <button mat-button class="bordered-light-green-button" [cdkCopyToClipboard]="i.SDK_Key"
                   matTooltipPosition="right" (click)="copyKey()">
@@ -114,19 +113,19 @@
           <div class="data-wrap">
             <div class="title">Created at</div>
             <div class="value">
-              {{ i.Created_At | date: "longDate" }}
+              {{ i?.Created_At | date: "longDate" }}
             </div>
           </div>
           <div class="data-wrap">
             <div class="title">Owner</div>
             <div class="value">
-              {{ i.Tenent_ID.Name }}
+              {{ i?.Tenent_ID?.Name }}
             </div>
           </div>
           <div class="data-wrap" fxFlex="200px">
             <div class="title">Mode</div>
             <div class="value">
-              {{i.Mode}}
+              {{i?.Mode}}
             </div>
           </div>
         </div>

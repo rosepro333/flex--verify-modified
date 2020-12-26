@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -40,9 +40,13 @@ export class FlexTenentComponent implements OnInit {
     'status',
     // 'actions',
   ];
+  tenentStatus: any = [{name: 'All',value: 'All'},{name: 'Created',value: 'created'},{name: 'Active',value: 'active'},{name: 'Suspended',value: 'suspended'}];
   dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
   isCreateTenant: boolean;
   isTenantDetails: boolean;
+  tenentData: any = [];
+  status = '';
+  search = '';
   constructor(
     private service: ServicesService,
     public dialog: MatDialog,
@@ -62,10 +66,10 @@ export class FlexTenentComponent implements OnInit {
       "limit": this.pageSize,
       "pageNo": this.currentPage,
       "order": "-1",
-      "search": "",
+      "search": this.search,
       "startDate": "",
       "endDate": "",
-      "status": ""
+      "status": this.status
     }
     console.log(data)
     this.service.getTenentList(data).subscribe((result) => {
@@ -86,16 +90,22 @@ export class FlexTenentComponent implements OnInit {
     this.dataSourceTenant.paginator = this.paginator;
   }
 
-  applyTenantFilter = (event: Event) => {
-    console.log(event.target);
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
+  applyTenantFilter = () => {
+    this.search
+    console.log(this.search);
+    this.getTenentList();
   }
   blockUser = (elm: any) => {
     alert('block ' + elm.name);
   }
   enableUser = (elm: any) => {
     alert('unblock ' + elm.name);
+  }
+  selectStatus = (value: any) => {
+    this.status = value;
+    console.log(value)
+    this.getTenentList();
+
   }
   handlePage(value: any) {
     console.log(value);
@@ -123,7 +133,7 @@ export class FlexTenentComponent implements OnInit {
 
   }
 
-  blockTenant = (id: any, name: any) => {
+  blockTenant = (name: any,id: any) => {
     console.log(id, name);
     const dialogRef = this.dialog.open(BlockTenentComponent, {
       height: '160px',
@@ -137,7 +147,7 @@ export class FlexTenentComponent implements OnInit {
   enableTenant = (elm: any) => {
     alert('unblock ' + elm.name);
   }
-  deleteTenant = (id: any, name: any) => {
+  deleteTenant = (name: any,id: any) => {
     const dialogRef = this.dialog.open(DeleteTenentComponent, {
       height: '160px',
       width: '400px',
@@ -149,16 +159,39 @@ export class FlexTenentComponent implements OnInit {
   }
   formControl = () => {
     this.form = this.fb.group({
-      type: new FormControl(''),
-      email: new FormControl(''),
-      name: new FormControl(''),
-      access: new FormControl(''),
-      tenent: new FormControl(''),
+      name: new FormControl('',[Validators.required,]),
+      contactName: new FormControl('',[Validators.required]),
+      contactEmail: new FormControl('',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     });
   }
 
   selectTenent = (value: any) => {
     this.tenentId = value;
+  }
+
+  editTenent = () => {
+    const id = this.tenentData._id;
+    console.log(id);
+    const contactName = this.form.get('contactName').value;
+    const contactEmail = this.form.get('contactEmail').value;
+    console.log(contactName);
+    console.log(contactEmail)
+    const data = {
+      Contact_Name: contactName,
+      Contact_Mail: contactEmail
+    }
+    this.service.updateTenent(id,data).subscribe((res)=>{
+      console.log(res);
+      if(res.msg === 'success'){
+        this.getTenentList();
+        this.toster.openSnackBar('Successfully Updated', res.msg);
+      }else if(res.msg === 'failed'){
+        this.toster.openSnackBar(res.msg,'failed' );
+      }
+    },(err) => {
+      console.log(err);
+       this.toster.openSnackBar(err.error, 'failed');
+    })
   }
   onSave = () => {
     if (this.form.valid) {
@@ -167,6 +200,7 @@ export class FlexTenentComponent implements OnInit {
         (result) => {
           console.log(result);
           if (result.msg === 'success') {
+            this.reset();
             this.getTenentList();
             console.log(result);
             const data = {
@@ -196,11 +230,26 @@ export class FlexTenentComponent implements OnInit {
       console.log(error);
     });
   }
-  clicked(a, id) {
+  clicked(a, value) {
     if (a == 'create-tenant') {
+      if(value === null){
+        this.tenentData = ''
+        this.form.reset();
+        this.form.get('name').enable();
+        this.form.get('contactEmail').enable();
+      }else if(value){
+        this.tenentData = value;
+        console.log(this.tenentData);
+        this.form.patchValue({name: this.tenentData.Name,contactName:this.tenentData.Contact_Name,contactEmail:this.tenentData.Contact_Mail})
+        this.form.get('name').disable();
+        // this.form.get('contactEmail').disable();
+        // console.log(data);
+      }
+
       this.isCreateTenant = true;
       this.isTenantDetails = false;
     } else if (a == 'tenant-details') {
+      this.tenentData = value;
       this.isCreateTenant = false;
       this.isTenantDetails = true;
     }
@@ -208,6 +257,6 @@ export class FlexTenentComponent implements OnInit {
       this.isCreateTenant = false;
       this.isTenantDetails = false;
     }
-    console.log(id);
+    // console.log(id);
   }
 }
