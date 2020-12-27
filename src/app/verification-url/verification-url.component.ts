@@ -33,7 +33,9 @@ export class VerificationUrlComponent implements OnInit {
   }
   getTenentList = () => {
     if (this.accessType === '1' || this.accessType === '2') {
-      const data ={};
+      const data ={
+        "isBlocked":true
+      };
       this.serviceService.getTenentList(data).subscribe((res) => {
         // console.log(res);
         if (res.msg === 'success') {

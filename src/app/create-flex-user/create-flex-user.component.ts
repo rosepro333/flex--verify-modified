@@ -35,7 +35,9 @@ export class CreateFlexUserComponent implements OnInit {
     });
   }
   getTenentList = () =>{
-    const data = {}
+    const data = {
+      "isBlocked":true
+    }
     this.service.getTenentList(data).subscribe((res) => {
       // console.log(res);
       if (res.msg === 'success') {

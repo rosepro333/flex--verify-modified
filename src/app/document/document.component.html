@@ -55,8 +55,8 @@
           </mat-form-field>
           <mat-form-field appearance="outline" fxFlex>
             <mat-label>Filter text</mat-label>
-            <input matInput [disabled]="disabled" (keyup)="applyFilter($event)" #input />
-            <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search">
+            <input matInput [disabled]="disabled" [(ngModel)]="search"  #input />
+            <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search"  (click)="applyFilter()">
               <mat-icon matSuffix>search</mat-icon>
             </button>
           </mat-form-field>

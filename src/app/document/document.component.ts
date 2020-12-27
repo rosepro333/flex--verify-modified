@@ -125,12 +125,13 @@ export class DocumentComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   selectDocsType = (value: any) => {
+    this.search ='';
     this.selectedDocs = value;
     console.log(this.selectedDocs);
     this.disabled = false;
   }
-  applyFilter = (event: any) => {
-    this.search = event.target.value;
+  applyFilter = () => {
+    console.log(this.search)
     // console.log()
     this.docdumentsList();
     // const filterValue = (event.target as HTMLInputElement).value;

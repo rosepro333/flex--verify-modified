@@ -249,7 +249,8 @@ export class FlexUserComponent implements OnInit {
         "search": "",
         "startDate": "",
         "endDate": "",
-        "status": ""
+        "status": "",
+        "isBlocked":true
       }
       this.service.getTenentList(data).subscribe((res) => {
         // console.log(res);
