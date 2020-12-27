@@ -23,6 +23,7 @@ const ELEMENT_DATA_User: any = [];
   styleUrls: ['./flex-user.component.scss'],
 })
 export class FlexUserComponent implements OnInit {
+@ViewChild('rightDrawer', { static: false }) sideNav: MatSidenav;
   // public data:any=[]
   showFiller = false;
   tenentList: any = [];
@@ -58,13 +59,14 @@ export class FlexUserComponent implements OnInit {
   tenentUser = 'All';
   selectedRole = 'All';
   userEdit: any = [];
+  isTenent = false;
   constructor(
     private serviceService: ServicesService,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private router: Router,
     private service: ServicesService,
-    private toster: TosterService
+    private toster: TosterService,
   ) { }
 
   ngOnInit(): void {
@@ -85,19 +87,28 @@ export class FlexUserComponent implements OnInit {
     this.selectedRole = value;
     this.getUserList();
   }
-  getUserList = () => {
-    const data = {
-      "Tenant_ID": this.tenentUser,
-      "limit": this.pageSize,
-      "pageNo": "1",
-      "order": "-1",
-      "search": this.search,
-      "startDate": "",
-      "endDate": "",
-      "status": "",
-      "role": this.selectedRole
+  roleSelect = (value: any) => {
+    if(value <= 2){
+      this.isTenent = false;
+      //  console.log(value);
+    }else{
+      this.isTenent = true;
+       console.log(value);
     }
+  }
+  getUserList = () => {
     if (this.accessType === '1') {
+        const data = {
+        "Tenant_ID": this.tenentUser,
+        "limit": this.pageSize,
+        "pageNo": "1",
+        "order": "-1",
+        "search": this.search,
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "role": this.selectedRole
+      }
       this.serviceService.getUserList(data).subscribe((result) => {
         if (result.msg === 'success') {
           this.totalSize = result.length;
@@ -109,9 +120,20 @@ export class FlexUserComponent implements OnInit {
         console.log(result.msg === 'success');
       });
     } else if (this.accessType === '3') {
+       const data = {
+        "Tenant_ID": this.tenetId,
+        "limit": this.pageSize,
+        "pageNo": "1",
+        "order": "-1",
+        "search": this.search,
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "role": this.selectedRole
+      }
       const tenetId = this.tenetId;
       console.log('tenent' + tenetId);
-      this.service.findUserByTenentId(tenetId).subscribe((res) => {
+      this.service.getUserList(data).subscribe((res) => {
         console.log(res);
         if (res.msg === 'success') {
           this.dataSourceUser = res.data;
@@ -279,6 +301,7 @@ export class FlexUserComponent implements OnInit {
     this.service.updateUser(id,data).subscribe((res)=>{
       console.log(res);
       if(res.msg === 'success'){
+        this.sideNav.close();
         this.getUserList();
         this.toster.openSnackBar('Successfully Updated', res.msg);
       }
@@ -289,12 +312,14 @@ export class FlexUserComponent implements OnInit {
   }
   onSave = () => {
     if (this.form.valid) {
+      console.log(this.form.value)
       this.form.value.tenent = this.tenentId;
       this.service.userCreate(this.form.value).subscribe(
         (result) => {
           console.log(result);
           if (result.msg === 'success') {
             console.log(result);
+            this.sideNav.close();
             const data = {
               user: Cookie.get('id'),
               tenentId: Cookie.get('Tenant_ID'),

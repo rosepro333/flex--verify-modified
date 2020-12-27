@@ -7,7 +7,7 @@
 
 <div class="api-keys-wrap" fxLayout="row wrap" fxLayoutAlign="start start">
   <div fxLayout="row wrap" fxLayoutAlign="start start" fxFill>
-    <mat-form-field appearance="outline" fxFlex="25">
+    <mat-form-field appearance="outline" fxFlex="25" *ngIf ="accessType !=='3'">
       <mat-label>Tenent</mat-label>
       <!-- (selectionChange)="selectTenent($event.value)"  formControlName="tenent" -->
       <mat-select disableRipple  (selectionChange)="selectTenent($event.value)">

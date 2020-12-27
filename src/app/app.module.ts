@@ -67,6 +67,7 @@ import { MainInterceptor } from './interceptor/main.interceptor';
 import { ShortNamePipe } from './short-name.pipe';
 import { ReportsComponent } from './reports/reports.component';
 import { MobileActivityReportComponent } from './reports/mobile-activity-report/mobile-activity-report.component';
+import { RolePipe } from './pipe/role.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,7 +99,8 @@ import { MobileActivityReportComponent } from './reports/mobile-activity-report/
     BlockTenentComponent,
     ShortNamePipe,
     ReportsComponent,
-    MobileActivityReportComponent
+    MobileActivityReportComponent,
+    RolePipe
   ],
   imports: [
     BrowserModule,

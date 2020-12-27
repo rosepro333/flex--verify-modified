@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   OnInit,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +15,7 @@ import * as moment from 'moment';
 import { error } from '@angular/compiler/src/util';
 import { MatTableDataSource } from '@angular/material/table';
 import { TosterService } from '../toster/toster.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-document-details',
@@ -23,6 +25,7 @@ import { TosterService } from '../toster/toster.service';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentDetailsComponent implements OnInit {
+  @ViewChild('rightDrawer', { static: false }) sideNav: MatSidenav;
   displayedColumns: string[] = ['scanId', 'scanDate', 'status'];
   dataSource: any = [];
   // new MatTableDataSource();
@@ -62,10 +65,10 @@ export class DocumentDetailsComponent implements OnInit {
   public selefieMatchPercengates = '';
   public scanResults = '';
   public scanResultComment = '';
-  isIdStatus = true;
-  isAddressStatus = true;
-  isLiveCheck = true;
-  isScanResults = true;
+  isIdStatus = false;
+  isAddressStatus = false;
+  isLiveCheck = false;
+  isScanResults = false;
   form: FormGroup;
   dateOfBirth: any;
   document: any = [];
@@ -244,6 +247,7 @@ export class DocumentDetailsComponent implements OnInit {
           this.scanDocument = [res.data];
           this.scanId$ = res.data.Scan_ID;
           console.log(this.scanDocument);
+          this.sideNav.close()
         }
     },(err) => {
       console.log(err);
@@ -307,6 +311,7 @@ export class DocumentDetailsComponent implements OnInit {
         if(res.status === 'success'){
             this.toast.openSnackBar('Success',res.status)
             this.scanDocumentById(id);
+            this.sideNav.close();
         }
       // console.log(res)
       this
@@ -356,6 +361,7 @@ export class DocumentDetailsComponent implements OnInit {
     this.serviceServive.approvedScanDocument(id, data).subscribe(
       (response) => {
         if(response.msg = 'success'){
+           this.sideNav.close();
            this.toast.openSnackBar('Success',response.status);
         }
         console.log(response);

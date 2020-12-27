@@ -69,17 +69,6 @@ export class ApiKeysComponent implements OnInit {
           })
         }
       });
-    } else if (this.accessType === '3') {
-      console.log('acces 3' + this.accessType);
-      const tenetId = this.tenetId;
-      console.log('tenent' + tenetId);
-      this.service.findTenetListById(tenetId).subscribe((res) => {
-        console.log(res);
-        if (res.msg === 'success') {
-          this.tenentList = res.data;
-          console.log(this.tenentList);
-        }
-      });
     }
   }
   copyKey = () => {
@@ -130,7 +119,12 @@ export class ApiKeysComponent implements OnInit {
       });
     } else if (this.accessType === '3') {
       const tenentId = Cookie.get('Tenant_ID');
-      this.service.getApiKeyListById(tenentId).subscribe((res) => {
+      const data= {
+        "Mode":this.selectedMode,
+        "Tenent_ID":tenentId
+        }
+        console.log(data);
+      this.service.getApiKeyList(data).subscribe((res) => {
         this.apiKeyData = res.msg === 'success' ? res.data : '';
         console.log(this.apiKeyData);
       });
@@ -147,8 +141,13 @@ export class ApiKeysComponent implements OnInit {
         console.log(this.sdkKeyData);
       });
     } else if (this.accessType === '3' ) {
-      const tenetId = Cookie.get('Tenant_ID');
-      this.service.getSdkKeyListById(tenetId).subscribe((res) => {
+      const tenentId = Cookie.get('Tenant_ID');
+      const data= {
+        "Mode":this.selectedMode,
+        "Tenent_ID":tenentId
+        }
+        console.log(data);
+      this.service.getSdkKeyList(data).subscribe((res) => {
         this.sdkKeyData = res.msg === 'success' ? res.data : '';
         console.log(this.sdkKeyData);
       });

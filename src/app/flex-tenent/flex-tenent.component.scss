@@ -72,5 +72,10 @@
       color: #ffc107;
       border: 1px solid #ffc107;
     }
+    &.suspended {
+      background: #f1dbdb;
+      color: #e04d4d;
+      border: 1px solid #e04d4d;
+    }
   }
 }

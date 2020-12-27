@@ -30,7 +30,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline" fxFill >
             <mat-label>Role</mat-label>
-            <mat-select formControlName="access">
+            <mat-select formControlName="access" (selectionChange)="roleSelect($event.value)">
               <mat-option value="1" *ngIf="accessType != '3'">Flex Admin</mat-option>
               <mat-option value="2" *ngIf="accessType != '3'">Flxem Operator
               </mat-option>
@@ -38,7 +38,7 @@
               <mat-option value="4">Tenent operator</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="outline" fxFill >
+          <mat-form-field appearance="outline" fxFill *ngIf="isTenent" >
             <mat-label>Select Tenent</mat-label>
             <mat-select disableRipple (selectionChange)="selectTenent($event.value)" formControlName="tenent" >
               <mat-option *ngFor="let tenent of tenentList" [value]="tenent._id">{{ tenent.Name }}</mat-option>
@@ -102,10 +102,10 @@
         <div class="data-wrap">
               <div class="title">Role</div>
               <div class="value" *ngIf="detailsDetails.Access_Type == 1">
-                Flex Admin
+                Flexm Admin
               </div>
               <div class="value" *ngIf="detailsDetails.Access_Type == 2">
-                Flex Operator
+                Flexm Operator
               </div>
               <div class="value" *ngIf="detailsDetails.Access_Type == 3">
                 Tenent Admin
@@ -163,7 +163,7 @@
         </button>
         <div>Users List</div>
       </div>
-      <div class="header-buttons">
+      <div class="header-buttons" *ngIf="accessType !== '3'">
         <button mat-button class="primary-button" (click)="rightDrawer.open();clicked('create-user',null)">
           <mat-icon>person_add</mat-icon> New User
         </button>
@@ -172,10 +172,10 @@
     <div class="user-list-wrap" fxLayout="column" fxLayoutAlign="start start">
       <div fxLayout="row wrap" class="w-100 filter-wrap" fxLayoutAlign="space-between center">
         <div fxFlex>
-          <mat-form-field class='form-rows' appearance="outline" fxFlex>
+          <mat-form-field class='form-rows' appearance="outline" fxFlex *ngIf="accessType !== '3'">
             <mat-label>Tenent List</mat-label>
             <mat-select (selectionChange)="selectTenentUser($event.value)">
-              <mat-option  *ngFor ="let i of tenentList" [value]="i._id">{{i.Name}}</mat-option>
+              <mat-option  *ngFor ="let i of tenentList" [value]="i._id" >{{i.Name}}</mat-option>
               <!-- <mat-option value="Owner2">Owner 2</mat-option>
               <mat-option value="Owner3">Owner 3</mat-option> -->
             </mat-select>
@@ -183,9 +183,8 @@
           <mat-form-field class='form-rows' appearance="outline" fxFlex>
             <mat-label>Role</mat-label>
             <mat-select (selectionChange)="selectRole($event.value)">
-              <mat-option *ngFor="let i of role" [value]='i.value'>{{i.name}}</mat-option>
-              <!-- <mat-option value="Role2">Role 2</mat-option>
-              <mat-option value="Role3">Role 3</mat-option> -->
+              <mat-option *ngFor="let i of role| role " [value]="i.value">{{i.name}}</mat-option>
+
             </mat-select>
           </mat-form-field>
         </div>
@@ -233,10 +232,10 @@
             <!-- data need to be changed -->
             <div class="data-wrap">
               <div class="value" *ngIf="element.Access_Type == 1">
-                Flex Admin
+                Flexm Admin
               </div>
               <div class="value" *ngIf="element.Access_Type == 2">
-                Flex Operator
+                Flexm Operator
               </div>
               <div class="value" *ngIf="element.Access_Type == 3">
                 Tenent Admin

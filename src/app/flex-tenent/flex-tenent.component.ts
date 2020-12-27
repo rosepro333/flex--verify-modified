@@ -21,6 +21,7 @@ const ELEMENT_DATA_Tenent: any = [];
   styleUrls: ['./flex-tenent.component.scss'],
 })
 export class FlexTenentComponent implements OnInit {
+  @ViewChild('rightDrawer', { static: false }) sideNav: MatSidenav;
   showFiller = false;
   form: FormGroup;
   tenentList: any = [];
@@ -183,6 +184,7 @@ export class FlexTenentComponent implements OnInit {
     this.service.updateTenent(id,data).subscribe((res)=>{
       console.log(res);
       if(res.msg === 'success'){
+        this.sideNav.close();
         this.getTenentList();
         this.toster.openSnackBar('Successfully Updated', res.msg);
       }else if(res.msg === 'failed'){
@@ -200,6 +202,7 @@ export class FlexTenentComponent implements OnInit {
         (result) => {
           console.log(result);
           if (result.msg === 'success') {
+            this.sideNav.close();
             this.reset();
             this.getTenentList();
             console.log(result);
