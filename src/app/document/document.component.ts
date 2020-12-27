@@ -34,6 +34,7 @@ export class DocumentComponent implements OnInit {
   serializedDate = new FormControl((new Date()).toISOString());
   id = '';
   tenentId = '';
+  Tenant_ID = '';
   accessType = '';
   selectedTenentId = '';
   search = '';
@@ -67,11 +68,11 @@ export class DocumentComponent implements OnInit {
   ngOnInit(): void {
     this.id = Cookie.get('id');
     this.accessType = Cookie.get('Access_Type');
-    this.tenentId = Cookie.get('Tenant_ID');
+    this.Tenant_ID = Cookie.get('Tenant_ID');
     this.loadAllDocuments();
   }
   loadAllDocuments = () => {
-    this.scanDocList();
+    // this.scanDocList();
     if (this.accessType === '1' || this.accessType === '2') {
       this.getTenentList();
     }
@@ -126,11 +127,7 @@ export class DocumentComponent implements OnInit {
   selectDocsType = (value: any) => {
     this.selectedDocs = value;
     console.log(this.selectedDocs);
-    // if (this.selectedDocs){
     this.disabled = false;
-    // console.log(this.disabled);
-    // }
-    // this.checkSelectButton();
   }
   applyFilter = (event: any) => {
     this.search = event.target.value;
@@ -210,7 +207,7 @@ export class DocumentComponent implements OnInit {
     this.docdumentsList();
   }
   docdumentsList = () => {
-    if (this.tenentId === 'undefined') {
+    if (this.Tenant_ID !== 'undefined' && this.Tenant_ID !== '') {
       this.tenentId = '';
     }
     const data = {

@@ -22,6 +22,7 @@ export class VerificationUrlComponent implements OnInit {
   id = '';
   selectedTenent = '';
   emailId = '';
+  // sdyKeyName = '';
   constructor(private serviceService: ServicesService) { }
 
   ngOnInit(): void {
@@ -40,38 +41,15 @@ export class VerificationUrlComponent implements OnInit {
         }
       });
     } else if (this.accessType === '3' || this.accessType === '4') {
-      console.log('acces 3' + this.accessType);
-      const tenetId = this.tenetId;
-      console.log('tenent' + tenetId);
-      const data ={
-        "Tenant_ID":tenetId,
-        "limit":"20",
-        "pageNo":"1",
-        "order":"-1",
-        "search":"",
-        "startDate":"",
-        "endDate":"",
-        "status":""
-        };
-      this.serviceService.getTenentList(data).subscribe((res) => {
-        console.log(res);
-        if (res.msg === 'success') {
-          this.tenentList = res.data;
-          console.log(this.tenentList);
-        }
-      });
+        const tenetId = this.tenetId;
+        console.log('tenent' + tenetId);
+        this.getSdkId(tenetId);
+
     }
-    // this.serviceService.getTenentList().subscribe((res) => {
-    //   // console.log(res);
-    //   if (res.msg === 'success') {
-    //     this.tenentList = res.data;
-    //   }
-    // });
+
   }
   selectSdkKey = (value: any) => {
     this.selectSdk = value;
-    // Cookie.set("x-access-token", value);
-    // localStorage.setItem("x-access-token", value);
   }
   selectTenent = (value: any) => {
     this.selectedTenent = value;
@@ -79,11 +57,18 @@ export class VerificationUrlComponent implements OnInit {
     this.getSdkId(value);
   }
   getSdkId = (value: any) => {
-    this.serviceService.getTenentSdkList(value).subscribe((res) => {
+    const data = {
+          "Mode":'All',
+          "Tenent_ID":value
+      }
+    this.serviceService.getSdkKeyList(data).subscribe((res) => {
       console.log(res.msg === 'success');
       console.log(res.data);
       this.sdkKey = res.data;
-      this.ngOnInit();
+      if(this.accessType === '3'|| this.accessType === '4'){
+        this.selectSdk = res.data[0].SDK_Key;
+      }
+      // this.ngOnInit();
     });
   }
   clickGenerate = () => {

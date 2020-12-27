@@ -2,7 +2,7 @@
   <div class="title">
     Perform KYC by scanning the following QR
   </div>
-  <mat-form-field appearance="outline" fxFill>
+  <mat-form-field appearance="outline" fxFill *ngIf ="accessType !=='3' && accessType !=='4'">
     <mat-label>Select Tenent</mat-label>
     <mat-select disableRipple (selectionChange)="selectTenent($event.value)">
       <mat-option *ngFor="let tenent of tenentList" [value]="tenent._id">
@@ -12,7 +12,7 @@
   </mat-form-field>
   <mat-form-field appearance="outline" fxFill>
     <mat-label>Select SdkKey</mat-label>
-    <mat-select disableRipple (selectionChange)="selectSdkKey($event.value)">
+    <mat-select disableRipple (selectionChange)="selectSdkKey($event.value)" [(ngModel)]="selectSdk" >
       <mat-option *ngFor="let tenent of sdkKey" [value]="tenent.SDK_Key">
         {{ tenent.SDK_Key }}
       </mat-option>

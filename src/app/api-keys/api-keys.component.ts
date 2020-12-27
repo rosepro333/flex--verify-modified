@@ -140,7 +140,7 @@ export class ApiKeysComponent implements OnInit {
         this.sdkKeyData = res.msg === 'success' ? res.data : '';
         console.log(this.sdkKeyData);
       });
-    } else if (this.accessType === '3' ) {
+    } else if (this.accessType === '3') {
       const tenentId = Cookie.get('Tenant_ID');
       const data= {
         "Mode":this.selectedMode,
