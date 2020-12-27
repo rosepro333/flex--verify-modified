@@ -208,7 +208,7 @@ export class DocumentComponent implements OnInit {
   }
   docdumentsList = () => {
     if (this.Tenant_ID !== 'undefined' && this.Tenant_ID !== '') {
-      this.tenentId = '';
+      this.tenentId = this.Tenant_ID;
     }
     const data = {
       Tenant_ID: this.tenentId,
