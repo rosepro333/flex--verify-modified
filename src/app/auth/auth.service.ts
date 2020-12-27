@@ -55,13 +55,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
   deleteAllCookies = () => {
-    // console.log(Cookie.delete('data'))
     Cookie.deleteAll('/', 'localhost');
-    // console.log(cookie)
-    // cookie.forEach(key => {
-    //     Cookie.delete(key);
-    // });
-    // cookie.map(key=>{Cookie.delete(key)})
   }
   handleError = (error: any ) => {
     let errorMessage = '';

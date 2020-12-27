@@ -43,7 +43,17 @@ export class VerificationUrlComponent implements OnInit {
       console.log('acces 3' + this.accessType);
       const tenetId = this.tenetId;
       console.log('tenent' + tenetId);
-      this.serviceService.findTenetListById(tenetId).subscribe((res) => {
+      const data ={
+        "Tenant_ID":tenetId,
+        "limit":"20",
+        "pageNo":"1",
+        "order":"-1",
+        "search":"",
+        "startDate":"",
+        "endDate":"",
+        "status":""
+        };
+      this.serviceService.getTenentList(data).subscribe((res) => {
         console.log(res);
         if (res.msg === 'success') {
           this.tenentList = res.data;
