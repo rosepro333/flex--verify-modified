@@ -41,7 +41,10 @@ export class FlexTenentComponent implements OnInit {
     'status',
     // 'actions',
   ];
-  tenentStatus: any = [{name: 'All',value: 'All'},{name: 'Created',value: 'created'},{name: 'Active',value: 'active'},{name: 'Suspended',value: 'suspended'}];
+  tenentStatus: any = [{name: 'All', value: 'All'},
+  {name: 'Created', value: 'created'},
+  {name: 'Active', value: 'active'},
+  {name: 'Suspended', value: 'suspended'}];
   dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
   isCreateTenant: boolean;
   isTenantDetails: boolean;
@@ -63,19 +66,19 @@ export class FlexTenentComponent implements OnInit {
 
   getTenentList = () => {
     const data = {
-      "Tenant_ID": "",
-      "limit": this.pageSize,
-      "pageNo": this.currentPage,
-      "order": "-1",
-      "search": this.search,
-      "startDate": "",
-      "endDate": "",
-      "status": this.status
-    }
-    console.log(data)
+      Tenant_ID: '',
+      limit: this.pageSize,
+      pageNo: this.currentPage,
+      order: '-1',
+      search: this.search,
+      startDate: '',
+      endDate: '',
+      status: this.status
+    };
+    console.log(data);
     this.service.getTenentList(data).subscribe((result) => {
       console.log(result);
-      if (result.msg === "success") {
+      if (result.msg === 'success') {
         this.totalSize = result.length;
         this.dataSourceTenant = result.data;
         // this.tenentList = result.data;
@@ -92,7 +95,8 @@ export class FlexTenentComponent implements OnInit {
   }
 
   applyTenantFilter = () => {
-    this.search
+    // tslint:disable-next-line:no-unused-expression
+    this.search;
     console.log(this.search);
     this.getTenentList();
   }
@@ -104,14 +108,14 @@ export class FlexTenentComponent implements OnInit {
   }
   selectStatus = (value: any) => {
     this.status = value;
-    console.log(value)
+    console.log(value);
     this.getTenentList();
 
   }
-  handlePage(value: any) {
+  handlePage = (value: any) => {
     console.log(value);
     if (value.pageIndex) {
-      console.log(value.pageIndex)
+      console.log(value.pageIndex);
       const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
       this.currentPage = pageIndex;
       console.log(this.currentPage);
@@ -120,7 +124,7 @@ export class FlexTenentComponent implements OnInit {
 
     }
     if (value.pageSize) {
-      console.log(value.pageSize)
+      console.log(value.pageSize);
       this.pageSize = value.pageSize;
       const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
       this.currentPage = pageIndex;
@@ -134,7 +138,7 @@ export class FlexTenentComponent implements OnInit {
 
   }
 
-  blockTenant = (name: any,id: any) => {
+  blockTenant = (name: any, id: any) => {
     console.log(id, name);
     const dialogRef = this.dialog.open(BlockTenentComponent, {
       height: '160px',
@@ -148,7 +152,7 @@ export class FlexTenentComponent implements OnInit {
   enableTenant = (elm: any) => {
     alert('unblock ' + elm.name);
   }
-  deleteTenant = (name: any,id: any) => {
+  deleteTenant = (name: any, id: any) => {
     const dialogRef = this.dialog.open(DeleteTenentComponent, {
       height: '160px',
       width: '400px',
@@ -160,9 +164,9 @@ export class FlexTenentComponent implements OnInit {
   }
   formControl = () => {
     this.form = this.fb.group({
-      name: new FormControl('',[Validators.required,]),
-      contactName: new FormControl('',[Validators.required]),
-      contactEmail: new FormControl('',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      name: new FormControl('', [Validators.required, ]),
+      contactName: new FormControl('', [Validators.required]),
+      contactEmail: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     });
   }
 
@@ -176,24 +180,24 @@ export class FlexTenentComponent implements OnInit {
     const contactName = this.form.get('contactName').value;
     const contactEmail = this.form.get('contactEmail').value;
     console.log(contactName);
-    console.log(contactEmail)
+    console.log(contactEmail);
     const data = {
       Contact_Name: contactName,
       Contact_Mail: contactEmail
-    }
-    this.service.updateTenent(id,data).subscribe((res)=>{
+    };
+    this.service.updateTenent(id, data).subscribe((res) => {
       console.log(res);
-      if(res.msg === 'success'){
+      if ( res.msg === 'success'){
         this.sideNav.close();
         this.getTenentList();
         this.toster.openSnackBar('Successfully Updated', res.msg);
-      }else if(res.msg === 'failed'){
-        this.toster.openSnackBar(res.msg,'failed' );
+      }else if (res.msg === 'failed'){
+        this.toster.openSnackBar(res.msg, 'failed' );
       }
-    },(err) => {
+    }, (err) => {
       console.log(err);
-       this.toster.openSnackBar(err.error, 'failed');
-    })
+      this.toster.openSnackBar(err.error, 'failed');
+    });
   }
   onSave = () => {
     if (this.form.valid) {
@@ -233,17 +237,19 @@ export class FlexTenentComponent implements OnInit {
       console.log(error);
     });
   }
-  clicked(a, value) {
-    if (a == 'create-tenant') {
-      if(value === null){
-        this.tenentData = ''
+  clicked = (a: any, value: any) => {
+    if (a === 'create-tenant') {
+      if (value === null){
+        this.tenentData = '';
         this.form.reset();
         this.form.get('name').enable();
         this.form.get('contactEmail').enable();
-      }else if(value){
+      }else if (value){
         this.tenentData = value;
         console.log(this.tenentData);
-        this.form.patchValue({name: this.tenentData.Name,contactName:this.tenentData.Contact_Name,contactEmail:this.tenentData.Contact_Mail})
+        this.form.patchValue({name: this.tenentData.Name,
+          contactName: this.tenentData.Contact_Name,
+          contactEmail: this.tenentData.Contact_Mail});
         this.form.get('name').disable();
         // this.form.get('contactEmail').disable();
         // console.log(data);
@@ -251,7 +257,7 @@ export class FlexTenentComponent implements OnInit {
 
       this.isCreateTenant = true;
       this.isTenantDetails = false;
-    } else if (a == 'tenant-details') {
+    } else if (a === 'tenant-details') {
       this.tenentData = value;
       this.isCreateTenant = false;
       this.isTenantDetails = true;

@@ -13,39 +13,57 @@
             </mat-toolbar>
             <div class="drawer-data" fxLayout="column">
                 <div class="data-wrap">
-                    <div class="title">Document Id</div>
+                    <div class="title">Scan Id</div>
                     <div class="value">
-                      {{activity?.documentId?.Document_ID}}
+                        {{details?.Scan_ID}}
                     </div>
                 </div>
                 <div class="data-wrap">
-                    <div class="title">Activity</div>
+                    <div class="title">Status</div>
                     <div class="value">
-                      {{activity?.activity}}
+                        {{details?.scanResultStatus}}
                     </div>
                 </div>
                 <div class="data-wrap">
                     <div class="title">Date and Time</div>
                     <div class="value">
-                      {{activity?.createdAt}}
+                        {{details?.createdAt}}
                     </div>
                 </div>
                 <div class="data-wrap">
-                    <div class="title">App Version</div>
+                    <div class="title">Name</div>
                     <div class="value">
-                      {{activity?.appVersion}}
+                        {{details?.firstName}}
                     </div>
                 </div>
                 <div class="data-wrap">
-                    <div class="title">IP Address</div>
+                    <div class="title">ID Type</div>
                     <div class="value">
-                      {{activity?.ipAddress}}
+                        {{details?.ID_Type}}
                     </div>
                 </div>
                 <div class="data-wrap">
-                    <div class="title">Browser</div>
+                    <div class="title">Id Result</div>
                     <div class="value">
-                      {{activity?.deviceSignature?.browser}} {{activity?.deviceSignature?.browser_version}}
+                        {{details?.scanResultStatus}}
+                    </div>
+                </div>
+                <div class="data-wrap">
+                    <div class="title">Address Result</div>
+                    <div class="value">
+                        {{details?.addressStatus}}
+                    </div>
+                </div>
+                <div class="data-wrap">
+                    <div class="title">Address</div>
+                    <div class="value">
+                        {{details?.city}}
+                    </div>
+                </div>
+                <div class="data-wrap">
+                    <div class="title">Live Check Result</div>
+                    <div class="value">
+                        {{details?.liveCheckingStatus}}
                     </div>
                 </div>
             </div>
@@ -57,7 +75,7 @@
                 <button mat-icon-button [routerLink]="['/reports']">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
-                <div>Mobile Activity Report</div>
+                <div>Scan Report</div>
             </div>
         </mat-toolbar>
         <div class="mobile-activity-wrap" fxLayout="column" fxLayoutAlign="start start">
@@ -74,41 +92,63 @@
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-date-range-picker #picker></mat-date-range-picker>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex="50">
+                    <!-- <mat-form-field appearance="outline" fxFlex="50">
                         <mat-label>Document ID</mat-label>
                         <input matInput #input [(ngModel)]="search" />
                         <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search" (click)="searchFilter()">
                             <mat-icon matSuffix>search</mat-icon>
                         </button>
+                    </mat-form-field> -->
+                    <mat-form-field class='form-rows' appearance="outline" fxFlex>
+                      <mat-label>Tenent</mat-label>
+                      <mat-select disableRipple (selectionChange)="selectTenent($event.value)">
+                        <mat-option *ngFor="let tenent of tenentList" [value]="tenent._id">
+                          {{ tenent.Name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class='form-rows' appearance="outline" fxFlex>
+                      <mat-label>Status</mat-label>
+                      <mat-select disableRipple (selectionChange)="selectStatus($event.value)">
+                        <mat-option *ngFor="let i of scanReport" [value]="i.value">
+                          {{ i.name }}
+                        </mat-option>
+                      </mat-select>
                     </mat-form-field>
                 </div>
             </div>
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" fxFlex="100" fxFill>
+            <table mat-table [dataSource]="dataSource"  class="mat-elevation-z2" fxFlex="100" fxFill>
                 <ng-container matColumnDef="docId">
-                    <th mat-header-cell *matHeaderCellDef> Document Id </th>
-                    <td mat-cell *matCellDef="let element"> {{element?.documentId?.Document_ID}} </td>
+                    <th mat-header-cell *matHeaderCellDef> Scan Id </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Scan_ID}} </td>
                 </ng-container>
                 <ng-container matColumnDef="activity">
-                    <th mat-header-cell *matHeaderCellDef> Activity </th>
-                    <td mat-cell *matCellDef="let element"> {{element?.activity}} </td>
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element"> {{element.scanResultStatus}} </td>
                 </ng-container>
                 <ng-container matColumnDef="dateTime">
                     <th mat-header-cell *matHeaderCellDef> Date & Time </th>
-                    <td mat-cell *matCellDef="let element"> {{element?.createdAt | date:'dd-MM-yyyy h:mm' }} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'dd-MM-yyyy h:mm' }} </td>
                 </ng-container>
                 <ng-container matColumnDef="ipAddress">
-                    <th mat-header-cell *matHeaderCellDef> IP Address </th>
-                    <td mat-cell *matCellDef="let element"> {{element?.ipAddress}} </td>
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
                 </ng-container>
                 <ng-container matColumnDef="appVersion">
-                    <th mat-header-cell *matHeaderCellDef> App Version </th>
-                    <td mat-cell *matCellDef="let element">{{element?.deviceSignature?.browser}} {{element?.appVersion}} </td>
+                    <th mat-header-cell *matHeaderCellDef>ID Type </th>
+                    <td mat-cell *matCellDef="let element"> {{element.ID_Type}} </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rightDrawer.open();activityDetails(row)"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rightDrawer.open();scanDetails(row)"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="5">
+                    <img class="noDataFound" src="assets/empty-tray.svg"/>
+                    <!-- <div class="noDataFound"></div> -->
+                  </td>
+                </tr>
             </table>
-            <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="mat-elevation-z2" fxFill>
-            </mat-paginator> -->
+
             <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
             [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
               </mat-paginator>

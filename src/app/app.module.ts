@@ -68,6 +68,10 @@ import { ShortNamePipe } from './short-name.pipe';
 import { ReportsComponent } from './reports/reports.component';
 import { MobileActivityReportComponent } from './reports/mobile-activity-report/mobile-activity-report.component';
 import { RolePipe } from './pipe/role.pipe';
+import { UserAboutComponent } from './user-about/user-about.component';
+import { PortalActivityReportComponent } from './reports/portal-activity-report/portal-activity-report.component';
+import { ScanReportComponent } from './reports/scan-report/scan-report.component';
+import { ReportService } from './service/report.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -100,7 +104,10 @@ import { RolePipe } from './pipe/role.pipe';
     ShortNamePipe,
     ReportsComponent,
     MobileActivityReportComponent,
-    RolePipe
+    RolePipe,
+    UserAboutComponent,
+    PortalActivityReportComponent,
+    ScanReportComponent
   ],
   imports: [
     BrowserModule,
@@ -137,7 +144,7 @@ import { RolePipe } from './pipe/role.pipe';
     MatSnackBarModule,
     MatProgressBarModule
   ],
-  providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService, ServicesService,
+  providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService, ServicesService,ReportService,
     { provide: HTTP_INTERCEPTORS, useClass: MainInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })

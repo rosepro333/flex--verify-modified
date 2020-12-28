@@ -1,3 +1,4 @@
+import { PortalActivityReportComponent } from './reports/portal-activity-report/portal-activity-report.component';
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
@@ -22,15 +23,17 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { NewPasswordComponent } from './new-password/new-password.component';
 import { ReportsComponent } from './reports/reports.component';
 import { MobileActivityReportComponent } from './reports/mobile-activity-report/mobile-activity-report.component';
+import { UserAboutComponent } from './user-about/user-about.component';
+import { ScanReportComponent } from './reports/scan-report/scan-report.component';
 const routes: Routes = [
   {
     path: '',
     component: HomeLayoutComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        component: DashboardComponent,
+        component: DashboardComponent
       },
       {
         path: 'dashboard',
@@ -56,6 +59,14 @@ const routes: Routes = [
       {
         path: 'mobile-activity',
         component: MobileActivityReportComponent
+      },
+      {
+        path: 'portal-activity',
+        component: PortalActivityReportComponent
+      },
+      {
+        path: 'scan-activity',
+        component: ScanReportComponent
       },
       {
         path: 'settings',

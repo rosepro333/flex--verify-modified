@@ -31,11 +31,11 @@ export class MainInterceptor implements HttpInterceptor {
     if (userDevice) {
       headersConfig['user-device'] = `${userDevice}`;
     }
+    headersConfig['version-code'] = `1.0.0.001a`;
     request = request.clone({
       setHeaders: headersConfig
     });
-    headersConfig['user-device'] = `${userDevice}`;
-    headersConfig['version-code'] = `1.0.0.001a`;
+    // headersConfig['user-device'] = `${userDevice}`;
     request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
     return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {

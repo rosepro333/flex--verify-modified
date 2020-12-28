@@ -1,0 +1,9 @@
+.mobile-activity-wrap {
+    padding: 20px;
+    td {
+        &.mat-cell {
+            font-size: 16px;
+            color: #333333;
+        }
+    }
+}

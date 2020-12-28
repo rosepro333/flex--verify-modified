@@ -26,6 +26,9 @@ export class VerificationUrlComponent implements OnInit {
   constructor(private serviceService: ServicesService) { }
 
   ngOnInit(): void {
+    this.serviceService.update.subscribe((data)=>{
+      console.log(data)
+    })
     this.id = Cookie.get('id');
     this.accessType = Cookie.get('Access_Type');
     this.tenetId = Cookie.get('Tenant_ID');
@@ -89,7 +92,7 @@ export class VerificationUrlComponent implements OnInit {
           const data = {
             user: Cookie.get('id'),
             tenentId: Cookie.get('Tenant_ID'),
-            activity: 'Generate url ',
+            activity: 'Generate Url',
             details: JSON.stringify({ tenant_id: this.selectedTenent, sdk_key: key })
           };
           this.audits(data);

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ServicesService } from '../service/services.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private service : ServicesService
+  ) { }
 
   public barChartOptions = {
     scaleShowVerticalLines: false,
@@ -25,5 +28,8 @@ export class DashboardComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.service.update.subscribe((data)=>{
+      console.log(data)
+    })
   }
 }

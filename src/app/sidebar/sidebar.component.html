@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+  <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" [opened]="true" fixedInViewport="true" [ngClass]="sidebarMode"
     class="left-navigation" (mouseover)="sidebarModeFunc('unfolded')" (mouseout)="sidebarModeFunc('folded')">
     <mat-nav-list fxLayout="column" fxFill>
@@ -10,11 +10,6 @@
         <mat-icon>dashboard</mat-icon>
         <span class="nav-text">Dashboard</span>
       </mat-list-item>
-      <!-- <mat-list-item [routerLink]="['/verification-url']" routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact:true}">
-                <mat-icon>link</mat-icon>
-                <span class="nav-text">Verification Url</span>
-            </mat-list-item> -->
       <mat-list-item [routerLink]="['/documents']" routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }">
         <mat-icon>assignment</mat-icon>
@@ -31,7 +26,7 @@
       </mat-list-item>
       <!-- bottom section -->
       <span fxFlex></span>
-      <mat-list-item>
+      <mat-list-item  >
         <mat-icon>account_circle</mat-icon>
         <span class="nav-text">{{ userName }}</span>
       </mat-list-item>
@@ -49,3 +44,4 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+

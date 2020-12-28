@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies';
 import { ServicesService } from '../service/services.service';
+import { VerificationUrlComponent } from '../verification-url/verification-url.component';
 import { AuthService } from './../auth/auth.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class SidebarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private service: ServicesService
+    private service: ServicesService,
+    public viewContainerRef: ViewContainerRef
   ) {}
 
   ngOnInit(): void {
@@ -58,5 +60,11 @@ export class SidebarComponent implements OnInit {
       // console.log(res.data.Contact_Name);
       this.userName = res.data.Contact_Name;
     });
+  }
+  openUserAbout = () => {
+    // console.log('dsedssd')
+    this.service.userDrawer('open');
+    this.router.navigate([{ outlets: { about: ['about'] } }])
+    // const abc =this.viewContainerRef.createComponent<VerificationUrlComponent>()
   }
 }

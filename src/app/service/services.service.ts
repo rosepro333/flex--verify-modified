@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { environment } from 'src/environments/environment';
@@ -15,6 +15,8 @@ import { async } from 'rxjs/internal/scheduler/async';
 export class ServicesService {
   // private apiUrl = environment.dummyApi;
   private apiUrl = environment.apiUrl;
+  updateNav: string;
+  update: BehaviorSubject<string>;
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
@@ -25,13 +27,16 @@ export class ServicesService {
   }
 
   constructor(private router: Router, private http: HttpClient) {
+    this.update = new BehaviorSubject(this.updateNav);
   }
   httpOptions = {
     headers: new HttpHeaders()
-      // .set('ACCESS-TOKEN', Cookie.get('data'))
-      // .set('x-access-token', Cookie.get('x-access-token'))
-      // .set('user-device', Cookie.get('user-device'))
   };
+  userDrawer = (updateString: string) => {
+    console.log(updateString)
+    this.update.next('ddsdscdscdsc');
+    // this.update.next(updateString);
+  }
   getToken = () => {
     return Cookie.get('data');
   }

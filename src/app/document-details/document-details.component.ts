@@ -251,7 +251,7 @@ export class DocumentDetailsComponent implements OnInit {
         }
     },(err) => {
       console.log(err);
-      this.toast.openSnackBar('Something Went Wrong',"failed")
+      this.toast.openSnackBar('Something Went Wrong','failed')
 
     })
   }
@@ -259,28 +259,28 @@ export class DocumentDetailsComponent implements OnInit {
     $event.stopPropagation();
     alert('shared');
   }
-  SelectType = (type:any, value: any) => {
+  SelectType = (type: any , value: any) => {
     console.log(type);
     console.log(value);
-    if(type === 'ID_Type'){
-      if(value == 'clear'){
-        this.isIdStatus =false
+    if (type === 'ID_Type'){
+      if (value === 'clear'){
+        this.isIdStatus = false;
       }else{
-        this.isIdStatus =true
+        this.isIdStatus = true;
       }
     }
-    if(type === 'Address'){
-      if(value == 'clear'){
-        this.isAddressStatus =false
+    if (type === 'Address'){
+      if (value === 'clear'){
+        this.isAddressStatus = false;
       }else{
-        this.isAddressStatus =true
+        this.isAddressStatus = true;
       }
     }
     if(type === 'LiveCheck'){
-      if(value == 'Ok'){
-        this.isLiveCheck =false
+      if(value === 'Ok'){
+        this.isLiveCheck = false;
       }else{
-        this.isLiveCheck =true
+        this.isLiveCheck = true;
       }
     }
     if(type === 'scanResult'){
@@ -294,31 +294,31 @@ export class DocumentDetailsComponent implements OnInit {
   }
   submitScanResult = (form: NgForm) => {
     const data = {
-      "liveCheckingStatus":form?.value?.LiveCheck,
-      "scanResultStatus":form?.value?.scanResult,
-      "selfiePhotoMatchStatus":form?.value?.selefieMatchPercengates,
-      "scanResultComment":form?.value?.scanResultComment ,
-      "idCardStatus":form?.value?.ID_Type,
-      "addressStatus":form?.value?.Address,
-      "idCardComment":form?.value?.idCardTypeComment,
-      "livecheckStatusComment":form?.value?.liveCheckComments,
-      "addressStatusComment":form?.value?.addressComments
-    }
-    console.log(data)
+      liveCheckingStatus: form?.value?.LiveCheck,
+      scanResultStatus: form?.value?.scanResult,
+      selfiePhotoMatchStatus: form?.value?.selefieMatchPercengates,
+      scanResultComment: form?.value?.scanResultComment ,
+      idCardStatus: form?.value?.ID_Type,
+      addressStatus: form?.value?.Address,
+      idCardComment: form?.value?.idCardTypeComment,
+      livecheckStatusComment: form?.value?.liveCheckComments,
+      addressStatusComment: form?.value?.addressComments
+    };
+    console.log(data);
     const id = this.scanId;
     console.log(id);
-      this.serviceServive.scanResults(id,data).subscribe((res)=> {
+      this.serviceServive.scanResults(id,data).subscribe((res) => {
         if(res.status === 'success'){
-            this.toast.openSnackBar('Success',res.status)
-            this.scanDocumentById(id);
-            this.sideNav.close();
+          this.toast.openSnackBar('Success',res.status)
+          this.scanDocumentById(id);
+          this.sideNav.close();
         }
       // console.log(res)
-      this
-    },(err)=>{
+        // this
+    },(err)=> {
       console.log(err);
-      this.toast.openSnackBar('Something Went Wrong',"failed")
-    })
+      this.toast.openSnackBar('Something Went Wrong','failed')
+    });
   }
   selectIdFront = (idfront: any) => {
     console.log(idfront.value);
@@ -374,7 +374,7 @@ export class DocumentDetailsComponent implements OnInit {
         this.audits(data);
       },(err) => {
       console.log(err);
-      this.toast.openSnackBar('Something Went Wrong',"failed")
+      this.toast.openSnackBar('Something Went Wrong','failed')
 
     })
   }
@@ -393,7 +393,7 @@ export class DocumentDetailsComponent implements OnInit {
         }
     },(err) => {
       console.log(err);
-      this.toast.openSnackBar('Something Went Wrong',"failed")
+      this.toast.openSnackBar('Something Went Wrong','failed')
 
     })
   }
