@@ -25,6 +25,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { MobileActivityReportComponent } from './reports/mobile-activity-report/mobile-activity-report.component';
 import { UserAboutComponent } from './user-about/user-about.component';
 import { ScanReportComponent } from './reports/scan-report/scan-report.component';
+import { NotificationComponent } from './notification/notification.component';
 const routes: Routes = [
   {
     path: '',
@@ -100,6 +101,10 @@ const routes: Routes = [
         path: 'cretae-flexm-tenent',
         component: CreateFlexTenentComponent,
       },
+      {
+        path: 'notification',
+        component: NotificationComponent,
+      },
     ],
   },
   {
@@ -128,6 +133,7 @@ const routes: Routes = [
     path: 'resetPassword/:resetUser',
     component: NewPasswordComponent,
   },
+
 ];
 
 @NgModule({

@@ -159,10 +159,7 @@ export class DocumentComponent implements OnInit {
   }
   applyFilter = () => {
     console.log(this.search)
-    // console.log()
     this.docdumentsList();
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   moreDetails = (id: number) => {
     console.log(id);
@@ -185,9 +182,7 @@ export class DocumentComponent implements OnInit {
     if (this.accessType === '1' || this.accessType === '2') {
       const data = {}
       this.serviceService.getTenentList(data).subscribe((res) => {
-        // console.log(res);
         if (res.msg === 'success') {
-          // this.tenentList = res.data;
           res.data.map((i: any, index) => {
             console.log(i.Name);
             const obj = {};
@@ -211,7 +206,6 @@ export class DocumentComponent implements OnInit {
               // tslint:disable-next-line:no-string-literal
               obj['Name'] = i.Name;
               this.tenentList.push(obj);
-              // console.log(this.tenentList);
             }
           });
           console.log(this.tenentList);

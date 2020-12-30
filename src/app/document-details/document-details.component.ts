@@ -6,7 +6,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { FormArray, FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ServicesService } from '../service/services.service';
@@ -114,18 +114,30 @@ export class DocumentDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private serviceServive: ServicesService,
     private cd: ChangeDetectorRef,
-    private toast: TosterService
+    private toast: TosterService,
+    private router: Router
   ) { }
 
   async ngOnInit(): Promise<void> {
+    this.id = this.route.snapshot.params['id'];
     this.accessType = Cookie.get('Access_Type');
     this.userId = Cookie.get('id');
     this.getUserDetails();
+    await this.documentLoad();
     // tslint:disable-next-line:no-string-literal
-    this.id = this.route.snapshot.params['id'];
+
     this.checkAccessType();
+
+
+  }
+  documentLoad = async() => {
     await this.getAllScanDocumentById(this.id)
       .then((res) => {
+        this.dataSource = res;
+        if(this.dataSource.length=== 0){
+          this.router.navigateByUrl('/documents');
+        }
+
         if(res[0]){
           this.scanDocument.slice(0, this.scanDocument.length)
           this.scanDocument.push(res[0]);
@@ -135,7 +147,7 @@ export class DocumentDetailsComponent implements OnInit {
           this.scanDocumentById(this.scanId);
         }
         console.log(res);
-        this.dataSource = res;
+
         console.log(res[0])
         this.scanDocument.map((i: any, index: string | number) => {
           console.log(i.idExpiryDate);
@@ -156,7 +168,6 @@ export class DocumentDetailsComponent implements OnInit {
       })
       .catch(() => console.error('some error'));
     this.getDocument(this.id);
-
   }
   getAllComment = (scanId: string, documentId: any) => {
     const data = {
@@ -391,6 +402,20 @@ export class DocumentDetailsComponent implements OnInit {
       console.log(err);
       this.toast.openSnackBar('Something Went Wrong','failed')
 
+    })
+  }
+  deleteScan = (id: any) => {
+    console.log(id)
+    this.serviceServive.deleteScan(id).subscribe((res)=> {
+      console.log(res)
+      if(res.msg === 'success'){
+        this.toast.openSnackBar('Successfully deleted Scan','Success');
+        this.documentLoad();
+      }else{
+        this.toast.openSnackBar('Something Went Sr','Success');
+      }
+    },(err: any) => {
+      console.log(err)
     })
   }
   clear = () => {};

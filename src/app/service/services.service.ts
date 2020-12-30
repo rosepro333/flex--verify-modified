@@ -163,6 +163,11 @@ export class ServicesService {
       .put(this.apiUrl + '/scans/scanResult/' + id,data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
+  deleteScan(id: any): Observable<any> {
+    return this.http
+      .delete(this.apiUrl + '/scans/delete/' + id, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
   deleteUser(id: any): Observable<any> {
     return this.http
       .delete(this.apiUrl + '/user/delete/' + id, this.httpOptions)

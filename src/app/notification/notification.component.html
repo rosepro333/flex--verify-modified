@@ -1,1 +1,166 @@
-<p>notification works!</p>
+<mat-toolbar>
+  <span>Notifications</span>
+</mat-toolbar>
+<div class="settings-wrap">
+  <div class="tiles-wrap" fxLayout="row wrap" fxLayoutAlign="start start">
+    <mat-card class="tile cursor-pointer" [routerLink]="['/flexm-user']" fxLayout="column" fxLayoutAlign="end center">
+      <i class="material-icons fs-40">drafts</i>
+      <div class="title">Email</div>
+    </mat-card>
+    <mat-card class="tile cursor-pointer" fxLayout="column" fxLayoutAlign="end center">
+      <i class="material-icons fs-40">notifications_none</i>
+      <div class="title">sms</div>
+    </mat-card>
+  </div>
+</div>
+<!-- <mat-drawer-container autosize>
+    <mat-drawer #rightDrawer class="right-side-drawer" mode="over" position="end">
+        <div class="user-details-wrap">
+            <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
+                <div>
+                    Detailed Info
+                </div>
+                <div class="header-buttons">
+                    <button mat-icon-button (click)="rightDrawer.close()" class="close-button">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+            </mat-toolbar>
+            <div class="drawer-data" fxLayout="column">
+                <div class="data-wrap">
+                    <div class="title">Scan Id</div>
+                    <div class="value">
+                        {{details?.Scan_ID}}
+                    </div>
+                </div>
+                <div class="data-wrap">
+                    <div class="title">Status</div>
+                    <div class="value">
+                        {{details?.scanResultStatus}}
+                    </div>
+                </div>
+                <div class="data-wrap">
+                    <div class="title">Date and Time</div>
+                    <div class="value">
+                        {{details?.createdAt | date:'dd-MM-yyyy, h:mm:ss a'}}
+                    </div>
+                </div>
+                <div class="data-wrap">
+                    <div class="title">Name</div>
+                    <div class="value">
+                        {{details?.firstName}}
+                    </div>
+                </div>
+                <div class="data-wrap">
+                    <div class="title">ID Type</div>
+                    <div class="value">
+                        {{details?.ID_Type}}
+                    </div>
+                </div>
+                <div class="data-wrap">
+                    <div class="title">Id Result</div>
+                    <div class="value">
+                        {{details?.scanResultStatus}}
+                    </div>
+                </div>
+                <div class="data-wrap">
+                    <div class="title">Address Result</div>
+                    <div class="value">
+                        {{details?.addressStatus}}
+                    </div>
+                </div>
+                <div class="data-wrap">
+                    <div class="title">Address</div>
+                    <div class="value">
+                        {{details?.city}}
+                    </div>
+                </div>
+                <div class="data-wrap">
+                    <div class="title">Live Check Result</div>
+                    <div class="value">
+                        {{details?.liveCheckingStatus}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-icon-button [routerLink]="['/reports']">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <div>Scan Report</div>
+            </div>
+        </mat-toolbar>
+        <div class="mobile-activity-wrap" fxLayout="column" fxLayoutAlign="start start">
+            <div fxLayout="row wrap" class="w-100 filter-wrap" fxLayoutAlign="space-between center">
+                <div fxFlex="50">
+                    <mat-form-field appearance="outline" fxFlex="50">
+                        <mat-label>Date Range</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" [(ngModel)]="startDate"
+                          (dateChange)="selectDate1($event.target.value)">
+                        <input matEndDate placeholder="End date" [(ngModel)]="endDate"
+                          (dateChange)="selectDate2($event.target.value)">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+
+                    <mat-form-field class='form-rows' appearance="outline" fxFlex>
+                      <mat-label>Tenent</mat-label>
+                      <mat-select disableRipple (selectionChange)="selectTenent($event.value)">
+                        <mat-option *ngFor="let tenent of tenentList" [value]="tenent._id">
+                          {{ tenent.Name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class='form-rows' appearance="outline" fxFlex>
+                      <mat-label>Status</mat-label>
+                      <mat-select disableRipple (selectionChange)="selectStatus($event.value)">
+                        <mat-option *ngFor="let i of scanReport" [value]="i.value">
+                          {{ i.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <table mat-table [dataSource]="dataSource"  class="mat-elevation-z2" fxFlex="100" fxFill>
+                <ng-container matColumnDef="docId">
+                    <th mat-header-cell *matHeaderCellDef> Scan Id </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Scan_ID}} </td>
+                </ng-container>
+                <ng-container matColumnDef="activity">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element"> {{element.scanResultStatus}} </td>
+                </ng-container>
+                <ng-container matColumnDef="dateTime">
+                    <th mat-header-cell *matHeaderCellDef> Date & Time </th>
+                    <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'dd-MM-yyyy, h:mm:ss a' }} </td>
+                </ng-container>
+                <ng-container matColumnDef="ipAddress">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="appVersion">
+                    <th mat-header-cell *matHeaderCellDef>ID Type </th>
+                    <td mat-cell *matCellDef="let element"> {{element.ID_Type}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rightDrawer.open();scanDetails(row)"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="5">
+                    <img class="noDataFound" src="assets/empty-tray.svg"/>
+                  </td>
+                </tr>
+            </table>
+
+            <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
+            [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
+              </mat-paginator>
+        </div>
+
+    </mat-drawer-content>
+</mat-drawer-container> -->
