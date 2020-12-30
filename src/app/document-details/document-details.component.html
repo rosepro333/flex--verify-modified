@@ -87,7 +87,7 @@
           </ng-container>
           <ng-container matColumnDef="scanDate">
             <th mat-header-cell *matHeaderCellDef> Scan Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.createdAt | date: "mediumDate"}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.createdAt | date: "MMM dd,yyyy hh:mm:ss a"}} </td>
           </ng-container>
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef> Status </th>
@@ -125,7 +125,7 @@
             <div class="data-wrap">
               <div class="title">Scan ID</div>
               <div class="value">
-                {{scanId$}}
+                {{scanIdDetails.Scan_ID}}
               </div>
             </div>
           </div>
@@ -178,7 +178,7 @@
 
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="outline" *ngIf="isScanResults">
+          <mat-form-field appearance="outline" >
             <mat-label>Comment</mat-label>
             <textarea [disabled]= '!resutData.isActive' matInput name="scanResultComment" rows="3"  [(ngModel)] = 'resutData.scanResultComment'></textarea>
           </mat-form-field>
@@ -214,7 +214,7 @@
           <div fxFlex>
             <div class="comment-text">{{j.text}}</div>
             <div class="comment-by-time">
-              Posted By {{j.username }} on {{j.createdAt | date: "mediumDate"}} </div>
+              Posted By {{j.username }} on {{j.createdAt | date: "MMM dd yyyy, hh:mm:ss a"}} </div>
           </div>
         </mat-list-item>
       </div>
@@ -396,34 +396,36 @@
           <div class="data-wrap">
             <div class="title">Scan ID</div>
             <div class="value">
-              {{ doc.Scan_ID }}
+              <!-- {{ doc.Scan_ID }}   -->
+              {{scanIdDetails?.Scan_ID}}
             </div>
           </div>
           <div class="data-wrap">
             <div class="title">Submitted Time</div>
             <div class="value">
-              10:12:33
+              {{scanIdDetails?.updatedAt | date: 'dd-MM-yyyy, HH:mm:ss a'}}
               <!--dummy-->
             </div>
           </div>
           <div class="data-wrap">
             <div class="title">Device Signature</div>
             <div class="value">
-              Chrome v2.6, app v3.2
+              {{  scanIdDetails?.deviceSignature?.browser }}  {{  scanIdDetails?.deviceSignature?.browser_version }}
+
               <!--dummy-->
             </div>
           </div>
           <div class="data-wrap">
             <div class="title">IP Address</div>
             <div class="value">
-              192.32.09.3
+              {{  scanIdDetails?.ipAddress }}
               <!--dummy-->
             </div>
           </div>
           <div class="data-wrap">
             <div class="title">Mode</div>
             <div class="value">
-              {{ document.Mode }}
+              {{  scanIdDetails?.Mode }}
             </div>
           </div>
           <div class="button-wrap">
@@ -437,28 +439,29 @@
           <div class="data-wrap">
             <div class="title">Status</div>
             <div class="value">
-              Submitted
+              {{scanIdDetails?.scanResultStatus}}
               <!--dummy-->
             </div>
           </div>
           <div class="data-wrap">
             <div class="title">ID Card</div>
             <div class="value">
-              N/A
+              {{scanIdDetails?.ID_Type}}
               <!--dummy-->
             </div>
           </div>
           <div class="data-wrap">
             <div class="title">Address</div>
             <div class="value">
-              N/A
+              {{scanIdDetails?.Building_No}} {{scanIdDetails?.streetName}} {{scanIdDetails?.city}}
               <!--dummy-->
             </div>
           </div>
           <div class="data-wrap">
             <div class="title">Live Check</div>
             <div class="value">
-              N/A
+              {{scanIdDetails?.liveCheckingStatus}}
+              <!-- N/A -->
               <!--dummy-->
             </div>
           </div>
@@ -784,7 +787,8 @@
                   name="reason" [(ngModel)]="doc.reason" rows="3"></textarea>
               </mat-form-field>
               <div fxFlex="100" class="button-bar" fxLayout="row wrap" fxLayoutAlign="center center">
-                <button mat-stroked-button type="button" [disabled]="!doc.isActive" (click)="clear()">
+                <button mat-stroked-button type="button" [disabled]="!doc.isActive" (click)="
+                ()">
                   cancel
                 </button>
                 <button [disabled]="!doc.isActive" mat-button class="primary-button" type="submit">

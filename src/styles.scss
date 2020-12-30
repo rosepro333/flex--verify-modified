@@ -67,7 +67,7 @@ body {
 .primary-button {
   background: #21b371;
   color: #fff;
-  margin: 0 12px !important;
+  margin: 0  12px !important;
   i,
   mat-icon,
   .material-icons {
@@ -191,6 +191,7 @@ body {
 }
 .mat-form-field-appearance-outline .mat-form-field-outline-thick {
   color: #68af8f;
+  // border:none;
 }
 .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
 .mat-form-field.mat-focused .mat-form-field-label {

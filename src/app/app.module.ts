@@ -72,6 +72,7 @@ import { UserAboutComponent } from './user-about/user-about.component';
 import { PortalActivityReportComponent } from './reports/portal-activity-report/portal-activity-report.component';
 import { ScanReportComponent } from './reports/scan-report/scan-report.component';
 import { ReportService } from './service/report.service';
+import { NotificationComponent } from './notification/notification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -107,7 +108,8 @@ import { ReportService } from './service/report.service';
     RolePipe,
     UserAboutComponent,
     PortalActivityReportComponent,
-    ScanReportComponent
+    ScanReportComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

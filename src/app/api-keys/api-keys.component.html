@@ -36,7 +36,7 @@
   </div>
   <section class="section" fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
     <div class="section-header" fxLayout="row" fxLayoutAlign="space-between center">
-      <span>Api Key</span>
+      <span>API Key</span>
       <button mat-button class="primary-button" (click)="createKey('api')">
         <mat-icon>add</mat-icon>
         Create Api Key
@@ -82,17 +82,22 @@
         </div>
       </mat-card-content>
     </mat-card>
+    <mat-card *ngIf="apiKeyData.length ===0" >
+      <mat-card-content fxLayout="row wrap" fxLayoutAlign="start start">
+        <img class="noDataFound" src="assets/empty-tray.svg"/>
+      </mat-card-content>
+    </mat-card>
   </section>
   <section class="section" fxFlex.gt-md="50" fxFlex.md="100" fxFlex.lt-md="100">
     <div class="section-header" fxLayout="row" fxLayoutAlign="space-between center">
-      <span>Mobile key</span>
+      <span>SDK key</span>
       <button mat-button class="primary-button" (click)="createKey('mobile')">
         <mat-icon>add</mat-icon>
         Create Sdk Key
       </button>
     </div>
-    <mat-card *ngFor="let i of sdkKeyData">
-      <mat-card-content fxLayout="row wrap" fxLayoutAlign="start start">
+    <mat-card *ngFor="let i of sdkKeyData" >
+      <mat-card-content fxLayout="row wrap" fxLayoutAlign="start start" *ngIf ='sdkKeyData'>
         <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex class="top">
           <div fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100" fxFlex>
             <div class="title" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-between center">
@@ -130,6 +135,12 @@
           </div>
         </div>
       </mat-card-content>
+
+    </mat-card>
+      <mat-card *ngIf="sdkKeyData.length ===0" >
+        <mat-card-content fxLayout="row wrap" fxLayoutAlign="start start">
+        <img class="noDataFound" src="assets/empty-tray.svg"/>
+     </mat-card-content>
     </mat-card>
   </section>
 </div>

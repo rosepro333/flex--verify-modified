@@ -31,9 +31,10 @@ export class FlexUserComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  pageSizeOptions = [2, 25, 50, 100];
+  pageSizeOptions = [10, 25, 50, 100];
   pageSize = 10;
   totalSize = 0;
+  page = 0;
   currentPage = 1;
   search = '';
   role:any = [{name:'All',value:'All'},{name:'Flex Admin',value:'1'},{name:'Flex Operator',value:'2'},{name:'Tenent Admin',value:'3'},{name:'Tenent Operator',value:'4'}]
@@ -60,6 +61,7 @@ export class FlexUserComponent implements OnInit {
   selectedRole = 'All';
   userEdit: any = [];
   isTenent = false;
+
   constructor(
     private serviceService: ServicesService,
     public dialog: MatDialog,
@@ -101,7 +103,7 @@ export class FlexUserComponent implements OnInit {
         const data = {
         "Tenant_ID": this.tenentUser,
         "limit": this.pageSize,
-        "pageNo": "1",
+        "pageNo": this.currentPage,
         "order": "-1",
         "search": this.search,
         "startDate": "",
@@ -123,7 +125,7 @@ export class FlexUserComponent implements OnInit {
        const data = {
         "Tenant_ID": this.tenetId,
         "limit": this.pageSize,
-        "pageNo": "1",
+        "pageNo": this.currentPage,
         "order": "-1",
         "search": this.search,
         "startDate": "",
@@ -162,27 +164,9 @@ export class FlexUserComponent implements OnInit {
     // this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
   }
   handlePage(value: any) {
-    console.log(value);
-    if (value.pageIndex) {
-      console.log(value.pageIndex)
-      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-      this.currentPage = pageIndex;
-      console.log(this.currentPage);
-      // this.getTenentList();
-      // }
-
-    }
-    if (value.pageSize) {
-      console.log(value.pageSize)
-      this.pageSize = value.pageSize;
-      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-      this.currentPage = pageIndex;
-      this.getTenentList();
-    }
-    // console.log(value.pageSize)
-
-    // this.currentPage = value.pageIndex;
-
+    this.pageSize = value.pageSize;
+    this.currentPage = value.pageIndex + 1;
+    this.getUserList();
   }
   blockUser = (name: any,id: any)=> {
     if (id !== this.userId) {

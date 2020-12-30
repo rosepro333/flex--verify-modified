@@ -33,6 +33,7 @@ export class FlexTenentComponent implements OnInit {
   pageSizeOptions = [2, 25, 50, 100];
   pageSize = 10;
   totalSize = 0;
+  page = 0;
   currentPage = 1;
   displayedColumns: string[] = [
     'name',
@@ -113,29 +114,9 @@ export class FlexTenentComponent implements OnInit {
 
   }
   handlePage = (value: any) => {
-    console.log(value);
-    if (value.pageIndex) {
-      console.log(value.pageIndex);
-      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-      this.currentPage = pageIndex;
-      console.log(this.currentPage);
-      // this.getTenentList();
-      // }
-
-    }
-    if (value.pageSize) {
-      console.log(value.pageSize);
-      this.pageSize = value.pageSize;
-      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-      this.currentPage = pageIndex;
-      this.getTenentList();
-    }
-
-
-    // console.log(value.pageSize)
-
-    // this.currentPage = value.pageIndex;
-
+   this.pageSize = value.pageSize;
+    this.currentPage = value.pageIndex + 1;
+    this.getTenentList();
   }
 
   blockTenant = (name: any, id: any) => {

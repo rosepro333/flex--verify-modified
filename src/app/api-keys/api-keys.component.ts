@@ -138,7 +138,7 @@ export class ApiKeysComponent implements OnInit {
       }
       this.service.getSdkKeyList(data).subscribe((res) => {
         this.sdkKeyData = res.msg === 'success' ? res.data : '';
-        console.log(this.sdkKeyData);
+        console.log(this.sdkKeyData.length);
       });
     } else if (this.accessType === '3') {
       const tenentId = Cookie.get('Tenant_ID');

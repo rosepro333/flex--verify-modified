@@ -14,7 +14,7 @@
         }
     }
     .login-right {
-        background: #fbfbfb;
+        // background: #fbfbfb;
         padding: 20px;
         .app-logo {
             width: 140px;
@@ -34,6 +34,7 @@
                 background: #21b371;
                 top: 4px;
             }
+
         }
         .mat-button {
             margin: 10px 0;
@@ -64,3 +65,16 @@
         }
     }
 }
+// .mat-form-field-flex{
+//   border: 5px solid black;
+// }
+// .mat-form-field-outline {
+//   color: white;
+//   border: 5px solid;
+// }
+// .mat-form-field-outline-start, .mat-form-field-outline-end {
+  // box-shadow: 5px 10px;
+  // border: 5px solid black;
+    // border-radius: 0 !important;
+// }
+

@@ -27,7 +27,7 @@
                 <div class="data-wrap">
                     <div class="title">Date and Time</div>
                     <div class="value">
-                        {{details?.createdAt}}
+                        {{details?.createdAt | date:'dd-MM-yyyy, h:mm:ss a'}}
                     </div>
                 </div>
                 <div class="data-wrap">
@@ -129,7 +129,7 @@
                 </ng-container>
                 <ng-container matColumnDef="dateTime">
                     <th mat-header-cell *matHeaderCellDef> Date & Time </th>
-                    <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'dd-MM-yyyy h:mm' }} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'dd-MM-yyyy, h:mm:ss a' }} </td>
                 </ng-container>
                 <ng-container matColumnDef="ipAddress">
                     <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -144,7 +144,6 @@
                 <tr class="mat-row" *matNoDataRow>
                   <td class="mat-cell" colspan="5">
                     <img class="noDataFound" src="assets/empty-tray.svg"/>
-                    <!-- <div class="noDataFound"></div> -->
                   </td>
                 </tr>
             </table>

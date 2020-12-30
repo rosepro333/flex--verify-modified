@@ -60,6 +60,16 @@
             color: #ffc107;
             border: 1px solid #ffc107;
         }
+        &.rejected {
+            background: #f1dbdb;
+            color: #f51414;
+            border: 1px solid #e04d4d;
+        }
+        &.submitted {
+            background: #e2fff2;
+            color: #22d484;
+            border: 1px solid #21b371;
+        }
     }
 }
 
@@ -75,3 +85,15 @@
 .example-sidenav {
     width: 20%;
 }
+img.noDataFound {
+  width: 150px;
+  height: 150px;
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+// .filter-wrap  {
+//   margin-top: 30px;
+//   // padding-top: 50px;
+//   height: 10px;
+// }

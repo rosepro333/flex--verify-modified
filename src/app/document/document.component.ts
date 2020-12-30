@@ -47,7 +47,11 @@ export class DocumentComponent implements OnInit {
   selectedDocStatus = '';
   selectedTenentType = '';
   dataSource = new MatTableDataSource();
-  pageSizeOptions = [10, 25, 50, 100];
+  pageSizeOptions = [2, 25, 50, 100];
+  pageSize = 2;
+  totalSize = 0;
+  currentPage = 1;
+  page = 0;
   displayedColumns: string[] = [
     'doc-scan-id',
     'date-time',
@@ -77,6 +81,29 @@ export class DocumentComponent implements OnInit {
       this.getTenentList();
     }
     this.docdumentsList();
+  }
+  handlePage(value: any) {
+    console.log(value)
+    this.pageSize = value.pageSize;
+    this.currentPage = value.pageIndex + 1;
+    this.docdumentsList();
+    // console.log(value);
+    // if (value.pageIndex) {
+
+    //   const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
+    //    console.log(pageIndex)
+    //   this.currentPage = pageIndex;
+    //   console.log(this.currentPage);
+    //   this.docdumentsList();
+    // }
+    // if (value.pageSize) {
+    //   console.log(value.pageSize)
+    //   this.pageSize = value.pageSize;
+    //   const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
+    //   this.currentPage = pageIndex;
+    //   console.log(this.currentPage);
+    //   this.docdumentsList();
+    // }
   }
   checkSelectButton = () => {
     // console.log(this.selectedDocs);
@@ -213,22 +240,22 @@ export class DocumentComponent implements OnInit {
     }
     const data = {
       Tenant_ID: this.tenentId,
-      limit: '10',
-      pageNo: '1',
+      limit: this.pageSize,
+      pageNo: this.currentPage,
       order: '-1',
       search: this.search,
       startDate: this.startDate,
       endDate: this.endDate,
       fieldName: this.selectedDocs,
-      fieldValue: '',
       status: this.selectStatustype
     };
     console.log(data);
     this.serviceService.scanDocByTenent(data).subscribe((res) => {
       if (res.msg === 'success') {
         if (res.data) {
+          this.totalSize= res.length;
           this.dataSource.data = res.data;
-          console.log(res.data);
+          console.log( this.dataSource.data);
         } else if (!res.datas) {
           this.dataSource.data.slice(0, this.dataSource.data.length);
           console.log(res.datas);
@@ -238,7 +265,6 @@ export class DocumentComponent implements OnInit {
               this.dataSource.data.push(i.doc);
             } else {
               this.dataSource.data = [];
-              // .push(i.doc);
             }
           });
         } else {

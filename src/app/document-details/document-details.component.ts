@@ -73,11 +73,11 @@ export class DocumentDetailsComponent implements OnInit {
   dateOfBirth: any;
   document: any = [];
   scanDocument: any = [];
+  scanIdDetails: any = [];
   commentsData: any = [];
   docId = '';
   scanId= '';
   resutData: any = [];
-  scanId$ = '';
 
   documentIdType: any = [
     { value: 'Nationality Identify Card' },
@@ -130,13 +130,12 @@ export class DocumentDetailsComponent implements OnInit {
           this.scanDocument.slice(0, this.scanDocument.length)
           this.scanDocument.push(res[0]);
           this.scanId = res[0]._id;
-          this.scanId$ = res[0].Scan_ID;
+          this.scanIdDetails=  res[0];
+          console.log(this.scanIdDetails);
           this.scanDocumentById(this.scanId);
         }
         console.log(res);
         this.dataSource = res;
-        // console.log(this.dataSource);
-        // this.scanDocument = res;
         console.log(res[0])
         this.scanDocument.map((i: any, index: string | number) => {
           console.log(i.idExpiryDate);
@@ -237,15 +236,16 @@ export class DocumentDetailsComponent implements OnInit {
     });
   }
   nextScan(id: any){
-    // console.log(id);
-
     this.serviceServive.getScanDocumentById(id).subscribe((res) =>{
       console.log(res)
       this.scanDocument.slice(0, this.scanDocument.length)
        if(res.msg === 'success'){
-          // this.scanDocument.push(res.data)
           this.scanDocument = [res.data];
-          this.scanId$ = res.data.Scan_ID;
+          // res.data.map((i: any, index) => {
+             res.data['deviceSignature'] =JSON.parse(res.data.deviceSignature);
+          // })
+          this.scanIdDetails=  res.data;
+          console.log(this.scanIdDetails);
           console.log(this.scanDocument);
           this.sideNav.close()
         }
@@ -283,14 +283,6 @@ export class DocumentDetailsComponent implements OnInit {
         this.isLiveCheck = true;
       }
     }
-    if(type === 'scanResult'){
-      // if(value == 'clear'){
-      //   this.isScanResults =false
-      // }else{
-      //   this.isScanResults =true
-      // }
-    }
-    // this.ID_Type = idType;
   }
   submitScanResult = (form: NgForm) => {
     const data = {
@@ -338,15 +330,15 @@ export class DocumentDetailsComponent implements OnInit {
   }
 
   onSave = (form: NgForm, scanId: any) => {
-    form.value.scanResultStatus = this.scanResultStatus;
-    form.value.ID_Type = this.ID_Type;
-    form.value.idCardFrontStatus = this.idCardFrontStatus;
-    form.value.idCardBackStatus = this.idCardBackStatus;
-    form.value.liveCheckingStatus = this.liveCheckingStatus;
-    console.log(form.value);
+    // form.value.scanResultStatus = this.scanResultStatus;
+    // form.value.ID_Type = this.ID_Type;
+    // form.value.idCardFrontStatus = this.idCardFrontStatus;
+    // form.value.idCardBackStatus = this.idCardBackStatus;
+    // form.value.liveCheckingStatus = this.liveCheckingStatus;
+    // console.log(form.value);
     const id = scanId;
     const data = {
-      ID_Type:form.value.scanResultStatus,
+      ID_Type:form.value.ID_Type,
       idCardNo: form.value.idCardNo,
       firstName: form.value.firstName,
       lastName: form.value.lastName,
@@ -357,11 +349,12 @@ export class DocumentDetailsComponent implements OnInit {
       city: form.value.city,
       postalCode: form.value.postalCode,
     }
-    console.log(id)
+    console.log(data)
     this.serviceServive.approvedScanDocument(id, data).subscribe(
       (response) => {
         if(response.msg = 'success'){
            this.sideNav.close();
+           this. nextScan(id);
            this.toast.openSnackBar('Success',response.status);
         }
         console.log(response);
@@ -389,6 +382,9 @@ export class DocumentDetailsComponent implements OnInit {
       console.log(res)
        if(res.msg === 'success'){
           this.resutData = res.data;
+          res.data['deviceSignature'] =JSON.parse(res.data.deviceSignature);
+          this.scanIdDetails =res.data;
+          console.log(this.scanIdDetails);
           console.log(this.resutData);
         }
     },(err) => {
@@ -397,7 +393,9 @@ export class DocumentDetailsComponent implements OnInit {
 
     })
   }
+  clear = () => {};
   sendComment = (scanId: any) => {
+
     const doctId = this.id;
     console.log(doctId + ' vghgvh');
     console.log(scanId);
@@ -410,6 +408,9 @@ export class DocumentDetailsComponent implements OnInit {
       }
     });
     console.log(this.comment);
+    if(!this.comment){
+      return this.toast.openSnackBar('Please Enter Comment','failed');
+    }
     const data = {
       documentId: this.id,
       scanId,
@@ -422,8 +423,12 @@ export class DocumentDetailsComponent implements OnInit {
     this.serviceServive.userComment(data).subscribe((res) => {
       if (res.msg === 'success') {
         this.filterComments(scanId, this.id);
+        this.toast.openSnackBar('Comment Posted','Success');
       }
       console.log(res);
+    },(error: any) => {
+      console.log(error)
+      this.toast.openSnackBar('Comment Post Failed','Success');
     });
     // const data1 = {
     //   user: Cookie.get('id'),

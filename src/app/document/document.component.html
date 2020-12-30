@@ -162,10 +162,11 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns" class="cursor-pointer"
           (click)="moreDetails(row.Document_ID._id)"></tr>
         <tr class="mat-row no-data" *matNoDataRow>
-          <td class="mat-cell" colspan="5">No record found</td>
+          <img class="noDataFound" src="assets/empty-tray.svg"/>
         </tr>
       </table>
-      <mat-paginator class="mat-elevation-z2" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons fxFill>
+       <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
+        [length]="totalSize" [pageIndex]="page" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
       </mat-paginator>
     </div>
 
