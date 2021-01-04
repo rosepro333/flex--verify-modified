@@ -13,6 +13,9 @@ export class ReportService {
   httpOptions = {
     headers: new HttpHeaders()
   };
+  emailConfiguration(id: any,data: any): Observable<any> {
+    return this.http.patch(this.apiUrl + '/tenent/emailConfiguation/'+ id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   mobileActivity(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/userAppLog/list/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }

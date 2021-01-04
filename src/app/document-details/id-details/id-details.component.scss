@@ -1,0 +1,44 @@
+.input{
+  display:none;
+}
+.mat-button{
+  min-width: 0px;
+}
+.close-button{
+  float: right;
+  top:36px;
+  right:3px;
+  color: #ffffff;
+  background:#21b371;
+}
+.img{
+  height: 100%;
+  width:850px;
+}
+.inputbox{
+  display: none;
+}
+.custom-dialog-container.mat-dialog-container {
+    display: block;
+    padding: 0px;
+    border-radius: 0px;
+    box-sizing: border-box;
+    overflow: auto;
+    outline: 0;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    max-height: inherit;
+}
+// .mat-dialog-container {
+//     display: block;
+//     padding: 24px;
+
+//     box-sizing: border-box;
+//     overflow: auto;
+//     outline: 0;
+//     width: 100%;
+//     height: 100%;
+//     min-height: inherit;
+//     max-height: inherit;
+// }

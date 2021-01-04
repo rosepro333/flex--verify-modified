@@ -80,6 +80,7 @@ export class FlexUserComponent implements OnInit {
     this.formControl();
   }
   selectTenentUser = (value: any) => {
+    this.search = '';
      console.log(value)
      this.tenentUser = value;
      this.getUserList();
@@ -156,12 +157,8 @@ export class FlexUserComponent implements OnInit {
   applyUserFilter = () => {
     console.log(this.search)
     this.getUserList();
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSourceUser.filter = filterValue.trim().toLowerCase();
   }
   applyTenantFilter = ( event: Event) => {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSourceTenant.filter = filterValue.trim().toLowerCase();
   }
   handlePage(value: any) {
     this.pageSize = value.pageSize;
@@ -360,7 +357,7 @@ export class FlexUserComponent implements OnInit {
         this.form.get('tenent').enable();
       }else if(data){
         this.userEdit = data;
-        this.form.patchValue({name: this.userEdit.Contact_Name,email: this.userEdit.Contact_Email,access: this.userEdit.Access_Type,tenent: this.userEdit.Tenant_ID._id})
+        this.form.patchValue({name: this.userEdit.Contact_Name,email: this.userEdit.Contact_Email,access: this.userEdit.Access_Type,tenent: this.userEdit.Tenant_ID?._id})
         console.log(data);
         this.form.get('email').disable();
         this.form.get('access').disable();

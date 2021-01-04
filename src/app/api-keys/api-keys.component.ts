@@ -17,6 +17,7 @@ export class ApiKeysComponent implements OnInit {
   constructor(public dialog: MatDialog, private service: ServicesService) { }
   accessType = '';
   tenetId = '';
+  tenentID = '';
   userId = '';
   pageSizeOptions = [2, 25, 50, 100];
   pageSize = 10;
@@ -36,16 +37,9 @@ export class ApiKeysComponent implements OnInit {
   }
  getTenentList = () => {
     if (this.accessType === '1') {
-      const data = {
-        "Tenant_ID": "",
-        "limit": 10,
-        "pageNo": 1,
-        "order": "-1",
-        "search": "",
-        "startDate": "",
-        "endDate": "",
-        "status": ""
-      }
+       const data ={
+        "isBlocked":true
+      };
       this.service.getTenentList(data).subscribe((res) => {
         // console.log(res);
         if (res.msg === 'success') {
@@ -70,6 +64,9 @@ export class ApiKeysComponent implements OnInit {
         }
       });
     }
+    // else if(this.accessType === '3'){
+    //   this.tenentID = this.tenetId
+    // }
   }
   copyKey = () => {
     // alert('copy key');

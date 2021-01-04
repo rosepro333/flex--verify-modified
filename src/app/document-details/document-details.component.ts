@@ -6,6 +6,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { FormArray, FormBuilder, FormGroup, NgForm } from '@angular/forms';
@@ -16,17 +17,25 @@ import { error } from '@angular/compiler/src/util';
 import { MatTableDataSource } from '@angular/material/table';
 import { TosterService } from '../toster/toster.service';
 import { MatSidenav } from '@angular/material/sidenav';
-
+import { Platform } from '@angular/cdk/platform';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { NgxImgZoomService } from "ngx-img-zoom";
+import * as $ from 'jquery';
+import { MatDialog } from '@angular/material/dialog';
+import { IdDetailsComponent } from './id-details/id-details.component';
+// declare var $: any;
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-document-details',
   templateUrl: './document-details.component.html',
   styleUrls: ['./document-details.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentDetailsComponent implements OnInit {
   @ViewChild('rightDrawer', { static: false }) sideNav: MatSidenav;
   displayedColumns: string[] = ['scanId', 'scanDate', 'status'];
+
   dataSource: any = [];
   // new MatTableDataSource();
   disabled = false;
@@ -65,10 +74,13 @@ export class DocumentDetailsComponent implements OnInit {
   public selefieMatchPercengates = '';
   public scanResults = '';
   public scanResultComment = '';
+  public fullImageDisplay:boolean = false;
   isIdStatus = false;
   isAddressStatus = false;
   isLiveCheck = false;
   isScanResults = false;
+  isOverLay = false;
+  // mailScreen = true;
   form: FormGroup;
   dateOfBirth: any;
   document: any = [];
@@ -109,14 +121,21 @@ export class DocumentDetailsComponent implements OnInit {
   isScanHistory: boolean;
   isScanResult: boolean;
   isComments: boolean;
+  enableZoom: Boolean = true;
+  previewImageSrc: any = '';
+  zoomImageSrc: any= '';
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private serviceServive: ServicesService,
     private cd: ChangeDetectorRef,
     private toast: TosterService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private ngxImgZoom: NgxImgZoomService,
+    public dialog: MatDialog
+  ) {
+    this.ngxImgZoom.setZoomBreakPoints([{w: 100, h: 100}, {w: 150, h: 150}, {w: 200, h: 200}, {w: 250, h: 250}, {w: 300, h: 300}]);
+  }
 
   async ngOnInit(): Promise<void> {
     this.id = this.route.snapshot.params['id'];
@@ -127,9 +146,25 @@ export class DocumentDetailsComponent implements OnInit {
     // tslint:disable-next-line:no-string-literal
 
     this.checkAccessType();
-
-
   }
+  preview = (value: any) => {
+    const img = `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${value}?alt=media`
+    console.log(img);
+    this.previewImageSrc = img;
+    this.zoomImageSrc = img;
+  }
+  overLayImage = (value: string) => {
+    const img = `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${value}?alt=media`;
+    const dialogRef = this.dialog.open(IdDetailsComponent,{
+      panelClass: 'custom-dialog-container',
+      width: '900px',
+      data: { img:img }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+        // this.ngOnInit();
+      });
+  }
+
   documentLoad = async() => {
     await this.getAllScanDocumentById(this.id)
       .then((res) => {
@@ -225,6 +260,24 @@ export class DocumentDetailsComponent implements OnInit {
       this.docId = response.data._id;
     });
   }
+  donwLoad = () => {
+    const printContent = document.getElementById("id-card1");
+    //  pdfMake.createPdf(printContent).open();
+    // const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
+    const WindowPrt = window.open();
+    // const WindowPrt :any = window.open();
+    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="./../../assets/css/style.scss">');
+    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="./document-details.component.scss">');
+    WindowPrt.document.write(printContent.innerHTML);
+    WindowPrt.document.close();
+    WindowPrt.focus();
+    WindowPrt.print();
+    // WindowPrt.close();
+
+
+
+  }
+
   getAllScanDocumentById = (id: any) => {
     return new Promise((resolve, reject) => {
       this.serviceServive.geScanDocumentList(id).subscribe(
@@ -243,7 +296,7 @@ export class DocumentDetailsComponent implements OnInit {
     this.serviceServive.getUserDetails(id).subscribe((res) => {
       console.log('2');
       // console.log(res.data.Contact_Name);
-      this.userName = res.data.Contact_Name;
+      this.userName = res.data?.Contact_Name;
     });
   }
   nextScan(id: any){

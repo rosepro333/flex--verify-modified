@@ -41,7 +41,7 @@
           <mat-form-field appearance="outline" fxFill *ngIf="isTenent" >
             <mat-label>Select Tenent</mat-label>
             <mat-select disableRipple (selectionChange)="selectTenent($event.value)" formControlName="tenent" >
-              <mat-option *ngFor="let tenent of tenentList" [value]="tenent._id">{{ tenent.Name }}</mat-option>
+              <mat-option *ngFor="let tenent of tenentList" [value]="tenent?._id">{{ tenent.Name }}</mat-option>
             </mat-select>
           </mat-form-field>
           <div class="sticky-bottom-bar">
@@ -139,14 +139,14 @@
         </div> -->
         <div class="sticky-bottom-bar">
           <div class="button-wrap" fxLayout="row wrap" fxLayoutAlign="space-between center">
-            <button mat-button type="button" class="delete-button-black" (click)="deleteUser(detailsDetails.Contact_Name,detailsDetails._id)">
+            <button mat-button type="button" class="delete-button-black" (click)="deleteUser(detailsDetails.Contact_Name,detailsDetails?._id)">
               <mat-icon>delete</mat-icon>
               Delete
             </button>
             <button mat-button class="primary-button" type="button" (click)="rightDrawer.open();clicked('create-user',detailsDetails)">
               Edit
             </button>
-            <button mat-button class="clear-button" type="button" (click)="blockUser(detailsDetails.Contact_Name,detailsDetails._id)">
+            <button mat-button class="clear-button" type="button" (click)="blockUser(detailsDetails.Contact_Name,detailsDetails?._id)">
               <mat-icon>block</mat-icon>
               Block
             </button>
@@ -175,7 +175,7 @@
           <mat-form-field class='form-rows' appearance="outline" fxFlex *ngIf="accessType !== '3'">
             <mat-label>Tenent List</mat-label>
             <mat-select (selectionChange)="selectTenentUser($event.value)">
-              <mat-option  *ngFor ="let i of tenentList" [value]="i._id" >{{i.Name}}</mat-option>
+              <mat-option  *ngFor ="let i of tenentList" [value]="i?._id" >{{i.Name}}</mat-option>
               <!-- <mat-option value="Owner2">Owner 2</mat-option>
               <mat-option value="Owner3">Owner 3</mat-option> -->
             </mat-select>

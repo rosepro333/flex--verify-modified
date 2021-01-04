@@ -73,6 +73,11 @@ import { PortalActivityReportComponent } from './reports/portal-activity-report/
 import { ScanReportComponent } from './reports/scan-report/scan-report.component';
 import { ReportService } from './service/report.service';
 import { NotificationComponent } from './notification/notification.component';
+import { EmailComponent } from './notification/email/email.component';
+import { SmsComponent } from './notification/sms/sms.component';
+import { NgxImgZoomModule  } from 'ngx-img-zoom';
+import * as $ from 'jquery';
+import { IdDetailsComponent } from './document-details/id-details/id-details.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -109,7 +114,10 @@ import { NotificationComponent } from './notification/notification.component';
     UserAboutComponent,
     PortalActivityReportComponent,
     ScanReportComponent,
-    NotificationComponent
+    NotificationComponent,
+    EmailComponent,
+    SmsComponent,
+    IdDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -144,7 +152,8 @@ import { NotificationComponent } from './notification/notification.component';
     CarouselModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    NgxImgZoomModule
   ],
   providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService, ServicesService,ReportService,
     { provide: HTTP_INTERCEPTORS, useClass: MainInterceptor, multi: true }],

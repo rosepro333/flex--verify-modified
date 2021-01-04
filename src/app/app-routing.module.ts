@@ -26,11 +26,13 @@ import { MobileActivityReportComponent } from './reports/mobile-activity-report/
 import { UserAboutComponent } from './user-about/user-about.component';
 import { ScanReportComponent } from './reports/scan-report/scan-report.component';
 import { NotificationComponent } from './notification/notification.component';
+import { EmailComponent }  from './notification/email/email.component';
+import { SmsComponent  } from './notification/sms/sms.component';
 const routes: Routes = [
   {
     path: '',
     component: HomeLayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -104,6 +106,14 @@ const routes: Routes = [
       {
         path: 'notification',
         component: NotificationComponent,
+      },
+      {
+        path: 'email',
+        component: EmailComponent,
+      },
+      {
+        path: 'sms',
+        component: SmsComponent,
       },
     ],
   },

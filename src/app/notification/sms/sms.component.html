@@ -1,0 +1,73 @@
+<mat-drawer-container autosize>
+  <mat-drawer #rightDrawer class="right-side-drawer" mode="over" position="end">
+    <div *ngIf="isCreateUser">
+      <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
+        <div >
+          Configure Email
+        </div>
+        <div class="header-buttons">
+          <button mat-icon-button (click)="rightDrawer.close()" class="close-button">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+      <form [formGroup]="form" class="drawer-data" (ngSubmit)="onSave()">
+        <div fxLayout="column">
+          <mat-form-field class='form-rows' appearance="outline" fxFlex *ngIf="accessType !== '3'">
+            <mat-label>Tenent List</mat-label>
+            <mat-select (selectionChange)="selectTenentList($event.value)">
+              <mat-option  *ngFor ="let i of tenentList" [value]="i._id" >{{i.Name}}</mat-option>
+
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill >
+            <mat-label>Email Service Provider</mat-label>
+            <mat-select formControlName="access" (selectionChange)="roleSelect($event.value)">
+              <mat-option value="mailGun">MailGun</mat-option>
+              <mat-option value="sendGrid">SendGrid</mat-option>
+            </mat-select>
+          </mat-form-field>
+           <mat-form-field appearance="outline" fxFill >
+            <mat-label>Api Key</mat-label>
+            <input matInput formControlName="email" />
+          </mat-form-field>
+           <mat-form-field appearance="outline" fxFill >
+            <mat-label>Domain</mat-label>
+            <input matInput formControlName="email" />
+          </mat-form-field>
+          <div class="sticky-bottom-bar">
+            <div class="button-wrap">
+              <button mat-button type="button" class="cancel-button" (click)="rightDrawer.close()">
+                cancel
+              </button>
+              <button mat-button class="primary-button" *ngIf="!userEdit;" type="submit">
+                Save
+              </button>
+              <button mat-button class="primary-button" *ngIf="userEdit;" type="button" (click)="editUser()">
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar>
+  <span>Notifications</span>
+</mat-toolbar>
+<div class="settings-wrap">
+  <div class="tiles-wrap" fxLayout="row wrap" fxLayoutAlign="start start" >
+    <mat-card class="tile cursor-pointer"  fxLayout="column" fxLayoutAlign="end center" (click)="rightDrawer.open();clicked('create-user',detailsDetails)">
+      <i class="material-icons fs-40">drafts</i>
+      <div class="title">Email</div>
+    </mat-card>
+    <mat-card class="tile cursor-pointer" fxLayout="column"  fxLayoutAlign="end center">
+      <i class="material-icons fs-40">notifications_none</i>
+      <div class="title">sms</div>
+    </mat-card>
+  </div>
+</div>
+
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -1,8 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSidenav } from '@angular/material/sidenav';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { ReportService } from '../service/report.service';
 import { ServicesService } from '../service/services.service';
+import { TosterService } from '../toster/toster.service';
 
 @Component({
   selector: 'app-notification',
@@ -10,52 +18,76 @@ import { ServicesService } from '../service/services.service';
   styleUrls: ['./notification.component.scss']
 })
 export class NotificationComponent implements OnInit {
-
-  scanReport: any = [{name: 'All', value: 'All'},
-  {name: 'Submitted', value: 'submitted'},
-  {name: 'Incomplete', value: 'Incomplete'},
-  {name: 'Rejected', value: 'Rejected'},
-  {name: 'Verified', value: 'Verified'},];
-  displayedColumns: string[] = ['docId', 'activity', 'dateTime', 'appVersion', 'ipAddress'];
-  dataSource: any = [];
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  pageSizeOptions = [2, 25, 50, 100];
-  pageSize = 10;
-  totalSize = 0;
-  currentPage = 1;
-  search = '';
+@ViewChild('rightDrawer', { static: false }) sideNav: MatSidenav;
+  // public data:any=[]
+  showFiller = false;
   tenentList: any = [];
-  details: any = [];
-  selectedTenent = '';
-  selectedStatus = '';
-  startDate: any = moment().startOf('day').toISOString();
-  endDate: any = moment().endOf('day').toISOString();
-  constructor(private service: ServicesService, private report: ReportService) { }
+  tenentId = '';
+  detailsDetails:any = [];
+  form: FormGroup;
+  accessType = '';
+  tenetId = '';
+  userId = '';
+  isOPen = false;
+  isCreateUser: boolean;
+  isUserDetails: boolean;
+  tenentUser = 'All';
+  selectedRole = 'All';
+  userEdit: any = [];
+  isTenent = false;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+  constructor(
+    private serviceService: ServicesService,
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private router: Router,
+    private service: ServicesService,
+    private toster: TosterService,
+    private report: ReportService
+  ) { }
+
   ngOnInit(): void {
+    this.accessType = Cookie.get('Access_Type');
+    this.tenetId = Cookie.get('Tenant_ID');
     this.getTenentList();
-    this.scanReports();
+    this.formControl();
   }
-  selectStatus = (value: any) => {
-    console.log(value);
-    this.selectedStatus = value;
-     this.scanReports();
+  selectTenentList = (value: any) => {
+     console.log(value)
+     this.tenentId = value;
   }
-  // searchFilter = () => {
-  //   console.log(this.search)
-  // }
-  getTenentList(){
-     const data ={
+  selecetMailService = (value: any) => {
+    console.log(value)
+  }
+  roleSelect = (value: any) => {
+    if(value <= 2){
+      this.isTenent = false;
+      //  console.log(value);
+    }else{
+      this.isTenent = true;
+       console.log(value);
+    }
+  }
+
+  clear = () => {
+  }
+  formControl = () => {
+    this.form = this.fb.group({
+      tenent: new FormControl('',),
+      serviceProvider: new FormControl('',[Validators.required,]),
+      apiKey: new FormControl('',[Validators.required,]),
+      domain: new FormControl('',[Validators.required,]),
+    });
+  }
+  getTenentList = () => {
+    if (this.accessType === '1') {
+      const data = {
         "isBlocked":true
-      };
+      }
       this.service.getTenentList(data).subscribe((res) => {
         // console.log(res);
         if (res.msg === 'success') {
-           this.tenentList.splice(0,this.tenentList.length);
+          this.tenentList.splice(0,this.tenentList.length);
           res.data.map((i: any, index: number) =>{
             const obj = {};
             if(index === 0){
@@ -71,67 +103,88 @@ export class NotificationComponent implements OnInit {
               obj['Name'] = i.Name;
               this.tenentList.push(obj);
             }
+            console.log(this.tenentList)
           })
         }
       });
-  }
-  selectDate1 = (value: any) => {
-    console.log(value);
-    this.startDate = moment(value).utc().toISOString();
-  }
-  selectDate2 = (value: any) => {
-    this.endDate = moment(value).utc().toISOString();
-    console.log(moment(value).utc().toISOString());
-    if (value) {
-      this.scanReports();
+    } else if (this.accessType === '3') {
+      const data ={
+        Tenant_ID:this.tenetId,
+        isBlocked:true
+      }
+      console.log(data)
+      this.service.getTenentList(data).subscribe((res) => {
+      // console.log(res);
+      if (res.msg === 'success') {
+        this.tenentList = res.data;
+        this.tenentId = this.tenentList[0]._id;
+        this.form.get('tenent').disable();
+        this.form.patchValue({tenent: this.tenentId});
+        console.log(res.data);
+      }
+    });
     }
   }
   selectTenent = (value: any) => {
-    console.log(value)
-    this.selectedTenent = value;
-    this.scanReports()
+    this.tenentId = value;
   }
-  scanDetails = (value: any) => {
-    console.log(value)
-    this.details = value;
-  }
-  handlePage = (value: any) => {
-    this.search = '';
-    console.log(value);
-    if (value.pageIndex) {
-      console.log(value.pageIndex);
-      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-      this.currentPage = pageIndex;
-      console.log(this.currentPage);
-      this.scanReports();
-    }
-    if (value.pageSize) {
-      console.log(value.pageSize);
-      this.pageSize = value.pageSize;
-      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-      this.currentPage = pageIndex;
-      this.scanReports();
-    }
-  }
-  scanReports = () => {
+
+  onSave = (form) => {
+    console.log(form.value)
+    const id = this.tenentId;
     const data = {
-      Tenant_ID:this.selectedTenent,
-      limit:this.pageSize,
-      pageNo:this.currentPage,
-      order:"-1",
-      startDate:this.startDate,
-      endDate:this.endDate,
-      status:this.selectedStatus
+    emailServiceProvider: form.value.serviceProvider,
+    apiKey: form.value.apiKey,
+    domain:form.value.domain
     }
-    this.report.scanReport(data).subscribe((res) => {
+    console.log(id);
+    console.log(data)
+    this.report.emailConfiguration(id, data).subscribe((res) => {
       console.log(res)
       if(res.msg === 'success'){
-        this.totalSize = res.length;
-        this.dataSource =res.data;
+        this.toster.openSnackBar('Successfully Configured Email', 'Success');
+        this.form.reset();
+        this.sideNav.close();
       }
-    }, (err) => {
+    },(err: any) => {
       console.log(err)
     })
+  }
+
+  audits = (data: any) => {
+    this.service.audit(data).subscribe((res) => {
+      console.log(res);
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
+  clicked(a, data) {
+    console.log(a,data);
+    if (a == 'create-user') {
+      if(data === null){
+        this.userEdit = '';
+        this.form.reset();
+        this.form.get('email').enable();
+        this.form.get('access').enable();
+        this.form.get('tenent').enable();
+      }else if(data){
+
+      }
+        this.isCreateUser = true;
+        this.isUserDetails = false;
+
+    } else if (a == 'user-details') {
+      this.detailsDetails = data;
+      console.log(this.detailsDetails);
+      this.isCreateUser = false;
+      this.isUserDetails = true;
+    }
+    else {
+      console.log('3')
+      this.isCreateUser = false;
+      this.isUserDetails = false;
+    }
+    // console.log(id);
   }
 
 }

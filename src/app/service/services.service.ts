@@ -117,16 +117,9 @@ export class ServicesService {
       .pipe(retry(1), catchError(this.handleError));
   }
   createApiKey(data: any): Observable<any> {
-    if (data.Tenent !== '' && data.mode !== '') {
-      const apiKeyData = {
-        Tenent_ID: data.Tenent,
-        Mode: data.mode,
-      };
-      console.log();
       return this.http
-        .post(this.apiUrl + '/apikey', apiKeyData, this.httpOptions)
+        .post(this.apiUrl + '/apikey', data, this.httpOptions)
         .pipe(retry(1), catchError(this.handleError));
-    }
   }
   getApiKeyListById(id: any): Observable<any> {
     return this.http

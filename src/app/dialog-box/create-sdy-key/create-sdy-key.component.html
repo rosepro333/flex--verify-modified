@@ -5,7 +5,7 @@
       <mat-form-field appearance="outline" class="field-wrap" fxFlex.gt-md="100" fxFlex.md="100" fxFlex.lt-md="100"
         fxFlex.lt-sm="100">
         <mat-label>Select Tenent</mat-label>
-        <mat-select disableRipple (selectionChange)="selectTenent($event.value)">
+        <mat-select formControlName="Tenent" disableRipple (selectionChange)="selectTenent($event.value)">
           <mat-option *ngFor="let tenent of tenentList" [value]="tenent._id">{{
             tenent.Name
             }}</mat-option>

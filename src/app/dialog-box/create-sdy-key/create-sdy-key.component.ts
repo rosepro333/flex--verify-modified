@@ -12,8 +12,10 @@ import { ServicesService } from 'src/app/service/services.service';
 })
 export class CreateSdyKeyComponent implements OnInit {
   form: FormGroup;
+  accessType = '';
   tenentList: any = [];
   tenentId = '';
+  tenetId = '';
 
   constructor(
     private fb: FormBuilder,
@@ -23,6 +25,8 @@ export class CreateSdyKeyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.accessType = Cookie.get('Access_Type');
+    this.tenetId = Cookie.get('Tenant_ID');
     this.formControl();
     this.getTenentList();
   }
@@ -33,13 +37,33 @@ export class CreateSdyKeyComponent implements OnInit {
     });
   }
   getTenentList = () => {
-    const data ={}
-    this.service.getTenentList(data).subscribe((res) => {
+    if (this.accessType === '1' || this.accessType === '2') {
+      const data ={
+        "isBlocked":true
+      };
+      this.service.getTenentList(data).subscribe((res) => {
+        console.log(res);
+        if (res.msg === 'success') {
+          this.tenentList = res.data;
+        }
+      });
+    } else if (this.accessType === '3' || this.accessType === '4') {
+      const data ={
+        Tenant_ID:this.tenetId,
+        isBlocked:true
+      }
+      console.log(data)
+      this.service.getTenentList(data).subscribe((res) => {
       // console.log(res);
       if (res.msg === 'success') {
         this.tenentList = res.data;
+        this.tenentId =this.tenentList[0]._id;
+        this.form.get('Tenent').disable();
+        this.form.patchValue({Tenent: this.tenentId});
+        console.log(res.data);
       }
     });
+    }
   }
   selectTenent = (value: any) => {
     this.tenentId = value;
