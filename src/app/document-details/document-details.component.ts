@@ -24,6 +24,7 @@ import { NgxImgZoomService } from "ngx-img-zoom";
 import * as $ from 'jquery';
 import { MatDialog } from '@angular/material/dialog';
 import { IdDetailsComponent } from './id-details/id-details.component';
+import { ReportService } from '../service/report.service';
 // declare var $: any;
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
@@ -132,7 +133,8 @@ export class DocumentDetailsComponent implements OnInit {
     private toast: TosterService,
     private router: Router,
     private ngxImgZoom: NgxImgZoomService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private report: ReportService
   ) {
     this.ngxImgZoom.setZoomBreakPoints([{w: 100, h: 100}, {w: 150, h: 150}, {w: 200, h: 200}, {w: 250, h: 250}, {w: 300, h: 300}]);
   }
@@ -260,18 +262,21 @@ export class DocumentDetailsComponent implements OnInit {
       this.docId = response.data._id;
     });
   }
-  donwLoad = () => {
-    const printContent = document.getElementById("id-card1");
-    //  pdfMake.createPdf(printContent).open();
-    // const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
-    const WindowPrt = window.open();
-    // const WindowPrt :any = window.open();
-    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="./../../assets/css/style.scss">');
-    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="./document-details.component.scss">');
-    WindowPrt.document.write(printContent.innerHTML);
-    WindowPrt.document.close();
-    WindowPrt.focus();
-    WindowPrt.print();
+  donwLoad = (data:any) => {
+    this.router.navigateByUrl('/print')
+    this.report.printAbleData(data);
+    // window.open('/print');
+    // const printContent = document.getElementById("id-card1");
+    // //  pdfMake.createPdf(printContent).open();
+    // // const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
+    // const WindowPrt = window.open();
+    // // const WindowPrt :any = window.open();
+    // WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="./../../assets/css/style.scss">');
+    // WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="./document-details.component.scss">');
+    // WindowPrt.document.write(printContent.innerHTML);
+    // WindowPrt.document.close();
+    // WindowPrt.focus();
+    // WindowPrt.print();
     // WindowPrt.close();
 
 

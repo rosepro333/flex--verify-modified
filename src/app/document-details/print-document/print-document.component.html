@@ -1,0 +1,206 @@
+<div id = 'main' fxLayout="column wrap" class="main-wrap">
+  <div  fxLayout="row" fxLayoutGap="50px">
+    <div class="filed-left">
+      <h2 >{{printData?.firstName}} {{printData?.lastName}}</h2>
+    </div>
+  </div>
+   <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>Document Id</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.Document_ID}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px" >
+    <div class="filed-left" fxFlex='15'>
+      <p>ScanID</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.Scan_ID}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>Submitted time</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.updatedAt | date:'DD/MM/YYYY h:mm:ss a'}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>Devide Signature</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.deviceSignature?.browser}},{{printData?.deviceSignature?.browser_version}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>Ip Address</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.ipAddress}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>Mode</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.Mode}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <h2 class="header">Scan Result</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>Status</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.scanResultStatus}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>ID Type</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.ID_Type}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>ID Number</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.idCardNo}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>First Name</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.firstName}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>Last Name</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.lastName}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>Date Of Birth</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.dob | date:'dd-MM-yyyy, h:mm:ss a'}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>ID Expiry Date</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.idExpiryDate| date:'dd-MM-yyyy, h:mm:ss a'}}</h2>
+    </div>
+  </div>
+   <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <h2 class="header">Address</h2>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>Building No</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.Building_No}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>Street Name</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.streetName}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>City</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.city}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>State</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.lastName}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <p>Country</p>
+    </div>
+    <div>
+      <h2 class="details">{{printData?.lastName}}</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <h2 class="header">Id Card</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed1-left" fxFlex='15'>
+       <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.ID_Card_Front}}?alt=media" />
+    </div>
+  </div>
+  <div fxLayout="row" class="pt-4" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+       <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.ID_Card_Back}}?alt=media" />
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px" >
+    <div class="filed-left" fxFlex='15'>
+      <h2 class="header">Profile Image</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='20'>
+      <img  class='liveliness' src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.Selfie_Photo}}?alt=media" />
+    </div>
+    <div fxLayoutAlign="center center">
+      <h2 class="details">{{printData?.selfiePhotoMatchStatus}}%</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxFlex='15'>
+      <h2 class="header">Liveliness</h2>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="8px">
+    <div class="filed-left" fxFlex='17' *ngFor ='let i of printData.LiveCheck_Photos'>
+      <img class='liveliness' src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{i}}?alt=media" />
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left" fxLayoutAlign="center center" fxFlex='100'>
+      <button class="printButton" (click)= 'print()'>Pirnt</button>
+    </div>
+  </div>
+</div>
+

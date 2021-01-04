@@ -28,11 +28,12 @@ import { ScanReportComponent } from './reports/scan-report/scan-report.component
 import { NotificationComponent } from './notification/notification.component';
 import { EmailComponent }  from './notification/email/email.component';
 import { SmsComponent  } from './notification/sms/sms.component';
+import { PrintDocumentComponent } from './document-details/print-document/print-document.component';
 const routes: Routes = [
   {
     path: '',
     component: HomeLayoutComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -142,6 +143,10 @@ const routes: Routes = [
   {
     path: 'resetPassword/:resetUser',
     component: NewPasswordComponent,
+  },
+  {
+    path: 'print',
+    component: PrintDocumentComponent,
   },
 
 ];
