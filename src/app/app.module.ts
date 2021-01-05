@@ -77,7 +77,8 @@ import { EmailComponent } from './notification/email/email.component';
 import { SmsComponent } from './notification/sms/sms.component';
 import { NgxImgZoomModule  } from 'ngx-img-zoom';
 import * as $ from 'jquery';
-import { IdDetailsComponent } from './document-details/id-details/id-details.component'
+import { IdDetailsComponent } from './document-details/id-details/id-details.component';
+import { RightSidenavComponent } from './right-sidenav/right-sidenav.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,7 +118,8 @@ import { IdDetailsComponent } from './document-details/id-details/id-details.com
     NotificationComponent,
     EmailComponent,
     SmsComponent,
-    IdDetailsComponent
+    IdDetailsComponent,
+    RightSidenavComponent
   ],
   imports: [
     BrowserModule,
