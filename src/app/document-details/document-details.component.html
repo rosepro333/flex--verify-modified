@@ -360,7 +360,7 @@
             <ng-container>
               <ng-template class="slide" carouselSlide>
                 <div class="justify-center">
-                  <img
+                  <img (click)="overLayImage(doc?.ID_Card_Back)"
                     src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc.ID_Card_Back}}?alt=media" />
                 </div>
               </ng-template>
