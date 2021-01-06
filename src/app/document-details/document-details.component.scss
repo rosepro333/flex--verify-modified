@@ -40,6 +40,9 @@
       img {
         width: 560px;
         border-radius: 8px;
+        margin:0 auto
+ 
+  
       }
       .justify-center:hover{
         display: flex;
@@ -160,3 +163,56 @@
   z-index: 2;
   cursor: pointer;
 }
+.mat-dialog-container {
+  display: block;
+  padding: 1px !important;
+  border-radius: 4px;
+  box-sizing: border-box;
+  /* overflow: auto; */
+  outline: 0;
+  position: relative;
+  width: 100%;
+  background: unset !important;
+  margin: 0px;
+  box-shadow: unset !important;
+}
+
+@media only screen and (min-width: 1601px) {
+  
+      
+  }
+  
+  @media only screen and (min-width: 1441px) and (max-width: 1600px) {
+
+  
+  }
+  
+  
+  @media only screen and (min-width: 1281px) and (max-width: 1440px) {
+    
+ 
+  }
+  
+  
+  
+  
+  @media only screen and (min-width: 800px) and (max-width: 1280px) {
+  
+  
+  }
+  
+  
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+   
+  }
+  
+  @media only screen and (max-width: 767px) {
+  }
+  
+  @media only screen and (min-width: 480px) and (max-width: 767px) {
+  }
+  
+  @media only screen and (max-width: 479px) {
+     
+  }
+  
