@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   private formSubmitAttempt: boolean;
   deviceInfo: any = [];
+  hide = false;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,

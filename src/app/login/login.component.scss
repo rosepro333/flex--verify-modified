@@ -5,40 +5,95 @@
     //     background: linear-gradient(90deg, #fff 50%, #fbfbfb 50%);
     // }
     .login-left {
-        padding: 20px;
+        background: #F7FFFB;
+        height:100vh;
         // .app-logo {
         //     width: 140px;
         // }
         .login-bg {
-            width: 100%;
+            width: 72%;
+    object-fit: contain;
         }
     }
     .login-right {
         // background: #fbfbfb;
         padding: 20px;
+        height: 100vh;
+        form{
+            width: 300px;
+        }
         .app-logo {
-            width: 140px;
-            margin-bottom: 20px;
+            width: 200px;
+                margin-bottom: 2.5em;
+           
+        }
+        .form-div {
+            margin-left: 14px;
         }
         .header {
             font-size: 24px;
             font-weight: 500;
             line-height: 2;
             position: relative;
-            &::before {
-                content: "";
-                height: 4px;
-                width: 35px;
-                position: absolute;
-                left: 0;
-                background: #21b371;
-                top: 4px;
-            }
+            margin-bottom: 30px;
 
+            
+
+        }
+        .mat-form-field {
+            width: 100%;
+        }
+        img.header-img {
+            margin-left: -8.9em;
+        }
+        label.form-check-label.text-secondary {
+            color: gray;
+            font-size: 13px !important;
+            font-weight: 300;
+        }
+        .forgot-pass {
+            color: gray;
+            font-size: 13px;
+            font-weight: 300;
+            padding:0px;
+        }
+        .visible-pass {
+            color: #888888;
         }
         .mat-button {
             margin: 10px 0;
+            width: 45%;
+    border-radius: 8px;
+            display: flex;
+            justify-content: flex-end;
+        }.button-login{
+            width: 45%;
+            display: flex;
+            justify-content: flex-end;
+            border-radius: 8px;
         }
+        .powered-by-wrapper {
+            position: absolute;
+            bottom: 5px;
+            right: 80px;
+        }
+    }
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+        display: flex;
+        position: absolute;
+        top: .25em;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        box-shadow: 1px 3px 2px #e4e0e0;
+        border-radius: 10px;
+    }
+    .mat-label{
+        color:gray;
+    }
+    .mat-form-field-empty.mat-form-field-label{
+        color: #8080808f;
     }
     @media only screen and (max-width: 959px) {
         .login-left {

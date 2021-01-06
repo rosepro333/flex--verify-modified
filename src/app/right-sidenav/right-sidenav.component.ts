@@ -11,7 +11,12 @@ export class RightSidenavComponent implements OnInit {
   constructor(private  sidenavService: SidebarService) { }
   
   ngOnInit(): void {
-		this.sidenavService.setSidenav(this.sidenav);
-	}
+    this.sidenavService.setSidenav(this.sidenav);
+    
+     
+  }
+  toggleRightSidenav(){
+    this.sidenavService.close() ;
+   }
 
 }

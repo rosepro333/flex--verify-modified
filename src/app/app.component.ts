@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { MatSidenav } from '@angular/material/sidenav';
+import{ SidebarService} from '../app/sidebar/sidebar.service'
 
 @Component({
   selector: 'app-root',
@@ -7,9 +9,11 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  @ViewChild('rightSidenav') public sidenav: MatSidenav;
+  @ViewChild('aboutSidenav') public sidenav1: MatSidenav;
   title = 'flex-verify-dashboard';
   deviceInfo: any = [];
-  constructor() {
+  constructor(private sidenavService: SidebarService) {
   }
 
 }

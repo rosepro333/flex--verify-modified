@@ -4,11 +4,16 @@ import { Cookie } from 'ng2-cookies';
 import { ServicesService } from '../service/services.service';
 import { VerificationUrlComponent } from '../verification-url/verification-url.component';
 import { AuthService } from './../auth/auth.service';
+import {SidebarService} from './sidebar.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
+  host: {
+    "(window:click)": "onClick()"
+  },
   encapsulation: ViewEncapsulation.None,
 })
 export class SidebarComponent implements OnInit {
@@ -21,12 +26,35 @@ export class SidebarComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private service: ServicesService,
-    public viewContainerRef: ViewContainerRef
+    public viewContainerRef: ViewContainerRef,
+    private sidenav: SidebarService
   ) {}
+  toggleActive:boolean = true;
+  toggleActive1:boolean = false;
+ 
+
+	toggleRightSidenav($event) {
+    $event.stopPropagation();
+    console.log('Clicked');
+    this.toggleActive = !this.toggleActive;
+		this.sidenav.toggle();
+  }
+  onClick() {
+    this.toggleActive = false;
+  }
+  toggleRightSidenav1() {
+    console.log('Clicked');
+    this.toggleActive1 = !this.toggleActive1;
+		this.sidenav.toggle1();
+  }
+ 
+ 
+
 
   ngOnInit(): void {
     this.getUserDetails();
     this.getAccessType();
+    
     // this.pageTitle = 'Dashboard';
   }
   getAccessType = () => {

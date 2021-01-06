@@ -1,73 +1,82 @@
-<div class="login-wrap" fxLayout="row" fxLayoutAlign="center center">
+<div class="login-wrap"  >
   <div
     fxLayout="row"
-    fxLayout.lt-md="column"
-    fxLayoutAlign="center center"
-    fxFlex.lt-md="100"
+    
   >
-    <div class="login-left" fxFlex fxFlex.md="50" fxFlex.gt-md="65">
+    <div class="login-left" fxFlex="65" fxLayout="row" fxLayoutAlign="center center">
       <div fxLayout="column" fxLayoutAlign="center center">
         <img src="./../../assets/login.svg" alt="login-bg" class="login-bg" />
       </div>
     </div>
-    <div class="login-right" fxFlex="100" fxFlex.md="50" fxFlex.gt-md="35">
+    <div class="login-right" fxFlex="35" fxLayout="row" fxLayoutAlign="center center" >
       <form
         [formGroup]="form"
         (ngSubmit)="onSubmit()"
         fxLayout="column"
         fxLayoutAlign="center stretch"
       >
-        <div fxFlex align="center">
+        <div fxFlex align="left">
           <img
             src="./../../assets/logo-main.svg"
             alt="app-logo"
             class="app-logo"
           />
+          
         </div>
-        <div class="header">Login</div>
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input
-            type="email"
-            matInput
-            placeholder="Email Address"
-            formControlName="userName"
-            required
-          />
-          <!-- <mat-icon matSuffix>alternate_email</mat-icon> -->
-          <mat-error *ngIf="isFieldInvalid('userName')">
-            Please fill your user name
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <input
-            matInput
-            type="password"
-            placeholder="Your password here"
-            formControlName="password"
-            required
-          />
-          <mat-icon matSuffix>lock</mat-icon>
-          <mat-error *ngIf="isFieldInvalid('userName')">
-            Please fill your password
-          </mat-error>
-        </mat-form-field>
-        <div class="my-20" align="right">
-          <button mat-button (click)="forgetPassword()" type="button">
-            Forgot Password?
-          </button>
-        </div>
-        <button mat-button class="primary-button" type="submit">
-          Login
-          <mat-icon>login</mat-icon>
-        </button>
-        <div class="powered-by-wrapper" align="right">
-          <img
-            src="./../../assets/powered-by-logo.svg"
-            alt="login-bg"
-            class="powered-by"
-          />
+        <div class="form-div">
+          <div class="header" fxLayout="column" align="left">
+            <img src="../../assets/login-line.svg" class="header-img" align="left">
+            Welcome</div>
+          <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input
+              type="email"
+              matInput
+              placeholder="Email Address"
+              formControlName="userName"
+              required
+            />
+            <!-- <mat-icon matSuffix>alternate_email</mat-icon> -->
+            <mat-error *ngIf="isFieldInvalid('userName')">
+              Please fill your user name
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Your Password here" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+            <mat-icon class="visible-pass" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="isFieldInvalid('userName')">
+              Please fill your password
+            </mat-error>
+          </mat-form-field>
+          <div class="my-20"  fxLayout="row" fxLayoutAlign="space-between center" >
+            <div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label text-secondary" for="gridCheck">
+  Remember Me
+  </label>
+            </div>
+            </div>
+            <div align="right">
+              <button class="forgot-pass" mat-button (click)="forgetPassword()" type="button">
+                Forgot Password?
+              </button>
+            </div>
+          </div>
+          <div align="right">
+            <button mat-button class="primary-button buttons-login" type="submit"  >
+              Login
+              <mat-icon>login</mat-icon>
+            </button>
+          </div>
+          <div class="powered-by-wrapper" align="right">
+            <img
+              src="./../../assets/powered-by-logo.svg"
+              alt="login-bg"
+              class="powered-by"
+            />
+          </div>
         </div>
       </form>
     </div>

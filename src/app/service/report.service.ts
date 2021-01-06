@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -8,11 +8,20 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ReportService {
+  updatePrint: any;
+  printData: BehaviorSubject<any>;
+  // currentMessage = this.printData.asObservable();
    private apiUrl = environment.apiUrl;
-  constructor( private http: HttpClient) { }
+  constructor( private http: HttpClient) {
+    this.printData = new BehaviorSubject(this.updatePrint);
+  }
   httpOptions = {
     headers: new HttpHeaders()
   };
+  printAbleData(data: any) {
+    console.log(data);
+    this.printData.next(data)
+  }
   emailConfiguration(id: any,data: any): Observable<any> {
     return this.http.patch(this.apiUrl + '/tenent/emailConfiguation/'+ id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }

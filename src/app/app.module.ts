@@ -79,6 +79,9 @@ import { NgxImgZoomModule  } from 'ngx-img-zoom';
 import * as $ from 'jquery';
 import { IdDetailsComponent } from './document-details/id-details/id-details.component';
 import { RightSidenavComponent } from './right-sidenav/right-sidenav.component'
+import { PrintDocumentComponent } from './document-details/print-document/print-document.component'
+import { SidebarService } from './sidebar/sidebar.service';
+import { AboutSidenavComponent } from './about-sidenav/about-sidenav.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -119,7 +122,9 @@ import { RightSidenavComponent } from './right-sidenav/right-sidenav.component'
     EmailComponent,
     SmsComponent,
     IdDetailsComponent,
-    RightSidenavComponent
+    RightSidenavComponent,
+    PrintDocumentComponent,
+    AboutSidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -157,7 +162,7 @@ import { RightSidenavComponent } from './right-sidenav/right-sidenav.component'
     MatProgressBarModule,
     NgxImgZoomModule
   ],
-  providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService, ServicesService,ReportService,
+  providers: [AuthService, AuthGuard, MatNativeDateModule, DocumentService, ServicesService,ReportService,SidebarService,
     { provide: HTTP_INTERCEPTORS, useClass: MainInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
