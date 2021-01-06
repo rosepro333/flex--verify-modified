@@ -186,19 +186,125 @@
 
   
   }
-  
-  
-  @media only screen and (min-width: 1281px) and (max-width: 1440px) {
-    
+  @media only screen and (min-width: 700px) and (max-width: 1366px) {
+    .left-section .mat-tab-header .mat-tab-label {
+      font-size: 14px;
+  }
+  .header .name {
+    font-size: 14px;
+  }
+  .mat-button{
+    line-height: 26px;
+  }
+  .header .header-doc-id-wrap {
+  font-size: 14px;
+  }
+  .sub-section-header {
+    font-size: 14px;
+  }
+  .middle-section .owl-carousel .owl-item img {
+    width: 328px;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+.right-section .data-wrap div:first-of-type {
+  width: 50%;
+  font-size: 12px;
  
+}
+.value {
+  font-size: 12px;
+}
+.right-section .bottom .sub-section-header {
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: none;
+}
+.right-section .top {
+  padding: 20px;
+}
   }
   
   
-  
+  @media only screen and (min-width: 1281px) and (max-width: 1440px) {
+  .left-section .mat-tab-header .mat-tab-label {
+      font-size: 14px;
+  }
+  .header .name {
+    font-size: 14px;
+  }
+  .mat-button{
+    line-height: 26px;
+  }
+  .header .header-doc-id-wrap {
+  font-size: 14px;
+  }
+  .sub-section-header {
+    font-size: 14px;
+  }
+  .middle-section .owl-carousel .owl-item img {
+    width: 328px;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+.right-section .data-wrap div:first-of-type {
+  width: 50%;
+  font-size: 12px;
+ 
+}
+.value {
+  font-size: 12px;
+}
+.right-section .bottom .sub-section-header {
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: none;
+}
+.right-section .top {
+  padding: 20px;
+}
+ 
+  }
   
   @media only screen and (min-width: 800px) and (max-width: 1280px) {
   
-  
+    .left-section .mat-tab-header .mat-tab-label {
+      font-size: 14px;
+  }
+  .header .name {
+    font-size: 14px;
+  }
+  .mat-button{
+    line-height: 26px;
+  }
+  .header .header-doc-id-wrap {
+  font-size: 14px;
+  }
+  .sub-section-header {
+    font-size: 14px;
+  }
+  .middle-section .owl-carousel .owl-item img {
+    width: 328px;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+.right-section .data-wrap div:first-of-type {
+  width: 50%;
+  font-size: 12px;
+ 
+}
+.value {
+  font-size: 12px;
+}
+.right-section .bottom .sub-section-header {
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: none;
+}
+.right-section .top {
+  padding: 20px;
+}
+ 
   }
   
   

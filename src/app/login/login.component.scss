@@ -86,7 +86,7 @@
         right: 0;
         bottom: 0;
         pointer-events: none;
-        box-shadow: 1px 3px 2px #e4e0e0;
+        
         border-radius: 10px;
     }
     .mat-label{
@@ -94,6 +94,10 @@
     }
     .mat-form-field-empty.mat-form-field-label{
         color: #8080808f;
+    }
+    .mat-form-field-outline {
+        border: 1px solid #f7f7f7;
+        border-radius: 14px;
     }
     @media only screen and (max-width: 959px) {
         .login-left {
