@@ -6,7 +6,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { FormArray, FormBuilder, FormGroup, NgForm } from '@angular/forms';
@@ -134,7 +134,8 @@ export class DocumentDetailsComponent implements OnInit {
     private router: Router,
     private ngxImgZoom: NgxImgZoomService,
     public dialog: MatDialog,
-    private report: ReportService
+    private report: ReportService,
+    private location: Location
   ) {
     this.ngxImgZoom.setZoomBreakPoints([{w: 100, h: 100}, {w: 150, h: 150}, {w: 200, h: 200}, {w: 250, h: 250}, {w: 300, h: 300}]);
   }
@@ -254,7 +255,9 @@ export class DocumentDetailsComponent implements OnInit {
       this.disabled = false;
     }
   }
-
+  back = () => {
+    this.location.back();
+  }
   getDocument = (id: any) => {
     // get item details using id
     this.serviceServive.getDocumentBy(id).subscribe((response) => {

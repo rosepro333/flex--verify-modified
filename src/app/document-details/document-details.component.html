@@ -237,7 +237,8 @@
     </div> -->
     <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header" >
       <div fxLayout="row" fxLayoutAlign="start center">
-        <button mat-icon-button [routerLink]="['/documents']">
+        <!-- [routerLink]="['/documents']" -->
+        <button mat-icon-button (click)="back()">
           <mat-icon>arrow_back</mat-icon>
         </button>
         <div class="name">{{ document.First_Name }} {{ document.Last_Name }}</div>
@@ -347,27 +348,25 @@
           <div class="sub-section-header">
             Identity Card
           </div>
-          <div class="owl-carousel-section">
-            <owl-carousel-o [options]="customOptions">
-              <ng-container>
-                <ng-template class="slide" carouselSlide>
-                  <div class="justify-center" class="imageHover">
-                    <img (click)="overLayImage(doc?.ID_Card_Front)"
-                      src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc?.ID_Card_Front}}?alt=media" />
-                  </div>
-                </ng-template>
-  
-              </ng-container>
-              <ng-container>
-                <ng-template class="slide" carouselSlide>
-                  <div class="justify-center">
-                    <img
-                      src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc.ID_Card_Back}}?alt=media" />
-                  </div>
-                </ng-template>
-              </ng-container>
-            </owl-carousel-o>
-          </div>
+          <owl-carousel-o [options]="customOptions">
+            <ng-container>
+              <ng-template class="slide" carouselSlide>
+                <div class="justify-center" class="imageHover">
+                  <img (click)="overLayImage(doc?.ID_Card_Front)"
+                    src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc?.ID_Card_Front}}?alt=media" />
+                </div>
+              </ng-template>
+
+            </ng-container>
+            <ng-container>
+              <ng-template class="slide" carouselSlide>
+                <div class="justify-center">
+                  <img (click)="overLayImage(doc?.ID_Card_Back)"
+                    src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc.ID_Card_Back}}?alt=media" />
+                </div>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
         </div>
         <div class="live-photo-wrap">
           <div class="sub-section-header">

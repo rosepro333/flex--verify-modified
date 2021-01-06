@@ -30,7 +30,7 @@ export class FlexTenentComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  pageSizeOptions = [2, 25, 50, 100];
+  pageSizeOptions = [10, 25, 50, 100];
   pageSize = 10;
   totalSize = 0;
   page = 0;
@@ -115,7 +115,7 @@ export class FlexTenentComponent implements OnInit {
   }
   handlePage = (value: any) => {
    this.pageSize = value.pageSize;
-    this.currentPage = value.pageIndex + 1;
+   this.currentPage = value.pageIndex + 1;
     this.getTenentList();
   }
 
@@ -183,7 +183,12 @@ export class FlexTenentComponent implements OnInit {
   onSave = () => {
     if (this.form.valid) {
       console.log(this.form.value);
-      this.service.createTenent(this.form.value).subscribe(
+      const data = {
+        Contact_Name: this.form.value.contactName,
+        Contact_Mail: this.form.value.contactEmail,
+        Name: this.form.value.name,
+      };
+      this.service.createTenent(data).subscribe(
         (result) => {
           console.log(result);
           if (result.msg === 'success') {
@@ -200,6 +205,10 @@ export class FlexTenentComponent implements OnInit {
             this.audits(data);
             this.toster.openSnackBar('Tenent Created Successfully', result.msg);
             this.form.reset();
+          }else if(result.msg === 'failure'){
+            this.toster.openSnackBar(result.err, result.msg);
+            this.sideNav.close();
+            this.reset();
           }
         },
         (error) => {

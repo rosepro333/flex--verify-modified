@@ -133,7 +133,7 @@
                 </tr>
             </table>
             <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
-            [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
+            [length]="totalSize" [pageIndex]="page" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
               </mat-paginator>
         </div>
 

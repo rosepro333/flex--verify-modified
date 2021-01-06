@@ -55,17 +55,11 @@ export class ServicesService {
   audit(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/audit/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
-  createTenent(tanent: any): Observable<any> {
-    if (tanent.name !== '' && tanent.contactName !== '' && tanent.contactEmail !== '') {
-      const data = {
-        Contact_Name: tanent.contactName,
-        Contact_Mail: tanent.contactEmail,
-        Name: tanent.name,
-      };
+  createTenent(data: any): Observable<any> {
       return this.http
         .post(this.apiUrl + '/tenent', data, this.httpOptions)
         .pipe(retry(1), catchError(this.handleError));
-    }
+
   }
   deleteTenent(id: any): Observable<any> {
     return this.http
@@ -77,18 +71,11 @@ export class ServicesService {
       .get(this.apiUrl + '/tenent/blockTenent/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  userCreate(user: any): Observable<any> {
-    if (user.email !== '' && user.name !== '' && user.access !== '') {
-      const data = {
-        Contact_Email: user.email,
-        Contact_Name: user.name,
-        Access_Type: user.access,
-        Tenant_ID: user.tenent,
-      };
+  userCreate(data: any): Observable<any> {
       return this.http
         .post(this.apiUrl + '/user', data, this.httpOptions)
         .pipe(retry(1), catchError(this.handleError));
-    }
+
   }
   createSdkKey(data: any): Observable<any> {
     if (data.Tenent !== '' && data.mode !== '') {

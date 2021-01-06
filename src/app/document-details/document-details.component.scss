@@ -38,10 +38,11 @@
         align-content: center;
       }
       img {
-        width: 100%;
-  border-radius: 8px;
-  height: 240px !important;
-  object-fit: cover;
+        width: 560px;
+        border-radius: 8px;
+        margin:0 auto
+ 
+  
       }
       .justify-center:hover{
         display: flex;

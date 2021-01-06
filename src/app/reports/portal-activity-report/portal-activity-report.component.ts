@@ -35,6 +35,7 @@ export class PortalActivityReportComponent implements OnInit {
   pageSizeOptions = [2, 25, 50, 100];
   pageSize = 10;
   totalSize = 0;
+  page = 0;
   currentPage = 1;
   activity: any = [];
   selectedActivity = '';
@@ -111,20 +112,23 @@ export class PortalActivityReportComponent implements OnInit {
   handlePage = (value: any) => {
     this.search = '';
     console.log(value);
-    if (value.pageIndex) {
-      console.log(value.pageIndex);
-      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-      this.currentPage = pageIndex;
-      console.log(this.currentPage);
-      this.portalActivity();
-    }
-    if (value.pageSize) {
-      console.log(value.pageSize);
-      this.pageSize = value.pageSize;
-      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-      this.currentPage = pageIndex;
-      this.portalActivity();
-    }
+    this.pageSize = value.pageSize;
+    this.currentPage = value.pageIndex + 1;
+    this.portalActivity();
+    // if (value.pageIndex) {
+    //   console.log(value.pageIndex);
+    //   const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
+    //   this.currentPage = pageIndex;
+    //   console.log(this.currentPage);
+    //   this.portalActivity();
+    // }
+    // if (value.pageSize) {
+    //   console.log(value.pageSize);
+    //   this.pageSize = value.pageSize;
+    //   const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
+    //   this.currentPage = pageIndex;
+    //   this.portalActivity();
+    // }
   }
   portalActivity = () => {
     const data = {

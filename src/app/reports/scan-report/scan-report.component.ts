@@ -31,6 +31,7 @@ export class ScanReportComponent implements OnInit {
   pageSizeOptions = [2, 25, 50, 100];
   pageSize = 10;
   totalSize = 0;
+  page = 0;
   currentPage = 1;
   search = '';
   tenentList: any = [];
@@ -105,21 +106,24 @@ export class ScanReportComponent implements OnInit {
   }
   handlePage = (value: any) => {
     this.search = '';
-    console.log(value);
-    if (value.pageIndex) {
-      console.log(value.pageIndex);
-      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-      this.currentPage = pageIndex;
-      console.log(this.currentPage);
-      this.scanReports();
-    }
-    if (value.pageSize) {
-      console.log(value.pageSize);
-      this.pageSize = value.pageSize;
-      const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-      this.currentPage = pageIndex;
-      this.scanReports();
-    }
+    this.pageSize = value.pageSize;
+    this.currentPage = value.pageIndex + 1;
+    this.scanReports();
+    // console.log(value);
+    // if (value.pageIndex) {
+    //   console.log(value.pageIndex);
+    //   const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
+    //   this.currentPage = pageIndex;
+    //   console.log(this.currentPage);
+    //   this.scanReports();
+    // }
+    // if (value.pageSize) {
+    //   console.log(value.pageSize);
+    //   this.pageSize = value.pageSize;
+    //   const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
+    //   this.currentPage = pageIndex;
+    //   this.scanReports();
+    // }
   }
   scanReports = () => {
     const data = {
