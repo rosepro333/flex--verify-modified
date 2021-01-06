@@ -237,7 +237,8 @@
     </div> -->
     <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header" >
       <div fxLayout="row" fxLayoutAlign="start center">
-        <button mat-icon-button [routerLink]="['/documents']">
+        <!-- [routerLink]="['/documents']" -->
+        <button mat-icon-button (click)="back()">
           <mat-icon>arrow_back</mat-icon>
         </button>
         <div class="name">{{ document.First_Name }} {{ document.Last_Name }}</div>

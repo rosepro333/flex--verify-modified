@@ -47,7 +47,7 @@
         <div fxFlex>
           <mat-form-field class='form-rows' appearance="outline" fxFlex>
             <mat-label>Document Id</mat-label>
-            <mat-select disableRipple (selectionChange)="selectDocsType($event.value)">
+            <mat-select disableRipple   [(ngModel)]="selectedDocs" (selectionChange)="selectDocsType($event.value)">
               <mat-option *ngFor="let doc of selectdocumentType" [value]="doc.value">
                 {{doc?.name}}
               </mat-option>
@@ -55,7 +55,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline" fxFlex>
             <mat-label>Filter text</mat-label>
-            <input matInput [disabled]="disabled" [(ngModel)]="search"  #input />
+            <input matInput [disabled]="(selectedDocs == '')?true:false" [(ngModel)]="search"  #input />
             <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search"  (click)="applyFilter()">
               <mat-icon matSuffix>search</mat-icon>
             </button>

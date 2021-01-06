@@ -10,6 +10,7 @@ import { Cookie } from 'ng2-cookies';
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import * as moment from 'moment';
+import { ReportService } from '../service/report.service';
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
@@ -42,13 +43,13 @@ export class DocumentComponent implements OnInit {
   startDate: any = moment().startOf('day').toISOString();
   endDate: any = moment().endOf('day').toISOString();
   selectStatustype = '';
-  selectedDocs = '';
+  selectedDocs = 'Document_ID';
   disabled = false;
   selectedDocStatus = '';
   selectedTenentType = '';
   dataSource = new MatTableDataSource();
-  pageSizeOptions = [2, 25, 50, 100];
-  pageSize = 2;
+  pageSizeOptions = [10, 25, 50, 100];
+  pageSize = 10;
   totalSize = 0;
   currentPage = 1;
   page = 0;
@@ -65,7 +66,9 @@ export class DocumentComponent implements OnInit {
   constructor(
     private router: Router,
     private documentService: DocumentService,
-    private serviceService: ServicesService) {
+    private serviceService: ServicesService,
+    private report: ReportService) {
+    this.reStoreFilter();
 
   }
 
@@ -74,6 +77,16 @@ export class DocumentComponent implements OnInit {
     this.accessType = Cookie.get('Access_Type');
     this.Tenant_ID = Cookie.get('Tenant_ID');
     this.loadAllDocuments();
+  }
+  reStoreFilter = () =>{
+    this.report.filter.subscribe((res: any)=>{
+      this.selectedTenentType;
+      this.startDate = moment(res?.startDate).utc().toISOString();
+      this.endDate = moment(res?.endDate).utc().toISOString();
+      this.search = res?.search;
+      this.selectedDocs = res?.fieldName;
+      console.log(res);
+    })
   }
   loadAllDocuments = () => {
     // this.scanDocList();
@@ -87,33 +100,8 @@ export class DocumentComponent implements OnInit {
     this.pageSize = value.pageSize;
     this.currentPage = value.pageIndex + 1;
     this.docdumentsList();
-    // console.log(value);
-    // if (value.pageIndex) {
-
-    //   const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-    //    console.log(pageIndex)
-    //   this.currentPage = pageIndex;
-    //   console.log(this.currentPage);
-    //   this.docdumentsList();
-    // }
-    // if (value.pageSize) {
-    //   console.log(value.pageSize)
-    //   this.pageSize = value.pageSize;
-    //   const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-    //   this.currentPage = pageIndex;
-    //   console.log(this.currentPage);
-    //   this.docdumentsList();
-    // }
   }
   checkSelectButton = () => {
-    // console.log(this.selectedDocs);
-    // if (!this.selectedDocs) {
-    //   console.log(this.selectedDocs);
-    //   this.disabled = true;
-    // }else{
-    //   console.log(this.selectedDocs);
-    //   this.disabled = false;
-    // }
   }
   clear = () => {
     const start = moment().startOf('day').toISOString();
@@ -243,6 +231,7 @@ export class DocumentComponent implements OnInit {
       fieldName: this.selectedDocs,
       status: this.selectStatustype
     };
+    this.report.filterFunction(data);
     console.log(data);
     this.serviceService.scanDocByTenent(data).subscribe((res) => {
       if (res.msg === 'success') {

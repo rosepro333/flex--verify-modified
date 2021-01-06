@@ -30,7 +30,7 @@
             <mat-card-title><i class="material-icons">check</i></mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <div class="count">20</div>
+            <div class="count">{{verificationData.todayVerification}}</div>
             <div class="title">Today Verfication</div>
           </mat-card-content>
         </mat-card>
@@ -39,11 +39,11 @@
             <mat-card-title> <i class="material-icons">check</i></mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <div class="count">15</div>
+            <div class="count">{{verificationData.monthlyVerification}}</div>
             <div class="title">Month Verfication</div>
           </mat-card-content>
         </mat-card>
-        <mat-card class="tile" fxLayout="column" fxLayoutAlign="end center">
+        <!-- <mat-card class="tile" fxLayout="column" fxLayoutAlign="end center">
           <mat-card-header>
             <mat-card-title> <i class="material-icons">check</i></mat-card-title>
           </mat-card-header>
@@ -51,7 +51,7 @@
             <div class="count">80</div>
             <div class="title">Balance SMS</div>
           </mat-card-content>
-        </mat-card>
+        </mat-card> -->
       </div>
       <mat-divider></mat-divider>
       <div class="chart-wrap" fxLayout="row wrap" fxLayoutAlign="space-evenly center">
