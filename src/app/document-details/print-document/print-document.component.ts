@@ -64,12 +64,16 @@ _id: "5ff2b35f14441f4fc06a55ca",
       var imgHeight = canvas.height * imgWidth / canvas.width;
       var heightLeft = imgHeight;
 
-      const contentDataURL = canvas.toDataURL('image/jpg')
+      const contentDataURL = canvas.toDataURL('image/png')
       let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
       var position = 0;
+      // const data = 'data:image/jpg;base64,' + btoa(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media`)
       pdf.addImage(contentDataURL, 'JPG', 0, position, imgWidth, imgHeight)
       pdf.save('MYPdf.pdf'); // Generated PDF
     });
     // window.print();
   }
+  //  Encodeuint8arr(){
+  //   return new TextEncoder().encode(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media`);
+  // }
 }

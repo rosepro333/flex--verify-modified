@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { ReportService } from '../service/report.service';
 import { ServicesService } from '../service/services.service';
 
 @Component({
@@ -8,9 +10,11 @@ import { ServicesService } from '../service/services.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class DashboardComponent implements OnInit {
-
+  verificationData: any = {};
+  Tenant_ID: string = '';
   constructor(
-    private service : ServicesService
+    private service : ServicesService,
+    private report: ReportService
   ) { }
 
   public barChartOptions = {
@@ -28,8 +32,23 @@ export class DashboardComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.Tenant_ID = Cookie.get('Tenant_ID');
+    this.verificationReporter();
     this.service.update.subscribe((data)=>{
       console.log(data)
     })
+  }
+  verificationReporter = () => {
+    const data = {
+      Tenant_ID:this.Tenant_ID
+    };
+    this.report.reportVerification(data).subscribe((res) =>{
+        if(res.msg === 'success'){
+          this.verificationData = res.data;
+          console.log(res.data);
+        }
+    },(err) =>{
+      console.log
+    });
   }
 }

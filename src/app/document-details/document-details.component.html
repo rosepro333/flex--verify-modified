@@ -237,7 +237,8 @@
     </div> -->
     <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header" >
       <div fxLayout="row" fxLayoutAlign="start center">
-        <button mat-icon-button [routerLink]="['/documents']">
+        <!-- [routerLink]="['/documents']" -->
+        <button mat-icon-button (click)="back()">
           <mat-icon>arrow_back</mat-icon>
         </button>
         <div class="name">{{ document.First_Name }} {{ document.Last_Name }}</div>
@@ -360,7 +361,7 @@
             <ng-container>
               <ng-template class="slide" carouselSlide>
                 <div class="justify-center">
-                  <img
+                  <img (click)="overLayImage(doc?.ID_Card_Back)"
                     src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc.ID_Card_Back}}?alt=media" />
                 </div>
               </ng-template>

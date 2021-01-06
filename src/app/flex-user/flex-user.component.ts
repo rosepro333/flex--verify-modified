@@ -173,7 +173,9 @@ export class FlexUserComponent implements OnInit {
         data: { id, name },
       });
       dialogRef.afterClosed().subscribe(() => {
-        this.ngOnInit();
+        this.getUserList();
+        this.sideNav.close();
+        // this.ngOnInit();
       });
     } else {
       this.toster.openSnackBar('You can not block ownself', 'failed');
@@ -190,7 +192,9 @@ export class FlexUserComponent implements OnInit {
         data: { id, name },
       });
       dialogRef.afterClosed().subscribe(() => {
-        this.ngOnInit();
+        this.getUserList();
+        this.sideNav.close();
+        // this.ngOnInit();
       });
     } else {
       this.toster.openSnackBar('You can not delete ownself', 'failed');
@@ -223,14 +227,6 @@ export class FlexUserComponent implements OnInit {
   getTenentList = () => {
     if (this.accessType === '1') {
       const data = {
-        "Tenant_ID": "",
-        "limit": 10,
-        "pageNo": 1,
-        "order": "-1",
-        "search": "",
-        "startDate": "",
-        "endDate": "",
-        "status": "",
         "isBlocked":true
       }
       this.service.getTenentList(data).subscribe((res) => {
@@ -252,7 +248,6 @@ export class FlexUserComponent implements OnInit {
               obj['Name'] = i.Name;
               this.tenentList.push(obj);
             }
-            console.log(this.tenentList)
           })
         }
       });
@@ -274,9 +269,7 @@ export class FlexUserComponent implements OnInit {
   }
   editUser = () => {
     const id = this.userEdit._id;
-    console.log(id);
     const name = this.form.get('name').value;
-    console.log(name)
     const data = {
       Contact_Name: name
     }
@@ -295,8 +288,17 @@ export class FlexUserComponent implements OnInit {
   onSave = () => {
     if (this.form.valid) {
       console.log(this.form.value)
-      this.form.value.tenent = this.tenentId;
-      this.service.userCreate(this.form.value).subscribe(
+      const tenentID = this.form.value.tenent;
+    //   this.form.value.tenent = this.tenentId;
+      const data = {
+        Contact_Email: this.form.value.email,
+        Contact_Name: this.form.value.name,
+        Access_Type: this.form.value.access,
+      };
+      if(tenentID!==null && tenentID !== 'undefined' && tenentID !=='All'){
+        data['Tenant_ID']= this.form.value.tenent;
+      }
+      this.service.userCreate(data).subscribe(
         (result) => {
           console.log(result);
           if (result.msg === 'success') {
@@ -327,8 +329,6 @@ export class FlexUserComponent implements OnInit {
           }else if(result.msg === 'failure'){
              this.toster.openSnackBar(result.error, 'failed');
           }
-
-
         },
         (error: any) => {
           console.log(error);
