@@ -347,25 +347,27 @@
           <div class="sub-section-header">
             Identity Card
           </div>
-          <owl-carousel-o [options]="customOptions">
-            <ng-container>
-              <ng-template class="slide" carouselSlide>
-                <div class="justify-center" class="imageHover">
-                  <img (click)="overLayImage(doc?.ID_Card_Front)"
-                    src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc?.ID_Card_Front}}?alt=media" />
-                </div>
-              </ng-template>
-
-            </ng-container>
-            <ng-container>
-              <ng-template class="slide" carouselSlide>
-                <div class="justify-center">
-                  <img
-                    src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc.ID_Card_Back}}?alt=media" />
-                </div>
-              </ng-template>
-            </ng-container>
-          </owl-carousel-o>
+          <div class="owl-carousel-section">
+            <owl-carousel-o [options]="customOptions">
+              <ng-container>
+                <ng-template class="slide" carouselSlide>
+                  <div class="justify-center" class="imageHover">
+                    <img (click)="overLayImage(doc?.ID_Card_Front)"
+                      src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc?.ID_Card_Front}}?alt=media" />
+                  </div>
+                </ng-template>
+  
+              </ng-container>
+              <ng-container>
+                <ng-template class="slide" carouselSlide>
+                  <div class="justify-center">
+                    <img
+                      src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc.ID_Card_Back}}?alt=media" />
+                  </div>
+                </ng-template>
+              </ng-container>
+            </owl-carousel-o>
+          </div>
         </div>
         <div class="live-photo-wrap">
           <div class="sub-section-header">
