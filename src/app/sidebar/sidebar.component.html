@@ -1,5 +1,4 @@
 <mat-sidenav-container>
-
     <mat-sidenav #sidenav mode="side" [opened]="true" fixedInViewport="true" [ngClass]="sidebarMode"
         class="left-navigation" (mouseout)="sidebarModeFunc('folded')">
         <mat-nav-list fxLayout="column" fxFill>
@@ -32,32 +31,27 @@
             </mat-list-item>
             <!-- bottom section -->
             <span fxFlex></span>
-            <mat-list-item (click)="toggleRightSidenav($event)" class="rightSidenav_toggle" matTooltip="Profile"
-                matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
+            <mat-list-item (click)="rightSideDrawer.open();sidebarContent('profile')" class="rightSidenav_toggle"
+                matTooltip="Profile" matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
                 <mat-icon>account_circle</mat-icon>
                 <span class="nav-text">{{ userName }}</span>
             </mat-list-item>
-            <mat-sidenav-content class="height-unset" hasBackdrop="true">
-                <app-right-sidenav></app-right-sidenav>
-            </mat-sidenav-content>
-
             <!-- <button [class.active]="toggleActive" (click)="toggleRightSidenav()" class="rightSidenav_toggle"> Toggle Right Sidenav	</button> -->
-
             <mat-list-item (click)="logout()" matTooltip="Logout" matTooltipPosition="right"
                 matTooltipClass="sidenav-tooltip">
                 <mat-icon>power_settings_new</mat-icon>
                 <span class="nav-text">Logout</span>
             </mat-list-item>
-
-            <mat-list-item (click)="toggleRightSidenav1()" class="rightSidenav_toggle" matTooltip="About"
-                matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
+            <mat-list-item (click)="rightSideDrawer.open();sidebarContent('about')" class="rightSidenav_toggle"
+                matTooltip="About" matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
                 <mat-icon>info</mat-icon>
                 <span class="nav-text">About</span>
             </mat-list-item>
-            <mat-sidenav-content class="height-unset">
-                <app-about-sidenav></app-about-sidenav>
-            </mat-sidenav-content>
         </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav #rightSideDrawer mode="over" position='end' [fixedInViewport]="true" [fixedTopGap]="0">
+        <app-right-sidenav *ngIf="profile"></app-right-sidenav>
+        <app-about-sidenav *ngIf="about"></app-about-sidenav>
     </mat-sidenav>
     <mat-sidenav-content [ngClass]="sidebarMode">
         <router-outlet></router-outlet>
