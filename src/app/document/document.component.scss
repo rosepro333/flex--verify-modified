@@ -116,6 +116,16 @@ img.noDataFound {
     .document-wrap .status {
         font-size: 12px;
     }
+    mat-form-field  .mat-form-field-appearance-outline  .mat-form-field-outline  {
+        display: flex;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    height: 30px;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+      }
 }
 @media only screen and (min-width: 1281px) and (max-width: 1440px) {
     .document-wrap .mat-table .mat-cell .value {

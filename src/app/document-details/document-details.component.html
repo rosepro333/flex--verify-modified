@@ -2,7 +2,7 @@
   <mat-drawer #rightDrawer mode="overlay" position='end' class="right-side-drawer">
     <div *ngIf="isDocumentDetails">
       <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
-        <div>
+        <div class="madrawer-head">
           Document Detaills
         </div>
         <div class="header-buttons">
@@ -70,7 +70,7 @@
     </div>
     <div *ngIf="isScanHistory">
       <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
-        <div>
+        <div class="madrawer-head">
           Scan History
         </div>
         <div class="header-buttons">
@@ -100,7 +100,7 @@
     </div>
     <div *ngIf="isScanResult">
       <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
-        <div>
+        <div class="madrawer-head">
           Scan Result
         </div>
         <div class="header-buttons">
