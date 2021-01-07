@@ -4,7 +4,7 @@ import { Cookie } from 'ng2-cookies';
 import { ServicesService } from '../service/services.service';
 import { VerificationUrlComponent } from '../verification-url/verification-url.component';
 import { AuthService } from './../auth/auth.service';
-import {SidebarService} from './sidebar.service';
+import { SidebarService } from './sidebar.service';
 import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
@@ -22,22 +22,24 @@ export class SidebarComponent implements OnInit {
   sidebarMode = 'folded';
   userName = '';
   accessType = '';
+  about = false;
+  profile = true;
   constructor(
     private authService: AuthService,
     private router: Router,
     private service: ServicesService,
     public viewContainerRef: ViewContainerRef,
     private sidenav: SidebarService
-  ) {}
-  toggleActive:boolean = true;
-  toggleActive1:boolean = false;
- 
+  ) { }
+  toggleActive: boolean = true;
+  toggleActive1: boolean = false;
 
-	toggleRightSidenav($event) {
+
+  toggleRightSidenav($event) {
     $event.stopPropagation();
     console.log('Clicked');
     this.toggleActive = !this.toggleActive;
-		this.sidenav.toggle();
+    this.sidenav.toggle();
   }
   onClick() {
     this.toggleActive = false;
@@ -45,16 +47,16 @@ export class SidebarComponent implements OnInit {
   toggleRightSidenav1() {
     console.log('Clicked');
     this.toggleActive1 = !this.toggleActive1;
-		this.sidenav.toggle1();
+    this.sidenav.toggle1();
   }
- 
- 
+
+
 
 
   ngOnInit(): void {
     this.getUserDetails();
     this.getAccessType();
-    
+
     // this.pageTitle = 'Dashboard';
   }
   getAccessType = () => {
@@ -94,5 +96,19 @@ export class SidebarComponent implements OnInit {
     this.service.userDrawer('open');
     this.router.navigate([{ outlets: { about: ['about'] } }])
     // const abc =this.viewContainerRef.createComponent<VerificationUrlComponent>()
+  }
+
+  sidebarContent(a) {
+    if (a == 'about') {
+      this.about = true;
+      this.profile = false;
+    } else if (a == 'profile') {
+      this.profile = true;
+      this.about = false;
+    }
+    else {
+      this.about = false;
+      this.profile = false;
+    }
   }
 }
