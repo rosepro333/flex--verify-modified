@@ -1,62 +1,65 @@
 <mat-sidenav-container>
-    
-    <mat-sidenav #sidenav mode="side" [opened]="true" fixedInViewport="true" [ngClass]="sidebarMode" class="left-navigation" (mouseout)="sidebarModeFunc('folded')">
+
+    <mat-sidenav #sidenav mode="side" [opened]="true" fixedInViewport="true" [ngClass]="sidebarMode"
+        class="left-navigation" (mouseout)="sidebarModeFunc('folded')">
         <mat-nav-list fxLayout="column" fxFill>
             <div class="nav-logo" fxLayout="row" fxLayoutAlign="center center">
                 <img src="{{ imgSrc }}" />
             </div>
             <!-- top-section -->
-            <mat-list-item [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-list-item [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                matTooltip="Dashboard" matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
                 <mat-icon>dashboard</mat-icon>
                 <span class="nav-text">Dashboard</span>
             </mat-list-item>
-            <mat-list-item [routerLink]="['/documents']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-list-item [routerLink]="['/documents']" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" matTooltip="Document" matTooltipPosition="right"
+                matTooltipClass="sidenav-tooltip">
                 <mat-icon>assignment</mat-icon>
                 <span class="nav-text">Document</span>
             </mat-list-item>
-            <mat-list-item [routerLink]="['/reports']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-list-item [routerLink]="['/reports']" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" matTooltip="Report" matTooltipPosition="right"
+                matTooltipClass="sidenav-tooltip">
                 <mat-icon>insights</mat-icon>
                 <span class="nav-text">Report</span>
             </mat-list-item>
-            <mat-list-item *ngIf="accessType === '1' || accessType === '3'" [routerLink]="['/settings']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-list-item *ngIf="accessType === '1' || accessType === '3'" [routerLink]="['/settings']"
+                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" matTooltip="Settings"
+                matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
                 <mat-icon>settings</mat-icon>
                 <span class="nav-text">Settings</span>
             </mat-list-item>
             <!-- bottom section -->
             <span fxFlex></span>
-            <mat-list-item  (click)="toggleRightSidenav($event)" class="rightSidenav_toggle">
+            <mat-list-item (click)="toggleRightSidenav($event)" class="rightSidenav_toggle" matTooltip="Profile"
+                matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
                 <mat-icon>account_circle</mat-icon>
                 <span class="nav-text">{{ userName }}</span>
             </mat-list-item>
-            
+            <mat-sidenav-content class="height-unset" hasBackdrop="true">
+                <app-right-sidenav></app-right-sidenav>
+            </mat-sidenav-content>
 
-           
-	
-                <mat-sidenav-content class="height-unset">
-                    
-                    <app-right-sidenav></app-right-sidenav>
-                </mat-sidenav-content>
-            
             <!-- <button [class.active]="toggleActive" (click)="toggleRightSidenav()" class="rightSidenav_toggle"> Toggle Right Sidenav	</button> -->
 
-            <mat-list-item (click)="logout()">
+            <mat-list-item (click)="logout()" matTooltip="Logout" matTooltipPosition="right"
+                matTooltipClass="sidenav-tooltip">
                 <mat-icon>power_settings_new</mat-icon>
                 <span class="nav-text">Logout</span>
             </mat-list-item>
-          
-            <mat-list-item  (click)="toggleRightSidenav1()" class="rightSidenav_toggle" >
+
+            <mat-list-item (click)="toggleRightSidenav1()" class="rightSidenav_toggle" matTooltip="About"
+                matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
                 <mat-icon>info</mat-icon>
                 <span class="nav-text">About</span>
             </mat-list-item>
             <mat-sidenav-content class="height-unset">
                 <app-about-sidenav></app-about-sidenav>
-                
             </mat-sidenav-content>
         </mat-nav-list>
     </mat-sidenav>
-    
     <mat-sidenav-content [ngClass]="sidebarMode">
-         
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
