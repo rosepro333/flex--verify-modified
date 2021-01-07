@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
@@ -10,6 +10,7 @@ import { TosterService } from '../toster/toster.service';
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
   styleUrls: ['./forget-password.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ForgetPasswordComponent implements OnInit {
   form: FormGroup;
@@ -20,17 +21,17 @@ export class ForgetPasswordComponent implements OnInit {
     private router: Router,
     private service: ServicesService,
     private toast: TosterService
-  ) {}
+  ) { }
 
   // tslint:disable-next-line:typedef
-  ngOnInit(){
+  ngOnInit() {
     this.form = this.fb.group({
       userName: ['', Validators.required],
     });
   }
 
   // tslint:disable-next-line:typedef
-  isFieldInvalid(field: string){
+  isFieldInvalid(field: string) {
     return (
       (!this.form.get(field).valid && this.form.get(field).touched) ||
       (this.form.get(field).untouched && this.formSubmitAttempt)
@@ -57,5 +58,5 @@ export class ForgetPasswordComponent implements OnInit {
     }
     // this.formSubmitAttempt = true;
   }
-  forgetPassword = () =>  {};
+  forgetPassword = () => { };
 }

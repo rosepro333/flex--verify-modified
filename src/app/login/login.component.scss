@@ -76,25 +76,17 @@
             }
         }
     }
-    .mat-form-field-appearance-outline .mat-form-field-outline {
-        display: flex;
-        position: absolute;
-        top: 0.25em;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        pointer-events: none;
-        border-radius: 10px;
-    }
-    .mat-label {
-        color: gray;
-    }
-    .mat-form-field-empty.mat-form-field-label {
-        color: #8080808f;
-    }
-    .mat-form-field-outline {
-        border: 1px solid #f7f7f7;
-        border-radius: 14px;
+    .mat-form-field-appearance-outline.ng-untouched {
+        .mat-form-field-outline {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0px 8px 12px -4px #c0c0c0;
+            .mat-form-field-outline-start,
+            .mat-form-field-outline-gap,
+            .mat-form-field-outline-end {
+                border: none;
+            }
+        }
     }
     @media only screen and (max-width: 1366px) {
         .login-left {
