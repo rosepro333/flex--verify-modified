@@ -81,8 +81,8 @@ export class DocumentComponent implements OnInit {
   reStoreFilter = () =>{
     this.report.filter.subscribe((res: any)=>{
       this.selectedTenentType;
-      this.startDate = moment(res?.startDate).utc().toISOString();
-      this.endDate = moment(res?.endDate).utc().toISOString();
+      this.startDate = moment(res?.startDate).startOf('day').utc().toISOString();
+      this.endDate = moment(res?.endDate).endOf('day').utc().toISOString();
       this.search = res?.search;
       this.selectedDocs = res?.fieldName;
       console.log(res);
@@ -127,10 +127,10 @@ export class DocumentComponent implements OnInit {
   }
   selectDate1 = (value: any) => {
     console.log(value);
-    this.startDate = moment(value).utc().toISOString();
+    this.startDate = moment(value).startOf('day').utc().toISOString();
   }
   selectDate2 = (value: any) => {
-    this.endDate = moment(value).utc().toISOString();
+    this.endDate = moment(value).endOf('day').utc().toISOString();
     console.log(moment(value).utc().toISOString());
     if (value) {
       this.docdumentsList();
