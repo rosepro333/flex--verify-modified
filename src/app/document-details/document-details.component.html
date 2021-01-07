@@ -284,23 +284,23 @@
                 <mat-form-field appearance="outline" fxFill>
                   <mat-label>Date of birth</mat-label>
                   <!-- (dateChange)="selectDate($event)" -->
-                  <input matInput [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" [matDatepicker]="dobPicker"
+                  <input matInput disabled [matDatepicker]="dobPicker"
                     placeholder="Date of birth" name="dob" [(ngModel)]="doc.dob" />
                   <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
-                  <mat-datepicker #dobPicker></mat-datepicker>
+                  <mat-datepicker #dobPicker disabled="false"></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFill>
                   <mat-label>Id expiry</mat-label>
-                  <input matInput [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" [matDatepicker]="idExpirypicker"
+                  <input matInput disabled [matDatepicker]="idExpirypicker"
                     placeholder="Id Expiry" name="idExpiryDate" [(ngModel)]="doc.idExpiryDate" />
                   <mat-datepicker-toggle matSuffix [for]="idExpirypicker"></mat-datepicker-toggle>
-                  <mat-datepicker #idExpirypicker></mat-datepicker>
+                  <mat-datepicker #idExpirypicker disabled="false"></mat-datepicker>
                 </mat-form-field>
                 <div class="button-wrap">
-                  <button mat-button type="button" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" class="cancel-button" (click)="clear()">
+                  <button mat-button type="button" *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" class="cancel-button" (click)="clear()">
                     cancel
                   </button>
-                  <button [disabled]="!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" mat-button class="primary-button" type="submit">
+                  <button *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" mat-button class="primary-button" type="submit">
                     Save
                   </button>
                 </div>
@@ -444,7 +444,7 @@
             </div>
           </div>
           <div class="button-wrap">
-            <button mat-button class="delete-button" (click)="deleteScan(scanIdDetails._id)">
+            <button *ngIf="accessType!=='3'&&accessType !=='4'" mat-button class="delete-button" (click)="deleteScan(scanIdDetails._id)">
               Delete
             </button>
           </div>
@@ -481,7 +481,7 @@
             </div>
           </div>
           <div class="button-wrap">
-            <button mat-button type="button" [disabled]="!doc.isActive"
+            <button mat-button type="button" [disabled]="!doc.isActive" *ngIf="accessType!=='3'&&accessType !=='4'"
               (click)="rightDrawer.open(); open('scan-result')" class="bordered-light-green-button">
               <i class="material-icons">edit</i>
               Edit

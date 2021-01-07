@@ -10,7 +10,8 @@ import { ServicesService } from 'src/app/service/services.service';
 })
 export class BlockTenentComponent implements OnInit {
   tenentId: string = '';
-  name: string = '';
+  tenentData: any = {};
+  block: number;
   constructor(
     // private fb: FormBuilder,
     private router: Router,
@@ -19,7 +20,7 @@ export class BlockTenentComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     console.log(data);
-    this.name = data.name;
+    this.tenentData = data.value;
     this.tenentId = data.id;
   }
 
@@ -27,7 +28,15 @@ export class BlockTenentComponent implements OnInit {
 
   blockTenent = () => {
     const id = this.tenentId;
-    this.service.blockTenent(id).subscribe((res) => {
+    if(this.tenentData.status ==='suspended'){
+      this.block = 0;
+    }else{
+      this.block = 1;
+    }
+    const data = {
+      block:this.block
+    }
+    this.service.blockTenent(id,data).subscribe((res) => {
       console.log(res);
       if (res.msg === 'success') {
         this.clear();

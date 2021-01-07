@@ -372,6 +372,7 @@ export class DocumentDetailsComponent implements OnInit {
         if(res.status === 'success'){
           this.toast.openSnackBar('Success',res.status)
           this.scanDocumentById(id);
+          this.nextScan(id);
           // this.documentLoad();
           this.sideNav.close();
         }
@@ -400,12 +401,6 @@ export class DocumentDetailsComponent implements OnInit {
   }
 
   onSave = (form: NgForm, scanId: any) => {
-    // form.value.scanResultStatus = this.scanResultStatus;
-    // form.value.ID_Type = this.ID_Type;
-    // form.value.idCardFrontStatus = this.idCardFrontStatus;
-    // form.value.idCardBackStatus = this.idCardBackStatus;
-    // form.value.liveCheckingStatus = this.liveCheckingStatus;
-    // console.log(form.value);
     const id = scanId;
     const data = {
       ID_Type:form.value.ID_Type,

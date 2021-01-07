@@ -108,6 +108,7 @@ export class FlexTenentComponent implements OnInit {
     alert('unblock ' + elm.name);
   }
   selectStatus = (value: any) => {
+    this.search ='';
     this.status = value;
     console.log(value);
     this.getTenentList();
@@ -119,15 +120,16 @@ export class FlexTenentComponent implements OnInit {
     this.getTenentList();
   }
 
-  blockTenant = (name: any, id: any) => {
-    console.log(id, name);
+  blockTenant = (value: any, id: any) => {
     const dialogRef = this.dialog.open(BlockTenentComponent, {
       height: '160px',
       width: '400px',
-      data: { id, name },
+      data: { id, value },
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.ngOnInit();
+      // this.ngOnInit();
+      this.getTenentList();
+      this.sideNav.close();
     });
   }
   enableTenant = (elm: any) => {
@@ -140,7 +142,9 @@ export class FlexTenentComponent implements OnInit {
       data: { id, name },
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.ngOnInit();
+      // this.ngOnInit();
+      this.getTenentList();
+      this.sideNav.close();
     });
   }
   formControl = () => {

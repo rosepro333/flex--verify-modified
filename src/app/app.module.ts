@@ -82,6 +82,8 @@ import { RightSidenavComponent } from './right-sidenav/right-sidenav.component'
 import { PrintDocumentComponent } from './document-details/print-document/print-document.component'
 import { SidebarService } from './sidebar/sidebar.service';
 import { AboutSidenavComponent } from './about-sidenav/about-sidenav.component';
+import { RoleNamePipe } from './pipe/role-name.pipe';
+import { DataCheckPipe } from './pipe/data-check.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -124,7 +126,9 @@ import { AboutSidenavComponent } from './about-sidenav/about-sidenav.component';
     IdDetailsComponent,
     RightSidenavComponent,
     PrintDocumentComponent,
-    AboutSidenavComponent
+    AboutSidenavComponent,
+    RoleNamePipe,
+    DataCheckPipe
   ],
   imports: [
     BrowserModule,

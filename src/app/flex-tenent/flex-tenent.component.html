@@ -106,10 +106,10 @@
             <button mat-button class="primary-button" type="button"  (click)="rightDrawer.open();clicked('create-tenant',tenentData)">
               Edit
             </button>
-            <button mat-button class="clear-button" type="button" (click)="blockTenant(tenentData.Contact_Name,tenentData ._id)">
+            <button mat-button class="clear-button" type="button" (click)="blockTenant(tenentData,tenentData ._id)">
               <!-- *ngIf="!element.isBlocked" -->
               <mat-icon>block</mat-icon>
-              Block
+              {{(tenentData.status ==='suspended')?'Unblock':'Block'}}
             </button>
             <!-- <button mat-button class="primary-button" type="button" (click)="enableTenant(element)"
             *ngIf="element.isBlocked">

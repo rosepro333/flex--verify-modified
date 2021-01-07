@@ -12,10 +12,10 @@ export class RolePipe implements PipeTransform {
     const data = [];
     value.map((i: any,index: number) => {
       if(index === 0){
-         data.push(i)
+        //  data.push(i)
       }
       if(accessType === '3'){
-        if(index > 2){
+        if(index > 2 || index === 0){
            data.push(i)
         }
       }

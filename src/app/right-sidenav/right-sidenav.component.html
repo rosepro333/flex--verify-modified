@@ -3,9 +3,12 @@
 	[fixedInViewport]="true" [fixedTopGap]="0" >
 	<div fxLayout="row" class="side-menu-right-drawer" fxLayoutAlign="space-between center" >
 		<div fxLayout="row" fxLayoutAlign=" center" >
-			<div>
+			<!-- <div>
 				<img src="../../assets/v-1.png" alt="">
-			</div>
+      </div> -->
+       <div class="shortname" *ngIf="data?.Contact_Name">
+            {{data?.Contact_Name | shortName}}
+          </div>
 			<div>
 				<h5>
 					{{data?.Contact_Name | titlecase}}
@@ -30,7 +33,7 @@
 					<h6>{{data?.Contact_Email }}</h6>
 				</div>
 			</div>
-			<div fxLayout="row" >
+			<div fxLayout="row" *ngIf="data?.Tenant_ID?.Contact_Name" >
 				<div class="right-drawer-about-th">
 					<h6>
 						Tenent
@@ -50,7 +53,7 @@
 				</div>
 				<div class="right-drawer-about-td">
 					<h6>
-            {{data?.Access_Type }}
+            {{data?.Access_Type | roleName}}
 					</h6>
 				</div>
 			</div>
@@ -67,7 +70,7 @@
 				</div>
 			</div>
 			<div fxLayout="row">
-				<div class="right-drawer-about-th">
+				<div class="right-drawer-about-th" *ngIf="data?.Tenant_ID?.Date_Expiry_Sand">
 					<h6>
 						Expry Date
 					</h6>

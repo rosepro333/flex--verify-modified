@@ -12,7 +12,9 @@
           fxLayoutAlign="center center"
         >
           <span class="textcenter"
-            >Do you want to Block <span class="name">{{ name }}</span></span
+            >
+            Do you want to {{(userData.status==='suspended')?'Unblock':'Block'}}  <span class="name">{{ userData?.Contact_Name }}</span>
+            </span
           >
         </div>
       </mat-card-content>
