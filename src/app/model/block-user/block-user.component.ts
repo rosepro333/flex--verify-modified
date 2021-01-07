@@ -12,7 +12,8 @@ import { ServicesService } from 'src/app/service/services.service';
 })
 export class BlockUserComponent implements OnInit {
   userId = '';
-  name = '';
+  userData: any = {};
+  block: number;
   constructor(
     // private fb: FormBuilder,
     private router: Router,
@@ -20,16 +21,25 @@ export class BlockUserComponent implements OnInit {
     private dialogRef: MatDialogRef<BlockUserComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(data);
-    this.name = data.name;
+    // console.log(data);
+    this.userData = data.value;
+    console.log(this.userData)
     this.userId = data.id;
   }
 
   ngOnInit(): void {}
 
   blockUser = () => {
+    if(this.userData.status ==='suspended'){
+      this.block = 0;
+    }else{
+      this.block = 1;
+    }
     const id = this.userId;
-    this.service.blockUser(id).subscribe((res) => {
+    const data = {
+      block:this.block
+    }
+    this.service.blockUser(id,data).subscribe((res) => {
       console.log(res);
       if (res.msg === 'success') {
         this.clear();

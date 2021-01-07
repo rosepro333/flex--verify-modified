@@ -69,9 +69,9 @@ export class ServicesService {
       .delete(this.apiUrl + '/tenent/delete/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  blockTenent(id: any): Observable<any> {
+  blockTenent(id: any,data: any): Observable<any> {
     return this.http
-      .get(this.apiUrl + '/tenent/blockTenent/' + id, this.httpOptions)
+      .patch(this.apiUrl + '/tenent/blockTenent/' + id,data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   userCreate(data: any): Observable<any> {
@@ -156,9 +156,9 @@ export class ServicesService {
       .delete(this.apiUrl + '/user/delete/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  blockUser(id: any): Observable<any> {
+  blockUser(id: any, data: any): Observable<any> {
     return this.http
-      .get(this.apiUrl + '/user/blockUser/' + id, this.httpOptions)
+      .patch(this.apiUrl + '/user/blockUser/' + id,data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   findUserById(id: any): Observable<any> {

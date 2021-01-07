@@ -126,7 +126,8 @@ export class DocumentComponent implements OnInit {
     });
   }
   selectDate1 = (value: any) => {
-    console.log(value);
+    this.search ='';
+    this.selectedDocs = '';
     this.startDate = moment(value).startOf('day').utc().toISOString();
   }
   selectDate2 = (value: any) => {

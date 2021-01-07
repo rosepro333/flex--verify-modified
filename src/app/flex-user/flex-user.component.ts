@@ -86,17 +86,21 @@ export class FlexUserComponent implements OnInit {
      this.getUserList();
   }
   selectRole = (value: any) => {
-    console.log(value)
+    console.log(value);
+    this.search ='';
     this.selectedRole = value;
     this.getUserList();
   }
   roleSelect = (value: any) => {
     if(value <= 2){
       this.isTenent = false;
+      this.form.get('tenent').setValidators([]);
       //  console.log(value);
     }else{
       this.isTenent = true;
-       console.log(value);
+      // this.form.
+      this.form.controls['tenent'].setValidators([Validators.required, Validators.min(1)])
+      console.log(value);
     }
   }
   getUserList = () => {
@@ -165,12 +169,12 @@ export class FlexUserComponent implements OnInit {
     this.currentPage = value.pageIndex + 1;
     this.getUserList();
   }
-  blockUser = (name: any,id: any)=> {
+  blockUser = (value: any,id: any)=> {
     if (id !== this.userId) {
       const dialogRef = this.dialog.open(BlockUserComponent, {
         height: '160px',
         width: '400px',
-        data: { id, name },
+        data: { id, value },
       });
       dialogRef.afterClosed().subscribe(() => {
         this.getUserList();
@@ -218,9 +222,9 @@ export class FlexUserComponent implements OnInit {
   formControl = () => {
     this.form = this.fb.group({
       type: new FormControl('',),
-      email: new FormControl(''),
-      name: new FormControl(''),
-      access: new FormControl(''),
+      email: new FormControl(null, [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      name: new FormControl(null, [Validators.required, Validators.min(2)]),
+      access: new FormControl(null, [Validators.required, Validators.min(1)]),
       tenent: new FormControl(''),
     });
   }

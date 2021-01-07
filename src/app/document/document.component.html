@@ -104,13 +104,13 @@
             <div class="data-wrap">
               <div class="title">Created At</div>
               <div class="value">
-                {{ document.createdAt | date: "mediumDate" }}
+                {{ document.createdAt | date: "mediumDate" |dataCheck }}
               </div>
             </div>
             <div class="data-wrap">
               <div class="title">Created time</div>
               <div class="value">
-                {{ document.updatedAt | date: "mediumTime" }}
+                {{ document.updatedAt | date: "mediumTime" |dataCheck}}
               </div>
             </div>
           </td>
@@ -121,12 +121,12 @@
             <div class="data-wrap">
               <div class="title">Name</div>
               <div class="value">
-                {{ document.firstName }} {{ document.lastName }}
+                {{ document.firstName |dataCheck}} {{ document.lastName }}
               </div>
             </div>
             <div class="data-wrap">
               <div class="title">Nationality</div>
-              <div class="value">{{ document.Document_ID.Nationality }}</div>
+              <div class="value">{{ document.Document_ID.Nationality |dataCheck }}</div>
             </div>
           </td>
         </ng-container>
@@ -135,12 +135,12 @@
           <td mat-cell *matCellDef="let document">
             <div class="data-wrap">
               <div class="title">Tenent Name</div>
-              <div class="value">{{ document?.Tenant_ID?.Name }}</div>
+              <div class="value">{{ document?.Tenant_ID?.Name |dataCheck}}</div>
             </div>
             <div class="data-wrap">
               <div class="title">Status</div>
               <div class="value"><span class="status {{document.scanResultStatus | lowercase}}">{{
-                  document.scanResultStatus }}</span></div>
+                  document.scanResultStatus |dataCheck}}</span></div>
             </div>
           </td>
         </ng-container>
