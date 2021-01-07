@@ -4,11 +4,11 @@
 	<div fxLayout="row" class="side-menu-right-drawer" fxLayoutAlign="space-between center" >
 		<div fxLayout="row" fxLayoutAlign=" center" >
 			<div>
-				<img src="../../assets/v-1.png" alt=""> 
+				<img src="../../assets/v-1.png" alt="">
 			</div>
 			<div>
 				<h5>
-					Vilison Gomez
+					{{data?.Contact_Name | titlecase}}
 				</h5>
 			</div>
 		</div>
@@ -27,14 +27,10 @@
 					</h6>
 				</div>
 				<div class="right-drawer-about-td">
-					<h6>
-						
-							Vilison@gmail.com
-						
-					</h6>
+					<h6>{{data?.Contact_Email }}</h6>
 				</div>
 			</div>
-			<div fxLayout="row">
+			<div fxLayout="row" >
 				<div class="right-drawer-about-th">
 					<h6>
 						Tenent
@@ -42,23 +38,19 @@
 				</div>
 				<div class="right-drawer-about-td">
 					<h6>
-						
-							ICIC Bank
-					
+            {{data?.Tenant_ID?.Contact_Name }}
 					</h6>
 				</div>
 			</div>
 			<div fxLayout="row">
 				<div class="right-drawer-about-th">
 					<h6>
-						Role
+            Role
 					</h6>
 				</div>
 				<div class="right-drawer-about-td">
 					<h6>
-						
-							FlexmOperator
-					
+            {{data?.Access_Type }}
 					</h6>
 				</div>
 			</div>
@@ -70,9 +62,7 @@
 				</div>
 				<div class="right-drawer-about-td">
 					<h6>
-						
-							11/07/21
-						
+            {{data?.createdAt | date: 'dd/MM/yyyy' }}
 					</h6>
 				</div>
 			</div>
@@ -84,13 +74,11 @@
 				</div>
 				<div class="right-drawer-about-td">
 					<h6>
-						
-							01/02/21
-						
+						{{data?.Tenant_ID?.Date_Expiry_Sand | date: 'dd/MM/yyyy' }}
 					</h6>
 				</div>
 			</div>
-			<div fxLayout="row">
+			<!-- <div fxLayout="row">
 				<div class="right-drawer-about-th">
 					<h6>
 						Created By
@@ -98,12 +86,11 @@
 				</div>
 				<div class="right-drawer-about-td">
 					<h6>
-						
 							Vilison
-						
+
 					</h6>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 

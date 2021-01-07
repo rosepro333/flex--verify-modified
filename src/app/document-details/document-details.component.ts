@@ -214,12 +214,9 @@ export class DocumentDetailsComponent implements OnInit {
     };
     console.log(data);
     this.serviceServive.getAllComment(data).subscribe((res) => {
-      // console.log(res);
       if (res.msg === 'success') {
         const obj = {};
-        // tslint:disable-next-line:no-string-literal
         obj['id'] = scanId;
-        // tslint:disable-next-line:no-string-literal
         obj['data'] = res.data;
         this.commentsData.push(obj);
       }
@@ -375,6 +372,7 @@ export class DocumentDetailsComponent implements OnInit {
         if(res.status === 'success'){
           this.toast.openSnackBar('Success',res.status)
           this.scanDocumentById(id);
+          // this.documentLoad();
           this.sideNav.close();
         }
       // console.log(res)

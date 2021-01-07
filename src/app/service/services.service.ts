@@ -55,6 +55,9 @@ export class ServicesService {
   audit(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/audit/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
+  userDetails(): Observable<any> {
+    return this.http.get(this.apiUrl + '/user/userInfo', this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   createTenent(data: any): Observable<any> {
       return this.http
         .post(this.apiUrl + '/tenent', data, this.httpOptions)
