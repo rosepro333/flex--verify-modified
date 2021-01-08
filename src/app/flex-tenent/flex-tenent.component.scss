@@ -88,7 +88,9 @@ img.noDataFound {
 }
  
 @media only screen and (min-width: 1441px) and (max-width: 1600px) {
-
+  mat-drawer.mat-drawer.right-side-drawer {
+    width: 450px;
+}
   .tenent-list-wrap{
     .shortname {
       width: 20px;
@@ -114,6 +116,9 @@ img.noDataFound {
 }
 
 @media only screen and (min-width: 700px) and (max-width: 1366px){
+  mat-drawer.mat-drawer.right-side-drawer {
+    width: 450px;
+}
   .tenent-list-wrap{
     .shortname {
       width: 20px;
@@ -138,6 +143,9 @@ img.noDataFound {
 }
 }
 @media only screen and (min-width: 1281px) and (max-width: 1440px) {
+  mat-drawer.mat-drawer.right-side-drawer {
+    width: 450px;
+}
   .tenent-list-wrap{
     .shortname {
       width: 20px;
@@ -163,6 +171,9 @@ img.noDataFound {
 
 }
 @media only screen and (min-width: 800px) and (max-width: 1536px) {
+  mat-drawer.mat-drawer.right-side-drawer {
+    width: 450px;
+}
   .tenent-list-wrap{
     .shortname {
       width: 20px;
@@ -192,6 +203,9 @@ img.noDataFound {
 
 
 @media only screen and (min-width: 800px) and (max-width: 1280px) {
+  mat-drawer.mat-drawer.right-side-drawer {
+    width: 450px;
+}
   .tenent-list-wrap{
     .shortname {
       width: 20px;
