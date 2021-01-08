@@ -39,14 +39,13 @@ export class LoginComponent implements OnInit {
     this.rememberMe();
   }
   rememberMe() {
-    const userName = localStorage.getItem('userName');
-    const password = localStorage.getItem('password');
-    const rememberMe = localStorage.getItem('rememberMe');
-    if(rememberMe === 'true'){
-      this.form.patchValue({userName:userName,password:password,rememberMe:rememberMe})
+    const flex_verify = localStorage.getItem('flex_verify')
+    const flex = CryptoJS.AES.decrypt(flex_verify, this.encryptSecretKey).toString(CryptoJS.enc.Utf8);
+    console.log(JSON.parse(flex));
+    const loginData = JSON.parse(flex);
+    if(loginData.rememberMe === true){
+      this.form.patchValue({userName:loginData.userName,password:loginData.password,rememberMe:loginData.rememberMe})
     }
-    console.log(this.form)
-
   }
   // tslint:disable-next-line:typedef
   isFieldInvalid(field: string) {
@@ -94,11 +93,8 @@ export class LoginComponent implements OnInit {
   }
   setRememberMe = () => {
     if(this.form.value.rememberMe === true){
-      // const flex = CryptoJS.AES.encrypt(JSON.stringify(this.form.value), this.encryptSecretKey).toString();
-      localStorage.setItem('userName',this.form.value.userName);
-      localStorage.setItem('password',this.form.value.password);
-      localStorage.setItem('rememberMe',this.form.value.rememberMe);
-      // localStorage.setItem('flex_verify',flex);
+      const flex = CryptoJS.AES.encrypt(JSON.stringify(this.form.value), this.encryptSecretKey).toString();
+      localStorage.setItem('flex_verify',flex);
     }
   }
   audits = (data: any) => {
