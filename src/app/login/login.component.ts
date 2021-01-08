@@ -7,7 +7,6 @@ import { audit } from 'rxjs/operators';
 import { ServicesService } from '../service/services.service';
 import { TosterService } from '../toster/toster.service';
 import { AuthService } from './../auth/auth.service';
-import * as CryptoJS from 'crypto-js';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,10 +15,9 @@ import * as CryptoJS from 'crypto-js';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  encryptSecretKey ='vuobnvlkdjvndvjkfnkjdlvndskvlnhuisdvbdslvbdslvbdsvdbuvdvhfvjjvbfjvbf';
   private formSubmitAttempt: boolean;
   deviceInfo: any = [];
-  hide = true;
+  hide = false;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -32,21 +30,11 @@ export class LoginComponent implements OnInit {
   // tslint:disable-next-line:typedef
   ngOnInit() {
     this.form = this.fb.group({
-      userName: [null, [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      userName: ['', Validators.required],
       password: ['', Validators.required],
-      rememberMe:[false]
     });
-    this.rememberMe();
   }
-  rememberMe() {
-    const flex_verify = localStorage.getItem('flex_verify')
-    const flex = CryptoJS.AES.decrypt(flex_verify, this.encryptSecretKey).toString(CryptoJS.enc.Utf8);
-    console.log(JSON.parse(flex));
-    const loginData = JSON.parse(flex);
-    if(loginData.rememberMe === true){
-      this.form.patchValue({userName:loginData.userName,password:loginData.password,rememberMe:loginData.rememberMe})
-    }
-  }
+
   // tslint:disable-next-line:typedef
   isFieldInvalid(field: string) {
     return (
@@ -71,7 +59,6 @@ export class LoginComponent implements OnInit {
             Cookie.set('data', result.data);
             Cookie.set('LOGIN_STATUS', result.msg);
             Cookie.set('Access_Type', result.user.Access_Type);
-            this.setRememberMe();
             const data = {
               user: result.user.ID,
               tenentId: result.user.Tenant_ID,
@@ -90,12 +77,6 @@ export class LoginComponent implements OnInit {
       );
     }
     this.formSubmitAttempt = true;
-  }
-  setRememberMe = () => {
-    if(this.form.value.rememberMe === true){
-      const flex = CryptoJS.AES.encrypt(JSON.stringify(this.form.value), this.encryptSecretKey).toString();
-      localStorage.setItem('flex_verify',flex);
-    }
   }
   audits = (data: any) => {
     this.service.audit(data).subscribe((res) => {
