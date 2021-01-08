@@ -59,17 +59,131 @@ span.material-icons:hover {
 .right-drawer-about-td h4 {
     font-size: 16px !important;
     font-weight: 400 !important;
-    line-height: 55.45px;
+    color: #333333 !important;
+}
+@media only screen and (min-width: 1441px) and (max-width: 1600px) {
+    .right-drawer-about-th h6 {
+        font-size: 12px !important;
+       
+    }.right-drawer-about-td h6 {
+        font-size: 12px !important;
+       
+    }
+    .side-menu-right-drawer img {
+        width: 34px;
+    }
+    .side-menu-right-drawer h5 {
+       
+        font-size: 14px !important;
+       
+    }
+    .side-menu-right-drawer-detail {
+        padding: 0px 78px;
+    }
 
-    // color: #333333 !important;
-    color: #B0B0B0 !important;
 }
 
-.mat-divider {
-  // border: 1px solid rgba(0, 0, 0, 0.15)
-    border-top-color: rgba(0, 0, 0, 0.15);
+@media only screen and (min-width: 700px) and (max-width: 1366px){
+   
+    
+    
+    .right-drawer-about-th h6 {
+        font-size: 12px !important;
+       
+    }.right-drawer-about-td h6 {
+        font-size: 12px !important;
+       
+    }
+    .side-menu-right-drawer img {
+        width: 34px;
+    }
+    .side-menu-right-drawer h5 {
+       
+        font-size: 14px !important;
+       
+    }
+    .side-menu-right-drawer-detail {
+        padding: 20px;
+    }
 }
-.app-logo {
-  width: 90px;
-  // margin-bottom: 2.5em;
+@media only screen and (min-width: 1281px) and (max-width: 1440px) {
+    .right-drawer-about-th h6 {
+        font-size: 12px !important;
+       
+    }.right-drawer-about-td h6 {
+        font-size: 12px !important;
+       
+    }
+    .side-menu-right-drawer img {
+        width: 34px;
+    }
+    .side-menu-right-drawer h5 {
+       
+        font-size: 14px !important;
+       
+    }
+    .side-menu-right-drawer-detail {
+        padding: 0px 78px;
+    }   
+
+}
+@media only screen and (min-width: 800px) and (max-width: 1536px) {
+    .right-drawer-about-th h6 {
+        font-size: 12px !important;
+       
+    }.right-drawer-about-td h6 {
+        font-size: 12px !important;
+       
+    }
+    .side-menu-right-drawer img {
+        width: 34px;
+    }
+    .side-menu-right-drawer h5 {
+       
+        font-size: 14px !important;
+       
+    }
+    .side-menu-right-drawer-detail {
+        padding: 0px 78px;
+    }
+
+}
+
+
+
+
+@media only screen and (min-width: 800px) and (max-width: 1280px) {
+    .right-drawer-about-th h6 {
+        font-size: 12px !important;
+       
+    }.right-drawer-about-td h6 {
+        font-size: 12px !important;
+       
+    }
+    .side-menu-right-drawer img {
+        width: 34px;
+    }
+    .side-menu-right-drawer h5 {
+       
+        font-size: 14px !important;
+       
+    }
+    .side-menu-right-drawer-detail {
+        padding: 0px 78px;
+    }
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+ 
+}
+
+@media only screen and (max-width: 767px) {
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+}
+
+@media only screen and (max-width: 479px) {
+   
 }

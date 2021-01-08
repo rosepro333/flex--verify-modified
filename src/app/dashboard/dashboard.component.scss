@@ -72,3 +72,135 @@
   //     }
   // }
 }
+
+
+@media only screen and (min-width: 1441px) and (max-width: 1600px) {
+  .dashboard-wrap  {
+    .tiles-wrap .tile .title{
+    font-size: 12px;
+    }
+     .tiles-wrap .tile .count {
+      font-size: 46px;
+  }
+  .madrawer-head{
+    font-size: 14px;
+  }
+ 
+    
+}
+
+}
+
+@media only screen and (min-width: 700px) and (max-width: 1366px){
+  .dashboard-wrap  {
+    .tiles-wrap .tile .title{
+    font-size: 12px;
+    }
+     .tiles-wrap .tile .count {
+      font-size: 46px;
+      
+  }
+ 
+}
+mat-drawer.mat-drawer.right-side-drawer {
+  width: 350px;
+}
+}
+@media only screen and (min-width: 1281px) and (max-width: 1440px) {
+  .dashboard-wrap  {
+    .tiles-wrap .tile .title{
+    font-size: 12px;
+    }
+     .tiles-wrap .tile .count {
+      font-size: 46px;
+      
+  }
+    
+}
+mat-drawer.mat-drawer.right-side-drawer {
+  width: 450px;
+}
+
+}
+@media only screen and (min-width: 800px) and (max-width: 1536px) {
+  .dashboard-wrap  {
+    .tiles-wrap .tile .title{
+    font-size: 12px;
+    }
+     .tiles-wrap .tile .count {
+      font-size: 46px;
+      
+  }
+    
+}
+mat-drawer.mat-drawer.right-side-drawer {
+  width: 450px;
+}
+}
+
+
+
+
+@media only screen and (min-width: 800px) and (max-width: 1280px) {
+  .dashboard-wrap  {
+    .tiles-wrap .tile .title{
+    font-size: 12px;
+    }
+     .tiles-wrap .tile .count {
+      font-size: 46px;
+      
+  }
+    
+}
+mat-drawer.mat-drawer.right-side-drawer {
+  width: 450px;
+}
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .dashboard-wrap  {
+    .tiles-wrap .tile .title{
+    font-size: 12px;
+    }
+     .tiles-wrap .tile .count {
+      font-size: 46px;
+      
+  }
+    
+}
+mat-drawer.mat-drawer.right-side-drawer {
+  width: 450px;
+}
+}
+
+@media only screen and (max-width: 767px) {
+  .dashboard-wrap  {
+    .tiles-wrap .tile .title{
+    font-size: 12px;
+    }
+     .tiles-wrap .tile .count {
+      font-size: 46px;
+      
+  }
+    
+}
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .dashboard-wrap  {
+    .tiles-wrap .tile .title{
+    font-size: 12px;
+    }
+     .tiles-wrap .tile .count {
+      font-size: 46px;
+      
+  }
+    
+}
+}
+
+@media only screen and (max-width: 479px) {
+   
+}
+

@@ -45,3 +45,152 @@ img.noDataFound {
   margin: 0 auto;
   padding-bottom: 20px;
 }
+
+@media only screen and (min-width: 1441px) and (max-width: 1600px) {
+    .api-keys-wrap{
+        button.mat-focus-indicator {
+            font-size: 12px;
+            line-height: 28px;
+        }
+        mat-card {
+            .top{
+                .key-wrapper {
+                    font-size: 12px;
+                    .api-key-value {
+                        font-size: 12px;
+                    }
+                } 
+                
+            }
+            .data-wrap {
+                .title {
+                   
+                    font-size: 12px;
+                }
+                .value {
+                    font-size: 12px;
+                    
+                }
+            }
+        }
+        
+    } 
+
+}
+
+@media only screen and (min-width: 700px) and (max-width: 1366px){
+    .api-keys-wrap{
+        button.mat-focus-indicator {
+            font-size: 12px;
+            line-height: 28px;
+        }
+        mat-card {
+            .top{
+                .key-wrapper {
+                    font-size: 12px;
+                    .api-key-value {
+                        font-size: 12px;
+                    }
+                } 
+                
+            }
+            .data-wrap {
+                .title {
+                   
+                    font-size: 12px;
+                }
+                .value {
+                    font-size: 12px;
+                    
+                }
+            }
+        }
+        
+    } 
+   
+}
+@media only screen and (min-width: 1281px) and (max-width: 1440px) {
+    .api-keys-wrap{
+        button.mat-focus-indicator {
+            font-size: 12px;
+            line-height: 28px;
+        }
+        mat-card {
+            .top{
+                .key-wrapper {
+                    font-size: 12px;
+                    .api-key-value {
+                        font-size: 12px;
+                    }
+                } 
+                
+            }
+            .data-wrap {
+                .title {
+                   
+                    font-size: 12px;
+                }
+                .value {
+                    font-size: 12px;
+                    
+                }
+            }
+        }
+        
+    } 
+
+}
+@media only screen and (min-width: 800px) and (max-width: 1536px) {
+    .api-keys-wrap{
+        button.mat-focus-indicator {
+            font-size: 12px;
+            line-height: 28px;
+        }
+        mat-card {
+            .top{
+                .key-wrapper {
+                    font-size: 12px;
+                    .api-key-value {
+                        font-size: 12px;
+                    }
+                } 
+                
+            }
+            .data-wrap {
+                .title {
+                   
+                    font-size: 12px;
+                }
+                .value {
+                    font-size: 12px;
+                    
+                }
+            }
+        }
+        
+    } 
+
+}
+
+
+
+
+@media only screen and (min-width: 800px) and (max-width: 1280px) {
+
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+ 
+}
+
+@media only screen and (max-width: 767px) {
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+}
+
+@media only screen and (max-width: 479px) {
+   
+}
+
