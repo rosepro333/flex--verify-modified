@@ -110,6 +110,7 @@ img.noDataFound {
 }
 
 @media only screen and (min-width: 700px) and (max-width: 1366px){
+  .document-wrap{
     .document-wrap .mat-table .mat-cell .value {
         font-size: 12px;
     }
@@ -126,29 +127,47 @@ img.noDataFound {
     bottom: 0;
     pointer-events: none;
       }
+  }
 }
 @media only screen and (min-width: 1281px) and (max-width: 1440px) {
-    .document-wrap .mat-table .mat-cell .value {
-        font-size: 12px;
-    }
-    .document-wrap .status {
-        font-size: 12px;
-    }
-    .document-wrap .mat-table .mat-cell .value {
-        font-size: 12px;
-    }
-    .document-wrap .status {
-        font-size: 12px;
-    }
-    mat-form-field  .mat-form-field-appearance-outline  .mat-form-field-outline  {
-        display: flex;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    height: 30px;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
+    .document-wrap{
+        .document-wrap .mat-table .mat-cell .value {
+            font-size: 12px;
+        }
+        .document-wrap .status {
+            font-size: 12px;
+        }
+        mat-form-field  .mat-form-field-appearance-outline  .mat-form-field-outline  {
+            display: flex;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        height: 30px;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+          }
+      }
+
+}
+@media only screen and (min-width: 800px) and (max-width: 1536px) {
+    .document-wrap{
+        .document-wrap .mat-table .mat-cell .value {
+            font-size: 12px;
+        }
+        .document-wrap .status {
+            font-size: 12px;
+        }
+        mat-form-field  .mat-form-field-appearance-outline  .mat-form-field-outline  {
+            display: flex;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        height: 30px;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+          }
       }
 
 }
@@ -158,12 +177,24 @@ img.noDataFound {
 
 @media only screen and (min-width: 800px) and (max-width: 1280px) {
 
-    .document-wrap .mat-table .mat-cell .value {
-        font-size: 12px;
-    }
-    .document-wrap .status {
-        font-size: 12px;
-    }
+    .document-wrap{
+        .document-wrap .mat-table .mat-cell .value {
+            font-size: 12px;
+        }
+        .document-wrap .status {
+            font-size: 12px;
+        }
+        mat-form-field  .mat-form-field-appearance-outline  .mat-form-field-outline  {
+            display: flex;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        height: 30px;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+          }
+      }
 }
 
 
