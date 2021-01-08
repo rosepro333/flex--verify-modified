@@ -128,11 +128,13 @@
 @media only screen and (min-width: 700px) and (max-width: 1366px){
     .login-wrap{
         .login-left {
+            max-width: 60% !important;
             .login-bg {
-                width: 75%;
+                width: 70%;
             }
         }
         .login-right{
+            max-width: 40% !important;
             .header {
                 font-size: 14px;
              
