@@ -153,6 +153,7 @@ export class DocumentDetailsComponent implements OnInit {
   preview = (value: any) => {
     const img = `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${value}?alt=media`
     console.log(img);
+    
     this.previewImageSrc = img;
     this.zoomImageSrc = img;
   }

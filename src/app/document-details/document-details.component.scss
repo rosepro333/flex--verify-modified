@@ -31,6 +31,7 @@
   overflow: auto;
   height: calc(100vh - 64px);
   .owl-carousel {
+    
     .owl-item {
       .justify-center {
         display: flex;
@@ -162,19 +163,6 @@
   background-color: rgba(0,0,0,0.5);
   z-index: 2;
   cursor: pointer;
-}
-.mat-dialog-container {
-  display: block;
-  padding: 1px !important;
-  border-radius: 4px;
-  box-sizing: border-box;
-  /* overflow: auto; */
-  outline: 0;
-  position: relative;
-  width: 100%;
-  background: unset !important;
-  margin: 0px;
-  box-shadow: unset !important;
 }
 
 @media only screen and (min-width: 1601px) {
@@ -385,9 +373,10 @@
   .header .name {
     font-size: 14px;
   }
-  .mat-button{
-    line-height: 26px;
-  }
+  .input-suffix-button {
+    
+    font-size: 11px;
+}
   .header .header-doc-id-wrap {
   font-size: 14px;
   }
@@ -458,12 +447,17 @@ table.mat-table tbody td {
     .left-section .mat-tab-header .mat-tab-label {
       font-size: 14px;
   }
+  .input-suffix-button {
+   
+    font-size: 11px;
+}
   .header .name {
     font-size: 14px;
   }
-  .mat-button{
-    line-height: 26px;
-  }
+  .input-suffix-button {
+   
+    font-size: 11px;
+}
   .header .header-doc-id-wrap {
   font-size: 14px;
   }
@@ -537,9 +531,10 @@ table.mat-table tbody td {
   .header .name {
     font-size: 14px;
   }
-  .mat-button{
-    line-height: 26px;
-  }
+  .input-suffix-button {
+   
+    font-size: 11px;
+}
   .header .header-doc-id-wrap {
   font-size: 14px;
   }
@@ -613,9 +608,10 @@ table.mat-table tbody td {
   .header .name {
     font-size: 14px;
   }
-  .mat-button{
-    line-height: 26px;
-  }
+  .input-suffix-button {
+   
+    font-size: 11px;
+}
   .header .header-doc-id-wrap {
   font-size: 14px;
   }
@@ -664,9 +660,10 @@ table.mat-table tbody td {
   .header .name {
     font-size: 14px;
   }
-  .mat-button{
-    line-height: 26px;
-  }
+  .input-suffix-button {
+   
+    font-size: 11px;
+}
   .header .header-doc-id-wrap {
   font-size: 14px;
   }
