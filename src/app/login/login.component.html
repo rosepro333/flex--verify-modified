@@ -1,13 +1,11 @@
 <div class="login-wrap">
   <div class="row">
-    <div class="login-left" fxFlex.md="65" fxFlex.gt-md="65" fxFlex.lt-md="100" fxHide.lt-md fxLayout="row"
-      fxLayoutAlign="center center">
-      <div fxLayout="column" fxLayoutAlign="center center">
+    <div class="login-left" >
+      <div >
         <img src="./../../assets/login.svg" alt="login-bg" class="login-bg" />
       </div>
     </div>
-    <div class="login-right" fxFlex.md="35" fxFlex.gt-md="35" fxFlex.lt-md="100" fxLayout="row"
-      fxLayoutAlign="center center">
+    <div class="login-right" >
       <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center stretch">
         <div fxFlex align="left">
           <img src="./../../assets/logo-main.svg" alt="app-logo" class="app-logo" />

@@ -4,9 +4,17 @@
     // mat-card {
     //     background: linear-gradient(90deg, #fff 50%, #fbfbfb 50%);
     // }
+    .row {
+        display: flex;
+        width: 100%;
+    }
     .login-left {
         background: #f7fffb;
-        height: 100vh;
+    height: 100vh;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
         // .app-logo {
         //     width: 140px;
         // }
@@ -18,7 +26,11 @@
     .login-right {
         // background: #fbfbfb;
         padding: 20px;
-        height: 100vh;
+    height: 100vh;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
         form {
             width: 500px;
         }
