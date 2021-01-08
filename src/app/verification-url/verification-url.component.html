@@ -27,9 +27,10 @@
     <ngx-qrcode [elementType]="elementType" [value]="verificaionUrl" cssClass="aclass" errorCorrectionLevel="L">
     </ngx-qrcode>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="verificaionUrl">
+  <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="verificaionUrl">
     <div class="url-wrap">
-      KYC verification url: <span class="url">{{ verificaionUrl }}</span>
+      KYC verification url: <br>
+      <span class="url">{{ verificaionUrl }}</span>
     </div>
     <button mat-icon-button [cdkCopyToClipboard]="verificaionUrl" matTooltip="copy url" matTooltipPosition="right">
       <mat-icon>content_copy</mat-icon>
