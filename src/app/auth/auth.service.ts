@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -57,16 +57,19 @@ export class AuthService {
   deleteAllCookies = () => {
     Cookie.deleteAll('/', 'localhost');
   }
-  handleError = (error: any ) => {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get Client Side Error
-      errorMessage = error.error.messages;
-    } else {
-      // Get Server-Side Error
-      errorMessage = `Error Code : ${error.status}\nMessage : ${error.messsage}`;
-    }
-    window.alert(errorMessage);
-    return throwError(errorMessage);
+  handleError(error: HttpErrorResponse) {
+    return throwError(error);
   }
+  // handleError = (error: any ) => {
+  //   let errorMessage = '';
+  //   if (error.error instanceof ErrorEvent) {
+  //     // Get Client Side Error
+  //     errorMessage = error.error.messages;
+  //   } else {
+  //     // Get Server-Side Error
+  //     errorMessage = `Error Code : ${error.status}\nMessage : ${error.messsage}`;
+  //   }
+  //   window.alert(errorMessage);
+  //   return throwError(errorMessage);
+  // }
 }

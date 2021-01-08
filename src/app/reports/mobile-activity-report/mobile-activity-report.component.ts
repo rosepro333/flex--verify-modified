@@ -43,13 +43,13 @@ export class MobileActivityReportComponent implements OnInit {
   }
   selectDate1 = (value: any) => {
     console.log(value);
-    this.startDate = moment(value).utc().toISOString();
+    this.startDate = moment(value).startOf('day').utc().toISOString();
   }
   selectDate2 = (value: any) => {
-    this.endDate = moment(value).utc().toISOString();
+    this.endDate = moment(value).endOf('day').utc().toISOString();
     console.log(moment(value).utc().toISOString());
     if (value) {
-      // this.mobileActivity();
+      this.mobileActivity();
     }
   }
   searchFilter = () => {
@@ -75,8 +75,8 @@ export class MobileActivityReportComponent implements OnInit {
     limit: this.pageSize,
     order: '-1',
     pageNo: this.currentPage,
-    // startDate: this.startDate,
-    // endDate: this.endDate,
+    startDate: this.startDate,
+    endDate: this.endDate,
     status: ''
     };
     this.report.mobileActivity(data).subscribe((res) => {

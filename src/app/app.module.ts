@@ -84,6 +84,7 @@ import { SidebarService } from './sidebar/sidebar.service';
 import { AboutSidenavComponent } from './about-sidenav/about-sidenav.component';
 import { RoleNamePipe } from './pipe/role-name.pipe';
 import { DataCheckPipe } from './pipe/data-check.pipe';
+import { LogoutComponent } from './sidebar/logout/logout.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -128,7 +129,8 @@ import { DataCheckPipe } from './pipe/data-check.pipe';
     PrintDocumentComponent,
     AboutSidenavComponent,
     RoleNamePipe,
-    DataCheckPipe
+    DataCheckPipe,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

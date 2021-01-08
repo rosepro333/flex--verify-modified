@@ -15,20 +15,21 @@ export class SidebarService {
 	public setSidenav1(sidenav: MatSidenav) {
 		this.sidenav1 = sidenav;
 	}
-	
+
 
 	public open() {
 		return this.sidenav.open();
-		
+
 	}
 	public open1() {
 		return this.sidenav1.open();
-		
+
 	}
 
 
 
 	public close() {
+    console.log('close called')
 		return this.sidenav.close();
 	}
 	public close1() {
