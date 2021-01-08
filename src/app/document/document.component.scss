@@ -105,16 +105,23 @@ img.noDataFound {
 }
 
 @media only screen and (min-width: 1441px) and (max-width: 1600px) {
-
+    .document-wrap  {
+        .mat-table .mat-cell .value{
+            font-size: 12px;
+        } 
+        .status {
+            font-size: 12px;
+        }
+    }
 
 }
 
 @media only screen and (min-width: 700px) and (max-width: 1366px){
   .document-wrap{
-    .document-wrap .mat-table .mat-cell .value {
+     .mat-table .mat-cell .value {
         font-size: 12px;
     }
-    .document-wrap .status {
+     .status {
         font-size: 12px;
     }
     mat-form-field  .mat-form-field-appearance-outline  .mat-form-field-outline  {
@@ -131,10 +138,10 @@ img.noDataFound {
 }
 @media only screen and (min-width: 1281px) and (max-width: 1440px) {
     .document-wrap{
-        .document-wrap .mat-table .mat-cell .value {
+        .mat-table .mat-cell .value {
             font-size: 12px;
         }
-        .document-wrap .status {
+         .status {
             font-size: 12px;
         }
         mat-form-field  .mat-form-field-appearance-outline  .mat-form-field-outline  {
@@ -152,10 +159,10 @@ img.noDataFound {
 }
 @media only screen and (min-width: 800px) and (max-width: 1536px) {
     .document-wrap{
-        .document-wrap .mat-table .mat-cell .value {
+         .mat-table .mat-cell .value {
             font-size: 12px;
         }
-        .document-wrap .status {
+         .status {
             font-size: 12px;
         }
         mat-form-field  .mat-form-field-appearance-outline  .mat-form-field-outline  {
@@ -178,10 +185,10 @@ img.noDataFound {
 @media only screen and (min-width: 800px) and (max-width: 1280px) {
 
     .document-wrap{
-        .document-wrap .mat-table .mat-cell .value {
+        .mat-table .mat-cell .value {
             font-size: 12px;
         }
-        .document-wrap .status {
+         .status {
             font-size: 12px;
         }
         mat-form-field  .mat-form-field-appearance-outline  .mat-form-field-outline  {

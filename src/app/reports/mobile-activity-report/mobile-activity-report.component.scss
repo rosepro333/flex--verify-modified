@@ -14,3 +14,113 @@ img.noDataFound {
   margin: 0 auto;
   padding-bottom: 20px;
 }
+@media only screen and (min-width: 1441px) and (max-width: 1600px) {
+    .mobile-activity-wrap {
+      
+        td {
+            &.mat-cell {
+                font-size: 12px;
+               
+            }
+        }
+        .drawer-head{
+            font-size: 14px;
+        }
+    }
+    
+
+}
+
+@media only screen and (min-width: 700px) and (max-width: 1366px){
+ 
+    .mobile-activity-wrap {
+      
+        td {
+            &.mat-cell {
+                font-size: 12px;
+               
+            }
+        }
+        .drawer-head{
+            font-size: 14px;
+        }
+    }
+    
+}
+@media only screen and (min-width: 1281px) and (max-width: 1440px) {
+    .mobile-activity-wrap {
+      
+        td {
+            &.mat-cell {
+                font-size: 12px;
+               
+            }
+        }
+        .drawer-head{
+            font-size: 14px;
+        }
+    }
+
+}
+@media only screen and (min-width: 800px) and (max-width: 1536px) {
+    .mobile-activity-wrap {
+      
+        td {
+            &.mat-cell {
+                font-size: 12px;
+               
+            }
+        }
+        .drawer-head{
+            font-size: 14px;
+        }
+    }
+
+}
+
+
+
+
+@media only screen and (min-width: 800px) and (max-width: 1280px) {
+    .mobile-activity-wrap {
+      
+        td {
+            &.mat-cell {
+                font-size: 12px;
+               
+            }
+        }
+        .drawer-head{
+            font-size: 14px;
+        }
+    }
+
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .mobile-activity-wrap {
+      
+        td {
+            &.mat-cell {
+                font-size: 12px;
+               
+            }
+        }
+        .drawer-head{
+            font-size: 14px;
+        }
+    }
+ 
+}
+
+@media only screen and (max-width: 767px) {
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+}
+
+@media only screen and (max-width: 479px) {
+   
+}
+

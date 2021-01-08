@@ -54,3 +54,55 @@ img.noDataFound {
   margin: 0 auto;
   padding-bottom: 20px;
 }
+
+@media only screen and (min-width: 1441px) and (max-width: 1600px) {
+
+
+}
+
+@media only screen and (min-width: 700px) and (max-width: 1366px){
+  .user-list-wrap{
+    .user-icon{
+      mat-icon {
+        font-size: 30px;
+        vertical-align: middle;
+        height: 30px;
+        width: 30px;
+        color: #00a185;
+        margin-right: 8px;
+    }
+    
+    }
+  } 
+}
+@media only screen and (min-width: 1281px) and (max-width: 1440px) {
+    
+
+}
+@media only screen and (min-width: 800px) and (max-width: 1536px) {
+  
+
+}
+
+
+
+
+@media only screen and (min-width: 800px) and (max-width: 1280px) {
+
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+ 
+}
+
+@media only screen and (max-width: 767px) {
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+}
+
+@media only screen and (max-width: 479px) {
+   
+}
+
