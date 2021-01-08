@@ -1,3 +1,4 @@
+import { LogoutComponent } from './logout/logout.component';
 import { Component, OnInit, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies';
@@ -6,6 +7,7 @@ import { VerificationUrlComponent } from '../verification-url/verification-url.c
 import { AuthService } from './../auth/auth.service';
 import { SidebarService } from './sidebar.service';
 import { MatSidenav } from '@angular/material/sidenav';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sidebar',
@@ -29,7 +31,8 @@ export class SidebarComponent implements OnInit {
     private router: Router,
     private service: ServicesService,
     public viewContainerRef: ViewContainerRef,
-    private sidenav: SidebarService
+    private sidenav: SidebarService,
+    public dialog: MatDialog,
   ) { }
   toggleActive: boolean = true;
   toggleActive1: boolean = false;
@@ -66,6 +69,13 @@ export class SidebarComponent implements OnInit {
   }
 
   logout = () => {
+    //  const dialogRef = this.dialog.open(LogoutComponent, {
+    //     // height: '300',
+    //     width: '480px',
+    //   });
+    //   dialogRef.afterClosed().subscribe(() => {
+    //     this.ngOnInit();
+    //   });
     this.authService.logout();
     this.router.navigate(['login']);
   }

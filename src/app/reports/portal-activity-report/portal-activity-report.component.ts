@@ -52,11 +52,13 @@ export class PortalActivityReportComponent implements OnInit {
     this.getTenentList();
   }
   selectTenent = (value: any) => {
+    this.search = '';
     this.selectedTenent = value;
     console.log(value);
     this.portalActivity();
   }
   selectActivity = (value: any) => {
+    this.search =''
     this.selectedActivity =value;
     console.log(value);
     this.portalActivity();
@@ -89,18 +91,19 @@ export class PortalActivityReportComponent implements OnInit {
       });
   }
   activityDetails = (data: any) => {
+
     console.log(data);
     // data.deviceSignature = JSON.parse(data.deviceSignature);
     this.activity = data;
     console.log(data);
   }
   selectDate1 = (value: any) => {
+    this.search = '';
     console.log(value);
-    this.startDate = moment(value).utc().toISOString();
+    this.startDate = moment(value).startOf('day').utc().toISOString();
   }
   selectDate2 = (value: any) => {
-    this.endDate = moment(value).utc().toISOString();
-    console.log(moment(value).utc().toISOString());
+    this.endDate = moment(value).endOf('day').utc().toISOString();
     if (value) {
       this.portalActivity();
     }

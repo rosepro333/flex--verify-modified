@@ -34,6 +34,9 @@ export class ReportService {
   emailConfiguration(id: any,data: any): Observable<any> {
     return this.http.patch(this.apiUrl + '/tenent/emailConfiguation/'+ id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
+  getEmailConfiguration(id: any): Observable<any> {
+    return this.http.get(this.apiUrl + '/tenent/emailConfiguation/'+ id, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   mobileActivity(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/userAppLog/list/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }

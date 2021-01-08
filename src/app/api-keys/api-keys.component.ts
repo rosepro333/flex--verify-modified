@@ -4,6 +4,7 @@ import { Cookie } from 'ng2-cookies';
 import { CreateApiKayComponent } from '../dialog-box/create-api-kay/create-api-kay.component';
 import { CreateSdyKeyComponent } from '../dialog-box/create-sdy-key/create-sdy-key.component';
 import { ServicesService } from '../service/services.service';
+import { TosterService } from '../toster/toster.service';
 
 @Component({
   selector: 'app-api-keys',
@@ -14,7 +15,10 @@ import { ServicesService } from '../service/services.service';
 export class ApiKeysComponent implements OnInit {
   apiKeyData: any = [];
   sdkKeyData: any = [];
-  constructor(public dialog: MatDialog, private service: ServicesService) { }
+  constructor(public dialog: MatDialog,
+     private service: ServicesService,
+     private toast: TosterService
+    ) { }
   accessType = '';
   tenetId = '';
   tenentID = '';
@@ -156,6 +160,7 @@ export class ApiKeysComponent implements OnInit {
       this.service.deleteApiKey(value._id).subscribe((res: any) => {
         console.log(res);
         if (res.msg === 'success') {
+          this.toast.openSnackBar('Api Key deleted Successfully','Success');
           this.getApiKeyList();
         }
         const datas = {
@@ -174,6 +179,7 @@ export class ApiKeysComponent implements OnInit {
         console.log(res);
         if (res.msg === 'success') {
           this.getSdkKeyList();
+          this.toast.openSnackBar('SdK Key deleted Successfully','Success');
         }
         const datas = {
           user: Cookie.get('id'),

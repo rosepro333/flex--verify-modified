@@ -35,7 +35,7 @@ export class NotificationComponent implements OnInit {
   selectedRole = 'All';
   userEdit: any = [];
   isTenent = false;
-
+  configureData: any  = {};
   constructor(
     private serviceService: ServicesService,
     public dialog: MatDialog,
@@ -53,8 +53,29 @@ export class NotificationComponent implements OnInit {
     this.formControl();
   }
   selectTenentList = (value: any) => {
-     console.log(value)
-     this.tenentId = value;
+    if(value ==='All'){
+      this.form.reset();
+    }else{
+      console.log(value)
+      this.tenentId = value;
+      this.emailConfigure(this.tenentId)
+    }
+  }
+   emailConfigure = (value: any) => {
+    const id =value;
+    this.report.getEmailConfiguration(id).subscribe((res)=>{
+      console.log(res);
+      if(res.msg === 'success'){
+        this.configureData =res.data;
+        this.populateConfigure();
+      }
+    },(error: any)=>{
+      console.log(error);
+    })
+  }
+  populateConfigure = () => {
+    const configureData = this.configureData;
+    this.form.patchValue({tenent:configureData?._id,serviceProvider:configureData?.emailServiceProvider,apiKey:configureData?.emailApiKey,domain:configureData?.domain})
   }
   selecetMailService = (value: any) => {
     console.log(value)
@@ -73,7 +94,7 @@ export class NotificationComponent implements OnInit {
   }
   formControl = () => {
     this.form = this.fb.group({
-      tenent: new FormControl('',),
+      tenent: new FormControl('',[Validators.required,]),
       serviceProvider: new FormControl('',[Validators.required,]),
       apiKey: new FormControl('',[Validators.required,]),
       domain: new FormControl('',[Validators.required,]),
@@ -128,6 +149,7 @@ export class NotificationComponent implements OnInit {
   selectTenent = (value: any) => {
     this.tenentId = value;
   }
+
 
   onSave = (form) => {
     console.log(form.value)

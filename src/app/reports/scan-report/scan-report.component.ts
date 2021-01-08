@@ -80,16 +80,17 @@ export class ScanReportComponent implements OnInit {
               obj['Name'] = i.Name;
               this.tenentList.push(obj);
             }
+            console.log(this.tenentList);
           })
         }
       });
   }
   selectDate1 = (value: any) => {
     console.log(value);
-    this.startDate = moment(value).utc().toISOString();
+    this.startDate = moment(value).startOf('day').utc().toISOString();
   }
   selectDate2 = (value: any) => {
-    this.endDate = moment(value).utc().toISOString();
+    this.endDate = moment(value).endOf('day').utc().toISOString();
     console.log(moment(value).utc().toISOString());
     if (value) {
       this.scanReports();
@@ -109,21 +110,6 @@ export class ScanReportComponent implements OnInit {
     this.pageSize = value.pageSize;
     this.currentPage = value.pageIndex + 1;
     this.scanReports();
-    // console.log(value);
-    // if (value.pageIndex) {
-    //   console.log(value.pageIndex);
-    //   const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-    //   this.currentPage = pageIndex;
-    //   console.log(this.currentPage);
-    //   this.scanReports();
-    // }
-    // if (value.pageSize) {
-    //   console.log(value.pageSize);
-    //   this.pageSize = value.pageSize;
-    //   const pageIndex = (value.pageIndex === 0) ? 1 : value.pageIndex;
-    //   this.currentPage = pageIndex;
-    //   this.scanReports();
-    // }
   }
   scanReports = () => {
     const data = {
