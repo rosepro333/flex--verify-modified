@@ -133,7 +133,7 @@ import { LogoutComponent } from './sidebar/logout/logout.component';
     LogoutComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     RouterModule,
