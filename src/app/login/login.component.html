@@ -1,21 +1,21 @@
 <div class="login-wrap"  >
   <div
-    fxLayout="row"
+     class="row"
     
   >
-    <div class="login-left" fxFlex="65" fxLayout="row" fxLayoutAlign="center center">
-      <div fxLayout="column" fxLayoutAlign="center center">
+    <div class="login-left" >
+      <div >
         <img src="./../../assets/login.svg" alt="login-bg" class="login-bg" />
       </div>
     </div>
-    <div class="login-right" fxFlex="35" fxLayout="row" fxLayoutAlign="center center" >
+    <div class="login-right"  >
       <form
         [formGroup]="form"
         (ngSubmit)="onSubmit()"
         fxLayout="column"
         fxLayoutAlign="center stretch"
       >
-        <div fxFlex align="left">
+        <div fxFlex >
           <img
             src="./../../assets/logo-main.svg"
             alt="app-logo"
@@ -24,8 +24,8 @@
           
         </div>
         <div class="form-div">
-          <div class="header" fxLayout="column" align="left">
-            <img src="../../assets/login-line.svg" class="header-img" align="left">
+          <div class="header" >
+            <img src="../../assets/login-line.svg" class="header-img" >
             <h2>
               Welcome
             </h2>
@@ -52,8 +52,8 @@
               Please fill your password
             </mat-error>
           </mat-form-field>
-          <div class="my-20"  fxLayout="row" fxLayoutAlign="space-between center" >
-            <div>
+          <div class="my-20  row align-item-between w-100"   >
+            <div class="w-50">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="gridCheck">
                 <label class="form-check-label text-secondary" for="gridCheck">
@@ -61,19 +61,19 @@
   </label>
             </div>
             </div>
-            <div align="right">
+            <div  class="w-50" >
               <button class="forgot-pass" mat-button (click)="forgetPassword()" type="button">
                 Forgot Password?
               </button>
             </div>
           </div>
-          <div align="right">
+          <div class="row  align-item-end" >
             <button mat-button class="primary-button buttons-login" type="submit"  >
               Login
               <mat-icon>login</mat-icon>
             </button>
           </div>
-          <div class="powered-by-wrapper" align="right">
+          <div class="powered-by-wrapper" >
             <img
               src="./../../assets/powered-by-logo.svg"
               alt="login-bg"

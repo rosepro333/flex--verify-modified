@@ -33,7 +33,15 @@
     align-items: center;
         form {
             width: 500px;
-        
+            .align-item-end {
+                display: flex;
+                justify-content: flex-end;
+            }
+            .align-item-between {
+                display: flex;
+                align-content: space-between;
+                align-items: center;
+            }
         .app-logo {
             width: 200px;
             margin-bottom: 2.5em;
