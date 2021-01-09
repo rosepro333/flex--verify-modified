@@ -224,6 +224,10 @@ img.noDataFound {
             height: 35px;
             top: 5px;
         }
+        .mat-form-field-suffix button mat-icon {
+            position: relative;
+            top: -5px;
+        }
         .mat-table .mat-cell .value {
             font-size: 12px;
         }

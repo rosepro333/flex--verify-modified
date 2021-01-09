@@ -66,6 +66,10 @@
             height: 35px;
             top: 5px;
         }
+        .mat-form-field-suffix button mat-icon {
+            position: relative;
+            top: -5px;
+        }
         .tiles-wrap {
             .title {
                 font-size: 12px !important;
