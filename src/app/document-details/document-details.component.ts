@@ -14,7 +14,7 @@ import { ServicesService } from '../service/services.service';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import * as moment from 'moment';
 import { error } from '@angular/compiler/src/util';
-import { MatTableDataSource } from '@angular/material/table';
+// import { MatTableDataSource } from '@angular/material/table';
 import { TosterService } from '../toster/toster.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Platform } from '@angular/cdk/platform';
@@ -153,7 +153,7 @@ export class DocumentDetailsComponent implements OnInit {
   preview = (value: any) => {
     const img = `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${value}?alt=media`
     console.log(img);
-    
+
     this.previewImageSrc = img;
     this.zoomImageSrc = img;
   }

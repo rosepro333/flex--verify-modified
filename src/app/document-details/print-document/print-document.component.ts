@@ -3,6 +3,8 @@ import { retry } from 'rxjs/operators';
 import { ReportService } from 'src/app/service/report.service';
 import { jsPDF}  from 'jspdf';
 import html2canvas from 'html2canvas';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-print-document',
   templateUrl: './print-document.component.html',
@@ -44,37 +46,55 @@ updatedAt: "2021-01-04T11:24:25.801Z",
 updatedDate: null,
 _id: "5ff2b35f14441f4fc06a55ca",
 };
-  // printData: any = [];
-  constructor(private report: ReportService) {
+  // printData: any = {};
+  constructor(private report: ReportService, private http: HttpClient) {
 
   }
 
   ngOnInit(): void {
+    this.getImage('imageUrl');
     this.report.printData.subscribe((res)=>{
-      // this.printData = res;
-      console.log(res);
+
+      const reader = new FileReader();
+      // reader.readAsDataURL(file);
+      this.printData.ID_Card_Front =  btoa(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${res?.ID_Card_Front}?alt=media`);
+      this.printData = res;
+      // console.log(res);
     })
   }
-  print = async() =>{
+    getImage(imageUrl: string):void {
+      console.log('imageUel')
+        var xhr = new XMLHttpRequest()
+        xhr.open("GET", `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${this.printData?.ID_Card_Front}?alt=media`);
+        xhr.responseType = "blob";
+        xhr.send();
+        xhr.addEventListener("load", function() {
+        var reader = new FileReader();
+        reader.readAsDataURL(xhr.response);
+        reader.addEventListener("loadend", function() {
+        console.log(reader.result);
+    });
+    console.log(reader)
+});
+    }
+  print = () =>{
     // var data = document.getElementById('main');
     var data = document.body;
+    const options = {headers: {'Access-Control-Allow-Origin': '*',},}
 
-    await html2canvas(data).then((canvas) => {
-      console.log(canvas);
+     html2canvas(data,{ logging: true,  allowTaint: true, useCORS: true, }).then(async (canvas) => {
       // Few necessary setting options
       var imgWidth = 208;
       var pageHeight = 295;
       var imgHeight = canvas.height * imgWidth / canvas.width;
       var heightLeft = imgHeight;
 
-      const contentDataURL =  canvas.toDataURL('image/jpg')
-      console.log(contentDataURL);
-      let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+      const contentDataURL = await canvas.toDataURL('image/jpeg', 0.1)
+      let pdf = new jsPDF('p', 'mm', 'a4',true); // A4 size page of PDF
       var position = 0;
-      var image = new Image();
-      image.src = '';
+
       // const data = 'data:image/jpg;base64,' + btoa(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media`)
-      pdf.addImage(contentDataURL, 'JPG', 0, position, imgWidth, imgHeight);
+      pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
       console.log(pdf)
       pdf.save('MYPdf.pdf'); // Generated PDF
     });
