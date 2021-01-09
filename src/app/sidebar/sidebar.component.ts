@@ -26,6 +26,7 @@ export class SidebarComponent implements OnInit {
   accessType = '';
   about = false;
   profile = true;
+  data: any;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -106,6 +107,15 @@ export class SidebarComponent implements OnInit {
     this.service.userDrawer('open');
     this.router.navigate([{ outlets: { about: ['about'] } }])
     // const abc =this.viewContainerRef.createComponent<VerificationUrlComponent>()
+  }
+  userDetails = () => {
+    this.service.userDetails().subscribe((res)=>{
+      console.log(res);
+      this.data = res.data;
+      console.log(this.data);
+    },(error: any) => {
+      console.log(error);
+    })
   }
 
   sidebarContent(a) {
