@@ -10,11 +10,11 @@
     }
     .login-left {
         background: #f7fffb;
-    height: 100vh;
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+        height: 100vh;
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         // .app-logo {
         //     width: 140px;
         // }
@@ -26,83 +26,88 @@
     .login-right {
         // background: #fbfbfb;
         padding: 20px;
-    height: 100vh;
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+        height: 100vh;
+        width: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         form {
             width: 500px;
             .align-item-end {
                 display: flex;
                 justify-content: flex-end;
             }
+            .w-50 {
+                width: 50%;
+            }
+            .forgot-pass span {
+                font-weight: 500;
+            }
             .align-item-between {
                 display: flex;
                 align-content: space-between;
                 align-items: center;
             }
-        .app-logo {
-            width: 200px;
-            margin-bottom: 2.5em;
-        }
-        .form-div {
-            margin-left: 14px;
-        }
-        .header {
-            font-size: 24px;
-            font-weight: 500;
-            line-height: 2;
-            position: relative;
-            margin-bottom: 30px;
-        }
-        img.header-img {
-    width: 92px;
-}
-        .mat-form-field {
-            width: 100%;
-        }
-
-        label.form-check-label.text-secondary {
-            color: gray;
-            font-size: 13px !important;
-            font-weight: 300;
-        }
-        .forgot-pass {
-            color: gray;
-            font-size: 13px;
-            font-weight: 300;
-            padding: 0px;
-        }
-        .visible-pass {
-            color: #888888;
-        }
-        .mat-button {
-            margin: 10px 0;
-            // width: 45%;
-            border-radius: 8px;
-            display: flex;
-            justify-content: flex-end;
-        }
-        .button-login {
-            width: 45%;
-            display: flex;
-            justify-content: flex-end;
-            border-radius: 8px;
-        }
-        .powered-by-wrapper {
-            position: absolute;
-            bottom: 5px;
-            right: 16px;
-            .powered-by {
-                width: 110px;
+            .app-logo {
+                width: 200px;
+                margin-bottom: 2.5em;
             }
-        }
-        .mat-form-field-appearance-outline {
-            .mat-form-field-outline {
+            .form-div {
+                margin-left: 14px;
+            }
+            .header {
+                font-size: 24px;
+                font-weight: 500;
+                line-height: 2;
+                position: relative;
+                margin-bottom: 30px;
+            }
+            img.header-img {
+                width: 92px;
+            }
+            .mat-form-field {
+                width: 100%;
+            }
+            label.form-check-label.text-secondary {
+                color: gray;
+                font-size: 13px !important;
+                font-weight: 300;
+            }
+            .forgot-pass {
+                color: gray;
+                font-size: 13px;
+                font-weight: 300;
+                padding: 0px;
+            }
+            .visible-pass {
+                color: #888888;
+            }
+            .mat-button {
+                margin: 10px 0;
+                // width: 45%;
+                border-radius: 8px;
+                display: flex;
+                justify-content: flex-end;
+            }
+            .button-login {
+                width: 45%;
+                display: flex;
+                justify-content: flex-end;
+                border-radius: 8px;
+            }
+            .powered-by-wrapper {
+                position: absolute;
+                bottom: 5px;
+                right: 16px;
+                .powered-by {
+                    width: 110px;
+                }
+            }
+            .mat-form-field-flex {
                 border-bottom-left-radius: 10px;
                 border-bottom-right-radius: 10px;
                 box-shadow: 0px 8px 12px -4px #c0c0c0;
+                padding: 4px 18px;
                 .mat-form-field-outline-start,
                 .mat-form-field-outline-gap,
                 .mat-form-field-outline-end {
@@ -111,55 +116,48 @@
             }
         }
     }
-    
-}
 }
 
 @media only screen and (min-width: 1441px) and (max-width: 1600px) {
-.login-wrap{
-    .login-left {
-        
-        
-        .login-bg {
-            width: 100%;
-            object-fit: contain;
+    .login-wrap {
+        .login-left {
+            .login-bg {
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+        .login-right {
+            form {
+                .app-logo {
+                    width: 150px;
+                }
+                .form-div {
+                    .header {
+                        font-size: 20px;
+                    }
+                    h2 {
+                        font-size: 20px;
+                    }
+                    .buttons-login {
+                        font-size: 12px;
+                    }
+                }
+            }
         }
     }
-    .login-right {
-        form{
-            .app-logo {
-                width: 150px;
-            }
-            .form-div{
-                .header {
-                    font-size: 20px;
-                }
-                h2{
-                    font-size: 20px;
-                }
-                .buttons-login {
-                    font-size: 12px;
-                }
-            }
-        }
-    } 
 }
 
-}
-
-@media only screen and (min-width: 700px) and (max-width: 1366px){
-    .login-wrap{
+@media only screen and (min-width: 700px) and (max-width: 1366px) {
+    .login-wrap {
         .login-left {
-            
-           
             .login-bg {
                 width: 75%;
                 object-fit: contain;
             }
         }
         .login-right {
-            form{
-                width:400px
+            form {
+                width: 400px
             }
             .app-logo {
                 width: 120px;
@@ -167,32 +165,29 @@
             .header {
                 font-size: 16px;
             }
-            h2{
+            h2 {
                 font-size: 16px;
             }
             .buttons-login {
                 font-size: 12px;
             }
-        } 
+        }
     }
 }
-@media only screen and (min-width: 1281px) and (max-width: 1440px) {
-    
 
-}
+@media only screen and (min-width: 1281px) and (max-width: 1440px) {}
+
 @media only screen and (min-width: 800px) and (max-width: 1536px) {
-    .login-wrap{
+    .login-wrap {
         .login-left {
-            
-            
             .login-bg {
                 width: 72%;
                 object-fit: contain;
             }
         }
         .login-right {
-            form{
-                width:400px
+            form {
+                width: 400px
             }
             .app-logo {
                 width: 120px;
@@ -200,35 +195,22 @@
             .header {
                 font-size: 16px;
             }
-            h2{
+            h2 {
                 font-size: 16px !important;
             }
             .buttons-login {
                 font-size: 12px;
             }
-        } 
+        }
     }
-
 }
 
+@media only screen and (min-width: 800px) and (max-width: 1280px) {}
 
+@media only screen and (min-width: 768px) and (max-width: 991px) {}
 
+@media only screen and (max-width: 767px) {}
 
-@media only screen and (min-width: 800px) and (max-width: 1280px) {
+@media only screen and (min-width: 480px) and (max-width: 767px) {}
 
-}
-
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
- 
-}
-
-@media only screen and (max-width: 767px) {
-}
-
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-}
-
-@media only screen and (max-width: 479px) {
-   
-}
+@media only screen and (max-width: 479px) {}
