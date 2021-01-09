@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
-  selector: 'app-id-details',
+  selector: 'app-id--+**************************************',
   templateUrl: './id-details.component.html',
   styleUrls: ['./id-details.component.scss'],
   // encapsulation: ViewEncapsulation.None,

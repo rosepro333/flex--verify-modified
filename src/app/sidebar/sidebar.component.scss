@@ -1,6 +1,18 @@
 mat-sidenav-container {
     height: -webkit-fill-available;
     background: #fff;
+    .close-sidebar {
+        position: absolute;
+        right: 30px;
+        top: 50px;
+        cursor: pointer;
+        .close-sidebar span.material-icons {
+            font-size: 26px;
+            color: #747474;
+            padding: 10px;
+            cursor: pointer;
+        }
+    }
     mat-sidenav.left-navigation {
         background: #333333;
         -webkit-transition-duration: 0.3s;
@@ -62,6 +74,7 @@ mat-sidenav-container {
         box-shadow: 0px 2px 8px 0 rgba(0, 0, 0, 0.15);
     }
 }
+
 .sidenav-tooltip {
     font-size: 14px;
     margin-top: 0 !important;
@@ -70,107 +83,46 @@ mat-sidenav-container {
 
 @media only screen and (min-width: 1441px) and (max-width: 1600px) {
     mat-sidenav.mat-drawer.mat-sidenav {
-        width: 450px;
+        width: 500px;
     }
-    .side-menu-about-right-drawer-detail{
-        padding:20px
+    .side-menu-about-right-drawer-detail {
+        padding: 20px
     }
-    .right-drawer-about-td img {
-        width: 45%;
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-    }
-    .right-drawer-about-th h4 {
-        font-size: 14px !important;
-        font-weight: 400;
-        line-height: 46.45px;
-        color: #333333 !important;
-    }
-
 }
 
-@media only screen and (min-width: 700px) and (max-width: 1366px){
+@media only screen and (min-width: 700px) and (max-width: 1366px) {
     mat-sidenav.mat-drawer.mat-sidenav {
-        width: 450px;
+        width: 500px;
     }
-    .side-menu-about-right-drawer-detail{
-        padding:20px
-    }
-    .right-drawer-about-td img {
-        width: 45%;
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-    }
-    .right-drawer-about-th h4 {
-        font-size: 14px !important;
-        font-weight: 400;
-        line-height: 46.45px;
-        color: #333333 !important;
+    .side-menu-about-right-drawer-detail {
+        padding: 20px
     }
 }
+
 @media only screen and (min-width: 1281px) and (max-width: 1440px) {
     mat-sidenav.mat-drawer.mat-sidenav {
-        width: 450px;
+        width: 500px;
     }
-    .side-menu-about-right-drawer-detail{
-        padding:20px
+    .side-menu-about-right-drawer-detail {
+        padding: 20px
     }
-    .right-drawer-about-td img {
-        width: 45%;
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-    }
-    .right-drawer-about-th h4 {
-        font-size: 14px !important;
-        font-weight: 400;
-        line-height: 46.45px;
-        color: #333333 !important;
-    }
-
 }
+
 @media only screen and (min-width: 800px) and (max-width: 1536px) {
     mat-sidenav.mat-drawer.mat-sidenav {
-        width: 450px;
+        width: 500px;
     }
-    .side-menu-about-right-drawer-detail{
-        padding:20px
-    }
-    .right-drawer-about-td img {
-        width: 45%;
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-    }
-    .right-drawer-about-th h4 {
-        font-size: 14px !important;
-        font-weight: 400;
-        line-height: 46.45px;
-        color: #333333 !important;
+    .side-menu-about-right-drawer-detail {
+        padding: 20px
     }
 }
 
+@media only screen and (min-width: 800px) and (max-width: 1280px) {}
 
+@media only screen and (min-width: 768px) and (max-width: 991px) {}
 
+@media only screen and (max-width: 767px) {}
 
-@media only screen and (min-width: 800px) and (max-width: 1280px) {
+@media only screen and (min-width: 480px) and (max-width: 767px) {}
 
-}
-
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
- 
-}
-
-@media only screen and (max-width: 767px) {
-}
-
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-}
-
-@media only screen and (max-width: 479px) {
-   
-}
-
+@media only screen and (max-width: 479px) {}

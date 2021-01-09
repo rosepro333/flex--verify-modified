@@ -1,56 +1,58 @@
 .rightSidenav {
     width: 438px;
 }
-    .right-drawer-about-th h6 {
-        width: 128px;
-        color: #B0B0B0;
-        font-weight: 300;
-        font-size: 18px !important;
-    }
 
-    .side-menu-right-drawer {
-        padding: 33px 31px;
-    }
+.right-drawer-about-th h6 {
+    width: 128px;
+    color: #B0B0B0;
+    font-weight: 300;
+    font-size: 18px !important;
+}
 
-       .side-menu-right-drawer img{
-            width:40px;
+.side-menu-right-drawer {
+    padding: 33px 31px;
+}
 
-       }
+.side-menu-right-drawer img {
+    width: 40px;
+}
 
-       .side-menu-right-drawer h5 {
-            margin-bottom: 0px !important;
-            padding-left: 10px;
-            font-weight: 500 !important;
-            font-size: 18px !important;
-            line-height: 40px;
-        }
-
-
-
+.side-menu-right-drawer h5 {
+    margin-bottom: 0px !important;
+    padding-left: 10px;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    line-height: 40px;
+}
 
 span.material-icons {
     color: #E04D4D;
     font-weight: 500;
     cursor: pointer;
-    padding:10px;
+    padding: 10px;
     border-radius: 50%;
 }
+
 span.material-icons:hover {
     background: #eae8e8;
 }
+
 .side-menu-right-drawer-detail {
     padding: 0px 85px;
 }
+
 .right-drawer-about-th h6 {
     font-size: 16px !important;
     font-weight: 300;
     color: #B0B0B0 !important;
 }
+
 .right-drawer-about-td h6 {
     font-size: 16px !important;
     font-weight: 400 !important;
     color: #333333 !important;
 }
+
 .shortname {
     font-size: 24px;
     padding: 10px;
@@ -63,128 +65,102 @@ span.material-icons:hover {
     text-align: center;
     font-weight: 500;
     border: 4px solid #0cdfba;
-  }
-  @media only screen and (min-width: 1441px) and (max-width: 1600px) {
+}
+
+@media only screen and (min-width: 1441px) and (max-width: 1600px) {
     .right-drawer-about-th h6 {
         font-size: 12px !important;
-       
-    }.right-drawer-about-td h6 {
+    }
+    .right-drawer-about-td h6 {
         font-size: 12px !important;
-       
     }
     .side-menu-right-drawer img {
         width: 34px;
     }
     .side-menu-right-drawer h5 {
-       
         font-size: 14px !important;
-       
     }
     .side-menu-right-drawer-detail {
-        padding: 0px 78px;
+        padding: 0px 98px;
     }
-
 }
 
-@media only screen and (min-width: 700px) and (max-width: 1366px){
+@media only screen and (min-width: 700px) and (max-width: 1366px) {
     .right-drawer-about-th h6 {
         font-size: 12px !important;
-       
-    }.right-drawer-about-td h6 {
+    }
+    .right-drawer-about-td h6 {
         font-size: 12px !important;
-       
     }
     .side-menu-right-drawer img {
         width: 34px;
     }
     .side-menu-right-drawer h5 {
-       
         font-size: 14px !important;
-       
     }
     .side-menu-right-drawer-detail {
-        padding: 0px 78px;
+        padding: 0px 96px;
     }
 }
+
 @media only screen and (min-width: 1281px) and (max-width: 1440px) {
     .right-drawer-about-th h6 {
         font-size: 12px !important;
-       
-    }.right-drawer-about-td h6 {
+    }
+    .right-drawer-about-td h6 {
         font-size: 12px !important;
-       
     }
     .side-menu-right-drawer img {
         width: 34px;
     }
     .side-menu-right-drawer h5 {
-       
         font-size: 14px !important;
-       
     }
     .side-menu-right-drawer-detail {
-        padding: 0px 78px;
-    }   
-
+        padding: 0px 98px;
+    }
 }
+
 @media only screen and (min-width: 800px) and (max-width: 1536px) {
     .right-drawer-about-th h6 {
         font-size: 12px !important;
-       
-    }.right-drawer-about-td h6 {
+    }
+    .right-drawer-about-td h6 {
         font-size: 12px !important;
-       
     }
     .side-menu-right-drawer img {
         width: 34px;
     }
     .side-menu-right-drawer h5 {
-       
         font-size: 14px !important;
-       
     }
     .side-menu-right-drawer-detail {
-        padding: 0px 78px;
+        padding: 0px 98px;
     }
-
 }
-
-
-
 
 @media only screen and (min-width: 800px) and (max-width: 1280px) {
     .right-drawer-about-th h6 {
         font-size: 12px !important;
-       
-    }.right-drawer-about-td h6 {
+    }
+    .right-drawer-about-td h6 {
         font-size: 12px !important;
-       
     }
     .side-menu-right-drawer img {
         width: 34px;
     }
     .side-menu-right-drawer h5 {
-       
         font-size: 14px !important;
-       
     }
     .side-menu-right-drawer-detail {
-        padding: 0px 78px;
+        padding: 0px 96px;
     }
 }
 
+@media only screen and (min-width: 768px) and (max-width: 991px) {}
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
- 
-}
+@media only screen and (max-width: 767px) {}
 
-@media only screen and (max-width: 767px) {
-}
+@media only screen and (min-width: 480px) and (max-width: 767px) {}
 
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-}
-
-@media only screen and (max-width: 479px) {
-   
-}
-
+@media only screen and (max-width: 479px) {}

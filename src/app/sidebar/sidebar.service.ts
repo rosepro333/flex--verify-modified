@@ -18,10 +18,12 @@ export class SidebarService {
 
 
 	public open() {
+		console.log('open called')
 		return this.sidenav.open();
 
 	}
 	public open1() {
+		console.log('open1 called')
 		return this.sidenav1.open();
 
 	}
@@ -33,6 +35,7 @@ export class SidebarService {
 		return this.sidenav.close();
 	}
 	public close1() {
+		console.log('close1 called')
 		return this.sidenav1.close();
 	}
 
