@@ -137,7 +137,7 @@ export class DocumentDetailsComponent implements OnInit {
     private report: ReportService,
     private location: Location
   ) {
-    this.ngxImgZoom.setZoomBreakPoints([{w: 100, h: 100}, {w: 150, h: 150}, {w: 200, h: 200}, {w: 250, h: 250}, {w: 300, h: 300}]);
+    // this.ngxImgZoom.setZoomBreakPoints([{w: 100, h: 100}, {w: 150, h: 150}, {w: 200, h: 200}, {w: 250, h: 250}, {w: 300, h: 300}]);
   }
 
   async ngOnInit(): Promise<void> {
@@ -224,7 +224,8 @@ export class DocumentDetailsComponent implements OnInit {
     });
   }
   SelectIdType = (value: any) => {
-    console.log(value);
+    // this.form.value.ID_Type = value.value;
+    console.log(value.value);
   }
   filterComments = (scanId: string, documentId: any) => {
     const data = {
@@ -372,7 +373,7 @@ export class DocumentDetailsComponent implements OnInit {
       this.serviceServive.scanResults(id,data).subscribe((res) => {
         if(res.status === 'success'){
           this.toast.openSnackBar('Success',res.status)
-          this.scanDocumentById(id);
+          // this.scanDocumentById(id);
           this.nextScan(id);
           // this.documentLoad();
           this.sideNav.close();
@@ -465,7 +466,11 @@ export class DocumentDetailsComponent implements OnInit {
       console.log(res)
       if(res.msg === 'success'){
         this.toast.openSnackBar('Successfully deleted Scan','Success');
-        this.documentLoad();
+        // this.documentLoad()
+        console.log(this.dataSource[1].Scan_ID);
+        const scanId = this.dataSource[1].Scan_ID;
+        this.nextScan(scanId);
+
       }else{
         this.toast.openSnackBar('Something Went Sr','Success');
       }
