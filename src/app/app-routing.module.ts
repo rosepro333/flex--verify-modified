@@ -132,10 +132,10 @@ const routes: Routes = [
     path: 'forget-passowrd',
     component: ForgetPasswordComponent,
   },
-  {
-    path: 'reset-password',
-    component: ResetPasswordComponent,
-  },
+  // {
+  //   path: 'reset-password',
+  //   component: ResetPasswordComponent,
+  // },
   {
     path: 'set-forget-password/:forgetPasswordId',
     component: SetPasswordComponent,

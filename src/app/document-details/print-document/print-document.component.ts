@@ -52,7 +52,7 @@ _id: "5ff2b35f14441f4fc06a55ca",
   }
 
   ngOnInit(): void {
-    this.getImage('imageUrl');
+    // this.getImage('imageUrl');
     this.report.printData.subscribe((res)=>{
 
       // const reader = new FileReader();
@@ -62,43 +62,43 @@ _id: "5ff2b35f14441f4fc06a55ca",
       // console.log(res);
     })
   }
-    getImage(imageUrl: string):void {
-      console.log('imageUel')
-        var xhr = new XMLHttpRequest()
-        xhr.open("GET", `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${this.printData?.ID_Card_Front}?alt=media`);
-        xhr.responseType = "blob";
-        xhr.send();
-        xhr.addEventListener("load", function() {
-        var reader = new FileReader();
-        reader.readAsDataURL(xhr.response);
-        reader.addEventListener("loadend", function() {
-        console.log(reader.result);
-    });
-    console.log(reader)
-});
-    }
+//     getImage(imageUrl: string):void {
+//       console.log('imageUel')
+//         var xhr = new XMLHttpRequest()
+//         xhr.open("GET", `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${this.printData?.Selfie_Photo}?alt=media`);
+//         xhr.responseType = "blob";
+//         xhr.send();
+//         xhr.addEventListener("load", function() {
+//         var reader = new FileReader();
+//         reader.readAsDataURL(xhr.response);
+//         reader.addEventListener("loadend", function() {
+//         console.log(reader.result);
+//     });
+//     console.log(reader)
+// });
+//     }
   print = () =>{
     // var data = document.getElementById('main');
-    var data = document.body;
-    const options = {headers: {'Access-Control-Allow-Origin': '*',},}
+    // var data = document.body;
+    // const options = {headers: {'Access-Control-Allow-Origin': '*',},}
 
-     html2canvas(data,{ logging: true,  allowTaint: true, useCORS: true, }).then(async (canvas) => {
-      // Few necessary setting options
-      var imgWidth = 208;
-      var pageHeight = 295;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
+    //  html2canvas(data,{ logging: true,  allowTaint: true, useCORS: true, }).then(async (canvas) => {
+    //   // Few necessary setting options
+    //   var imgWidth = 208;
+    //   var pageHeight = 295;
+    //   var imgHeight = canvas.height * imgWidth / canvas.width;
+    //   var heightLeft = imgHeight;
 
-      const contentDataURL = await canvas.toDataURL('image/jpeg', 0.1)
-      let pdf = new jsPDF('p', 'mm', 'a4',true); // A4 size page of PDF
-      var position = 0;
+    //   const contentDataURL = await canvas.toDataURL('image/jpeg', 0.1)
+    //   let pdf = new jsPDF('p', 'mm', 'a4',true); // A4 size page of PDF
+    //   var position = 0;
 
-      // const data = 'data:image/jpg;base64,' + btoa(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media`)
-      pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
-      console.log(pdf)
-      pdf.save('MYPdf.pdf'); // Generated PDF
-    });
-    // window.print();
+    //   // const data = 'data:image/jpg;base64,' + btoa(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media`)
+    //   pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
+    //   console.log(pdf)
+    //   pdf.save('MYPdf.pdf'); // Generated PDF
+    // });
+    window.print();
   }
 
 }
