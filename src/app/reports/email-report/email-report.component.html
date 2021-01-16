@@ -15,7 +15,7 @@
                 <div class="data-wrap">
                     <div class="title">Document Id</div>
                     <div class="value">
-                      {{activity?.documentId?.Document_ID}}
+                      {{dataSource?.recipientEmail}}
                     </div>
                 </div>
                 <div class="data-wrap">
@@ -48,12 +48,6 @@
                       {{activity?.deviceSignature?.browser}} {{activity?.deviceSignature?.browser_version}}
                     </div>
                 </div>
-                <div class="data-wrap">
-                    <div class="title">OS</div>
-                    <div class="value">
-                       {{activity?.deviceSignature?.os}} {{activity?.deviceSignature?.os_version |dataCheck}}
-                    </div>
-                </div>
             </div>
         </div>
     </mat-drawer>
@@ -63,7 +57,7 @@
                 <button mat-icon-button [routerLink]="['/reports']">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
-                <div>Mobile Activity Report</div>
+                <div>Email Activity Report</div>
             </div>
         </mat-toolbar>
         <div class="mobile-activity-wrap" fxLayout="column" fxLayoutAlign="start start">
@@ -80,23 +74,23 @@
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-date-range-picker #picker></mat-date-range-picker>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex="50">
+                    <!-- <mat-form-field appearance="outline" fxFlex="50">
                         <mat-label>Document ID</mat-label>
                         <input matInput #input [(ngModel)]="search" />
                         <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search" (click)="searchFilter()">
                             <mat-icon matSuffix>search</mat-icon>
                         </button>
-                    </mat-form-field>
+                    </mat-form-field> -->
                 </div>
             </div>
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" fxFlex="100" fxFill>
                 <ng-container matColumnDef="docId">
-                    <th mat-header-cell *matHeaderCellDef> Document Id </th>
-                    <td mat-cell *matCellDef="let element"> {{element?.documentId?.Document_ID}} </td>
+                    <th mat-header-cell *matHeaderCellDef> Receipent ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.recipientEmail}} </td>
                 </ng-container>
                 <ng-container matColumnDef="activity">
-                    <th mat-header-cell *matHeaderCellDef> Activity </th>
-                    <td mat-cell *matCellDef="let element"> {{element?.activity}} </td>
+                    <th mat-header-cell *matHeaderCellDef> Type </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.type}} </td>
                 </ng-container>
                 <ng-container matColumnDef="dateTime">
                     <th mat-header-cell *matHeaderCellDef> Date & Time </th>
@@ -106,12 +100,12 @@
                     <th mat-header-cell *matHeaderCellDef> IP Address </th>
                     <td mat-cell *matCellDef="let element"> {{element?.ipAddress}} </td>
                 </ng-container>
-                <ng-container matColumnDef="appVersion">
-                    <th mat-header-cell *matHeaderCellDef> App Version </th>
+                <ng-container matColumnDef="Subject">
+                    <th mat-header-cell *matHeaderCellDef> Subject </th>
                     <td mat-cell *matCellDef="let element">{{element?.deviceSignature?.browser}} {{element?.appVersion}} </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rightDrawer.open();activityDetails(row)"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
                 <tr class="mat-row" *matNoDataRow>
                   <td class="mat-cell" colspan="5">
                     <img class="noDataFound" src="assets/empty-tray.svg"/>

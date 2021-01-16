@@ -1,17 +1,19 @@
 .login-wrap {
-    height: -webkit-fill-available;
+    // height: -webkit-fill-available;
+    // height: 80%;
     // background: #edffed;
     // mat-card {
     //     background: linear-gradient(90deg, #fff 50%, #fbfbfb 50%);
     // }
-    .row {
-        display: flex;
-        width: 100%;
-    }
+    // .row {
+    //     display: flex;
+    //     width: 100%
+    // }
     .login-left {
         background: #f7fffb;
-        height: 100vh;
-        width: 70%;
+        // height: 90vh;
+        // height: 100%;
+        // width: 70%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -19,20 +21,21 @@
         //     width: 140px;
         // }
         .login-bg {
-            width: 120%;
+            width:65%;
+            height:100%;
             object-fit: contain;
         }
     }
     .login-right {
         // background: #fbfbfb;
-        padding: 20px;
+        padding: 20px 20px 0px 20px;
         height: 100vh;
         width: 30%;
         display: flex;
         justify-content: center;
         align-items: center;
         form {
-            width: 500px;
+            // width: 500px;
             .align-item-end {
                 display: flex;
                 justify-content: flex-end;
@@ -118,99 +121,100 @@
     }
 }
 
-@media only screen and (min-width: 1441px) and (max-width: 1600px) {
-    .login-wrap {
-        .login-left {
-            .login-bg {
-                width: 100%;
-                object-fit: contain;
-            }
-        }
-        .login-right {
-            form {
-                .app-logo {
-                    width: 150px;
-                }
-                .form-div {
-                    .header {
-                        font-size: 20px;
-                    }
-                    h2 {
-                        font-size: 20px;
-                    }
-                    .buttons-login {
-                        font-size: 12px;
-                    }
-                }
-            }
-        }
-    }
-}
+// @media only screen and (min-width: 1441px) and (max-width: 1600px) {
+//     .login-wrap {
+//         .login-left {
+//             .login-bg {
+//                 width: 100%;
+//                 object-fit: contain;
+//             }
+//         }
+//         .login-right {
+//             form {
+//               height: 90%;
+//                 .app-logo {
+//                     width: 150px;
+//                 }
+//                 .form-div {
+//                     .header {
+//                         font-size: 20px;
+//                     }
+//                     h2 {
+//                         font-size: 20px;
+//                     }
+//                     .buttons-login {
+//                         font-size: 12px;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
 
-@media only screen and (min-width: 700px) and (max-width: 1366px) {
-    .login-wrap {
-        .login-left {
-            .login-bg {
-                width: 75%;
-                object-fit: contain;
-            }
-        }
-        .login-right {
-            form {
-                width: 400px
-            }
-            .app-logo {
-                width: 120px;
-            }
-            .header {
-                font-size: 16px;
-            }
-            h2 {
-                font-size: 16px;
-            }
-            .buttons-login {
-                font-size: 12px;
-            }
-        }
-    }
-}
+// @media only screen and (min-width: 700px) and (max-width: 1366px) {
+//     .login-wrap {
+//         .login-left {
+//             .login-bg {
+//                 width: 75%;
+//                 object-fit: contain;
+//             }
+//         }
+//         .login-right {
+//             form {
+//                 width: 400px
+//             }
+//             .app-logo {
+//                 width: 120px;
+//             }
+//             .header {
+//                 font-size: 16px;
+//             }
+//             h2 {
+//                 font-size: 16px;
+//             }
+//             .buttons-login {
+//                 font-size: 12px;
+//             }
+//         }
+//     }
+// }
 
-@media only screen and (min-width: 1281px) and (max-width: 1440px) {}
+// @media only screen and (min-width: 1281px) and (max-width: 1440px) {}
 
-@media only screen and (min-width: 800px) and (max-width: 1536px) {
-    .login-wrap {
-        .login-left {
-            .login-bg {
-                width: 72%;
-                object-fit: contain;
-            }
-        }
-        .login-right {
-            form {
-                width: 400px
-            }
-            .app-logo {
-                width: 120px;
-            }
-            .header {
-                font-size: 16px;
-            }
-            h2 {
-                font-size: 16px !important;
-            }
-            .buttons-login {
-                font-size: 12px;
-            }
-        }
-    }
-}
+// @media only screen and (min-width: 800px) and (max-width: 1536px) {
+//     .login-wrap {
+//         .login-left {
+//             .login-bg {
+//                 width: 72%;
+//                 object-fit: contain;
+//             }
+//         }
+//         .login-right {
+//             form {
+//                 width: 400px
+//             }
+//             .app-logo {
+//                 width: 120px;
+//             }
+//             .header {
+//                 font-size: 16px;
+//             }
+//             h2 {
+//                 font-size: 16px !important;
+//             }
+//             .buttons-login {
+//                 font-size: 12px;
+//             }
+//         }
+//     }
+// }
 
-@media only screen and (min-width: 800px) and (max-width: 1280px) {}
+// @media only screen and (min-width: 800px) and (max-width: 1280px) {}
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {}
+// @media only screen and (min-width: 768px) and (max-width: 991px) {}
 
-@media only screen and (max-width: 767px) {}
+// @media only screen and (max-width: 767px) {}
 
-@media only screen and (min-width: 480px) and (max-width: 767px) {}
+// @media only screen and (min-width: 480px) and (max-width: 767px) {}
 
-@media only screen and (max-width: 479px) {}
+// @media only screen and (max-width: 479px) {}

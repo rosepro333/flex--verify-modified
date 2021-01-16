@@ -166,33 +166,36 @@
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed1-left" fxFlex='15'>
-       <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.ID_Card_Front}}?alt=media" />
+       <!-- <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media" /> -->
+       <!-- <img id ="" class="idCard" src="{{printData?.ID_Card_Front}}" /> -->
+        <img  class='liveliness' src="https://theloon.com/wp-content/uploads/2021/01/IMG_3038-1050x525.jpg" alt ='dscfdf'/>
+       <!-- <img id ="" class="idCard" src="https://www.york.ac.uk/media/news-and-events/pressreleases/2020/Random%20feat.jpg" alt ='dscfdf'  /> -->
     </div>
   </div>
-  <div fxLayout="row" class="pt-4" fxLayoutGap="10px">
+  <!-- <div fxLayout="row" class="pt-4" fxLayoutGap="10px">
     <div class="filed-left" fxFlex='15'>
        <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.ID_Card_Back}}?alt=media" />
     </div>
-  </div>
+  </div> -->
   <div fxLayout="row" fxLayoutGap="10px" >
     <div class="filed-left" fxFlex='15'>
       <h2 class="header">Profile Image</h2>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
-    <div class="filed-left" fxFlex='20'>
+    <!-- <div class="filed-left" fxFlex='20'> -->
       <!-- <img  class='liveliness' src="./../../../assets/powered-by-logo.svg"alt ='dscfdf' />
       <img  class='liveliness' src="https://theloon.com/wp-content/uploads/2018/12/glitter.jpg" alt ='dscfdf'/> -->
       <!-- <img  class='liveliness' src="https://theloon.com/wp-content/uploads/2021/01/IMG_3038-1050x525.jpg" alt ='dscfdf'/> -->
       <!-- <img  class='liveliness' src="./../../../assets/pexels-pixabay-259915.jpg" alt ='dscfdf' /> -->
       <!-- <img  class='liveliness' src="{{printData?.ID_Card_Front}}" alt ='dscfdf'/> -->
-     <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.ID_Card_Front}}?alt=media" />
-    </div>
-    <div fxLayoutAlign="center center">
+     <!-- <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.ID_Card_Front}}?alt=media" /> -->
+    <!-- </div> -->
+    <!-- <div fxLayoutAlign="center center">
       <h2 class="details">{{printData?.selfiePhotoMatchStatus}}%</h2>
-    </div>
+    </div> -->
   </div>
-  <div fxLayout="row" fxLayoutGap="10px">
+  <!-- <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed-left" fxFlex='15'>
       <h2 class="header">Liveliness</h2>
     </div>
@@ -201,7 +204,7 @@
     <div class="filed-left" fxFlex='17' *ngFor ='let i of printData.LiveCheck_Photos'>
       <img class='liveliness' src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{i}}?alt=media" />
     </div>
-  </div>
+  </div> -->
   <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed-left" fxLayoutAlign="center center" fxFlex='100'>
       <button class="printButton" (click)= 'print()'>Pirnt</button>

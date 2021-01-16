@@ -11,6 +11,7 @@
 
 .side-menu-right-drawer {
     padding: 33px 31px;
+    // padding: 8px 31px;
 }
 
 .side-menu-right-drawer img {
@@ -31,6 +32,7 @@ span.material-icons {
     cursor: pointer;
     padding: 10px;
     border-radius: 50%;
+
 }
 
 span.material-icons:hover {
@@ -59,12 +61,13 @@ span.material-icons:hover {
     border-radius: 50%;
     line-height: 1;
     width: 24px;
-    background: #00a185;
+    background: #21b371;
     height: 24px;
     color: #fff;
     text-align: center;
     font-weight: 500;
-    border: 4px solid #0cdfba;
+    // border: 4px solid #0cdfba;
+    border: 4px solid #21b371;
 }
 
 @media only screen and (min-width: 1441px) and (max-width: 1600px) {

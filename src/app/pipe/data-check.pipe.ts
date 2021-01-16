@@ -10,6 +10,9 @@ export class DataCheckPipe implements PipeTransform {
     if(value === undefined || value === null){
       return 'N/A';
     }
+    if(value === 'unknown'){
+      return;
+    }
     return value;
   }
 

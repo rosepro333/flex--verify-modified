@@ -48,6 +48,18 @@
                         {{activity?.deviceSignature?.browser}} {{activity?.deviceSignature?.browser_version}}
                     </div>
                 </div>
+                 <div class="data-wrap">
+                    <div class="title">OS</div>
+                    <div class="value">
+                       {{activity?.deviceSignature?.os}}
+                    </div>
+                </div>
+                 <div class="data-wrap">
+                    <div class="title">OS Version</div>
+                    <div class="value">
+                      {{activity?.deviceSignature?.os_version |dataCheck}}
+                    </div>
+                </div>
             </div>
         </div>
     </mat-drawer>

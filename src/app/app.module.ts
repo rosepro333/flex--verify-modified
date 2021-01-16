@@ -85,6 +85,8 @@ import { AboutSidenavComponent } from './about-sidenav/about-sidenav.component';
 import { RoleNamePipe } from './pipe/role-name.pipe';
 import { DataCheckPipe } from './pipe/data-check.pipe';
 import { LogoutComponent } from './sidebar/logout/logout.component';
+import { NameFilterPipe } from './pipe/name-filter.pipe';
+import { EmailReportComponent } from './reports/email-report/email-report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -130,7 +132,9 @@ import { LogoutComponent } from './sidebar/logout/logout.component';
     AboutSidenavComponent,
     RoleNamePipe,
     DataCheckPipe,
-    LogoutComponent
+    LogoutComponent,
+    NameFilterPipe,
+    EmailReportComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

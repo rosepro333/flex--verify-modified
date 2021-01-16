@@ -412,7 +412,20 @@
                         <div class="value">
                             {{ scanIdDetails?.deviceSignature?.browser }} {{ scanIdDetails?.deviceSignature?.browser_version }}
 
-                            <!--dummy-->
+                        </div>
+                    </div>
+                    <div class="data-wrap">
+                        <div class="title">OS</div>
+                        <div class="value">
+                          {{scanIdDetails?.deviceSignature?.os}}
+
+                        </div>
+                    </div>
+                     <div class="data-wrap" *ngIf= 'scanIdDetails?.deviceSignature?.os_version |dataCheck'>
+                        <div class="title">OS Version</div>
+                        <div class="value">
+                     {{scanIdDetails?.deviceSignature?.os_version |dataCheck}}
+
                         </div>
                     </div>
                     <div class="data-wrap">

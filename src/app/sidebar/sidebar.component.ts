@@ -70,15 +70,15 @@ export class SidebarComponent implements OnInit {
   }
 
   logout = () => {
-    //  const dialogRef = this.dialog.open(LogoutComponent, {
-    //     // height: '300',
-    //     width: '480px',
-    //   });
-    //   dialogRef.afterClosed().subscribe(() => {
-    //     this.ngOnInit();
-    //   });
-    this.authService.logout();
-    this.router.navigate(['login']);
+     const dialogRef = this.dialog.open(LogoutComponent, {
+        // height: '300',
+        width: '480px',
+      });
+      dialogRef.afterClosed().subscribe(() => {
+        // this.ngOnInit();
+      });
+    // this.authService.logout();
+    // this.router.navigate(['login']);
   }
 
   // navigate(title: string) {

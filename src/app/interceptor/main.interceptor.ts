@@ -36,7 +36,7 @@ export class MainInterceptor implements HttpInterceptor {
       setHeaders: headersConfig
     });
     // headersConfig['user-device'] = `${userDevice}`;
-    request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
+  request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
     return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
@@ -46,10 +46,11 @@ export class MainInterceptor implements HttpInterceptor {
             }),
             catchError((error: HttpErrorResponse) => {
                 let data = {};
+                console.log(error);
                 data = {
                     reason: error && error.error && error.error.reason ? error.error.reason : '',
                     status: error.status
-                };
+                  };
                 this.errorDialogService.openDialog(data);
                 return throwError(error);
             }));

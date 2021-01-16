@@ -49,7 +49,7 @@
         <div fxFlex="65px" fxLayoutAlign="start start">
           <div class="shortname">
 
-            {{tenentData.Name | shortName}}
+            {{tenentData.Name| dataCheck|nameFilter }}
           </div>
         </div>
         <div fxFlex>
@@ -163,7 +163,7 @@
           <td mat-cell *matCellDef="let element">
             <div fxLayout="row" fxLayoutAlign="start center">
               <div fxFlex="65px" fxLayoutAlign="start center">
-                <div class="shortname">{{ element.Name | shortName }}</div>
+                <div class="shortname">{{ element.Name | nameFilter }}</div>
               </div>
               <div class="data-wrap">
                 <div class="value">{{ element.Name }}</div>

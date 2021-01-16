@@ -28,6 +28,9 @@ export class ReportService {
     console.log(data);
     this.printData.next(data)
   }
+  emaiListFilter(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/email/list', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   reportVerification(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/dashboard/verification', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
