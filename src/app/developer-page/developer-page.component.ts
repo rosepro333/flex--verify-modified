@@ -10,7 +10,7 @@ export class DeveloperPageComponent implements OnInit {
   constructor() { }
   startedType:any = ['Overview Api', 'Authentication',"Issue"];
   projectSetting:any = ['aapt2 compile project_root/module_root/src/main/res/values-en/', 'Authe strings.xml -o compiled/ntication'," aapt2 compile project_root/module_root/src/main/res/drawabl"];
-  tab:any = ['Overview','Getting Started', 'Basis of authentications','Manage deploye Keys','Using SSH agent','Api keys for getting','Data Creation in Document','Update Document','Delete Document','Gett data Document','Scan data Document','Best Pratice integrations'];
+  tab:any = ['Overview','Getting Started', 'Generate Verification URL','Get Scan Details',];
 
   ngOnInit(): void {
   }

@@ -80,7 +80,7 @@
             <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="verificaionUrl">
               <div class="url-wrap">
                 KYC verification url:
-                <span class="url">{{ verificaionUrl |limitTo:'50' }}</span>
+                <span class="url">{{ verificaionUrl |limitTo:'30' }}</span>
               </div>
               <button mat-icon-button [cdkCopyToClipboard]="verificaionUrl" matTooltip="copy url" matTooltipPosition="right">
                 <mat-icon>content_copy</mat-icon>

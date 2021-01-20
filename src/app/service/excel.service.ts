@@ -4,6 +4,7 @@ import * as XLSX from 'xlsx';
 // import { Workbook } from 'exceljs';
 // import * as Excel from 'exceljs';
 import * as Excel from 'exceljs/dist/exceljs.min.js';
+// import * as Excel from "exceljs";
 import * as ExcelProper from 'exceljs';
 const EXCEL_TYPE =
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
