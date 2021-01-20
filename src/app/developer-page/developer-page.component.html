@@ -4,61 +4,40 @@
     <mat-toolbar>
   <span>Developer Guide</span>
 </mat-toolbar>
-<!-- <div class="settings-wrap">
-  <div class="tiles-wrap" fxLayout="row wrap" fxLayoutAlign="start start" >
-    <mat-card class="tile cursor-pointer"  fxLayout="column" fxLayoutAlign="end center" >
-      <i class="material-icons fs-40">drafts</i>
-      <div class="title">Email</div>
-    </mat-card>
-    <mat-card class="tile cursor-pointer" fxLayout="column"  fxLayoutAlign="end center">
-      <i class="material-icons fs-40">notifications_none</i>
-      <div class="title">sms</div>
-    </mat-card>
-  </div>
-</div> -->
 <div>
-    <div class="layout-Left" fxLayout="row wrap" fxFlex="70" >
+    <div class="layout-Left" fxLayout="row wrap" fxFlex="75" >
       <div fxLayout="row" fxFlex="100">
-        <h1>Getting Started</h1>
+        <h1 class="headling">Getting Started</h1>
       </div>
       <div fxLayout="row" fxFlex="100">
-        <ol type='i'>
-          <li *ngFor="let i of startedType">{{i}}</li>
-        </ol>
+        <p >This document guides to integrate Flexverify APIs to client applications.  </p>
+      </div>
+        <div class="note"  fxLayout="row" fxFlex="100">
 
+      <p class="p-tag"> <span class="material-icons">grade
+        </span> Note : api-key and sdk-key are available in flexverify console Settings page. </p>
       </div>
       <div fxLayout="row" fxFlex="100">
-        <h1>Overview Api</h1>
+        <h1 class="headling">Generate Verification Url</h1>
       </div>
-      <div fxLayout="row" fxFlex="100">
-        <p>A quickstart or getting started guide plays an important role in introducing new technology to developers. This document or section of your developer website is also part of how you can make your API as popular as pie. And as a likely first impression to developers, it’s worth some extra attention.</p>
-      </div>
-
-      <div fxLayout="row" fxFlex="100">
+      <div class="generateKyc" fxLayout="row" fxFlex="100">
         <ul type='none'>
-          <li *ngFor="let i of projectSetting">{{i}}</li>
+          <li *ngFor="let i of generateKycApp">{{i}}</li>
         </ul>
       </div>
-      <div fxLayout="row" fxFlex="100">
-        <P>A quickstart or getting started guide plays an important role in introducing new technology to developers. This document or section of your
-          developer website is also part of how you can make your API as popular as pie. And as a likely first impression to developers, it’s worth
-          some extra attention.</P>
+       <div fxLayout="row" fxFlex="100">
+        <h1 class="headling">Get Scan Details</h1>
       </div>
-      <div fxLayout="row" fxFlex="100">
-        <P>Note : For resource files, the path to input files must project_root/module_root/src/main/res/values-en/</P>
-      </div>
-      <div fxLayout="row" fxFlex="100">
-        <P>A quickstart or getting started guide plays an important role in introducing new technology to developers. This document or section of your
-        developer website is also part of how you can make your API as popular as pie. And as a likely first impression to developers, it’s worth
-        some extra attention.</P>
-      </div>
-      <div fxLayout="row" fxFlex="100">
-        <P>A quickstart or getting started guide plays an important role in introducing new technology to developers. This document or section of your
-        developer website is also part of how you can make your API as popular as pie. And as a likely first impression to developers, it’s worth
-        some extra attention.</P>
+      <!-- <div fxLayout="row" fxFlex="100">
+      </div> -->
+
+      <div class="generateKyc"  fxLayout="row" fxFlex="100">
+        <ul type='none'>
+          <li  *ngFor="let i of getKycApp">{{i}}</li>
+        </ul>
       </div>
     </div>
-    <div class="layout-Right" fxLayout="row wrap" fxFlex="30" >
+    <div class="layout-Right" fxLayout="row wrap" fxFlex="25" >
       <div class="roundex-box" fxLayout="row" fxFlex="100">
         <ul class="rounded-ul" type='none'>
           <li class="rounded-box-list"><p class="rounded-select">{{tab[0]}}</p></li>

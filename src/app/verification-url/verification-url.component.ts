@@ -76,7 +76,7 @@ export class VerificationUrlComponent implements OnInit {
       if(this.accessType === '3'|| this.accessType === '4'){
         this.selectSdk = res.data[0].SDK_Key;
       }
-      this.ngOnInit();
+      // this.ngOnInit();
     });
   }
   clickGenerate = () => {

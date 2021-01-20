@@ -9,7 +9,8 @@ export class DeveloperPageComponent implements OnInit {
   selectedItem: '';
   constructor() { }
   startedType:any = ['Overview Api', 'Authentication',"Issue"];
-  projectSetting:any = ['aapt2 compile project_root/module_root/src/main/res/values-en/', 'Authe strings.xml -o compiled/ntication'," aapt2 compile project_root/module_root/src/main/res/drawabl"];
+  generateKycApp:any = ['Route: project_root/module_root/src/main/res/values-en/', 'Method: POST',"  Headers:","Body:"];
+  getKycApp:any = ['Route: https://verify.flexm.com/api/scans/kycScanDetails', 'Method: POST',"  Headers: api-key, sdk-key"," Body: Document_ID"];
   tab:any = ['Overview','Getting Started', 'Generate Verification URL','Get Scan Details',];
 
   ngOnInit(): void {

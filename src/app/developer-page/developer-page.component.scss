@@ -4,6 +4,20 @@
   font-weight: 400;
   font-style: normal;
   // font-size: 20px
+  .headling{
+    font-size: 20px;
+  }
+  .note{
+     background: #F7F6F6;
+    .p-tag{
+      padding: 20px;
+      display: inline-block;
+    }
+  }
+  .generateKyc {
+        border-left: 5px solid  #21B371;
+        background: #F7F6F6;
+      }
 }
 .layout-Right{
   padding:50px;
@@ -29,7 +43,6 @@
       .rounded-box-list.active {
         border-left: 5px solid  #21B371;
         background: #F7F6F6;
-
       }
     }
 
