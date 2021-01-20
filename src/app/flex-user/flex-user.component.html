@@ -185,6 +185,12 @@
             <mat-label>Role</mat-label>
             <mat-select (selectionChange)="selectRole($event.value)">
               <mat-option *ngFor="let i of role| role " [value]="i.value">{{i.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class='form-rows' appearance="outline" fxFlex="50">
+            <mat-label>Status</mat-label>
+            <mat-select (selectionChange)="selectStatus($event.value)">
+              <mat-option *ngFor="let i of userList" [value]="i.value">{{i.name}}</mat-option>
 
             </mat-select>
           </mat-form-field>

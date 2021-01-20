@@ -69,6 +69,23 @@ span.material-icons:hover {
     // border: 4px solid #0cdfba;
     border: 4px solid #21b371;
 }
+.sticky-bottom-bar {
+        padding: 16px;
+        background: #ffffff;
+        // position: sticky;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        // box-shadow: 0px -8px 12px -8px #c1c1c1;
+        .button-wrap {
+            text-align: center;
+        }
+        .cancel-button{
+            // background: #21b371;
+
+        }
+    }
 
 @media only screen and (min-width: 1441px) and (max-width: 1600px) {
     .right-drawer-about-th h6 {

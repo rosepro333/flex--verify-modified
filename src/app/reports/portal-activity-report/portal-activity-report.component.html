@@ -113,6 +113,11 @@
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
+                     <div class="filter-button-wrap" fxFlex="205px">
+                      <button mat-stroked-button class='export-button' (click)="exportAsXLSX()">
+                        <img src="./../../assets/excel.svg" />
+                      </button>
+                    </div>
                 </div>
             </div>
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" fxFlex="100" fxFill>

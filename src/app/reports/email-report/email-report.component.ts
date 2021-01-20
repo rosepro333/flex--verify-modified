@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
+import { ExcelService } from 'src/app/service/excel.service';
 import { ReportService } from 'src/app/service/report.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class EmailReportComponent implements OnInit {
   search = '';
   startDate: any = moment().startOf('day').toISOString();
   endDate: any = moment().endOf('day').toISOString();
-  constructor(private report: ReportService) { }
+  excelData: any = [];
+  constructor(private report: ReportService, private excelService: ExcelService) { }
 
   // tslint:disable-next-line:typedef
   // ngAfterViewInit() {
@@ -59,6 +61,32 @@ export class EmailReportComponent implements OnInit {
     this.pageSize = value.pageSize;
     this.currentPage = value.pageIndex + 1;
     this.emailActivity();
+  }
+    exportAsXLSX(): void {
+    this.excelData.splice(0, this.excelData.length);
+    console.log(this.dataSource)
+    const dateRange =
+      moment(this.startDate).format('DD-MM-YYYY') +
+      ' to ' +
+      moment(this.endDate).format('DD-MM-YYYY');
+    this.filterReport();
+    this.excelService.exportAsExcelFile(
+      dateRange,
+      this.excelData,
+      'EmailReportActivity'
+    );
+  }
+  filterReport() {
+    this.dataSource.map((i, index) => {
+      console.log(i)
+      const data = {};
+      data['recipientEmail'] = i.recipientEmail;
+      data['createdAt'] = moment( i.createdAt).format('DD-MMM-YYYY hh:mm A');
+      data['type'] = i.type;
+      // data['deviceSignature'] = `${i.deviceSignature.browser} ${i.deviceSignature.browser_version}`;
+      data['ipAddress'] = i.ipAddress;
+      this.excelData.push(data);
+    });
   }
   emailActivity = () => {
     const data = {

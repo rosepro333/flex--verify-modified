@@ -47,6 +47,13 @@ export class FlexUserComponent implements OnInit {
     'createdAt',
     // 'actions',
   ];
+    userList: any = [{name: 'All', value: 'All'},
+  {name: 'invitation sent', value: 'invitation sent'},
+  {name: 'Invitation Accepted', value: 'Invitation Accepted'},
+  {name: 'Created', value: 'created'},
+  {name: 'Created', value: 'created'},
+  {name: 'Active', value: 'active'},
+  {name: 'Suspended', value: 'suspended'}];
   detailsDetails: any = [];
   dataSourceUser = new MatTableDataSource(ELEMENT_DATA_User);
   dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
@@ -59,6 +66,7 @@ export class FlexUserComponent implements OnInit {
   isUserDetails: boolean;
   tenentUser = 'All';
   selectedRole = 'All';
+   status = '';
   userEdit: any = [];
   isTenent = false;
 
@@ -103,6 +111,13 @@ export class FlexUserComponent implements OnInit {
       console.log(value);
     }
   }
+    selectStatus = (value: any) => {
+    this.search ='';
+    this.status = value;
+    console.log(value);
+    this.getUserList();
+
+  }
   getUserList = () => {
     if (this.accessType === '1') {
         const data = {
@@ -113,7 +128,7 @@ export class FlexUserComponent implements OnInit {
         "search": this.search,
         "startDate": "",
         "endDate": "",
-        "status": "",
+        "status": this.status,
         "role": this.selectedRole
       }
       this.serviceService.getUserList(data).subscribe((result) => {

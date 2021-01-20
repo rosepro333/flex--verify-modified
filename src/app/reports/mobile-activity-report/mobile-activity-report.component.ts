@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { ReportService } from 'src/app/service/report.service';
+import { ExcelService } from 'src/app/service/excel.service';
 
 export interface PeriodicElement {
   activity: string;
@@ -32,7 +33,8 @@ export class MobileActivityReportComponent implements OnInit {
   search = '';
   startDate: any = moment().startOf('day').toISOString();
   endDate: any = moment().endOf('day').toISOString();
-  constructor(private report: ReportService) { }
+  excelData: any = [];
+  constructor(private report: ReportService,private excelService: ExcelService) { }
 
   // tslint:disable-next-line:typedef
   // ngAfterViewInit() {
@@ -90,6 +92,32 @@ export class MobileActivityReportComponent implements OnInit {
       }
     }, (err: any) => {
       console.log(err);
+    });
+  }
+  exportAsXLSX(): void {
+    this.excelData.splice(0, this.excelData.length);
+    console.log(this.dataSource)
+    const dateRange =
+      moment(this.startDate).format('DD-MM-YYYY') +
+      ' to ' +
+      moment(this.endDate).format('DD-MM-YYYY');
+    this.filterReport();
+    this.excelService.exportAsExcelFile(
+      dateRange,
+      this.excelData,
+      'mobileReportActivity'
+    );
+  }
+  filterReport() {
+    this.dataSource.map((i, index) => {
+      console.log(i)
+      const data = {};
+      data['documentId'] = i.documentId._id;
+      data['createdAt'] = moment( i.createdAt).format('DD-MMM-YYYY hh:mm A');
+      data['activity'] = i.activity;
+      data['deviceSignature'] = `${i.deviceSignature.browser} ${i.deviceSignature.browser_version}`;
+      data['ipAddress'] = i.ipAddress;
+      this.excelData.push(data);
     });
   }
 }

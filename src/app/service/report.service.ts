@@ -28,6 +28,12 @@ export class ReportService {
     console.log(data);
     this.printData.next(data)
   }
+  reGenerateUrl(): Observable<any> {
+    return this.http.post(this.apiUrl + '/generate/regenerateURl', {}, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  sentEmailToUser(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/email', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   emaiListFilter(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/email/list', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Cookie } from 'ng2-cookies';
 import { ServicesService } from '../service/services.service';
+import { TosterService } from '../toster/toster.service';
 
 @Component({
   selector: 'app-verification-url',
@@ -23,12 +24,12 @@ export class VerificationUrlComponent implements OnInit {
   selectedTenent = '';
   emailId = '';
   // sdyKeyName = '';
-  constructor(private serviceService: ServicesService) { }
+  constructor(private serviceService: ServicesService, private toast: TosterService) { }
 
   ngOnInit(): void {
-    this.serviceService.update.subscribe((data)=>{
-      console.log(data)
-    })
+    // this.serviceService.update.subscribe((data)=>{
+    //   console.log(data)
+    // })
     this.id = Cookie.get('id');
     this.accessType = Cookie.get('Access_Type');
     this.tenetId = Cookie.get('Tenant_ID');
@@ -43,6 +44,7 @@ export class VerificationUrlComponent implements OnInit {
         // console.log(res);
         if (res.msg === 'success') {
           this.tenentList = res.data;
+          console.log(res.data)
         }
       });
     } else if (this.accessType === '3' || this.accessType === '4') {
@@ -54,6 +56,7 @@ export class VerificationUrlComponent implements OnInit {
 
   }
   selectSdkKey = (value: any) => {
+    console.log(value);
     this.selectSdk = value;
   }
   selectTenent = (value: any) => {
@@ -73,7 +76,7 @@ export class VerificationUrlComponent implements OnInit {
       if(this.accessType === '3'|| this.accessType === '4'){
         this.selectSdk = res.data[0].SDK_Key;
       }
-      // this.ngOnInit();
+      this.ngOnInit();
     });
   }
   clickGenerate = () => {
@@ -83,12 +86,6 @@ export class VerificationUrlComponent implements OnInit {
         if (res.url) {
           console.log(res.url);
           this.verificaionUrl = res.url;
-          // this.verificaionUrl = res.url;
-          // localhost:50492/
-          // var url = this.verificaionUrl.split("/");
-          // console.log(url);
-          // console.log(url[2]);
-          // window.open(res.url, "_blank");
           const data = {
             user: Cookie.get('id'),
             tenentId: Cookie.get('Tenant_ID'),
@@ -103,16 +100,7 @@ export class VerificationUrlComponent implements OnInit {
       }
     );
   }
-  // send = (value: string, a: string) => {
-  //   if (a === 'mail') {
 
-  //     // alert('mail sent to ' + value);
-  //   } else {
-  //     alert('sms sent to ' + value);
-  //   }
-
-  //   console.log(a);
-  // }
   audits = (data: any) => {
     this.serviceService.audit(data).subscribe((res) => {
       console.log(res);
@@ -132,6 +120,11 @@ export class VerificationUrlComponent implements OnInit {
       }
       this.serviceService.sendEmail(data).subscribe((res) =>{
         console.log(res)
+        if(res.data==='delivered'){
+          this.toast.openSnackBar('Successfully message delivered','Success')
+        }else{
+          this.toast.openSnackBar('Message delivered Failed','Failed')
+        }
       },(err) =>{
         console.log(err);
       })

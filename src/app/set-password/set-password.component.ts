@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServicesService } from '../service/services.service';
@@ -8,6 +8,7 @@ import { TosterService } from '../toster/toster.service';
   selector: 'app-set-password',
   templateUrl: './set-password.component.html',
   styleUrls: ['./set-password.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SetPasswordComponent implements OnInit {
   form: FormGroup;
@@ -42,6 +43,7 @@ export class SetPasswordComponent implements OnInit {
 
   onSubmit = () => {
     // this.router.navigate(["/login"]);
+    console.log(this.form.value)
     if (
       this.form.valid &&
       this.form.value.password === this.form.value.confirmpassword
@@ -51,7 +53,7 @@ export class SetPasswordComponent implements OnInit {
       this.service.setForgetPassword(this.form.value).subscribe(
         (result) => {
           console.log(result);
-          if (result.msg === 'success') {
+          if (result.msg === 'success' && result.apires=== 1) {
             this.toast.openSnackBar(
               'Successfully change your password',
               'Success'

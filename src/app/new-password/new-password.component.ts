@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
@@ -9,8 +9,10 @@ import { TosterService } from '../toster/toster.service';
   selector: 'app-new-password',
   templateUrl: './new-password.component.html',
   styleUrls: ['./new-password.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NewPasswordComponent implements OnInit {
+  hide = true;
   form: FormGroup;
   id = '';
   private formSubmitAttempt: boolean;
@@ -42,18 +44,21 @@ export class NewPasswordComponent implements OnInit {
     );
   }
 
-  onSubmit = () => {
+  onSubmit = async () => {
     this.form.value.id = this.id;
-    console.log(this.form);
     if (this.form.valid) {
       if (this.form.value.newPassword === this.form.value.confirmPassword) {
-        console.log(this.form.value);
-        this.service.resetPassword(this.form.value).subscribe(
+        const data = {
+        id:this.form.value.id,
+        password: this.form.value.currentPassword,
+        newpassword: this.form.value.newPassword,
+      };
+        this.service.resetPassword(data).subscribe(
           (result) => {
             console.log(result);
-            if (result.msg === 'success') {
+            if (result.msg === 'success' && result.apires ===1) {
               this.toast.openSnackBar(
-                'Successfuly Reset Your password',
+                'Successfuly Changed Your password',
                 'Success'
               );
               this.router.navigate(['/login']);

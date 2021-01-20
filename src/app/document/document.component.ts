@@ -117,14 +117,14 @@ export class DocumentComponent implements OnInit {
     this.docdumentsList();
     // All
   }
-  scanDocList = () => {
-    this.serviceService.scanDocList().subscribe((res: any) => {
-      if (res.msg === 'success') {
-        this.dataSource.data = res.data;
-      }
-      console.log(this.dataSource.data);
-    });
-  }
+  // scanDocList = () => {
+  //   this.serviceService.scanDocList().subscribe((res: any) => {
+  //     if (res.msg === 'success') {
+  //       this.dataSource.data = res.data;
+  //     }
+  //     console.log(this.dataSource.data);
+  //   });
+  // }
   selectDate1 = (value: any) => {
     this.search ='';
     this.selectedDocs = '';

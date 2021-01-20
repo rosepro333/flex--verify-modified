@@ -31,9 +31,14 @@ export class LogoutComponent implements OnInit {
     this.dialogRef.close();
   }
   logout = () => {
-    this.dialogRef.close();
-    this.authService.logout();
-    this.router.navigate(['login']);
+    const close =this.dialogRef.close();
+      setTimeout(()=>{
+        this.authService.logout();
+        this.router.navigate(['login']);
+      },500)
+
+
+
   }
   audits = (data: any) => {
     this.service.audit(data).subscribe((res) => {

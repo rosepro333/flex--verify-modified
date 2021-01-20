@@ -152,6 +152,7 @@ export class FlexTenentComponent implements OnInit {
       name: new FormControl('', [Validators.required, ]),
       contactName: new FormControl('', [Validators.required]),
       contactEmail: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+      expireTokenTime: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     });
   }
 
@@ -164,11 +165,13 @@ export class FlexTenentComponent implements OnInit {
     console.log(id);
     const contactName = this.form.get('contactName').value;
     const contactEmail = this.form.get('contactEmail').value;
+    const expireTokenTime = this.form.get('expireTokenTime').value;
     console.log(contactName);
     console.log(contactEmail);
     const data = {
       Contact_Name: contactName,
-      Contact_Mail: contactEmail
+      Contact_Mail: contactEmail,
+      expireTokenTime:expireTokenTime
     };
     this.service.updateTenent(id, data).subscribe((res) => {
       console.log(res);
@@ -243,7 +246,8 @@ export class FlexTenentComponent implements OnInit {
         console.log(this.tenentData);
         this.form.patchValue({name: this.tenentData.Name,
           contactName: this.tenentData.Contact_Name,
-          contactEmail: this.tenentData.Contact_Mail});
+          contactEmail: this.tenentData.Contact_Mail,
+          expireTokenTime: this.tenentData.expireTokenTime});
         this.form.get('name').disable();
         // this.form.get('contactEmail').disable();
         // console.log(data);

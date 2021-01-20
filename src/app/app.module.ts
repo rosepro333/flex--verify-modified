@@ -87,6 +87,8 @@ import { DataCheckPipe } from './pipe/data-check.pipe';
 import { LogoutComponent } from './sidebar/logout/logout.component';
 import { NameFilterPipe } from './pipe/name-filter.pipe';
 import { EmailReportComponent } from './reports/email-report/email-report.component';
+import { DeveloperPageComponent } from './developer-page/developer-page.component';
+import { LimitToPipe } from './pipe/limit-to.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -134,7 +136,9 @@ import { EmailReportComponent } from './reports/email-report/email-report.compon
     DataCheckPipe,
     LogoutComponent,
     NameFilterPipe,
-    EmailReportComponent
+    EmailReportComponent,
+    DeveloperPageComponent,
+    LimitToPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

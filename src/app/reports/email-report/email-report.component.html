@@ -74,6 +74,11 @@
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-date-range-picker #picker></mat-date-range-picker>
                     </mat-form-field>
+                    <div class="filter-button-wrap" fxFlex="205px">
+                      <button mat-stroked-button class='export-button' (click)="exportAsXLSX()">
+                        <img src="./../../assets/excel.svg" />
+                      </button>
+                    </div>
                     <!-- <mat-form-field appearance="outline" fxFlex="50">
                         <mat-label>Document ID</mat-label>
                         <input matInput #input [(ngModel)]="search" />

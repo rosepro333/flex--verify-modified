@@ -34,9 +34,12 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   encapsulation: ViewEncapsulation.None,
 })
 export class DocumentDetailsComponent implements OnInit {
+
   @ViewChild('rightDrawer', { static: false }) sideNav: MatSidenav;
   displayedColumns: string[] = ['scanId', 'scanDate', 'status'];
-
+  elementType: 'url';
+  verificaionUrl='';
+   emailId:'';
   dataSource: any = [];
   // new MatTableDataSource();
   disabled = false;
@@ -168,7 +171,38 @@ export class DocumentDetailsComponent implements OnInit {
         // this.ngOnInit();
       });
   }
-
+  clickGenerate = () => {
+    Cookie.set('docForRegenerateUrl',this.id.toString())
+    this.verificaionUrl= 'hiii';
+    this.report.reGenerateUrl().subscribe((res)=>{
+      console.log(res)
+      if(res.msg === 'success'){
+        this.verificaionUrl= res.url
+      }
+    },(error:any)=>{
+      console.log(error);
+    })
+  }
+  sendEmail = () => {
+  console.log(this.document)
+     const data ={
+        "fromUser":Cookie.get('id'),
+        "tenentId":this.document.Tenant_ID,
+        "recipientEmail":this.emailId,
+        "type":"Verification url",
+        "data":JSON.stringify({url: this.verificaionUrl, sdk:this.document.sdkKey_ID })
+      }
+      this.serviceServive.sendEmail(data).subscribe((res) =>{
+        if(res.data==='delivered'){
+          this.toast.openSnackBar('Successfully message delivered','Success')
+        }else{
+          this.toast.openSnackBar('Message delivered Failed','Failed')
+        }
+        console.log(res)
+      },(err) =>{
+        console.log(err);
+      })
+  }
   documentLoad = async() => {
     await this.getAllScanDocumentById(this.id)
       .then((res) => {
@@ -201,11 +235,11 @@ export class DocumentDetailsComponent implements OnInit {
             moment(i.updatedDate, 'DD-MM-YYYY').format('MM/DD/YYYY')
           );
           this.getAllComment(i._id, i.Document_ID);
-          this.scanDocument[index].push(obj);
+          // this.scanDocument[index].push(obj);
         });
-        console.log(this.scanDocument);
+        // console.log(this.scanDocument);
       })
-      .catch(() => console.error('some error'));
+      .catch((error) => console.error(error));
     this.getDocument(this.id);
   }
   getAllComment = (scanId: string, documentId: any) => {
@@ -261,6 +295,7 @@ export class DocumentDetailsComponent implements OnInit {
     // get item details using id
     this.serviceServive.getDocumentBy(id).subscribe((response) => {
       this.document = response.data;
+      console.log(this.document)
       this.docId = response.data._id;
     });
   }
@@ -462,14 +497,22 @@ export class DocumentDetailsComponent implements OnInit {
   }
   deleteScan = (id: any) => {
     console.log(id)
+    console.log(this.router.url);
     this.serviceServive.deleteScan(id).subscribe((res)=> {
       console.log(res)
       if(res.msg === 'success'){
         this.toast.openSnackBar('Successfully deleted Scan','Success');
+        this.router.navigateByUrl(this.router.url)
+        let currentUrl = this.router.url;
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate([currentUrl]);
+            console.log(currentUrl);
+        });
+        // this.ngOnInit();
         // this.documentLoad()
-        console.log(this.dataSource[1].Scan_ID);
-        const scanId = this.dataSource[1].Scan_ID;
-        this.nextScan(scanId);
+        // console.log(this.dataSource[1].Scan_ID);
+        // const scanId = this.dataSource[1].Scan_ID;
+        // this.nextScan(scanId);
 
       }else{
         this.toast.openSnackBar('Something Went Sr','Success');

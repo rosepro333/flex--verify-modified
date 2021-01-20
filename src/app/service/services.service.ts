@@ -30,8 +30,9 @@ export class ServicesService {
     this.update = new BehaviorSubject(this.updateNav);
   }
   httpOptions = {
-    headers: new HttpHeaders()
+    headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
   };
+  // const httpOptions =  new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   userDrawer = (updateString: string) => {
     console.log(updateString)
     this.update.next('ddsdscdscdsc');
@@ -43,11 +44,26 @@ export class ServicesService {
   userDevice = () => {
     return Cookie.get('user-device');
   }
+  forgetUserId = () =>{
+    return Cookie.get('data_ID')
+  }
+  resetUserId = () =>{
+    return Cookie.get('reset_ID')
+  }
+  getSdkKey = () =>{
+    return Cookie.get('sdkKey')
+  }
+  docForRegenerateUrl = () =>{
+    return Cookie.get('docForRegenerateUrl')
+  }
   updateUser(id:string,data: any): Observable<any> {
     return this.http.patch(this.apiUrl + '/user/update/'+ id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   updateTenent(id:string,data: any): Observable<any> {
     return this.http.patch(this.apiUrl + '/tenent/update/'+ id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  userForChangePassword(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/user/accessToken', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   sendEmail(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/email/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
@@ -192,18 +208,11 @@ export class ServicesService {
     }
   }
   resetPassword(data: any): Observable<any> {
-    console.log(data);
-    if (data) {
-      const resetDAta = {
-        id: data.id,
-        password: data.currentPassword,
-        newpassword: data.newPassword,
-      };
-      console.log(resetDAta);
+    Cookie.set('reset_ID',data.id);
       return this.http
-        .post(this.apiUrl + '/user/resetPassword', resetDAta, this.httpOptions)
+        .post(this.apiUrl + '/user/resetPassword', data, this.httpOptions)
         .pipe(retry(1), catchError(this.handleError));
-    }
+
   }
   idFindMyMail(data: any): Observable<any> {
     if (data) {
@@ -227,11 +236,14 @@ export class ServicesService {
         .pipe(retry(1), catchError(this.handleError));
     }
   }
+
   setForgetPassword(data: any): Observable<any> {
-    console.log();
+    // headers.append('user-access-token',data.id);
+    // this.httpOptions.headers.append('user-access-token',data.id)
+    Cookie.set('data_ID',data.id);
     if (data) {
       const formData = {
-        id: data.id,
+        // id: data.id,
         password: data.password,
       };
       return this.http
@@ -240,7 +252,7 @@ export class ServicesService {
           formData,
           this.httpOptions
         )
-        .pipe(retry(1), catchError(this.handleError));
+        .pipe(retry(1),map(()=>{}), catchError(this.handleError));
     }
   }
   // tslint:disable-next-line:variable-name
@@ -282,11 +294,12 @@ export class ServicesService {
   }
   generateUrl(key: any): Observable<any> {
     console.log(key);
-    const data = {
-      header: key,
-    };
+    // const data = {
+    //   header: key,
+    // };
+    Cookie.set('sdkKey',key)
     return this.http
-      .post(this.apiUrl + '/generate', data, this.httpOptions)
+      .post(this.apiUrl + '/generate', {}, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   documentList(): Observable<any> {

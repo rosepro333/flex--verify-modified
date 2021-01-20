@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "../auth/auth.service";
@@ -7,6 +7,7 @@ import { AuthService } from "../auth/auth.service";
   selector: "app-reset-password",
   templateUrl: "./reset-password.component.html",
   styleUrls: ["./reset-password.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ResetPasswordComponent implements OnInit {
   form: FormGroup;

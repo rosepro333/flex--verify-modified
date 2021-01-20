@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
+import { ExcelService } from 'src/app/service/excel.service';
 import { ReportService } from 'src/app/service/report.service';
 import { ServicesService } from 'src/app/service/services.service';
 
@@ -38,9 +39,10 @@ export class ScanReportComponent implements OnInit {
   details: any = [];
   selectedTenent = '';
   selectedStatus = '';
+  excelData: any = [];
   startDate: any = moment().startOf('day').toISOString();
   endDate: any = moment().endOf('day').toISOString();
-  constructor(private service: ServicesService, private report: ReportService) { }
+  constructor(private service: ServicesService, private report: ReportService, private excelService:ExcelService) { }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -110,6 +112,32 @@ export class ScanReportComponent implements OnInit {
     this.pageSize = value.pageSize;
     this.currentPage = value.pageIndex + 1;
     this.scanReports();
+  }
+    exportAsXLSX(): void {
+    this.excelData.splice(0, this.excelData.length);
+    console.log(this.dataSource)
+    const dateRange =
+      moment(this.startDate).format('DD-MM-YYYY') +
+      ' to ' +
+      moment(this.endDate).format('DD-MM-YYYY');
+    this.filterReport();
+    this.excelService.exportAsExcelFile(
+      dateRange,
+      this.excelData,
+      'ScanReport'
+    );
+  }
+  filterReport() {
+    this.dataSource.map((i, index) => {
+      console.log(i)
+      const data = {};
+      data['Scan_ID'] = i.Scan_ID;
+      data['createdAt'] = moment( i.createdAt).format('DD-MMM-YYYY hh:mm A');
+      data['status'] = i.scanResultStatus;
+      data['ID_Type'] = i.ID_Type;
+      data['Name'] = `${i.firstName} ${i.lastName}`;
+      this.excelData.push(data);
+    });
   }
   scanReports = () => {
     const data = {

@@ -16,7 +16,7 @@ import { AuthService } from './../auth/auth.service';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  private formSubmitAttempt: boolean;
+  private formSubmitAttempt: boolean = true;
   deviceInfo: any = [];
   encryptSecretKey ='vuobnvlkdjvndvjkfnkjdlvndskvlnhuisdvbdslvbdslvbdsvdbuvdvhfvjjvbfjvbf';
   hide = true;
@@ -39,15 +39,19 @@ export class LoginComponent implements OnInit {
     this.rememberMe();
   }
   rememberMe() {
-    const flex_verify = localStorage.getItem('flex_verify')
-    const flex = CryptoJS.AES.decrypt(flex_verify, this.encryptSecretKey).toString(CryptoJS.enc.Utf8);
-    console.log(JSON.parse(flex));
-    const loginData = JSON.parse(flex);
-    if(loginData.rememberMe === true){
-      this.form.patchValue({userName:loginData.userName,password:loginData.password,rememberMe:loginData.rememberMe})
-    }else{
-      this.form.patchValue({userName:'',password:'',rememberMe:false});
+    const flex_verify = localStorage.getItem('flex_verify');
+    if(flex_verify !== undefined && flex_verify !== null) {
+      console.log(flex_verify)
+      const flex = CryptoJS.AES.decrypt(flex_verify, this.encryptSecretKey).toString(CryptoJS.enc.Utf8);
+      console.log(JSON.parse(flex));
+      const loginData = JSON.parse(flex);
+      if(loginData.rememberMe === true){
+        this.form.patchValue({userName:loginData.userName,password:loginData.password,rememberMe:loginData.rememberMe})
+      }else{
+        this.form.patchValue({userName:'',password:'',rememberMe:false});
+      }
     }
+
   }
 
   // tslint:disable-next-line:typedef

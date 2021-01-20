@@ -30,6 +30,7 @@ import { EmailComponent }  from './notification/email/email.component';
 import { SmsComponent  } from './notification/sms/sms.component';
 import { PrintDocumentComponent } from './document-details/print-document/print-document.component';
 import { EmailReportComponent } from './reports/email-report/email-report.component';
+import { DeveloperPageComponent } from './developer-page/developer-page.component';
 const routes: Routes = [
   {
     path: '',
@@ -112,6 +113,10 @@ const routes: Routes = [
       {
         path: 'notification',
         component: NotificationComponent,
+      },
+      {
+        path: 'developer-page',
+        component: DeveloperPageComponent,
       },
       {
         path: 'email',
