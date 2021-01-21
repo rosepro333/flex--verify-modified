@@ -22,18 +22,44 @@
       </div>
       <div class="generateKyc" fxLayout="row" fxFlex="100">
         <ul type='none'>
-          <li *ngFor="let i of generateKycApp">{{i}}</li>
+          <li >Route: https://verify.flexm.com/api/generate/generateKycUrl</li>
+          <li >Method: POST</li>
+          <li >Headers: [&#123;
+              <ul type='none' class='generateKycHeadert'>
+                <li  *ngFor ="let i of generateKycHeader">{{i}}</li>
+              </ul>
+          </li>
+          <li class="bracket-padding">&#125;];</li>
+          <li >Body:[&#123;
+              <ul type='none'class='generateKycHeadert'>
+                <li *ngFor ="let i of generateKycBody">{{i}}</li>
+
+              </ul>
+          </li>
+          <li class="bracket-padding">&#125;];</li>
         </ul>
       </div>
        <div fxLayout="row" fxFlex="100">
         <h1 class="headling">Get Scan Details</h1>
       </div>
-      <!-- <div fxLayout="row" fxFlex="100">
-      </div> -->
 
       <div class="generateKyc"  fxLayout="row" fxFlex="100">
         <ul type='none'>
-          <li  *ngFor="let i of getKycApp">{{i}}</li>
+          <li >Route: https://verify.flexm.com/api/scans/kycScanDetails</li>
+          <li >Method: POST</li>
+          <li >Headers: [&#123;
+              <ul type='none' class='generateKycHeadert'>
+                <li  *ngFor ="let i of kycScanDetailsHeader">{{i}}</li>
+              </ul>
+          </li>
+          <li class="bracket-padding">&#125;];</li>
+          <li >Body: [&#123;
+              <ul type='none'>
+                <li *ngFor ="let i of kycScanDetailsBody">{{i}}</li>
+
+              </ul>
+          </li>
+           <li class="bracket-padding">&#125;];</li>
         </ul>
       </div>
     </div>

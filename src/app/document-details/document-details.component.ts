@@ -154,13 +154,13 @@ export class DocumentDetailsComponent implements OnInit {
 
     this.checkAccessType();
   }
-  preview = (value: any) => {
-    const img = `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${value}?alt=media`
-    console.log(img);
+  // preview = (value: any) => {
+  //   const img = `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${value}?alt=media`
+  //   console.log(img);
 
-    this.previewImageSrc = img;
-    this.zoomImageSrc = img;
-  }
+  //   this.previewImageSrc = img;
+  //   this.zoomImageSrc = img;
+  // }
   overLayImage = (value: string) => {
     const img = `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${value}?alt=media`;
     const dialogRef = this.dialog.open(IdDetailsComponent,{
@@ -308,6 +308,7 @@ export class DocumentDetailsComponent implements OnInit {
   }
   donwLoad = (data:any) => {
     this.router.navigateByUrl('/print')
+    data.Document_ID = this.document.Document_ID;
     this.report.printAbleData(data);
     // window.open('/print');
     // const printContent = document.getElementById("id-card1");

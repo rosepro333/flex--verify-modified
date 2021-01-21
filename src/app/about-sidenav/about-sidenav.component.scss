@@ -72,7 +72,45 @@ span.material-icons:hover {
     display: flex;
     align-items: center;
 }
+@media only screen and (min-width: 1800px) and (max-width: 2000px) {
+    // .fmargin-top-div{
+    //   margin: 25px;
+    // }
+    .about-us-box{
+      // padding: 25px;
+      margin: 50px;
+    }
+    .right-drawer-about-th h6 {
+        font-size: 12px !important;
+    }
+    .right-drawer-about-td h6 {
+        font-size: 12px !important;
+        .app-logo{
+          width:20px;
+        }
+    }
+    .right-drawer-about-td{
+       .app-logo{
+          width:120px;
+        }
+    }
+    .side-menu-right-drawer {
 
+    }
+    .side-menu-right-drawer img {
+        width: 34px;
+    }
+    .side-menu-right-drawer h5 {
+        font-size: 14px !important;
+        margin-left:25px;
+    }
+    .side-menu-right-drawer-detail {
+        padding: 0px 78px;
+    }
+    .right-drawer-about-td h4 {
+        font-size: 12px;
+    }
+}
 @media only screen and (min-width: 1441px) and (max-width: 1600px) {
     .right-drawer-about-th h6 {
         font-size: 12px !important;

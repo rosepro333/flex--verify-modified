@@ -57,6 +57,7 @@ export class NewPasswordComponent implements OnInit {
           (result) => {
             console.log(result);
             if (result.msg === 'success' && result.apires ===1) {
+              localStorage.clear();
               this.toast.openSnackBar(
                 'Successfuly Changed Your password',
                 'Success'

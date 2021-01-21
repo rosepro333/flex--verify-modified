@@ -58,7 +58,7 @@ _id: "5ff2b35f14441f4fc06a55ca",
 
     this.report.printData.subscribe((res)=>{
 
-      // this.printData = res;
+      this.printData = res;
     })
   }
 //     getImage(imageUrl: string):void {

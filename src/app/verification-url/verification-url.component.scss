@@ -24,13 +24,46 @@
         }
     }
 }
+@media only screen and (min-width: 1800px) and (max-width: 2000px) {
+    .verification-wrap {
+        .title {
+            font-size: 14px;
+        }
+        .mat-form-field-flex {
+            font-size: 14px;
+        }
+        .mat-select-value {
+            font-size: 10px;
+        }
+        button.mat-focus-indicator {
+            font-size: 11px;
+            padding: 0px 14px;
+        }
+        .aclass img {
+            width: 125px;
+        }
+        .url-wrap {
+            font-size: 12px;
+
+        }
+        .url-wrap .url {
+            font-size: 11px;
+            padding: 0px;
+
+        }
+        .aclass {
+            margin: 12px;
+        }
+    }
+
+}
 @media only screen and (min-width: 1441px) and (max-width: 1600px) {
     .verification-wrap {
 
         .title {
-           
+
             font-size: 14px;
-           
+
         }
         .mat-form-field-flex {
             font-size: 11px;
@@ -47,12 +80,12 @@
         }
         .url-wrap {
             font-size: 12px;
-            
+
         }
         .url-wrap .url {
             font-size: 11px;
             padding: 0px;
-            
+
         }
         .aclass {
             margin: 12px;
@@ -65,9 +98,9 @@
     .verification-wrap {
 
         .title {
-           
+
             font-size: 14px;
-           
+
         }
         .mat-form-field-flex {
             font-size: 11px;
@@ -84,26 +117,26 @@
         }
         .url-wrap {
             font-size: 12px;
-            
+
         }
         .url-wrap .url {
             font-size: 11px;
             padding: 0px;
-            
+
         }
         .aclass {
             margin: 12px;
         }
     }
- 
+
 }
 @media only screen and (min-width: 1281px) and (max-width: 1440px) {
     .verification-wrap {
 
         .title {
-           
+
             font-size: 14px;
-           
+
         }
         .mat-form-field-flex {
             font-size: 11px;
@@ -120,27 +153,27 @@
         }
         .url-wrap {
             font-size: 12px;
-            
+
         }
         .url-wrap .url {
             font-size: 11px;
             padding: 0px;
-            
+
         }
         .aclass {
             margin: 12px;
         }
     }
-    
+
 
 }
 @media only screen and (min-width: 800px) and (max-width: 1536px) {
     .verification-wrap {
 
         .title {
-           
+
             font-size: 14px;
-           
+
         }
         .mat-form-field-flex {
             font-size: 11px;
@@ -157,12 +190,12 @@
         }
         .url-wrap {
             font-size: 12px;
-            
+
         }
         .url-wrap .url {
             font-size: 11px;
             padding: 0px;
-            
+
         }
         .aclass {
             margin: 12px;
@@ -178,12 +211,13 @@
     .verification-wrap {
 
         .title {
-           
+
             font-size: 14px;
-           
+
         }
         .mat-form-field-flex {
             font-size: 11px;
+            font-size: 13px;
         }
         .mat-select-value {
             font-size: 10px;
@@ -197,12 +231,12 @@
         }
         .url-wrap {
             font-size: 12px;
-            
+
         }
         .url-wrap .url {
             font-size: 11px;
             padding: 0px;
-            
+
         }
         .aclass {
             margin: 12px;
@@ -212,7 +246,7 @@
 
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
- 
+
 }
 
 @media only screen and (max-width: 767px) {
@@ -222,6 +256,6 @@
 }
 
 @media only screen and (max-width: 479px) {
-   
+
 }
 
