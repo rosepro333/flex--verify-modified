@@ -58,11 +58,7 @@ _id: "5ff2b35f14441f4fc06a55ca",
 
     this.report.printData.subscribe((res)=>{
 
-      // const reader = new FileReader();
-      // // reader.readAsDataURL(file);
-      // this.printData.ID_Card_Front =  btoa(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${res?.ID_Card_Front}?alt=media`);
-      this.printData = res;
-      // console.log(res);
+      // this.printData = res;
     })
   }
 //     getImage(imageUrl: string):void {

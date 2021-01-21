@@ -181,7 +181,7 @@
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
-    <div class="filed-left" fxFlex='30'>
+    <div class="filed-left" fxFlex='30' fxFlex.lg ="35%"  fxFlex.gt-sm ="75%">
         <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.Selfie_Photo}}?alt=media" />
     </div>
     <div fxLayoutAlign="center center">
@@ -194,13 +194,18 @@
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="8px">
-    <div class="filed-left" fxFlex='17' *ngFor ='let i of printData.LiveCheck_Photos'>
-      <img class='liveliness' src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{i}}?alt=media" />
+    <div class="filed-left" fxFlex='15' *ngFor ='let i of printData.LiveCheck_Photos;let j=index'>
+      <img class='liveliness'src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{i}}?alt=media" />
     </div>
   </div>
+   <!-- <div fxLayout="row" fxLayoutGap="8px">
+    <div class="filed-left" fxFlex='17' *ngFor ='let i of printData.LiveCheck_Photos;let j=index'>
+      <img class='liveliness'*ngIf='j>=3' src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{i}}?alt=media" />
+    </div>
+  </div> -->
   <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed-left" fxLayoutAlign="center center" fxFlex='100'>
-      <button class="printButton" (click)= 'print()'>Pirnt</button>
+      <button class="printButton" (click)= 'print()'>Print</button>
     </div>
   </div>
 </div>
