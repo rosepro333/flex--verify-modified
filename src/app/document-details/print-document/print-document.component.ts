@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { retry } from 'rxjs/operators';
 import { ReportService } from 'src/app/service/report.service';
 import { jsPDF}  from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-print-document',
   templateUrl: './print-document.component.html',
-  styleUrls: ['./print-document.component.scss']
+  styleUrls: ['./print-document.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PrintDocumentComponent implements OnInit {
   printData : any = {
     Building_No: "42",
 Document_ID: "5ff2b30114441f4fc06a55c7",
 ID_Card_Back: "/id_back__1609741156411.jpg",
-ID_Card_Front: "https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media",
+ID_Card_Front: "/id_front_doc82YFgqomRZ_1609741149213.jpg",
 ID_Type: "Nationality Identify Card",
 LiveCheck_Photos: ["/livecheck_left_1609741165620.jpg", "/livecheck_up_1609741165628.jpg", "/livecheck_left_1609741165633.jpg", "/livecheck_up_1609741165636.jpg", "/livecheck_center_1609741165638.jpg"],
 Mode: "Sandbox",
@@ -47,7 +49,7 @@ updatedDate: null,
 _id: "5ff2b35f14441f4fc06a55ca",
 };
   // printData: any = {};
-  constructor(private report: ReportService, private http: HttpClient) {
+  constructor(private report: ReportService, private http: HttpClient,public domSanitizer: DomSanitizer) {
 
   }
 
@@ -59,7 +61,7 @@ _id: "5ff2b35f14441f4fc06a55ca",
       // const reader = new FileReader();
       // // reader.readAsDataURL(file);
       // this.printData.ID_Card_Front =  btoa(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${res?.ID_Card_Front}?alt=media`);
-      // this.printData = res;
+      this.printData = res;
       // console.log(res);
     })
   }
@@ -79,33 +81,40 @@ _id: "5ff2b35f14441f4fc06a55ca",
 // });
 //     }
   print = () =>{
-    const img = new Image();
-    img.crossOrigin = '';
-    console.log(this.printData?.ID_Card_Front)
-    // var data = document.getElementById('main');
-              // document.body.appendChild(this.printData?.ID_Card_Front)
-    var data = document.body;
-    const z = document.createElement('p');
-    z.innerHTML = this.printData?.ID_Card_Front
-     data.appendChild(z)
-    console.log(data)
-     html2canvas(data,{ logging: true,  allowTaint: true, useCORS: true }).then(async (canvas) => {
+    // var data = document.body;
+    // ,proxy:'html2canvasproxy.php'
+    // const options ={Access-Control-Allow-Origin:"*"};
+    //  html2canvas(data,{proxy:'https://firebasestorage.googleapis.com', logging: true,  allowTaint: true, useCORS: true ,imageTimeout:0,}).then(async (canvas) => {
       // Few necessary setting options
-      console.log(canvas)
-      var imgWidth = 208;
-      var pageHeight = 295;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
-
-      const contentDataURL = await canvas.toDataURL('image/jpeg', 0.1)
-      let pdf = new jsPDF('p', 'mm', 'a4',true); // A4 size page of PDF
-      var position = 0;
-
+      // var img = new Image();
+      // img.onload = function() {
+      // document.body.appendChild(img);
+      // };
+      // img.error = function() {
+      // if(window.console.log) {
+      // window.console.log("Not loaded image from canvas.toDataURL");
+      // } else {
+      //  alert("Not loaded image from canvas.toDataURL");
+      // }
+      // };
+      // img.src = canvas.toDataURL("image/png");
+      // console.log(canvas)
+      // var imgWidth = 208;
+      // var pageHeight = 295;
+      // var imgHeight = canvas.height * imgWidth / canvas.width;
+      // var heightLeft = imgHeight;
+      // canvas.toBlob(()=>{})
+      // const contentDataURL = await canvas.toDataURL('image/jpeg', 0.1);
+      // let pdf = new jsPDF('p', 'mm', 'a4',true); // A4 size page of PDF
+      // var position = 0;
+      // const options ={}
       // const data = 'data:image/jpg;base64,' + btoa(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media`)
-      pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
-      pdf.save('MYPdf.pdf'); // Generated PDF
-    });
-    // window.print();
+      // pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
+      // pdf.addImage(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media`, 'JPEG', 0, position, imgWidth, imgHeight,)
+      // console.log(pdf)
+      // pdf.save('MYPdf.pdf'); // Generated PDF
+    // });
+    window.print();
   }
 
 }

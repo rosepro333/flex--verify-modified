@@ -1,23 +1,24 @@
-<div id = 'main' fxLayout="column wrap" class="main-wrap">
-  <div  fxLayout="row" fxLayoutGap="50px">
-    <div class="filed-left">
-      <h2 >{{printData?.firstName}} {{printData?.lastName}}</h2>
+<div id = 'main'  class="main-wrap">
+  <div  fxLayout="row" fxLayoutGap="10px">
+    <div class="filed-left"fxFlex='100'>
+      <h1 class="main-header">{{printData?.firstName}} {{printData?.lastName}}</h1>
     </div>
   </div>
-   <div fxLayout="row" fxLayoutGap="10px">
+
+    <div fxLayout="row" fxLayoutGap="10px" >
     <div class="filed-left" fxFlex='15'>
-      <p>Document Id</p>
+      <span>Document ID:</span>
     </div>
-    <div>
-      <h2 class="details">{{printData?.Document_ID}}</h2>
+    <div fxFlex='20'>
+      <p class="filed-left docID">{{printData?.Document_ID}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px" >
     <div class="filed-left" fxFlex='15'>
-      <p>ScanID</p>
+      <span>Scan ID</span>
     </div>
     <div>
-      <h2 class="details">{{printData?.Scan_ID}}</h2>
+      <p class="filed-left">{{printData?.Scan_ID}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -25,7 +26,7 @@
       <p>Submitted time</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.updatedAt | date:'DD/MM/YYYY h:mm:ss a'}}</h2>
+      <p class="filed-left">{{printData?.updatedAt | date:'DD/MM/YYYY h:mm:ss a'}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -33,7 +34,7 @@
       <p>Devide Signature</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.deviceSignature?.browser}},{{printData?.deviceSignature?.browser_version}}</h2>
+      <p class="details">{{printData?.deviceSignature?.browser}},{{printData?.deviceSignature?.browser_version}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -41,7 +42,7 @@
       <p>Ip Address</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.ipAddress}}</h2>
+      <p class="details">{{printData?.ipAddress}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -49,12 +50,12 @@
       <p>Mode</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.Mode}}</h2>
+      <p class="details">{{printData?.Mode}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed-left" fxFlex='15'>
-      <h2 class="header">Scan Result</h2>
+      <p class="header">Scan Result</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -62,7 +63,7 @@
       <p>Status</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.scanResultStatus}}</h2>
+      <p class="details">{{printData?.scanResultStatus}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -70,7 +71,7 @@
       <p>ID Type</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.ID_Type}}</h2>
+      <p class="details">{{printData?.ID_Type}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -78,7 +79,7 @@
       <p>ID Number</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.idCardNo}}</h2>
+      <p class="details">{{printData?.idCardNo}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -86,7 +87,7 @@
       <p>First Name</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.firstName}}</h2>
+      <p class="details">{{printData?.firstName}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -94,28 +95,28 @@
       <p>Last Name</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.lastName}}</h2>
+      <p class="details">{{printData?.lastName}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed-left" fxFlex='15'>
-      <p>Date Of Birth</p>
+      <p>DOB </p>
     </div>
     <div>
-      <h2 class="details">{{printData?.dob | date:'dd-MM-yyyy, h:mm:ss a'}}</h2>
+      <p class="details">{{printData?.dob | date:'dd-MM-yyyy, h:mm:ss a'}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed-left" fxFlex='15'>
-      <p>ID Expiry Date</p>
+      <p>ID ExpiryDate</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.idExpiryDate| date:'dd-MM-yyyy, h:mm:ss a'}}</h2>
+      <p class="details">{{printData?.idExpiryDate| date:'dd-MM-yyyy, h:mm:ss a'}}</p>
     </div>
   </div>
    <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed-left" fxFlex='15'>
-      <h2 class="header">Address</h2>
+      <p class="header">Address</p>
     </div>
   </div>
 
@@ -124,7 +125,7 @@
       <p>Building No</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.Building_No}}</h2>
+      <p class="details">{{printData?.Building_No}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -132,7 +133,7 @@
       <p>Street Name</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.streetName}}</h2>
+      <p class="details">{{printData?.streetName}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -140,7 +141,7 @@
       <p>City</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.city}}</h2>
+      <p class="details">{{printData?.city}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -148,7 +149,7 @@
       <p>State</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.lastName}}</h2>
+      <p class="details">{{printData?.lastName}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -156,55 +157,47 @@
       <p>Country</p>
     </div>
     <div>
-      <h2 class="details">{{printData?.lastName}}</h2>
+      <p class="details">{{printData?.lastName}}</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed-left" fxFlex='15'>
-      <h2 class="header">Id Card</h2>
+      <p class="header">Id Card</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed1-left" fxFlex='15'>
-       <!-- <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media" /> -->
-       <!-- <img id ="" class="idCard" src="{{printData?.ID_Card_Front}}" /> -->
-        <img  class='liveliness' src="https://theloon.com/wp-content/uploads/2021/01/IMG_3038-1050x525.jpg" alt ='dscfdf'/>
-       <!-- <img id ="" class="idCard" src="https://www.york.ac.uk/media/news-and-events/pressreleases/2020/Random%20feat.jpg" alt ='dscfdf'  /> -->
-    </div>
+       <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.ID_Card_Front}}?alt=media" />
+        </div>
   </div>
-  <!-- <div fxLayout="row" class="pt-4" fxLayoutGap="10px">
+  <div fxLayout="row" class="pt-4" fxLayoutGap="10px">
     <div class="filed-left" fxFlex='15'>
        <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.ID_Card_Back}}?alt=media" />
     </div>
-  </div> -->
+  </div>
   <div fxLayout="row" fxLayoutGap="10px" >
     <div class="filed-left" fxFlex='15'>
-      <h2 class="header">Profile Image</h2>
+      <p class="header">Profile Image</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
-    <!-- <div class="filed-left" fxFlex='20'> -->
-      <!-- <img  class='liveliness' src="./../../../assets/powered-by-logo.svg"alt ='dscfdf' />
-      <img  class='liveliness' src="https://theloon.com/wp-content/uploads/2018/12/glitter.jpg" alt ='dscfdf'/> -->
-      <!-- <img  class='liveliness' src="https://theloon.com/wp-content/uploads/2021/01/IMG_3038-1050x525.jpg" alt ='dscfdf'/> -->
-      <!-- <img  class='liveliness' src="./../../../assets/pexels-pixabay-259915.jpg" alt ='dscfdf' /> -->
-      <!-- <img  class='liveliness' src="{{printData?.ID_Card_Front}}" alt ='dscfdf'/> -->
-     <!-- <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.ID_Card_Front}}?alt=media" /> -->
-    <!-- </div> -->
-    <!-- <div fxLayoutAlign="center center">
-      <h2 class="details">{{printData?.selfiePhotoMatchStatus}}%</h2>
-    </div> -->
+    <div class="filed-left" fxFlex='30'>
+        <img class="idCard" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{printData?.Selfie_Photo}}?alt=media" />
+    </div>
+    <div fxLayoutAlign="center center">
+      <p class="details">{{printData?.selfiePhotoMatchStatus}}%</p>
+    </div>
   </div>
-  <!-- <div fxLayout="row" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed-left" fxFlex='15'>
-      <h2 class="header">Liveliness</h2>
+      <p class="header">Liveliness</p>
     </div>
   </div>
   <div fxLayout="row" fxLayoutGap="8px">
     <div class="filed-left" fxFlex='17' *ngFor ='let i of printData.LiveCheck_Photos'>
       <img class='liveliness' src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{i}}?alt=media" />
     </div>
-  </div> -->
+  </div>
   <div fxLayout="row" fxLayoutGap="10px">
     <div class="filed-left" fxLayoutAlign="center center" fxFlex='100'>
       <button class="printButton" (click)= 'print()'>Pirnt</button>

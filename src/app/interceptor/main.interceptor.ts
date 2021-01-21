@@ -62,6 +62,7 @@ export class MainInterceptor implements HttpInterceptor {
       headersConfig['user-device'] = `${userDevice}`;
     }
     headersConfig['version-code'] = `1.0.0.001a`;
+    // headersConfig['Access-Control-Allow-Origin'] = `firebasestorage.googleapis.com`;
     request = request.clone({
       setHeaders: headersConfig
     });

@@ -68,10 +68,15 @@
                 </div>
             </div>
           <div class="sticky-bottom-bar">
-             <div fxLayout="row wrap" fxLayoutAlign="center center">
-              <button mat-button class="primary-button" (click)="clickGenerate()">
+            <!-- verificaionUrl===''?center center:space-between center -->
+             <!-- <div fxLayout="row wrap"   fxLayoutAlign="{{verificaionUrl==''?'center center':'space-between center'}}"> -->
+             <div fxLayout="row wrap"   fxLayoutAlign="{{verificaionUrl==''?'center center':'end center'}}">
+              <button mat-button class="primary-button" (click)="clickGenerate()" *ngIf="isGenerated">
                 Regenerate Url
               </button>
+                <button mat-icon-button  class="close-button" *ngIf="verificaionUrl" (click)="clearUrl()">
+                  <mat-icon>close</mat-icon>
+                </button>
             </div>
             <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="verificaionUrl">
               <ngx-qrcode [elementType]="elementType" [value]="verificaionUrl" cssClass="aclass" errorCorrectionLevel="L">
@@ -287,7 +292,7 @@
         <div fxFlexLayout="row" *ngFor="let doc of scanDocument; let isFirst = first; let i=index">
             <section fxFlex="25" class="left-section">
                 <form class="panel-body" (ngSubmit)="onSave(heroForm, doc._id)" #heroForm="ngForm">
-                    <mat-tab-group>
+                    <mat-tab-group >
                         <mat-tab label="ID Details">
                             <div fxLayout="column">
                                 <mat-form-field appearance="outline" fxFill>
@@ -323,15 +328,15 @@
                                     <mat-datepicker [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" #idExpirypicker disabled="false"></mat-datepicker>
                                 </mat-form-field>
                                 <!-- <div class="sticky-bottom-bar"> -->
-                                    <div  class="button-wrap" >
+                                    <!-- <div  class="button-wrap" >
                                     <button mat-button type="button" *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" class="cancel-button" (click)="clear()">
                                       cancel
                                     </button>
                                     <button *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" mat-button class="primary-button" type="submit">
                                       Save
                                     </button>
-                                <!-- </div> -->
-                                </div>
+                                </div> -->
+                                 <!-- </div> -->
 
                             </div>
                         </mat-tab>
@@ -353,18 +358,27 @@
                                     <mat-label>Postal code</mat-label>
                                     <input matInput [disabled]="disabled ||!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" placeholder="Postal Code" name="postalCode" [(ngModel)]="doc.postalCode" />
                                 </mat-form-field>
-                                <div class="button-wrap"   fxLayoutAlign="center end">
+                                <!-- <div class="button-wrap"   fxLayoutAlign="center end">
                                     <button mat-button type="button" *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" class="cancel-button" (click)="clear()">
                                       cancel
                                     </button>
                                     <button *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" mat-button class="primary-button" type="submit">
                                       Save
                                     </button>
-                                </div>
+                                </div> -->
                             </div>
                         </mat-tab>
                     </mat-tab-group>
-
+                    <div class="sticky-bottom-bar">
+                        <div  class="button-wrap" >
+                          <button mat-button type="button" *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" class="cancel-button" (click)="clear()">
+                            cancel
+                          </button>
+                          <button *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" mat-button class="primary-button" type="submit">
+                            Save
+                          </button>
+                        </div>
+                    </div>
                 </form>
             </section>
             <section fxFlex="50" class="middle-section">
@@ -477,10 +491,10 @@
                             {{ scanIdDetails?.Mode }}
                         </div>
                     </div>
-                    <div class="button-wrap" fxLayout="row" fxLayoutAlign="center end" >
+                    <div class="button-wrap1" fxLayout="row" fxLayoutAlign="center end" >
                         <button *ngIf="accessType!=='3'&&accessType !=='4'" mat-button class="delete-button" (click)="deleteScan(scanIdDetails._id)">
-              Delete
-            </button>
+                          Delete
+                        </button>
                     </div>
                 </div>
                 <div fxLayout="column" class="bottom">
@@ -514,7 +528,7 @@
                             <!--dummy-->
                         </div>
                     </div>
-                    <div class="button-wrap" fxLayout="row" fxLayoutAlign="center end" >
+                    <div class="button-wrap" fxLayout="row" fxLayoutAlign="center center" >
                         <button mat-button type="button" [disabled]="!doc.isActive" *ngIf="accessType!=='3'&&accessType !=='4'" (click)="rightDrawer.open(); open('scan-result')" class="bordered-light-green-button">
               <i class="material-icons">edit</i>
               Edit

@@ -84,6 +84,7 @@ export class DocumentDetailsComponent implements OnInit {
   isLiveCheck = false;
   isScanResults = false;
   isOverLay = false;
+  isGenerated = true;
   // mailScreen = true;
   form: FormGroup;
   dateOfBirth: any;
@@ -171,12 +172,18 @@ export class DocumentDetailsComponent implements OnInit {
         // this.ngOnInit();
       });
   }
+
+  clearUrl= () =>{
+    this.isGenerated=true;
+    this.verificaionUrl ='';
+  }
   clickGenerate = () => {
     Cookie.set('docForRegenerateUrl',this.id.toString())
     this.verificaionUrl= 'hiii';
     this.report.reGenerateUrl().subscribe((res)=>{
       console.log(res)
       if(res.msg === 'success'){
+        this.isGenerated = false;
         this.verificaionUrl= res.url
       }
     },(error:any)=>{

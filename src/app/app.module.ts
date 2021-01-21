@@ -89,6 +89,7 @@ import { NameFilterPipe } from './pipe/name-filter.pipe';
 import { EmailReportComponent } from './reports/email-report/email-report.component';
 import { DeveloperPageComponent } from './developer-page/developer-page.component';
 import { LimitToPipe } from './pipe/limit-to.pipe';
+import { TrustPipe } from './pipe/trust.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -138,7 +139,8 @@ import { LimitToPipe } from './pipe/limit-to.pipe';
     NameFilterPipe,
     EmailReportComponent,
     DeveloperPageComponent,
-    LimitToPipe
+    LimitToPipe,
+    TrustPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

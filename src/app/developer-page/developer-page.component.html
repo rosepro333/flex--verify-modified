@@ -5,7 +5,7 @@
   <span>Developer Guide</span>
 </mat-toolbar>
 <div>
-    <div class="layout-Left" fxLayout="row wrap" fxFlex="75" >
+    <div class="layout-Left" fxLayout="row wrap" fxFlex="75" fxFlex.gt-xs="75" fxFlex.gt-sm="75" fxFlex.gt-sm="75" fxFlex.gt-md="75" >
       <div fxLayout="row" fxFlex="100">
         <h1 class="headling">Getting Started</h1>
       </div>
@@ -37,8 +37,8 @@
         </ul>
       </div>
     </div>
-    <div class="layout-Right" fxLayout="row wrap" fxFlex="25" >
-      <div class="roundex-box" fxLayout="row" fxFlex="100">
+    <div class="layout-Right" fxLayout="row wrap" fxFlex="25" fxFlex.gt-xs="25" fxFlex.gt-sm="25" fxFlex.gt-sm="25" fxFlex.gt-md="25">
+      <div class="roundex-box" fxLayout="row" fxFlex="100" *ngIf="tab.length>0">
         <ul class="rounded-ul" type='none'>
           <li class="rounded-box-list"><p class="rounded-select">{{tab[0]}}</p></li>
           <mat-divider></mat-divider>
