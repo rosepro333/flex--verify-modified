@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
@@ -17,7 +17,8 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-scan-report',
   templateUrl: './scan-report.component.html',
-  styleUrls: ['./scan-report.component.scss']
+  styleUrls: ['./scan-report.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ScanReportComponent implements OnInit {
   scanReport: any = [{name: 'All', value: 'All'},

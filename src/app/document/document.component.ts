@@ -235,6 +235,9 @@ export class DocumentComponent implements OnInit {
     this.report.filterFunction(data);
     console.log(data);
     this.serviceService.scanDocByTenent(data).subscribe((res) => {
+      if(res.apires===0){
+        this.dataSource.data= null;
+      }
       if (res.msg === 'success') {
         if (res.data) {
           this.totalSize= res.length;

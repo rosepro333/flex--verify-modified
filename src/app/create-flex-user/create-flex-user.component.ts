@@ -51,19 +51,20 @@ export class CreateFlexUserComponent implements OnInit {
   onSave = () => {
     if (this.form.valid) {
       this.form.value.tenent = this.tenentId;
-      this.service.userCreate(this.form.value).subscribe(
-        (result) => {
-          console.log(result);
-          if (result.msg == 'success') {
-            console.log(result);
-            this.toster.openSnackBar('User Created Successfully', result.msg);
-            this.userNavigate();
-          }
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+      console.log(this.form.value)
+      // this.service.userCreate(this.form.value).subscribe(
+      //   (result) => {
+      //     console.log(result);
+      //     if (result.msg == 'success') {
+      //       console.log(result);
+      //       this.toster.openSnackBar('User Created Successfully', result.msg);
+      //       this.userNavigate();
+      //     }
+      //   },
+      //   (error) => {
+      //     console.error(error);
+      //   }
+      // );
     }
   }
   userNavigate = () => {

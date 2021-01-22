@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
@@ -17,7 +17,8 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-portal-activity-report',
   templateUrl: './portal-activity-report.component.html',
-  styleUrls: ['./portal-activity-report.component.scss']
+  styleUrls: ['./portal-activity-report.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PortalActivityReportComponent implements OnInit {
   activityList:any = [{name:'All',value:'All'},{name:'Login',value:'Login'},

@@ -152,7 +152,7 @@ export class FlexTenentComponent implements OnInit {
       name: new FormControl('', [Validators.required, ]),
       contactName: new FormControl('', [Validators.required]),
       contactEmail: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
-      expireTokenTime: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+      expireTokenTime: new FormControl('',),
     });
   }
 
@@ -188,7 +188,8 @@ export class FlexTenentComponent implements OnInit {
     });
   }
   onSave = () => {
-    if (this.form.valid) {
+    // console.log(this.form.value)
+    // if (this.form.valid) {
       console.log(this.form.value);
       const data = {
         Contact_Name: this.form.value.contactName,
@@ -222,7 +223,7 @@ export class FlexTenentComponent implements OnInit {
           console.error(error);
         }
       );
-    }
+    // }
   }
   reset = () => {
     this.form.reset();

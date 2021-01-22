@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
 import { ExcelService } from 'src/app/service/excel.service';
@@ -7,7 +7,8 @@ import { ReportService } from 'src/app/service/report.service';
 @Component({
   selector: 'app-email-report',
   templateUrl: './email-report.component.html',
-  styleUrls: ['./email-report.component.scss']
+  styleUrls: ['./email-report.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class EmailReportComponent implements OnInit {
 

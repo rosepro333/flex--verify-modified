@@ -87,7 +87,7 @@ span.material-icons:hover {
         }
     }
 
-@media only screen and (min-width: 1441px) and (max-width: 1600px) {
+@media only screen and (min-width: 1801px) and (max-width: 2000px) {
     .right-drawer-about-th h6 {
         font-size: 12px !important;
     }
@@ -105,7 +105,7 @@ span.material-icons:hover {
     }
 }
 
-@media only screen and (min-width: 700px) and (max-width: 1366px) {
+@media only screen and (min-width: 1601px) and (max-width: 1800px) {
     .right-drawer-about-th h6 {
         font-size: 12px !important;
     }
@@ -123,7 +123,7 @@ span.material-icons:hover {
     }
 }
 
-@media only screen and (min-width: 1281px) and (max-width: 1440px) {
+@media only screen and (min-width: 1501px) and (max-width: 1600px) {
     .right-drawer-about-th h6 {
         font-size: 12px !important;
     }
@@ -141,7 +141,7 @@ span.material-icons:hover {
     }
 }
 
-@media only screen and (min-width: 800px) and (max-width: 1536px) {
+@media only screen and (min-width: 1401px) and (max-width: 1500px) {
     .right-drawer-about-th h6 {
         font-size: 12px !important;
     }
@@ -159,8 +159,30 @@ span.material-icons:hover {
     }
 }
 
-@media only screen and (min-width: 800px) and (max-width: 1280px) {
-    .right-drawer-about-th h6 {
+@media only screen and (min-width: 1201px) and (max-width: 1400px) {
+    .right-drawer-about-th h6{
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 55.45px;
+      color: #333333 !important;
+    }
+
+    .right-drawer-about-td h6 {
+        font-size: 12px !important;
+    }
+    .side-menu-right-drawer img {
+        width: 34px;
+    }
+    .side-menu-right-drawer h5 {
+        font-size: 14px !important;
+    }
+    .side-menu-right-drawer-detail {
+        padding: 0px 96px;
+    }
+}
+
+@media only screen and (min-width: 1001px) and (max-width: 1200px) {
+   .right-drawer-about-th h6 {
         font-size: 12px !important;
     }
     .right-drawer-about-td h6 {
@@ -176,8 +198,6 @@ span.material-icons:hover {
         padding: 0px 96px;
     }
 }
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {}
 
 @media only screen and (max-width: 767px) {}
 

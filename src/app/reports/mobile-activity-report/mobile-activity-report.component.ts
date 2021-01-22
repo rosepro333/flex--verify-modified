@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
@@ -17,7 +17,8 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-mobile-activity-report',
   templateUrl: './mobile-activity-report.component.html',
-  styleUrls: ['./mobile-activity-report.component.scss']
+  styleUrls: ['./mobile-activity-report.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MobileActivityReportComponent implements OnInit {
   displayedColumns: string[] = ['docId', 'activity', 'dateTime', 'appVersion', 'ipAddress'];

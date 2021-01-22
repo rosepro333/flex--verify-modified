@@ -48,6 +48,7 @@ updatedAt: "2021-01-04T11:24:25.801Z",
 updatedDate: null,
 _id: "5ff2b35f14441f4fc06a55ca",
 };
+isButton=true;
   // printData: any = {};
   constructor(private report: ReportService, private http: HttpClient,public domSanitizer: DomSanitizer) {
 
@@ -58,7 +59,7 @@ _id: "5ff2b35f14441f4fc06a55ca",
 
     this.report.printData.subscribe((res)=>{
 
-      this.printData = res;
+      // this.printData = res;
     })
   }
 //     getImage(imageUrl: string):void {
@@ -77,40 +78,25 @@ _id: "5ff2b35f14441f4fc06a55ca",
 // });
 //     }
   print = () =>{
+    this.isButton = false;
     // var data = document.body;
-    // ,proxy:'html2canvasproxy.php'
-    // const options ={Access-Control-Allow-Origin:"*"};
     //  html2canvas(data,{proxy:'https://firebasestorage.googleapis.com', logging: true,  allowTaint: true, useCORS: true ,imageTimeout:0,}).then(async (canvas) => {
-      // Few necessary setting options
-      // var img = new Image();
-      // img.onload = function() {
-      // document.body.appendChild(img);
-      // };
-      // img.error = function() {
-      // if(window.console.log) {
-      // window.console.log("Not loaded image from canvas.toDataURL");
-      // } else {
-      //  alert("Not loaded image from canvas.toDataURL");
-      // }
-      // };
-      // img.src = canvas.toDataURL("image/png");
-      // console.log(canvas)
-      // var imgWidth = 208;
-      // var pageHeight = 295;
-      // var imgHeight = canvas.height * imgWidth / canvas.width;
-      // var heightLeft = imgHeight;
-      // canvas.toBlob(()=>{})
-      // const contentDataURL = await canvas.toDataURL('image/jpeg', 0.1);
-      // let pdf = new jsPDF('p', 'mm', 'a4',true); // A4 size page of PDF
-      // var position = 0;
-      // const options ={}
-      // const data = 'data:image/jpg;base64,' + btoa(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media`)
-      // pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
-      // pdf.addImage(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media`, 'JPEG', 0, position, imgWidth, imgHeight,)
-      // console.log(pdf)
-      // pdf.save('MYPdf.pdf'); // Generated PDF
+
+    //   var imgWidth = 208;
+    //   var pageHeight = 295;
+    //   var imgHeight = canvas.height * imgWidth / canvas.width;
+    //   var heightLeft = imgHeight;
+    //   canvas.toBlob(()=>{})
+    //   const contentDataURL = await canvas.toDataURL('image/jpeg', 0.1);
+    //   let pdf = new jsPDF('p', 'mm', 'a4',true); // A4 size page of PDF
+    //   var position = 0;
+    //   // const data = 'data:image/jpg;base64,' + btoa(`https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o/id_front_doc82YFgqomRZ_1609741149213.jpg?alt=media`)
+    //   pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
+    //  console.log(pdf)
+    //   pdf.save('MYPdf.pdf'); // Generated PDF
     // });
     window.print();
+    // this.isButton = true;
   }
 
 }

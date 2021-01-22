@@ -87,8 +87,160 @@ img.noDataFound {
   margin: 0 auto;
   padding-bottom: 20px;
 }
+// @media only screen and (min-width: 1441px) and (max-width: 1600px) {
+//   mat-drawer.mat-drawer.right-side-drawer {
+//     width: 450px;
+// }
+//   .tenent-list-wrap{
+//     .shortname {
+//       width: 20px;
+//       height: 20px;
 
-@media only screen and (min-width: 1441px) and (max-width: 1600px) {
+//   }
+//   .status {
+//     font-size: 12px;
+//     padding: 4px;
+//   }
+//     .data-wrap{
+//       .value {
+//         font-size: 12px;
+//         color: #3a3a3a;
+//     }
+//     .name {
+//       color: #3a3a3a;
+//       font-size: 12px;
+//       font-weight: 500;
+//     }
+//   }
+//   }
+//   .input-suffix-button {
+//     border-radius: 0px 4px 4px 0 !important;
+//     // right: -9px;
+//     right: -13px;
+//     top: 0;
+//     height: 40px;
+//     text-align: center;
+//     padding: 12px 20px !important;
+//     margin: 0 !important;
+//     font-size: 14px;
+//   }
+// }
+@media only screen and (min-width: 1801px) and (max-width: 2000px) {
+  mat-drawer.mat-drawer.right-side-drawer {
+    width: 450px;
+}
+  .tenent-list-wrap{
+    .shortname {
+      width: 20px;
+      height: 20px;
+
+  }
+  .status {
+    font-size: 12px;
+    padding: 4px;
+  }
+    .data-wrap{
+      .value {
+        font-size: 12px;
+        color: #3a3a3a;
+    }
+    .name {
+      color: #3a3a3a;
+      font-size: 12px;
+      font-weight: 500;
+    }
+   }
+  }
+  .input-suffix-button {
+    border-radius: 0px 4px 4px 0 !important;
+    // right: -9px;
+    right: -13px;
+    top: 0;
+    height: 40px;
+    text-align: center;
+    padding: 12px 20px !important;
+    margin: 0 !important;
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width: 1601px) and (max-width: 1800px){
+  mat-drawer.mat-drawer.right-side-drawer {
+    width: 450px;
+}
+  .tenent-list-wrap{
+    .shortname {
+      width: 20px;
+      height: 20px;
+
+  }
+  .status {
+    font-size: 12px;
+    padding: 4px;
+  }
+    .data-wrap{
+      .value {
+        font-size: 12px;
+        color: #3a3a3a;
+    }
+    .name {
+      color: #3a3a3a;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+  }
+  .input-suffix-button {
+    border-radius: 0px 4px 4px 0 !important;
+    // right: -9px;
+    right: -13px;
+    top: 0;
+    height: 40px;
+    text-align: center;
+    padding: 12px 20px !important;
+    margin: 0 !important;
+    font-size: 14px;
+  }
+}
+@media only screen and (min-width: 1501px) and (max-width: 1600px){
+  mat-drawer.mat-drawer.right-side-drawer {
+    width: 450px;
+}
+  .tenent-list-wrap{
+    .shortname {
+      width: 20px;
+      height: 20px;
+
+  }
+  .status {
+    font-size: 12px;
+    padding: 4px;
+  }
+    .data-wrap{
+      .value {
+        font-size: 12px;
+        color: #3a3a3a;
+    }
+    .name {
+      color: #3a3a3a;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+  }
+  .input-suffix-button {
+    border-radius: 0px 4px 4px 0 !important;
+    // right: -9px;
+    right: -13px;
+    top: 0;
+    height: 40px;
+    text-align: center;
+    padding: 12px 20px !important;
+    margin: 0 !important;
+    font-size: 14px;
+  }
+}
+@media only screen and (min-width: 1441px) and (max-width: 1500px){
   mat-drawer.mat-drawer.right-side-drawer {
     width: 450px;
 }
@@ -114,34 +266,17 @@ img.noDataFound {
     }
   }
 }
-}
-
-@media only screen and (min-width: 700px) and (max-width: 1366px){
-  mat-drawer.mat-drawer.right-side-drawer {
-    width: 450px;
-}
-  .tenent-list-wrap{
-    .shortname {
-      width: 20px;
-      height: 20px;
-
+.input-suffix-button {
+    border-radius: 0px 4px 4px 0 !important;
+    // right: -9px;
+    right: -13px;
+    top: 0;
+    height: 40px;
+    text-align: center;
+    padding: 12px 20px !important;
+    margin: 0 !important;
+    font-size: 14px;
   }
-  .status {
-    font-size: 12px;
-    padding: 4px;
-  }
-    .data-wrap{
-      .value {
-        font-size: 12px;
-        color: #3a3a3a;
-    }
-    .name {
-      color: #3a3a3a;
-      font-size: 12px;
-      font-weight: 500;
-    }
-  }
-}
 }
 @media only screen and (min-width: 1281px) and (max-width: 1440px) {
   mat-drawer.mat-drawer.right-side-drawer {
@@ -169,67 +304,78 @@ img.noDataFound {
     }
   }
 }
-
-}
-@media only screen and (min-width: 800px) and (max-width: 1536px) {
-  mat-drawer.mat-drawer.right-side-drawer {
-    width: 450px;
-}
-  .tenent-list-wrap{
-    .shortname {
-      width: 20px;
-      height: 20px;
-
+.input-suffix-button {
+    border-radius: 0px 4px 4px 0 !important;
+    // right: -9px;
+    right: -13px;
+    top: 0;
+    height: 40px;
+    text-align: center;
+    padding: 12px 20px !important;
+    margin: 0 !important;
+    font-size: 14px;
   }
-  .status {
-    font-size: 12px;
-    padding: 4px;
-  }
-    .data-wrap{
-      .value {
-        font-size: 12px;
-        color: #3a3a3a;
-    }
-    .name {
-      color: #3a3a3a;
-      font-size: 12px;
-      font-weight: 500;
-    }
-  }
-}
 
 }
+// @media only screen and (min-width: 800px) and (max-width: 1536px) {
+//   mat-drawer.mat-drawer.right-side-drawer {
+//     width: 450px;
+// }
+//   .tenent-list-wrap{
+//     .shortname {
+//       width: 20px;
+//       height: 20px;
+
+//   }
+//   .status {
+//     font-size: 12px;
+//     padding: 4px;
+//   }
+//     .data-wrap{
+//       .value {
+//         font-size: 12px;
+//         color: #3a3a3a;
+//     }
+//     .name {
+//       color: #3a3a3a;
+//       font-size: 12px;
+//       font-weight: 500;
+//     }
+//   }
+// }
+
+// }
 
 
 
 
-@media only screen and (min-width: 800px) and (max-width: 1280px) {
-  mat-drawer.mat-drawer.right-side-drawer {
-    width: 450px;
-}
-  .tenent-list-wrap{
-    .shortname {
-      width: 20px;
-      height: 20px;
+// @media only screen and (min-width: 800px) and (max-width: 1280px) {
+//   mat-drawer.mat-drawer.right-side-drawer {
+//     width: 450px;
+// }
+//   .tenent-list-wrap{
+//     .shortname {
+//       width: 20px;
+//       height: 20px;
 
-  }
-  .status {
-    font-size: 12px;
-    padding: 4px;
-  }
-    .data-wrap{
-      .value {
-        font-size: 12px;
-        color: #3a3a3a;
-    }
-    .name {
-      color: #3a3a3a;
-      font-size: 12px;
-      font-weight: 500;
-    }
-  }
-}
-}
+//   }
+//   .status {
+//     font-size: 12px;
+//     padding: 4px;
+//   }
+//     .data-wrap{
+//       .value {
+//         font-size: 12px;
+//         color: #3a3a3a;
+//     }
+//     .name {
+//       color: #3a3a3a;
+//       font-size: 12px;
+//       font-weight: 500;
+//     }
+//   }
+// }
+// }
 
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {

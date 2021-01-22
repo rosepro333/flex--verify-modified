@@ -21,6 +21,7 @@ const ELEMENT_DATA_User: any = [];
   selector: 'app-flex-user',
   templateUrl: './flex-user.component.html',
   styleUrls: ['./flex-user.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class FlexUserComponent implements OnInit {
 @ViewChild('rightDrawer', { static: false }) sideNav: MatSidenav;
@@ -305,7 +306,7 @@ export class FlexUserComponent implements OnInit {
     })
   }
   onSave = () => {
-    if (this.form.valid) {
+    // if (this.form.valid) {
       console.log(this.form.value)
       const tenentID = this.form.value.tenent;
     //   this.form.value.tenent = this.tenentId;
@@ -332,19 +333,19 @@ export class FlexUserComponent implements OnInit {
             this.audits(data);
             this.toster.openSnackBar('User Created Successfully', result.msg);
             this.getUserList();
-            const data1 ={
-              "fromUser":this.userId,
-              "tenentId":this.tenentId,
-              "recipientEmail":this.form.value.email,
-              "user":"user",
-              "type":"User Invitation",
-              "data":JSON.stringify({UserId: result.docs._id, name: result.docs.Contact_Name, tenentId: result.docs.Tenant_ID})
-            }
-            this.serviceService.sendEmail(data1).subscribe((res) =>{
-              console.log(res)
-            },(err) =>{
-              console.log(err);
-            })
+            // const data1 ={
+            //   "fromUser":this.userId,
+            //   "tenentId":this.tenentId,
+            //   "recipientEmail":this.form.value.email,
+            //   "user":"user",
+            //   "type":"User Invitation",
+            //   "data":JSON.stringify({UserId: result.docs._id, name: result.docs.Contact_Name, tenentId: result.docs.Tenant_ID})
+            // }
+            // this.serviceService.sendEmail(data1).subscribe((res) =>{
+            //   console.log(res)
+            // },(err) =>{
+            //   console.log(err);
+            // })
           }else if(result.msg === 'failure'){
              this.toster.openSnackBar(result.error, 'failed');
           }
@@ -353,7 +354,7 @@ export class FlexUserComponent implements OnInit {
           console.log(error);
         }
       );
-    }
+    // }
   }
   userNavigate = () => {
     setTimeout(() => { }, 200);
