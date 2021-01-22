@@ -139,11 +139,8 @@ export class EmailComponent implements OnInit {
         "Tenant_ID": this.tenetId,
         "limit": this.pageSize,
         "pageNo": this.currentPage,
-        "order": "-1",
+
         "search": this.search,
-        "startDate": "",
-        "endDate": "",
-        "status": "",
         "role": this.selectedRole
       }
       const tenetId = this.tenetId;

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { Component, Inject, OnInit, Optional, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { ServicesService } from 'src/app/service/services.service';
   selector: 'app-delete-tenent',
   templateUrl: './delete-tenent.component.html',
   styleUrls: ['./delete-tenent.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DeleteTenentComponent implements OnInit {
   tenentId = '';

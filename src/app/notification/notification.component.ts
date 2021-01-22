@@ -140,6 +140,7 @@ export class NotificationComponent implements OnInit {
         this.tenentList = res.data;
         this.tenentId = this.tenentList[0]._id;
         this.form.get('tenent').disable();
+        this.emailConfigure(this.tenetId);
         this.form.patchValue({tenent: this.tenentId});
         console.log(res.data);
       }
