@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class LimitToPipe implements PipeTransform {
 
   transform(value: string, args: string): string  {
-    console.log(args)
-    console.log(value)
+    // console.log(args)
+    // console.log(value)
     let limit = args ? parseInt(args, 10) : 10;
     let trail = '...';
 

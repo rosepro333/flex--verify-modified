@@ -13,6 +13,8 @@ import { TosterService } from '../toster/toster.service';
 })
 export class NewPasswordComponent implements OnInit {
   hide = true;
+  hide1 = true;
+  hide2 = true;
   form: FormGroup;
   id = '';
   private formSubmitAttempt: boolean;

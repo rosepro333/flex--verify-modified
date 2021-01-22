@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class NameFilterPipe implements PipeTransform {
 
   transform(value: any, ...args: unknown[]): unknown {
-    console.log(value)
+    // console.log(value)
     return value?.charAt(0).toUpperCase();
   }
 

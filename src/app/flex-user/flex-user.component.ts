@@ -108,7 +108,7 @@ export class FlexUserComponent implements OnInit {
     }else{
       this.isTenent = true;
       // this.form.
-      this.form.controls['tenent'].setValidators([Validators.required, Validators.min(1)])
+      this.form.controls['tenent'].setValidators([Validators.required, Validators.min(10)])
       console.log(value);
     }
   }
@@ -220,12 +220,7 @@ export class FlexUserComponent implements OnInit {
       this.toster.openSnackBar('You can not delete ownself', 'failed');
     }
   }
-  blockTenant = (elm: any) => {
-    alert('block ' + elm.name);
-  }
-  enableTenant = (elm: any) => {
-    alert('unblock ' + elm.name);
-  }
+
   deleteTenant = (elm: any) => {
     this.serviceService.deleteTenent(elm).subscribe((res) => {
       console.log(res);
@@ -252,23 +247,24 @@ export class FlexUserComponent implements OnInit {
       this.service.getTenentList(data).subscribe((res) => {
         // console.log(res);
         if (res.msg === 'success') {
-          this.tenentList.splice(0,this.tenentList.length);
-          res.data.map((i: any, index: number) =>{
-            const obj = {};
-            if(index === 0){
-              const obj1 = {};
-              obj1['_id']= "All";
-              obj1['Name']= "All";
-              this.tenentList.push(obj1);
-              obj['_id'] = i._id;
-              obj['Name'] = i.Name;
-              this.tenentList.push(obj);
-            } else{
-              obj['_id'] = i._id;
-              obj['Name'] = i.Name;
-              this.tenentList.push(obj);
-            }
-          })
+          this.tenentList = res.data;
+          // this.tenentList.splice(0,this.tenentList.length);
+          // res.data.map((i: any, index: number) =>{
+          //   const obj = {};
+          //   if(index === 0){
+          //     const obj1 = {};
+          //     obj1['_id']= "All";
+          //     obj1['Name']= "All";
+          //     this.tenentList.push(obj1);
+          //     obj['_id'] = i._id;
+          //     obj['Name'] = i.Name;
+          //     this.tenentList.push(obj);
+          //   } else{
+          //     obj['_id'] = i._id;
+          //     obj['Name'] = i.Name;
+          //     this.tenentList.push(obj);
+          //   }
+          // })
         }
       });
     } else if (this.accessType === '3') {
@@ -279,13 +275,18 @@ export class FlexUserComponent implements OnInit {
         console.log(res);
         if (res.msg === 'success') {
           this.tenentList = res.data;
-          console.log(this.tenentList);
+          console.log(tenetId)
+          this.form.patchValue({tenent: this.tenetId});
+          console.log(this.tenentList[0].Tenant_ID);
         }
       });
     }
   }
   selectTenent = (value: any) => {
-    this.tenentId = value;
+     this.tenentId = value;
+
+
+
   }
   editUser = () => {
     const id = this.userEdit._id;
@@ -306,10 +307,13 @@ export class FlexUserComponent implements OnInit {
     })
   }
   onSave = () => {
-    // if (this.form.valid) {
+    if (this.form.valid) {
       console.log(this.form.value)
       const tenentID = this.form.value.tenent;
     //   this.form.value.tenent = this.tenentId;
+      //  if(tenentID ==='All'){
+      //  return this.toster.openSnackBar('please selecet a Tenent ', 'Failed');
+      // }
       const data = {
         Contact_Email: this.form.value.email,
         Contact_Name: this.form.value.name,
@@ -354,7 +358,7 @@ export class FlexUserComponent implements OnInit {
           console.log(error);
         }
       );
-    // }
+    }
   }
   userNavigate = () => {
     setTimeout(() => { }, 200);

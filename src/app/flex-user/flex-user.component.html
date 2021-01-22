@@ -1,5 +1,6 @@
 <mat-drawer-container autosize>
   <mat-drawer #rightDrawer class="right-side-drawer" mode="over" position="end">
+    <!-- *ngIf="isCreateUser" -->
     <div *ngIf="isCreateUser">
       <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
         <div *ngIf="!userEdit;else elseBlock">
@@ -20,10 +21,7 @@
             <mat-label>Name</mat-label>
             <input matInput formControlName="name" />
           </mat-form-field>
-          <!-- <mat-form-field appearance="outline" fxFill>
-            <mat-label>Last Name</mat-label>
-            <input matInput />
-          </mat-form-field> -->
+
           <mat-form-field appearance="outline" fxFill >
             <mat-label>Email Id</mat-label>
             <input matInput formControlName="email" />
@@ -164,7 +162,7 @@
         </button>
         <div>Users List</div>
       </div>
-      <div class="header-buttons" *ngIf="accessType !== '3'">
+      <div class="header-buttons" >
         <button mat-button class="primary-button" (click)="rightDrawer.open();clicked('create-user',null)">
           <mat-icon>person_add</mat-icon> New User
         </button>
@@ -175,7 +173,7 @@
         <div fxFlex>
           <mat-form-field class='form-rows' appearance="outline" fxFlex *ngIf="accessType !== '3'">
             <mat-label>Tenent List</mat-label>
-            <mat-select (selectionChange)="selectTenentUser($event.value)">
+            <mat-select (selectionChange)="selectTenentUser($event.value)" >
               <mat-option  *ngFor ="let i of tenentList" [value]="i?._id" >{{i.Name}}</mat-option>
               <!-- <mat-option value="Owner2">Owner 2</mat-option>
               <mat-option value="Owner3">Owner 3</mat-option> -->

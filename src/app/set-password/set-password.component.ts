@@ -12,6 +12,8 @@ import { TosterService } from '../toster/toster.service';
 })
 export class SetPasswordComponent implements OnInit {
   form: FormGroup;
+  hide = true;
+  hide1 = true;
   private formSubmitAttempt: boolean;
   id = '';
   constructor(
