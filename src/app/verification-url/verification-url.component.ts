@@ -74,6 +74,7 @@ export class VerificationUrlComponent implements OnInit {
       console.log(res.data);
       this.sdkKey = res.data;
       if(this.accessType === '3'|| this.accessType === '4'){
+        this.selectedTenent = value;
         this.selectSdk = res.data[0].SDK_Key;
       }
       // this.ngOnInit();
