@@ -27,7 +27,7 @@ export class CreateApiKayComponent implements OnInit {
     this.accessType = Cookie.get('Access_Type');
     this.tenetId = Cookie.get('Tenant_ID');
     this.formControl();
-     this.getTenentList();
+    this.getTenentList();
 
   }
   formControl = () => {

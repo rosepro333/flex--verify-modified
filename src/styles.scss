@@ -77,10 +77,10 @@ body {
 }
 
 .clear-button {
-    background-color: #ebebeb;
+    // background-color: #ebebeb;
     color: #444444;
     margin: 0 12px !important;
-    border: 1px solid #969696 !important;
+    border: 1px solid #dfdfdf !important;
     i,
     mat-icon,
     .material-icons {
@@ -346,17 +346,17 @@ body {
     margin-bottom: 28px;
 }
 
-.input-suffix-button {
-    border-radius: 0px 4px 4px 0 !important;
-    // right: -9px;
-    right: -13px;
-    top: 0;
-    height: 3em;
-    text-align: center;
-    padding: 12px 20px !important;
-    margin: 0 !important;
-    font-size: 14px;
-}
+// .input-suffix-button {
+//     border-radius: 0px 4px 4px 0 !important;
+//     // right: -9px;
+//     right: -13px;
+//     top: 0;
+//     height: 3em;
+//     text-align: center;
+//     padding: 12px 20px !important;
+//     margin: 0 !important;
+//     font-size: 14px;
+// }
 
 .dialogue-title {
     border-bottom: 3px solid #21b371;
@@ -380,13 +380,14 @@ body {
 
 .w-100 {
     width: 100%;
+
 }
 
 .filter-wrap {
     .filter-button-wrap {
         button {
-            // margin: 6px 12px;
-            margin: 8px 12px;
+            margin: 4px  12px;
+            // margin: 8px 12px;
 
         }
     }
@@ -412,154 +413,81 @@ body {
     }
 }
 
-@media only screen and (min-width: 1801px) and (max-width: 2000px) {
-  .mat-form-field-infix{
-    font-size: 12px;
-  }
-  .header-doc-id-wrap {
-    color: #333333;
-    font-weight: 200;
-    font-size: 12px;
-    .header-doc-id {
-      color: #21b371;
-      font-size: 12px;
-      font-weight: 300;
-    }
-  }
-  .drawer-data {
-    padding: 16px;
-    margin-bottom: 48px;
-    .data-wrap {
-      line-height: 224.7%;
-      div {
-        display: inline-block;
-        font-size: 12px;
-        &:first-of-type {
-          width: 50%;
-          font-size: 12px;
-          font-weight: 300;
-          color: #b0b0b0;
-        }
-      }
-    }
-  }
-}
-@media only screen and (min-width: 1601px) and (max-width: 1800) {
-  .mat-form-field-infix{
-    font-size: 12px;
-  }
-  .header-doc-id-wrap {
-    color: #333333;
-    font-weight: 200;
-    font-size: 12px;
-    .header-doc-id {
-      color: #21b371;
-      font-size: 12px;
-      font-weight: 300;
-    }
-  }
-  .input-suffix-button {
-    border-radius: 0px 4px 4px 0 !important;
-    right: -15px;
-    top: 0;
-    height: 36px;
-    text-align: center;
-    padding: 9px 20px !important;
-    margin: 0 !important;
-    font-size: 14px;
-}
-  .drawer-data {
-    padding: 16px;
-    margin-bottom: 48px;
-    .data-wrap {
-      line-height: 224.7%;
-      div {
-        display: inline-block;
-        font-size: 12px;
-        &:first-of-type {
-          width: 50%;
-          font-size: 12px;
-          font-weight: 300;
-          color: #b0b0b0;
-        }
-      }
-    }
-  }
-}
-@media only screen and (min-width: 1557px) and (max-width: 1600px) {
-    .mat-header-row .mat-header-cell {
-        font-size: 12px;
-    }
-    .right-side-drawer .drawer-data .data-wrap div {
-        display: inline-block;
-        font-size: 12px;
-    }
-    .input-suffix-button {
-    border-radius: 0px 4px 4px 0 !important;
-    // right: -9px;
-    right: -13px;
-    top: 0;
-    height: 36px;
-    text-align: center;
-    padding: 9px  20px !important;
-    margin: 0 !important;
-    font-size: 14px;
-}
-}
-@media only screen and (min-width: 1441px) and (max-width: 1556px) {
-    .mat-header-row .mat-header-cell {
-        font-size: 12px;
-    }
-    .right-side-drawer .drawer-data .data-wrap div {
-        display: inline-block;
-        font-size: 12px;
-    }
-    .input-suffix-button {
-    border-radius: 0px 4px 4px 0 !important;
-    // right: -9px;
-    right: -13px;
-    top: 0;
-    height: 36px;
-    text-align: center;
-    padding: 11px   20px !important;
-    margin: 0 !important;
-    font-size: 14px;
-}
-}
-@media only screen and (min-width: 1281px) and (max-width: 1440px) {
-    .mat-header-row .mat-header-cell {
-        font-size: 12px;
-    }
-    .input-suffix-button {
-    border-radius: 0px 4px 4px 0 !important;
-    // right: -9px;
-    right: -13px;
-    top: 0;
-    height: 36px;
-    text-align: center;
-    padding: 12px  20px !important;
-    margin: 0 !important;
-    font-size: 14px;
-  }
-    .right-side-drawer .drawer-data .data-wrap div {
-        display: inline-block;
-        font-size: 12px;
-    }
-}
-
-@media only screen and (min-width: 1001px) and (max-width: 1280px) {
-    .mat-header-row .mat-header-cell {
-        font-size: 12px;
-    }
-    .right-side-drawer .drawer-data .data-wrap div {
-        display: inline-block;
-        font-size: 12px;
-    }
-}
-
-
-
-// @media only screen and (min-width: 800px) and (max-width: 1536px) {
+// @media only screen and (min-width: 1801px) and (max-width: 2000px) {
+//   .mat-form-field-infix{
+//     font-size: 12px;
+//   }
+//   .header-doc-id-wrap {
+//     color: #333333;
+//     font-weight: 200;
+//     font-size: 12px;
+//     .header-doc-id {
+//       color: #21b371;
+//       font-size: 12px;
+//       font-weight: 300;
+//     }
+//   }
+//   .drawer-data {
+//     padding: 16px;
+//     margin-bottom: 48px;
+//     .data-wrap {
+//       line-height: 224.7%;
+//       div {
+//         display: inline-block;
+//         font-size: 12px;
+//         &:first-of-type {
+//           width: 50%;
+//           font-size: 12px;
+//           font-weight: 300;
+//           color: #b0b0b0;
+//         }
+//       }
+//     }
+//   }
+// }
+// @media only screen and (min-width: 1601px) and (max-width: 1800) {
+//   .mat-form-field-infix{
+//     font-size: 12px;
+//   }
+//   .header-doc-id-wrap {
+//     color: #333333;
+//     font-weight: 200;
+//     font-size: 12px;
+//     .header-doc-id {
+//       color: #21b371;
+//       font-size: 12px;
+//       font-weight: 300;
+//     }
+//   }
+//   .input-suffix-button {
+//     border-radius: 0px 4px 4px 0 !important;
+//     right: -15px;
+//     top: 0;
+//     height: 36px;
+//     text-align: center;
+//     padding: 9px 20px !important;
+//     margin: 0 !important;
+//     font-size: 14px;
+// }
+//   .drawer-data {
+//     padding: 16px;
+//     margin-bottom: 48px;
+//     .data-wrap {
+//       line-height: 224.7%;
+//       div {
+//         display: inline-block;
+//         font-size: 12px;
+//         &:first-of-type {
+//           width: 50%;
+//           font-size: 12px;
+//           font-weight: 300;
+//           color: #b0b0b0;
+//         }
+//       }
+//     }
+//   }
+// }
+// @media only screen and (min-width: 1557px) and (max-width: 1600px) {
 //     .mat-header-row .mat-header-cell {
 //         font-size: 12px;
 //     }
@@ -567,18 +495,60 @@ body {
 //         display: inline-block;
 //         font-size: 12px;
 //     }
-//     .mat-form-field-suffix button {
-
-//         height: 40px;
-//         top: 0px;
+//     .input-suffix-button {
+//     border-radius: 0px 4px 4px 0 !important;
+//     // right: -9px;
+//     right: -13px;
+//     top: 0;
+//     height: 36px;
+//     text-align: center;
+//     padding: 9px  20px !important;
+//     margin: 0 !important;
+//     font-size: 14px;
+// }
+// }
+// @media only screen and (min-width: 1441px) and (max-width: 1556px) {
+//     .mat-header-row .mat-header-cell {
+//         font-size: 12px;
 //     }
-//     .mat-form-field-suffix button mat-icon {
-//         position: relative;
-//         top: -5px;
+//     .right-side-drawer .drawer-data .data-wrap div {
+//         display: inline-block;
+//         font-size: 12px;
+//     }
+//     .input-suffix-button {
+//     border-radius: 0px 4px 4px 0 !important;
+//     // right: -9px;
+//     right: -13px;
+//     top: 0;
+//     height: 36px;
+//     text-align: center;
+//     padding: 11px   20px !important;
+//     margin: 0 !important;
+//     font-size: 14px;
+// }
+// }
+// @media only screen and (min-width: 1281px) and (max-width: 1440px) {
+//     .mat-header-row .mat-header-cell {
+//         font-size: 12px;
+//     }
+//     .input-suffix-button {
+//     border-radius: 0px 4px 4px 0 !important;
+//     // right: -9px;
+//     right: -13px;
+//     top: 0;
+//     height: 36px;
+//     text-align: center;
+//     padding: 12px  20px !important;
+//     margin: 0 !important;
+//     font-size: 14px;
+//   }
+//     .right-side-drawer .drawer-data .data-wrap div {
+//         display: inline-block;
+//         font-size: 12px;
 //     }
 // }
 
-// @media only screen and (min-width: 800px) and (max-width: 1280px) {
+// @media only screen and (min-width: 1001px) and (max-width: 1280px) {
 //     .mat-header-row .mat-header-cell {
 //         font-size: 12px;
 //     }
@@ -588,21 +558,52 @@ body {
 //     }
 // }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .mat-header-row .mat-header-cell {
-        font-size: 12px;
-    }
-    .right-side-drawer .drawer-data .data-wrap div {
-        display: inline-block;
-        font-size: 12px;
-    }
-}
 
-@media only screen and (max-width: 767px) {}
 
-@media only screen and (min-width: 480px) and (max-width: 767px) {}
+// // @media only screen and (min-width: 800px) and (max-width: 1536px) {
+// //     .mat-header-row .mat-header-cell {
+// //         font-size: 12px;
+// //     }
+// //     .right-side-drawer .drawer-data .data-wrap div {
+// //         display: inline-block;
+// //         font-size: 12px;
+// //     }
+// //     .mat-form-field-suffix button {
 
-@media only screen and (max-width: 479px) {}
+// //         height: 40px;
+// //         top: 0px;
+// //     }
+// //     .mat-form-field-suffix button mat-icon {
+// //         position: relative;
+// //         top: -5px;
+// //     }
+// // }
+
+// // @media only screen and (min-width: 800px) and (max-width: 1280px) {
+// //     .mat-header-row .mat-header-cell {
+// //         font-size: 12px;
+// //     }
+// //     .right-side-drawer .drawer-data .data-wrap div {
+// //         display: inline-block;
+// //         font-size: 12px;
+// //     }
+// // }
+
+// @media only screen and (min-width: 768px) and (max-width: 991px) {
+//     .mat-header-row .mat-header-cell {
+//         font-size: 12px;
+//     }
+//     .right-side-drawer .drawer-data .data-wrap div {
+//         display: inline-block;
+//         font-size: 12px;
+//     }
+// }
+
+// @media only screen and (max-width: 767px) {}
+
+// @media only screen and (min-width: 480px) and (max-width: 767px) {}
+
+// @media only screen and (max-width: 479px) {}
 
 
 

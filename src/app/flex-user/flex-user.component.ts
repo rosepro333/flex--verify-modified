@@ -10,6 +10,7 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { BlockTenentComponent } from '../model/block-tenent/block-tenent.component';
 import { BlockUserComponent } from '../model/block-user/block-user.component';
 import { DeleteUserComponent } from '../model/delete-user/delete-user.component';
+import { ReportService } from '../service/report.service';
 import { ServicesService } from '../service/services.service';
 import { TosterService } from '../toster/toster.service';
 
@@ -21,7 +22,7 @@ const ELEMENT_DATA_User: any = [];
   selector: 'app-flex-user',
   templateUrl: './flex-user.component.html',
   styleUrls: ['./flex-user.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class FlexUserComponent implements OnInit {
 @ViewChild('rightDrawer', { static: false }) sideNav: MatSidenav;
@@ -70,7 +71,9 @@ export class FlexUserComponent implements OnInit {
    status = '';
   userEdit: any = [];
   isTenent = false;
-
+  clickAble: boolean =true;
+  isResend: boolean = true;
+  selectedID:string = '';
   constructor(
     private serviceService: ServicesService,
     public dialog: MatDialog,
@@ -78,6 +81,7 @@ export class FlexUserComponent implements OnInit {
     private router: Router,
     private service: ServicesService,
     private toster: TosterService,
+    private report: ReportService
   ) { }
 
   ngOnInit(): void {
@@ -118,6 +122,29 @@ export class FlexUserComponent implements OnInit {
     console.log(value);
     this.getUserList();
 
+  }
+  mouseOver =() =>{
+    this.clickAble =false;
+  }
+  mouseOut = () =>{
+    this.clickAble =true;
+  }
+  reSendInvitation = (value:any) =>{
+    console.log(value);
+    this.selectedID = value;
+    const data = {id:value}
+    this.report.resendInvitation(data).subscribe((res)=>{
+      console.log(res);
+      if(res.msg === 'success'){
+        this.isResend =false;
+        this.toster.openSnackBar('Successfully Resend Invitation', 'Success');
+      }else{
+        this.isResend =true;
+        this.toster.openSnackBar(res.data, 'Failed');
+      }
+    }, (err)=>{
+      console.log(err);
+    })
   }
   getUserList = () => {
     if (this.accessType === '1') {
@@ -284,9 +311,6 @@ export class FlexUserComponent implements OnInit {
   }
   selectTenent = (value: any) => {
      this.tenentId = value;
-
-
-
   }
   editUser = () => {
     const id = this.userEdit._id;
@@ -372,7 +396,8 @@ export class FlexUserComponent implements OnInit {
   }
   clicked(a, data) {
     console.log(a,data);
-    if (a == 'create-user') {
+    if(this.clickAble === true){
+      if (a == 'create-user') {
       if(data === null){
         this.userEdit = '';
         this.form.reset();
@@ -390,17 +415,19 @@ export class FlexUserComponent implements OnInit {
         this.isCreateUser = true;
         this.isUserDetails = false;
 
-    } else if (a == 'user-details') {
-      this.detailsDetails = data;
-      console.log(this.detailsDetails);
-      this.isCreateUser = false;
-      this.isUserDetails = true;
+      } else if (a == 'user-details') {
+        this.detailsDetails = data;
+        console.log(this.detailsDetails);
+        this.isCreateUser = false;
+        this.isUserDetails = true;
+      }
+      else {
+        console.log('3')
+        this.isCreateUser = false;
+        this.isUserDetails = false;
+      }
     }
-    else {
-      console.log('3')
-      this.isCreateUser = false;
-      this.isUserDetails = false;
-    }
+
     // console.log(id);
   }
 }

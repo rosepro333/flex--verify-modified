@@ -1,5 +1,16 @@
 .user-list-wrap {
   padding: 20px;
+  .footer {
+      // padding: 20px;
+
+      position: fixed;
+      left: 75px;
+      right:20px;
+      bottom: 0px;
+      width: calc(92% + 10px);
+      color: white;
+      text-align: center;
+    }
   .user-icon {
     mat-icon {
       font-size: 36px;
@@ -40,11 +51,27 @@
       color: #ffc107;
       border: 1px solid #ffc107;
     }
+    &.resend {
+      text-decoration: underline;
+      cursor: pointer;
+      background: #a3c4e4;
+      color: #ffffff;
+      border: 1px solid #52a7fc;
+    }
     // &.invitation {
     //   background: #ebebeb;
     //   color: #949494;
     //   border: 1px solid #949494;
     // }
+  }
+
+  .resend {
+      text-decoration: underline;
+      cursor: pointer;
+      text-decoration-color:#21b371;
+      // background: #a3c4e4;
+      // color: #ffffff;
+      // border: 1px solid #52a7fc;
   }
 }
 img.noDataFound {
@@ -55,6 +82,20 @@ img.noDataFound {
   padding-bottom: 20px;
 }
 @media only screen and (min-width: 1801px) and (max-width: 2000px) {
+
+  .user-list-wrap {
+    .footer {
+      // padding: 20px;
+
+      position: fixed;
+      left: 75px;
+      right:20px;
+      bottom: 10px;
+      width: calc(95% + 0px);
+      color: white;
+      text-align: center;
+    }
+  }
   .right-side-drawer {
     width: 451px;
 }
@@ -85,18 +126,31 @@ mat-drawer.mat-drawer {
   }
   .input-suffix-button {
     border-radius: 0px 4px 4px 0 !important;
-    // right: -9px;
     right: -13px;
     top: 0;
-    height: 40px;
+    height: 41px;
     text-align: center;
-    padding: 12px 20px !important;
+    padding: 13px 19px !important;
     margin: 0 !important;
     font-size: 14px;
   }
 
 }
 @media only screen and (min-width: 1601px) and (max-width: 1800px) {
+
+  .user-list-wrap {
+    .footer {
+      // padding: 20px;
+
+      position: fixed;
+      left: 75px;
+      right:20px;
+      bottom: 10px;
+      width: calc(95% + 0px);
+      color: white;
+      text-align: center;
+    }
+  }
   .right-side-drawer {
     width: 451px;
 }
@@ -130,15 +184,32 @@ mat-drawer.mat-drawer {
     // right: -9px;
     right: -13px;
     top: 0;
-    height: 40px;
+    // height: 3em;
+    height: 41px;
     text-align: center;
-    padding: 12px 20px !important;
+    // padding: 12px 20px !important;
+    padding: 13px 19px !important;
     margin: 0 !important;
     font-size: 14px;
   }
 
 }
 @media only screen and (min-width: 1501px) and (max-width: 1600px) {
+
+  .user-list-wrap {
+    .footer {
+      // padding: 20px;
+
+      position: fixed;
+      left: 75px;
+      right:20px;
+      bottom: 10px;
+      // width: calc(94% + 2px);
+      width: calc(93% + 14px);
+      color: white;
+      text-align: center;
+    }
+  }
   .right-side-drawer {
     width: 451px;
 }
@@ -168,19 +239,35 @@ mat-drawer.mat-drawer {
 
   }
   .input-suffix-button {
-    border-radius: 0px 4px 4px 0 !important;
-    // right: -9px;
-    right: -13px;
-    top: 0;
-    height: 40px;
-    text-align: center;
-    padding: 12px 20px !important;
-    margin: 0 !important;
-    font-size: 14px;
-  }
+      border-radius: 0px 4px 4px 0 !important;
+      // right: -9px;
+      right: -13px;
+      top: 0;
+      // height: 3em;
+      height: 41px;
+      text-align: center;
+      // padding: 12px 20px !important;
+      padding: 13px 19px !important;
+      margin: 0 !important;
+      font-size: 14px;
+    }
 
 }
 @media only screen and (min-width: 1441px) and (max-width: 1500px) {
+
+  .user-list-wrap {
+    .footer {
+      // padding: 20px;
+
+      position: fixed;
+      left: 75px;
+      right:20px;
+      bottom: 10px;
+      width: calc(93% + 3px);
+      color: white;
+      text-align: center;
+    }
+  }
   .right-side-drawer {
     width: 451px;
 }
@@ -209,19 +296,35 @@ mat-drawer.mat-drawer {
 
   }
   .input-suffix-button {
-    border-radius: 0px 4px 4px 0 !important;
-    // right: -9px;
-    right: -13px;
-    top: 0;
-    height: 40px;
-    text-align: center;
-    padding: 12px 20px !important;
-    margin: 0 !important;
-    font-size: 14px;
-  }
+      border-radius: 0px 4px 4px 0 !important;
+      // right: -9px;
+      right: -13px;
+      top: 0;
+      // height: 3em;
+      height: 41px;
+      text-align: center;
+      // padding: 12px 20px !important;
+      padding: 13px 19px !important;
+      margin: 0 !important;
+      font-size: 14px;
+    }
 
 }
 @media only screen and (min-width: 1281px) and (max-width: 1440px) {
+
+  .user-list-wrap {
+    .footer {
+      // padding: 20px;
+
+      position: fixed;
+      left: 75px;
+      right:20px;
+      bottom: 10px;
+      width: calc(93% -5px);
+      color: white;
+      text-align: center;
+    }
+  }
   .right-side-drawer {
     width: 451px;
 }
@@ -250,20 +353,48 @@ mat-drawer.mat-drawer {
 
   }
   .input-suffix-button {
-    border-radius: 0px 4px 4px 0 !important;
-    // right: -9px;
-    right: -13px;
-    top: 0;
-    height: 40px;
-    text-align: center;
-    padding: 12px 20px !important;
-    margin: 0 !important;
-    font-size: 14px;
-  }
+      border-radius: 0px 4px 4px 0 !important;
+      // right: -9px;
+      right: -13px;
+      top: 0;
+      // height: 3em;
+      height: 41px;
+      text-align: center;
+      // padding: 12px 20px !important;
+      padding: 13px 19px !important;
+      margin: 0 !important;
+      font-size: 14px;
+    }
 
 }
 
 @media only screen and (min-width: 1000px) and (max-width: 1280px){
+   .input-suffix-button {
+      border-radius: 0px 4px 4px 0 !important;
+      // right: -9px;
+      right: -13px;
+      top: 0;
+      // height: 3em;
+      height: 41px;
+      text-align: center;
+      // padding: 12px 20px !important;
+      padding: 13px  19px !important;
+      margin: 0 !important;
+      font-size: 14px;
+    }
+  .user-list-wrap {
+    .footer {
+      // padding: 20px;
+
+      position: fixed;
+      left: 75px;
+      right:20px;
+      bottom: 10px;
+      width: calc(92% + 8px);
+      color: white;
+      text-align: center;
+    }
+  }
   .right-side-drawer {
     width: 451px;
 }
@@ -296,9 +427,9 @@ mat-drawer.mat-drawer {
     // right: -9px;
     right: -13px;
     top: 0;
-    height: 40px;
+    height: 41px;
     text-align: center;
-    padding: 12px 20px !important;
+    padding: 13px 20px !important;
     margin: 0 !important;
     font-size: 14px;
   }

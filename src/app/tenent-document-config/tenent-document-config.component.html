@@ -1,0 +1,183 @@
+<mat-drawer-container autosize>
+  <mat-drawer #rightDrawer class="right-side-drawer" mode="over" position="end">
+    <div *ngIf="isCountry">
+      <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
+        <div>
+          Country List
+        </div>
+
+        <div class="header-buttons">
+          <button mat-icon-button (click)="rightDrawer.close()" class="close-button">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+      <form class="drawer-data">
+        <div fxLayout="column">
+          <mat-form-field appearance="outline" class='search' >
+            <mat-label>Search</mat-label>
+            <input matInput #input />
+            <!-- <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search" (click)="searchCountry()"> -->
+              <mat-icon matSuffix>search</mat-icon>
+            <!-- </button> -->
+          </mat-form-field>
+                <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="Countries"  >
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Countries </th>
+                        <td mat-cell *matCellDef="let element" class="mat-cell" > India </td>
+                    </ng-container>
+                    <ng-container matColumnDef="TakeAction">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Take Actions</th>
+                        <td mat-cell *matCellDef="let element" class="mat-cell">
+                          <button mat-button class="primary-button" type="submit">
+                            <mat-icon>edit</mat-icon>
+                            Edit
+                          </button>
+                           <mat-slide-toggle class="toggleInMiddleLine" (change)="toggle($event)">Active</mat-slide-toggle>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns1;" ></tr>
+                </table>
+              <div class="sticky-bottom-bar">
+                <div class="button-wrap">
+                  <div fxLayout="row wrap"  fxLayoutAlign="{{countryInfo==false?'center center':'end center'}}"  >
+                    <button mat-button class="primary-button" type="submit" *ngIf="checkCountry" (click)="enabledCreateCountry()">
+                        <mat-icon>add</mat-icon>
+                        Create Country
+                    </button>
+                    <button mat-icon-button  class="close-button" *ngIf="countryInfo" (click) ="disableCreateCountry()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                  <mat-form-field appearance="outline" class="createCountry" fxFill *ngIf="countryInfo" >
+                    <mat-label>Country</mat-label>
+                    <input matInput type="text" name="country">
+                  </mat-form-field>
+                  <div class="button-wrap" fxLayout="row wrap" fxLayoutAlign="space-around center" *ngIf="countryInfo">
+                    <button mat-button type="button" class="delete-button-black">
+                      Cancel
+                    </button>
+                    <button mat-button class="primary-button" type="button"  (click)="rightDrawer.open();">
+                      Save
+                    </button>
+                  </div>
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar>
+  <span>Document Settings</span>
+</mat-toolbar>
+<div class="user-list-wrap" fxLayout="column" fxLayoutAlign="start start">
+      <div fxLayout="row wrap" class="w-100 filter-wrap1" fxLayoutAlign="space-between center">
+        <div fxFlex>
+          <mat-form-field class='form-rows' appearance="outline" fxFlex="20">
+            <mat-label>Tenent List</mat-label>
+            <mat-select (selectionChange)="selectTenentUser($event.value)" >
+              <mat-option  *ngFor ="let i of tenentList" [value]="i?._id" >{{i.Name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="20" >
+            <mat-label>Search</mat-label>
+            <input matInput [(ngModel)]="search" #input />
+            <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search" (click)="searchCountry()">
+              <mat-icon matSuffix>search</mat-icon>
+            </button>
+          </mat-form-field>
+            <div class="filter-button-wrap1"  fxFlex="400px">
+            <button mat-stroked-button >
+              Clear All
+            </button>
+            <button mat-stroked-button (click)="addDocument()">
+              <mat-icon>add</mat-icon>
+              Document
+            </button>
+            <button mat-stroked-button (click)="rightDrawer.open();openDrawer('countryList')">
+              <mat-icon>add</mat-icon>
+              Country
+            </button>
+          </div>
+        </div>
+      </div>
+      <table mat-table [dataSource]="dataSourceUser" class="mat-elevation-z2" matSort fxFlex="100" fxFill>
+        <ng-container matColumnDef="Countries">
+          <th mat-header-cell *matHeaderCellDef>Countries</th>
+          <td mat-cell *matCellDef="let element">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <!-- <div class="user-icon">
+                <mat-icon>account_circle</mat-icon>
+              </div> -->
+              <div class="data-wrap">
+                <div class="value name">
+                  India
+                </div>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="National ID">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            National ID
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="data-wrap">
+                <!-- <div class="value name">{{ element.Contact_Name }}</div> -->
+                <div class="value email">
+                  <mat-checkbox class="example-margin" ></mat-checkbox>
+                </div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Passport">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <!-- <mat-checkbox ></mat-checkbox> -->
+            Passport
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <!-- data need to be changed -->
+            <div class="data-wrap">
+              <div class="value">
+                <mat-checkbox class="example-margin"></mat-checkbox>
+              </div>
+
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Driving Licence">
+          <th mat-header-cell *matHeaderCellDef >Driving Licence</th>
+          <td mat-cell *matCellDef="let element">
+            <!-- start center -->
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap='5px'>
+              <div class="data-wrap" >
+                <div class="value">
+                  <div class="status">
+                    <mat-checkbox class="example-margin" ></mat-checkbox>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let document; columns: displayedColumns"
+          (click)="clicked('user-details',document)"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">
+              <img class="noDataFound" src="assets/empty-tray.svg"/>
+            </td>
+          </tr>
+      </table>
+      <div class="footer">
+        <!-- <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
+        [length]="totalSize" [pageIndex]="page" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
+      </mat-paginator> -->
+      </div>
+  </div>
+  </mat-drawer-content>
+</mat-drawer-container>

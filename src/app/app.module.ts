@@ -90,6 +90,12 @@ import { EmailReportComponent } from './reports/email-report/email-report.compon
 import { DeveloperPageComponent } from './developer-page/developer-page.component';
 import { LimitToPipe } from './pipe/limit-to.pipe';
 import { TrustPipe } from './pipe/trust.pipe';
+import { TenentDocumentConfigComponent } from './tenent-document-config/tenent-document-config.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { AddDocumentComponent } from './dialog-box/add-document/add-document.component';
+import { ProfileSettingComponent } from './profile-setting/profile-setting.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -140,13 +146,17 @@ import { TrustPipe } from './pipe/trust.pipe';
     EmailReportComponent,
     DeveloperPageComponent,
     LimitToPipe,
-    TrustPipe
+    TrustPipe,
+    TenentDocumentConfigComponent,
+    AddDocumentComponent,
+    ProfileSettingComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     RouterModule,
+    MatCheckboxModule,
     FlexLayoutModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -159,6 +169,7 @@ import { TrustPipe } from './pipe/trust.pipe';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatSlideToggleModule,
     ChartsModule,
     NgxQRCodeModule,
     ClipboardModule,

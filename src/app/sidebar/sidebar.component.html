@@ -23,9 +23,13 @@
             </mat-list-item>
             <!-- bottom section -->
             <span fxFlex></span>
-            <mat-list-item (click)="rightSideDrawer.open();sidebarContent('profile')" class="rightSidenav_toggle" matTooltip="Profile" matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
+            <!-- <mat-list-item (click)="rightSideDrawer.open();sidebarContent('profile')" class="rightSidenav_toggle" matTooltip="Profile" matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
                 <mat-icon>account_circle</mat-icon>
                 <span class="nav-text">{{ userName }}</span>
+            </mat-list-item> -->
+            <mat-list-item  [routerLink]="['/profile-setting']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" matTooltip="Report" matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
+                <mat-icon>account_circle</mat-icon>
+                <span class="nav-text">Profile Settings</span>
             </mat-list-item>
             <!-- <button [class.active]="toggleActive" (click)="toggleRightSidenav()" class="rightSidenav_toggle"> Toggle Right Sidenav	</button> -->
             <mat-list-item (click)="logout()" matTooltip="Logout" matTooltipPosition="right" matTooltipClass="sidenav-tooltip">

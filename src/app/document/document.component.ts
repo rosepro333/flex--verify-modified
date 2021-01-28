@@ -15,14 +15,14 @@ import { ReportService } from '../service/report.service';
   selector: 'app-document',
   templateUrl: './document.component.html',
   styleUrls: ['./document.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class DocumentComponent implements OnInit {
   showFiller = false;
   @Output() dateChange: EventEmitter<MatDatepickerInputEvent<any>> = new EventEmitter();
   statusColumn: any = [
     { name: 'All', value: 'All' },
-    { name: 'Submitted', value: 'submitted' },
+    { name: 'Submitted', value: 'Submitted' },
     { name: 'Incomplete', value: 'Incomplete' },
     { name: 'Rejected', value: 'Rejected' },
     { name: 'Verified', value: 'Verified' },
@@ -53,6 +53,7 @@ export class DocumentComponent implements OnInit {
   totalSize = 0;
   currentPage = 1;
   page = 0;
+  clickAble: boolean = true;
   displayedColumns: string[] = [
     'doc-scan-id',
     'date-time',
@@ -94,6 +95,12 @@ export class DocumentComponent implements OnInit {
       this.getTenentList();
     }
     this.docdumentsList();
+  }
+  mouseOver =() =>{
+    this.clickAble =false;
+  }
+  mouseOut = () =>{
+    this.clickAble =true;
   }
   handlePage(value: any) {
     console.log(value)
@@ -151,15 +158,19 @@ export class DocumentComponent implements OnInit {
     this.docdumentsList();
   }
   moreDetails = (id: number) => {
-    console.log(id);
-    const data = {
+    // value = this.clickAble;
+    if(this.clickAble === true){
+      console.log(id);
+      const data = {
       user: Cookie.get('id'),
       tenentId: Cookie.get('Tenant_ID'),
       activity: 'View Document',
       details: JSON.stringify({ document_id: id })
-    };
-    this.audits(data);
-    this.router.navigate(['documents/' + id]);
+      };
+      this.audits(data);
+      this.router.navigate(['documents/' + id]);
+    }
+
   }
   selectStatus = (value) => {
     console.log(value);

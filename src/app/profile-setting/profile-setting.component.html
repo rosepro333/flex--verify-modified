@@ -1,0 +1,21 @@
+<mat-drawer-container autosize>
+  <mat-drawer #rightDrawer class="right-side-drawer" mode="over" position="end">
+
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar>
+  <span>Profile Settings</span>
+</mat-toolbar>
+<div class="settings-wrap">
+  <div class="tiles-wrap" fxLayout="row wrap" fxLayoutAlign="start start" >
+    <div fxFlex="20">
+      <ul class="tabView">
+        <li *ngFor=" let i of tabView">{{i}}</li>
+      </ul>
+    </div>
+    <div fxFlex="80"> Hi</div>
+  </div>
+</div>
+
+  </mat-drawer-content>
+</mat-drawer-container>

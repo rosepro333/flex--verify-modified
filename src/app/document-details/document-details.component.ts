@@ -129,6 +129,7 @@ export class DocumentDetailsComponent implements OnInit {
   enableZoom: Boolean = true;
   previewImageSrc: any = '';
   zoomImageSrc: any= '';
+  imagePlaceHolder='./../../assets/placeHolder.jpg';
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,

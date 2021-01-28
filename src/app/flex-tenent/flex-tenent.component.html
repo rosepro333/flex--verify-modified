@@ -58,7 +58,6 @@
         </div>
         <div fxFlex>
           <div>
-            <!-- dummy -->
            {{tenentData.Name}}
           </div>
         </div>
@@ -88,18 +87,6 @@
             {{tenentData.createdAt | date: "mediumDate"}}
           </div>
         </div>
-        <!-- <div class="data-wrap">
-          <div class="title">Expiry Date</div>
-          <div class="value">
-            10/12/2020
-          </div>
-        </div>
-        <div class="data-wrap">
-          <div class="title">Created By</div>
-          <div class="value">
-            Williamson George
-          </div>
-        </div> -->
         <div class="sticky-bottom-bar">
           <div class="button-wrap" fxLayout="row wrap" fxLayoutAlign="space-between center">
             <button mat-button type="button" class="delete-button-black"
@@ -111,15 +98,9 @@
               Edit
             </button>
             <button mat-button class="clear-button" type="button" (click)="blockTenant(tenentData,tenentData ._id)">
-              <!-- *ngIf="!element.isBlocked" -->
               <mat-icon>block</mat-icon>
               {{(tenentData.status ==='suspended')?'Unblock':'Block'}}
             </button>
-            <!-- <button mat-button class="primary-button" type="button" (click)="enableTenant(element)"
-            *ngIf="element.isBlocked">
-
-              <mat-icon aria-label="Edit">check_circle_outline</mat-icon>
-            </button> -->
           </div>
         </div>
       </div>
@@ -210,17 +191,18 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let document; columns: displayedColumns"
           (click)="rightDrawer.open();clicked('tenant-details',document)"></tr>
-
-        <!-- Row shown when there is no matching data. -->
         <tr class="mat-row" *matNoDataRow>
                   <td class="mat-cell" colspan="5">
                     <img class="noDataFound" src="assets/empty-tray.svg"/>
                   </td>
                 </tr>
       </table>
-      <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
-        [length]="totalSize" [pageIndex]="page" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
-      </mat-paginator>
+      <div class="footer">
+        <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
+          [length]="totalSize" [pageIndex]="page" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
+        </mat-paginator>
+      </div>
+
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

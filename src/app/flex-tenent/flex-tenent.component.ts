@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -19,6 +19,7 @@ const ELEMENT_DATA_Tenent: any = [];
   selector: 'app-flex-tenent',
   templateUrl: './flex-tenent.component.html',
   styleUrls: ['./flex-tenent.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class FlexTenentComponent implements OnInit {
   @ViewChild('rightDrawer', { static: false }) sideNav: MatSidenav;

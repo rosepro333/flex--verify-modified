@@ -31,6 +31,8 @@ import { SmsComponent  } from './notification/sms/sms.component';
 import { PrintDocumentComponent } from './document-details/print-document/print-document.component';
 import { EmailReportComponent } from './reports/email-report/email-report.component';
 import { DeveloperPageComponent } from './developer-page/developer-page.component';
+import { TenentDocumentConfigComponent } from './tenent-document-config/tenent-document-config.component';
+import { ProfileSettingComponent } from './profile-setting/profile-setting.component';
 const routes: Routes = [
   {
     path: '',
@@ -125,6 +127,14 @@ const routes: Routes = [
       {
         path: 'sms',
         component: SmsComponent,
+      },
+      {
+        path: 'document-config',
+        component: TenentDocumentConfigComponent,
+      },
+      {
+        path: 'profile-setting',
+        component: ProfileSettingComponent,
       },
     ],
   },

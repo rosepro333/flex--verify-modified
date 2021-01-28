@@ -68,9 +68,7 @@
                 </div>
             </div>
           <div class="sticky-bottom-bar">
-            <!-- verificaionUrl===''?center center:space-between center -->
-             <!-- <div fxLayout="row wrap"   fxLayoutAlign="{{verificaionUrl==''?'center center':'space-between center'}}"> -->
-             <div fxLayout="row wrap"   fxLayoutAlign="{{verificaionUrl==''?'center center':'end center'}}">
+            <div fxLayout="row wrap"   fxLayoutAlign="{{verificaionUrl==''?'center center':'end center'}}">
               <button mat-button class="primary-button" (click)="clickGenerate()" *ngIf="isGenerated">
                 Regenerate Url
               </button>
@@ -98,12 +96,6 @@
                 <mat-icon>send</mat-icon>
               </button>
             </mat-form-field>
-
-            <!-- <div class="button-wrap">
-              <button mat-button type="button" class="primary-button" >
-                share
-              </button>
-            </div> -->
           </div>
         </div>
         <div *ngIf="isScanHistory">
@@ -316,7 +308,6 @@
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFill>
                                     <mat-label>Date of birth</mat-label>
-                                    <!-- (dateChange)="selectDate($event)" -->
                                     <input matInput readonly [matDatepicker]="dobPicker" placeholder="Date of birth" name="dob" [(ngModel)]="doc.dob" />
                                     <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
                                     <mat-datepicker [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" #dobPicker disabled="false"></mat-datepicker>
@@ -327,17 +318,6 @@
                                     <mat-datepicker-toggle matSuffix [for]="idExpirypicker"></mat-datepicker-toggle>
                                     <mat-datepicker [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" #idExpirypicker disabled="false"></mat-datepicker>
                                 </mat-form-field>
-                                <!-- <div class="sticky-bottom-bar"> -->
-                                    <!-- <div  class="button-wrap" >
-                                    <button mat-button type="button" *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" class="cancel-button" (click)="clear()">
-                                      cancel
-                                    </button>
-                                    <button *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" mat-button class="primary-button" type="submit">
-                                      Save
-                                    </button>
-                                </div> -->
-                                 <!-- </div> -->
-
                             </div>
                         </mat-tab>
                         <mat-tab label="Address" >
@@ -390,7 +370,7 @@
                         <ng-container>
                             <ng-template class="slide" carouselSlide>
                                 <div class="justify-center" class="imageHover">
-                                    <img (click)="overLayImage(doc?.ID_Card_Front)" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc?.ID_Card_Front}}?alt=media" />
+                                    <img (click)="overLayImage(doc?.ID_Card_Front)" [src]="doc.ID_Card_Front!= null?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Front+'?alt=media':imagePlaceHolder" />
                                 </div>
                             </ng-template>
 
@@ -398,8 +378,10 @@
                         <ng-container>
                             <ng-template class="slide" carouselSlide>
 
-                                <div class="justify-center">
-                                    <img (click)="overLayImage(doc?.ID_Card_Back)" src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc.ID_Card_Back}}?alt=media" />
+                                 <div class="justify-center">
+                                  <!-- <img src="./../../assets/placeHolder.jpg"/> -->
+                                 <!--   <img (click)="overLayImage(doc?.ID_Card_Back)" [src]="(doc?.ID_Card_Back!== null && doc?.ID_Card_Back!==undefined)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Back+'?alt=media':'https://palife.co.uk/wp-content/uploads/2017/11/dummy.jpg'" /> -->
+                                    <img (click)="overLayImage(doc?.ID_Card_Back)" [src]="(doc?.ID_Card_Back!== null && doc?.ID_Card_Back!==undefined)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Back+'?alt=media':imagePlaceHolder" />
                                 </div>
                             </ng-template>
                         </ng-container>
@@ -411,7 +393,7 @@
                     </div>
                     <div fxLayout="row wrap">
                         <div fxFlex="50" class="live-photo-match">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{doc?.Selfie_Photo}}?alt=media" />
+                            <img [src]="(doc?.Selfie_Photo!== null && doc?.Selfie_Photo!==undefined)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.Selfie_Photo+'?alt=media':imagePlaceHolder"  />
                             <div class="matching-wrap">
                                 Matching
                                 <span class="matching-value">{{doc?.selfiePhotoMatchStatus}}</span>
@@ -419,8 +401,8 @@
                                 <mat-progress-bar mode="determinate" value="{{doc?.selfiePhotoMatchStatus}}"></mat-progress-bar>
                             </div>
                         </div>
-                        <div fxFlex="50" class="live-photos" *ngFor="let i of doc.LiveCheck_Photos">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o{{i}}?alt=media" />
+                        <div fxFlex="50" class="live-photos" *ngFor="let i of ((doc.LiveCheck_Photos.length>0)?doc.LiveCheck_Photos:[imagePlaceHolder]) ">
+                            <img [src]="(doc.LiveCheck_Photos.length===null)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+i+'?alt=media':imagePlaceHolder"/>
                         </div>
                     </div>
                 </div>

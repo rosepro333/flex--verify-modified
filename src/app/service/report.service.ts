@@ -34,6 +34,9 @@ export class ReportService {
   sentEmailToUser(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/email', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
+  resendInvitation(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/user/resendInvitation', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   emaiListFilter(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/email/list', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
