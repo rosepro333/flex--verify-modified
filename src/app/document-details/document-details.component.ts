@@ -38,8 +38,8 @@ export class DocumentDetailsComponent implements OnInit {
   @ViewChild('rightDrawer', { static: false }) sideNav: MatSidenav;
   displayedColumns: string[] = ['scanId', 'scanDate', 'status'];
   elementType: 'url';
-  verificaionUrl='';
-   emailId:'';
+  verificaionUrl = '';
+  emailId: '';
   dataSource: any = [];
   // new MatTableDataSource();
   disabled = false;
@@ -69,16 +69,16 @@ export class DocumentDetailsComponent implements OnInit {
   public scanResultStatus = '';
   public selfiePhotoMatchStatus = '';
   public reason = '';
-  public idCardSelect =''
+  public idCardSelect = ''
   public idCardTypeComment = '';
-  public addressStatus ='';
-  public addressComments ='';
+  public addressStatus = '';
+  public addressComments = '';
   public LiveCheckData = '';
   public liveCheckComments = '';
   public selefieMatchPercengates = '';
   public scanResults = '';
   public scanResultComment = '';
-  public fullImageDisplay:boolean = false;
+  public fullImageDisplay: boolean = false;
   isIdStatus = false;
   isAddressStatus = false;
   isLiveCheck = false;
@@ -93,7 +93,7 @@ export class DocumentDetailsComponent implements OnInit {
   scanIdDetails: any = [];
   commentsData: any = [];
   docId = '';
-  scanId= '';
+  scanId = '';
   resutData: any = [];
 
   documentIdType: any = [
@@ -128,9 +128,9 @@ export class DocumentDetailsComponent implements OnInit {
   isComments: boolean;
   enableZoom: Boolean = true;
   previewImageSrc: any = '';
-  zoomImageSrc: any= '';
-  imagePlaceHolder='./../../assets/name.svg';
-  idCardPlaceholder='./../../assets/id-card.svg';
+  zoomImageSrc: any = '';
+  imagePlaceHolder = './../../assets/name.svg';
+  idCardPlaceholder = './../../assets/id-card.svg';
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -165,66 +165,66 @@ export class DocumentDetailsComponent implements OnInit {
   // }
   overLayImage = (value: string) => {
     const img = `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${value}?alt=media`;
-    const dialogRef = this.dialog.open(IdDetailsComponent,{
+    const dialogRef = this.dialog.open(IdDetailsComponent, {
       panelClass: 'custom-dialog-container',
       width: '900px',
-      data: { img:img }
+      data: { img: img }
     });
     dialogRef.afterClosed().subscribe(() => {
-        // this.ngOnInit();
-      });
+      // this.ngOnInit();
+    });
   }
-
-  clearUrl= () =>{
-    this.isGenerated=true;
-    this.verificaionUrl ='';
+  isString(val): boolean { return val.includes('storage.googleapis.com') }
+  clearUrl = () => {
+    this.isGenerated = true;
+    this.verificaionUrl = '';
   }
   clickGenerate = () => {
-    Cookie.set('docForRegenerateUrl',this.id.toString())
-    this.verificaionUrl= 'hiii';
-    this.report.reGenerateUrl().subscribe((res)=>{
+    Cookie.set('docForRegenerateUrl', this.id.toString())
+    this.verificaionUrl = 'hiii';
+    this.report.reGenerateUrl().subscribe((res) => {
       console.log(res)
-      if(res.msg === 'success'){
+      if (res.msg === 'success') {
         this.isGenerated = false;
-        this.verificaionUrl= res.url
+        this.verificaionUrl = res.url
       }
-    },(error:any)=>{
+    }, (error: any) => {
       console.log(error);
     })
   }
   sendEmail = () => {
-  console.log(this.document)
-     const data ={
-        "fromUser":Cookie.get('id'),
-        "tenentId":this.document.Tenant_ID,
-        "recipientEmail":this.emailId,
-        "type":"Verification url",
-        "data":JSON.stringify({url: this.verificaionUrl, sdk:this.document.sdkKey_ID })
+    console.log(this.document)
+    const data = {
+      "fromUser": Cookie.get('id'),
+      "tenentId": this.document.Tenant_ID,
+      "recipientEmail": this.emailId,
+      "type": "Verification url",
+      "data": JSON.stringify({ url: this.verificaionUrl, sdk: this.document.sdkKey_ID })
+    }
+    this.serviceServive.sendEmail(data).subscribe((res) => {
+      if (res.data === 'delivered') {
+        this.toast.openSnackBar('Successfully message delivered', 'Success')
+      } else {
+        this.toast.openSnackBar('Message delivered Failed', 'Failed')
       }
-      this.serviceServive.sendEmail(data).subscribe((res) =>{
-        if(res.data==='delivered'){
-          this.toast.openSnackBar('Successfully message delivered','Success')
-        }else{
-          this.toast.openSnackBar('Message delivered Failed','Failed')
-        }
-        console.log(res)
-      },(err) =>{
-        console.log(err);
-      })
+      console.log(res)
+    }, (err) => {
+      console.log(err);
+    })
   }
-  documentLoad = async() => {
+  documentLoad = async () => {
     await this.getAllScanDocumentById(this.id)
       .then((res) => {
         this.dataSource = res;
-        if(this.dataSource.length=== 0){
+        if (this.dataSource.length === 0) {
           this.router.navigateByUrl('/documents');
         }
 
-        if(res[0]){
+        if (res[0]) {
           this.scanDocument.slice(0, this.scanDocument.length)
           this.scanDocument.push(res[0]);
           this.scanId = res[0]._id;
-          this.scanIdDetails=  res[0];
+          this.scanIdDetails = res[0];
           console.log(this.scanIdDetails);
           this.scanDocumentById(this.scanId);
         }
@@ -308,7 +308,7 @@ export class DocumentDetailsComponent implements OnInit {
       this.docId = response.data._id;
     });
   }
-  donwLoad = (data:any) => {
+  donwLoad = (data: any) => {
     this.router.navigateByUrl('/print')
     data.Document_ID = this.document.Document_ID;
     this.report.printAbleData(data);
@@ -351,23 +351,23 @@ export class DocumentDetailsComponent implements OnInit {
       this.userName = res.data?.Contact_Name;
     });
   }
-  nextScan(id: any){
-    this.serviceServive.getScanDocumentById(id).subscribe((res) =>{
+  nextScan(id: any) {
+    this.serviceServive.getScanDocumentById(id).subscribe((res) => {
       console.log(res)
       this.scanDocument.slice(0, this.scanDocument.length)
-       if(res.msg === 'success'){
-          this.scanDocument = [res.data];
-          // res.data.map((i: any, index) => {
-             res.data['deviceSignature'] =JSON.parse(res.data.deviceSignature);
-          // })
-          this.scanIdDetails=  res.data;
-          console.log(this.scanIdDetails);
-          console.log(this.scanDocument);
-          this.sideNav.close()
-        }
-    },(err) => {
+      if (res.msg === 'success') {
+        this.scanDocument = [res.data];
+        // res.data.map((i: any, index) => {
+        res.data['deviceSignature'] = JSON.parse(res.data.deviceSignature);
+        // })
+        this.scanIdDetails = res.data;
+        console.log(this.scanIdDetails);
+        console.log(this.scanDocument);
+        this.sideNav.close()
+      }
+    }, (err) => {
       console.log(err);
-      this.toast.openSnackBar('Something Went Wrong','failed')
+      this.toast.openSnackBar('Something Went Wrong', 'failed')
 
     })
   }
@@ -375,27 +375,27 @@ export class DocumentDetailsComponent implements OnInit {
     $event.stopPropagation();
     alert('shared');
   }
-  SelectType = (type: any , value: any) => {
+  SelectType = (type: any, value: any) => {
     console.log(type);
     console.log(value);
-    if (type === 'ID_Type'){
-      if (value === 'clear'){
+    if (type === 'ID_Type') {
+      if (value === 'clear') {
         this.isIdStatus = false;
-      }else{
+      } else {
         this.isIdStatus = true;
       }
     }
-    if (type === 'Address'){
-      if (value === 'clear'){
+    if (type === 'Address') {
+      if (value === 'clear') {
         this.isAddressStatus = false;
-      }else{
+      } else {
         this.isAddressStatus = true;
       }
     }
-    if(type === 'LiveCheck'){
-      if(value === 'Ok'){
+    if (type === 'LiveCheck') {
+      if (value === 'Ok') {
         this.isLiveCheck = false;
-      }else{
+      } else {
         this.isLiveCheck = true;
       }
     }
@@ -405,7 +405,7 @@ export class DocumentDetailsComponent implements OnInit {
       liveCheckingStatus: form?.value?.LiveCheck,
       scanResultStatus: form?.value?.scanResult,
       selfiePhotoMatchStatus: form?.value?.selefieMatchPercengates,
-      scanResultComment: form?.value?.scanResultComment ,
+      scanResultComment: form?.value?.scanResultComment,
       idCardStatus: form?.value?.ID_Type,
       addressStatus: form?.value?.Address,
       idCardComment: form?.value?.idCardTypeComment,
@@ -415,19 +415,19 @@ export class DocumentDetailsComponent implements OnInit {
     console.log(data);
     const id = this.scanId;
     console.log(id);
-      this.serviceServive.scanResults(id,data).subscribe((res) => {
-        if(res.status === 'success'){
-          this.toast.openSnackBar('Success',res.status)
-          // this.scanDocumentById(id);
-          this.nextScan(id);
-          // this.documentLoad();
-          this.sideNav.close();
-        }
+    this.serviceServive.scanResults(id, data).subscribe((res) => {
+      if (res.status === 'success') {
+        this.toast.openSnackBar('Success', res.status)
+        // this.scanDocumentById(id);
+        this.nextScan(id);
+        // this.documentLoad();
+        this.sideNav.close();
+      }
       // console.log(res)
-        // this
-    },(err)=> {
+      // this
+    }, (err) => {
       console.log(err);
-      this.toast.openSnackBar('Something Went Wrong','failed')
+      this.toast.openSnackBar('Something Went Wrong', 'failed')
     });
   }
   selectIdFront = (idfront: any) => {
@@ -450,11 +450,11 @@ export class DocumentDetailsComponent implements OnInit {
   onSave = (form: NgForm, scanId: any) => {
     const id = scanId;
     const data = {
-      ID_Type:form.value.ID_Type,
+      ID_Type: form.value.ID_Type,
       idCardNo: form.value.idCardNo,
       firstName: form.value.firstName,
       lastName: form.value.lastName,
-      dob:form.value.dob,
+      dob: form.value.dob,
       idExpiryDate: form.value.idExpiryDate,
       building_No: form.value.building_No,
       streetName: form.value.streetName,
@@ -464,10 +464,10 @@ export class DocumentDetailsComponent implements OnInit {
     console.log(data)
     this.serviceServive.approvedScanDocument(id, data).subscribe(
       (response) => {
-        if(response.msg = 'success'){
-           this.sideNav.close();
-           this. nextScan(id);
-           this.toast.openSnackBar('Success',response.status);
+        if (response.msg = 'success') {
+          this.sideNav.close();
+          this.nextScan(id);
+          this.toast.openSnackBar('Success', response.status);
         }
         console.log(response);
         const data = {
@@ -477,46 +477,46 @@ export class DocumentDetailsComponent implements OnInit {
           details: JSON.stringify({ document_id: this.docId, scan_id: scanId })
         };
         this.audits(data);
-      },(err) => {
-      console.log(err);
-      this.toast.openSnackBar('Something Went Wrong','failed')
+      }, (err) => {
+        console.log(err);
+        this.toast.openSnackBar('Something Went Wrong', 'failed')
 
-    })
+      })
   }
   selectDate = (event: any) => {
     this.dateOfBirth = event;
     console.log(event.target.value);
   }
 
-  scanDocumentById = (id:any) => {
+  scanDocumentById = (id: any) => {
     // const id = '';
-    this.serviceServive.getScanDocumentById(id).subscribe((res) =>{
+    this.serviceServive.getScanDocumentById(id).subscribe((res) => {
       console.log(res)
-       if(res.msg === 'success'){
-          this.resutData = res.data;
-          res.data['deviceSignature'] =JSON.parse(res.data.deviceSignature);
-          this.scanIdDetails =res.data;
-          console.log(this.scanIdDetails);
-          console.log(this.resutData);
-        }
-    },(err) => {
+      if (res.msg === 'success') {
+        this.resutData = res.data;
+        res.data['deviceSignature'] = JSON.parse(res.data.deviceSignature);
+        this.scanIdDetails = res.data;
+        console.log(this.scanIdDetails);
+        console.log(this.resutData);
+      }
+    }, (err) => {
       console.log(err);
-      this.toast.openSnackBar('Something Went Wrong','failed')
+      this.toast.openSnackBar('Something Went Wrong', 'failed')
 
     })
   }
   deleteScan = (id: any) => {
     console.log(id)
     console.log(this.router.url);
-    this.serviceServive.deleteScan(id).subscribe((res)=> {
+    this.serviceServive.deleteScan(id).subscribe((res) => {
       console.log(res)
-      if(res.msg === 'success'){
-        this.toast.openSnackBar('Successfully deleted Scan','Success');
+      if (res.msg === 'success') {
+        this.toast.openSnackBar('Successfully deleted Scan', 'Success');
         this.router.navigateByUrl(this.router.url)
         let currentUrl = this.router.url;
-        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-            this.router.navigate([currentUrl]);
-            console.log(currentUrl);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([currentUrl]);
+          console.log(currentUrl);
         });
         // this.ngOnInit();
         // this.documentLoad()
@@ -524,14 +524,14 @@ export class DocumentDetailsComponent implements OnInit {
         // const scanId = this.dataSource[1].Scan_ID;
         // this.nextScan(scanId);
 
-      }else{
-        this.toast.openSnackBar('Something Went Sr','Success');
+      } else {
+        this.toast.openSnackBar('Something Went Sr', 'Success');
       }
-    },(err: any) => {
+    }, (err: any) => {
       console.log(err)
     })
   }
-  clear = () => {};
+  clear = () => { };
   sendComment = (scanId: any) => {
 
     const doctId = this.id;
@@ -546,8 +546,8 @@ export class DocumentDetailsComponent implements OnInit {
       }
     });
     console.log(this.comment);
-    if(!this.comment){
-      return this.toast.openSnackBar('Please Enter Comment','failed');
+    if (!this.comment) {
+      return this.toast.openSnackBar('Please Enter Comment', 'failed');
     }
     const data = {
       documentId: this.id,
@@ -561,12 +561,12 @@ export class DocumentDetailsComponent implements OnInit {
     this.serviceServive.userComment(data).subscribe((res) => {
       if (res.msg === 'success') {
         this.filterComments(scanId, this.id);
-        this.toast.openSnackBar('Comment Posted','Success');
+        this.toast.openSnackBar('Comment Posted', 'Success');
       }
       console.log(res);
-    },(error: any) => {
+    }, (error: any) => {
       console.log(error)
-      this.toast.openSnackBar('Comment Post Failed','Success');
+      this.toast.openSnackBar('Comment Post Failed', 'Success');
     });
     // const data1 = {
     //   user: Cookie.get('id'),

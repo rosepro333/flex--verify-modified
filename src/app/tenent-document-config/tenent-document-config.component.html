@@ -13,7 +13,7 @@
         </div>
       </mat-toolbar>
       <form class="drawer-data">
-        <div fxLayout="column" [formGroup]="form" *ngIf="countryLIst.length !== 0">
+        <div fxLayout="column" [formGroup]="form" *ngIf ='countryLIst' >
           <mat-form-field appearance="outline" class='search' >
             <mat-label>Search</mat-label>
             <input matInput #input (keyup)='countrySearch()' formControlName='countrySearch'/>
@@ -41,11 +41,12 @@
                 </table>
               <div class="sticky-bottom-bar">
                 <div class="button-wrap"*ngIf="!isCountryEdit" >
-                  <div fxLayout="row wrap"    fxLayoutAlign="{{countryInfo==false?'center center':'end center'}}"  >
+                  <div fxLayout="row wrap"    fxLayoutAlign="{{countryInfo==false?'center center':'space-between'}}"  >
                     <button mat-button class="primary-button" type="submit" *ngIf="checkCountry" (click)="enabledCreateCountry()">
                         <mat-icon>add</mat-icon>
                         Create Country
                     </button>
+                     <h1 class="header" *ngIf="countryInfo" >Create Country </h1>
                     <button mat-icon-button  class="close-button" *ngIf="countryInfo" (click) ="disableCreateCountry()">
                       <mat-icon>close</mat-icon>
                     </button>
@@ -64,7 +65,8 @@
                   </div>
               </div>
               <div class="button-wrap"*ngIf="isCountryEdit" [formGroup]="form">
-                    <div fxLayout="row wrap" fxLayoutAlign="{{countryInfo==false?'center center':'end center'}}"  >
+                    <div fxLayout="row wrap" fxLayoutAlign="{{countryInfo==false?'center center':'space-between'}}"  >
+                    <h1 class="header" *ngIf="countryInfo" >Country Edit</h1>
                     <button mat-icon-button  class="close-button" *ngIf="countryInfo" (click) ="displayCreateCountry()">
                       <mat-icon>close</mat-icon>
                     </button>
@@ -114,8 +116,8 @@
                     </ng-container>
                     <ng-container matColumnDef="TakeAction">
                         <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Take Actions</th>
-                        <td mat-cell *matCellDef="let element" class="mat-cell" (click)="editDocumentType(element?._id,element?.name)" >
-                          <button mat-button class="bordered-light-green-button1" >
+                        <td mat-cell *matCellDef="let element" class="mat-cell" >
+                          <button mat-button class="bordered-light-green-button1" (click)="editDocumentType(element?._id,element?.name)"  >
                             <mat-icon>edit</mat-icon>
                             <!-- Edit -->
                           </button>
@@ -127,11 +129,12 @@
                 </table>
               <div class="sticky-bottom-bar">
                 <div class="button-wrap" *ngIf="!isDocumentEdit" >
-                  <div fxLayout="row wrap"  fxLayoutAlign="{{documentInfo==false?'center center':'end center'}}"  >
+                  <div fxLayout="row wrap"  fxLayoutAlign="{{documentInfo==false?'center center':'space-between'}}"  >
                     <button mat-button class="primary-button" type="submit" *ngIf="checkDocumentType" (click)="enabledDocumentType()">
                         <mat-icon>add</mat-icon>
                         Create Document
                     </button>
+                     <h1 class="header" *ngIf="documentInfo" >Create Country </h1>
                     <button mat-icon-button  class="close-button" *ngIf="documentInfo" (click) ="disabledDocumentType()">
                       <mat-icon>close</mat-icon>
                     </button>
@@ -150,7 +153,8 @@
                   </div>
               </div>
               <div class="button-wrap" *ngIf="isDocumentEdit" [formGroup]="form1">
-                    <div fxLayout="row wrap" fxLayoutAlign="{{documentInfo==false?'center center':'end center'}}"  >
+                    <div fxLayout="row wrap" fxLayoutAlign="{{documentInfo==false?'center center':'space-between'}}"  >
+                       <h1 class="header" *ngIf="documentInfo" >Country Edit </h1>
                     <button mat-icon-button  class="close-button" *ngIf="documentInfo" (click) ="displayCreateDocumentType()">
                       <mat-icon>close</mat-icon>
                     </button>

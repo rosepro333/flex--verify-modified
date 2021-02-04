@@ -13,8 +13,8 @@ export class ReportService {
   filter: BehaviorSubject<any>;
   printData: BehaviorSubject<any>;
   // currentMessage = this.printData.asObservable();
-   private apiUrl = environment.apiUrl;
-  constructor( private http: HttpClient) {
+  private apiUrl = environment.apiUrl;
+  constructor(private http: HttpClient) {
     this.printData = new BehaviorSubject(this.updatePrint);
     this.filter = new BehaviorSubject(this.filterData);
   }
@@ -28,17 +28,20 @@ export class ReportService {
     console.log(data);
     this.printData.next(data)
   }
+  toggleConfiguteForCountry(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/documentConfig/toggleConfiguteForCountry/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   selectTenentConfig(data: any): Observable<any> {
-    return this.http.post(this.apiUrl + '/documentConfig/configAllCountryAndDocument/',data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    return this.http.post(this.apiUrl + '/documentConfig/configAllCountryAndDocument/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
-  webhookUpdate(id:any,data:any): Observable<any> {
-    return this.http.put(this.apiUrl + '/webhook/'+ id,data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  webhookUpdate(id: any, data: any): Observable<any> {
+    return this.http.put(this.apiUrl + '/webhook/' + id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
-  webhookList(data:any): Observable<any> {
-    return this.http.post(this.apiUrl + '/webhook/list/',data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  webhookList(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/webhook/list/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
-  createWebhook(data:any): Observable<any> {
-    return this.http.post(this.apiUrl + '/webhook/',data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  createWebhook(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/webhook/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   countryListData(): Observable<any> {
     return this.http.get(this.apiUrl + '/country/countryList/', this.httpOptions).pipe(retry(1), catchError(this.handleError));
@@ -46,8 +49,8 @@ export class ReportService {
   docTypeListForHeader(): Observable<any> {
     return this.http.get(this.apiUrl + '/documentType/docTypelist/', this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
-  documentTypeUpdate(id:any,data: any): Observable<any> {
-    return this.http.put(this.apiUrl + '/documentType/'+id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  documentTypeUpdate(id: any, data: any): Observable<any> {
+    return this.http.put(this.apiUrl + '/documentType/' + id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   documentTypeList(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/documentType/list/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
@@ -58,8 +61,8 @@ export class ReportService {
   countryList(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/country/list', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
-  countryUpdate(id:any,data: any): Observable<any> {
-    return this.http.put(this.apiUrl + '/country/'+id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  countryUpdate(id: any, data: any): Observable<any> {
+    return this.http.put(this.apiUrl + '/country/' + id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   createCountry(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/country/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
@@ -79,11 +82,11 @@ export class ReportService {
   reportVerification(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/dashboard/verification', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
-  emailConfiguration(id: any,data: any): Observable<any> {
-    return this.http.patch(this.apiUrl + '/tenent/emailConfiguation/'+ id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  emailConfiguration(id: any, data: any): Observable<any> {
+    return this.http.patch(this.apiUrl + '/tenent/emailConfiguation/' + id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   getEmailConfiguration(id: any): Observable<any> {
-    return this.http.get(this.apiUrl + '/tenent/emailConfiguation/'+ id, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    return this.http.get(this.apiUrl + '/tenent/emailConfiguation/' + id, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   mobileActivity(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/userAppLog/list/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));

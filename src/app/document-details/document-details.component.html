@@ -370,7 +370,7 @@
                         <ng-container>
                             <ng-template class="slide" carouselSlide>
                                 <div class="justify-center" class="imageHover">
-                                    <img (click)="overLayImage(doc?.ID_Card_Front)" [src]="doc.ID_Card_Front!= null?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Front+'?alt=media':idCardPlaceholder" />
+                                    <img (click)="overLayImage(doc?.ID_Card_Front)" [src]="doc.ID_Card_Front!= null?isString(doc?.ID_Card_Front) === true ? 'https://storage.googleapis.com/flexverify.appspot.com'+doc?.ID_Card_Front:'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Front+'?alt=media':idCardPlaceholder" />
                                 </div>
                             </ng-template>
 
@@ -379,9 +379,7 @@
                             <ng-template class="slide" carouselSlide>
 
                                  <div class="justify-center">
-                                  <!-- <img src="./../../assets/placeHolder.jpg"/> -->
-                                 <!--   <img (click)="overLayImage(doc?.ID_Card_Back)" [src]="(doc?.ID_Card_Back!== null && doc?.ID_Card_Back!==undefined)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Back+'?alt=media':'https://palife.co.uk/wp-content/uploads/2017/11/dummy.jpg'" /> -->
-                                    <img (click)="overLayImage(doc?.ID_Card_Back)" [src]="(doc?.ID_Card_Back!== null && doc?.ID_Card_Back!==undefined)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Back+'?alt=media':idCardPlaceholder" />
+                                      <img (click)="overLayImage(doc?.ID_Card_Back)" [src]="(doc?.ID_Card_Back!== null && doc?.ID_Card_Back!==undefined)?isString(doc?.ID_Card_Back) === true ? 'https://storage.googleapis.com/flexverify.appspot.com'+doc?.ID_Card_Back: 'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Back+'?alt=media':idCardPlaceholder" />
                                 </div>
                             </ng-template>
                         </ng-container>
@@ -393,7 +391,7 @@
                     </div>
                     <div fxLayout="row wrap">
                         <div fxFlex="50" class="live-photo-match">
-                            <img [src]="(doc?.Selfie_Photo!== null && doc?.Selfie_Photo!==undefined)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.Selfie_Photo+'?alt=media':imagePlaceHolder"  />
+                            <img [src]="(doc?.Selfie_Photo!== null && doc?.Selfie_Photo!==undefined)? isString(doc?.Selfie_Photo) === true ? 'https://storage.googleapis.com/flexverify.appspot.com'+doc?.Selfie_Photo:'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.Selfie_Photo+'?alt=media' : imagePlaceHolder"  />
                             <div class="matching-wrap">
                                 Matching
                                 <span class="matching-value">{{doc?.selfiePhotoMatchStatus}}</span>
@@ -402,14 +400,13 @@
                             </div>
                         </div>
                         <div fxFlex="50" class="live-photos" *ngFor="let i of ((doc.LiveCheck_Photos.length>0)?doc.LiveCheck_Photos:[imagePlaceHolder]) ">
-                            <img [src]="(doc.LiveCheck_Photos.length===null)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+i+'?alt=media':imagePlaceHolder"/>
+                            <img [src]="(doc.LiveCheck_Photos.length===null)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+i+'?alt=media':null"/>
                         </div>
                     </div>
                 </div>
                 <div class="comment-wrapper" fxLayout="column">
                     <mat-form-field fxFlex="100">
                         <mat-label>Comment</mat-label>
-                        <!-- [type]="passwordVisible ? 'text' : 'password'" -->
                         <textarea [disabled]="disabled ||!doc.isActive" matInput name="comments" [(ngModel)]='comments[i]' rows="3"></textarea>
 
                     </mat-form-field>

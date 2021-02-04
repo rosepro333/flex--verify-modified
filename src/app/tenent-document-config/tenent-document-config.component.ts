@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -96,7 +96,8 @@ export class TenentDocumentConfigComponent implements OnInit {
     private router: Router,
     private service: ServicesService,
     private toster: TosterService,
-    private report: ReportService
+    private report: ReportService,
+    private ref: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -179,12 +180,14 @@ export class TenentDocumentConfigComponent implements OnInit {
             this.columns = cols;
             this.displayedColumns = this.columns.map(c => c.columnDef);
             this.colspanLength = this.columns.length;
+            this.ref.detectChanges();
           }
         })
       } else if (res.apires === 0 && res.msg === 'success') {
         this.columns = cols;
         this.displayedColumns = this.columns.map(c => c.columnDef);
         this.colspanLength = this.columns.length;
+        this.ref.detectChanges();
       }
     }, (err: any) => {
       //(err)
@@ -198,9 +201,21 @@ export class TenentDocumentConfigComponent implements OnInit {
   checkedFunction = (row: any, header: any, value: any) => {
     console.log(row);
     console.log(header)
-    console.log(value)
+    console.log(value.checked)
+    const data = {
+      tenentId: this.tenentID,
+      documentType: [header.headerId],
+      country: row._id,
+      checked: value.checked
+    }
+    console.log(data)
+    this.toggleConfigCountry(data);
   }
-
+  toggleConfigCountry = (data: any) => {
+    this.report.toggleConfiguteForCountry(data).subscribe(() => { }, (error: any) => {
+      console.log(error)
+    })
+  }
   countrySearch = () => {
     this.countryListSearch = this.form.value.countrySearch;
     //(this.countryListSearch)
@@ -213,11 +228,17 @@ export class TenentDocumentConfigComponent implements OnInit {
     }
     this.report.countryList(data).subscribe((res) => {
       //(res)
-      if (res.msg === 'success') {
+      if (res.apires === 1 && res.msg === 'success') {
         //(res.data)
-        this.countryLIst = res.data;
+        if (res.data.length > 0) {
+          this.countryLIst = res.data;
+          this.ref.detectChanges();
+        } else if (res.apires === 0 && res.msg === 'success') {
+          this.countryLIst = [];
+          this.ref.detectChanges();
+        }
       } else {
-        this.toster.openSnackBar('Something Went Wrong', 'Failed')
+        // this.toster.openSnackBar('Something Went Wrong', 'Failed')
       }
     }, (error: any) => {
       //(error)
@@ -260,8 +281,9 @@ export class TenentDocumentConfigComponent implements OnInit {
     this.report.countryUpdate(id, data).subscribe((res) => {
       //(res)
       if (res.msg === 'success') {
-        this.countryList();
+        this.ref.detectChanges();
         this.displayCreateCountry();
+        this.countryList();
         this.countryListDoc();
         this.selectTenentUser(this.tenentID)
         this.toster.openSnackBar('Successfully Update Country', 'Success')
@@ -282,6 +304,7 @@ export class TenentDocumentConfigComponent implements OnInit {
     this.report.createCountry(data).subscribe((res) => {
       //(res)
       if (res.msg === 'success') {
+        this.ref.detectChanges();
         this.form.patchValue({ createCountry: '' })
         this.countryListDoc();
         this.disableCreateCountry()
@@ -321,9 +344,11 @@ export class TenentDocumentConfigComponent implements OnInit {
       if (res.apires === 1 && res.msg === 'success') {
         //(res.data)
         this.documentTypeList = res.data;
+        this.ref.detectChanges();
       }
       if (res.apires === 0 && res.msg === 'success') {
         this.documentTypeList = [];
+        this.ref.detectChanges();
       }
     }, (error: any) => {
       //(error)
@@ -335,10 +360,11 @@ export class TenentDocumentConfigComponent implements OnInit {
     this.report.createDocumentType(data).subscribe((res) => {
       //(res)
       if (res.apires === 1 && res.msg === 'success') {
+        this.ref.detectChanges();
+        this.displayCreateDocumentType();
         this.form1.get('createDocumentType').patchValue('')
         this.DocumentTypeList();
         this.documentHeader();
-        this.displayCreateDocumentType();
         this.selectTenentUser(this.tenentID)
         this.toster.openSnackBar('Successfully create DocumentType', 'Success')
       } else if (res.apires === 0) {
@@ -377,10 +403,9 @@ export class TenentDocumentConfigComponent implements OnInit {
     this.report.documentTypeUpdate(id, data).subscribe((res) => {
       //(res)
       if (res.msg === 'success') {
-        this.documentHeader();
         this.displayCreateDocumentType()
         this.DocumentTypeList();
-        this.displayCreateDocumentType();
+        this.documentHeader();
         this.selectTenentUser(this.tenentID)
         this.toster.openSnackBar('Successfully Update documentType', 'Success')
       } else {
@@ -427,9 +452,13 @@ export class TenentDocumentConfigComponent implements OnInit {
       this.sideNav.close();
     });
   }
+
   selectTenentUser = async (value: string) => {
     this.search = '';
     this.tenentID = value;
+    // if (this.tenentID === 'All') {
+    //   return;
+    // }
     const data = { tenentId: this.tenentID }
     await this.countryListDoc().then(async (res: Array<any>) => {
       if (res.length > 0) {
@@ -463,8 +492,12 @@ export class TenentDocumentConfigComponent implements OnInit {
               }
             }
           }
+
+          this.ref.detectChanges();
         })
+
       }
+      this.ref.detectChanges();
     })
   }
 
