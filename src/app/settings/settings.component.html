@@ -27,8 +27,12 @@
       <i class="material-icons fs-40">developer_mode</i>
       <div class="title">Developer</div>
     </mat-card>
-    <mat-card class="tile cursor-pointer" [routerLink]="['/document-config']" *ngIf="accessType === '1'" fxLayout="column" fxLayoutAlign="end center">
-      <i class="material-icons fs-40">developer_mode</i>
+    <mat-card class="tile cursor-pointer text-center" [routerLink]="['/document-config']" *ngIf="accessType === '1'" fxLayout="column" fxLayoutAlign="end center">
+      <i class="material-icons fs-40">
+        <!-- document -->
+        <img src="./../../assets/tenent-setting.svg" class="text-center" height="40px" width="40px">
+
+      </i>
       <div class="title">Document <br> Setting</div>
     </mat-card>
   </div>

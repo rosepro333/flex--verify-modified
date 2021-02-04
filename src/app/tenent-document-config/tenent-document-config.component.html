@@ -134,7 +134,7 @@
                         <mat-icon>add</mat-icon>
                         Create Document
                     </button>
-                     <h1 class="header" *ngIf="documentInfo" >Create Country </h1>
+                     <h1 class="header" *ngIf="documentInfo" >Create Document </h1>
                     <button mat-icon-button  class="close-button" *ngIf="documentInfo" (click) ="disabledDocumentType()">
                       <mat-icon>close</mat-icon>
                     </button>
@@ -154,7 +154,7 @@
               </div>
               <div class="button-wrap" *ngIf="isDocumentEdit" [formGroup]="form1">
                     <div fxLayout="row wrap" fxLayoutAlign="{{documentInfo==false?'center center':'space-between'}}"  >
-                       <h1 class="header" *ngIf="documentInfo" >Country Edit </h1>
+                       <h1 class="header" *ngIf="documentInfo" >Document Edit </h1>
                     <button mat-icon-button  class="close-button" *ngIf="documentInfo" (click) ="displayCreateDocumentType()">
                       <mat-icon>close</mat-icon>
                     </button>
