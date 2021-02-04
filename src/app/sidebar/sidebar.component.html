@@ -13,7 +13,7 @@
                 <mat-icon>assignment</mat-icon>
                 <span class="nav-text">Document</span>
             </mat-list-item>
-            <mat-list-item [routerLink]="['/reports']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" matTooltip="Report" matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
+            <mat-list-item [routerLink]="['/reports']" *ngIf="accessType === '1'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" matTooltip="Report" matTooltipPosition="right" matTooltipClass="sidenav-tooltip">
                 <mat-icon>insights</mat-icon>
                 <span class="nav-text">Report</span>
             </mat-list-item>

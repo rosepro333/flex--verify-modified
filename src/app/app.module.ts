@@ -95,6 +95,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AddDocumentComponent } from './dialog-box/add-document/add-document.component';
 import { ProfileSettingComponent } from './profile-setting/profile-setting.component';
+import { WebHookComponent } from './web-hook/web-hook.component';
 
 @NgModule({
   declarations: [
@@ -149,7 +150,8 @@ import { ProfileSettingComponent } from './profile-setting/profile-setting.compo
     TrustPipe,
     TenentDocumentConfigComponent,
     AddDocumentComponent,
-    ProfileSettingComponent
+    ProfileSettingComponent,
+    WebHookComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

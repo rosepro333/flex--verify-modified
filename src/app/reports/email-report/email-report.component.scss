@@ -26,6 +26,15 @@ img.noDataFound {
 }
 @media only screen and (min-width: 1801px) and (max-width: 2000px) {
     .mobile-activity-wrap {
+      .footer {
+        position: fixed;
+        left: 75px;
+        right:20px;
+        bottom: 10px;
+        width: calc(95% + 0px);
+        color: white;
+        text-align: center;
+      }
         td {
             &.mat-cell {
                 font-size: 12px;
@@ -55,14 +64,14 @@ img.noDataFound {
     margin: 0 !important;
     font-size: 14px;
   }
-  .filter-wrap .filter-button-wrap button {
-    margin: 5px 8px;
+   .filter-wrap .filter-button-wrap button {
+    margin: 4px 8px;
     padding: 2px;
   }
   .mat-stroked-button {
     padding: 4px 15px;
-    line-height: 40px;
-}
+    line-height: 37px;
+  }
 //     .mat-icon-button {
 //     display: block;
 //     font-size: inherit;
@@ -80,15 +89,27 @@ img.noDataFound {
         .drawer-head {
             font-size: 14px;
         }
+         .footer {
+      // padding: 20px;
+
+          position: fixed;
+          left: 75px;
+          right:20px;
+          bottom: 10px;
+          width: calc(95% + 0px);
+          color: white;
+          text-align: center;
+        }
     }
+
      .filter-wrap .filter-button-wrap button {
-    margin: 5px 8px;
+    margin: 4px 8px;
     padding: 2px;
   }
   .mat-stroked-button {
     padding: 4px 15px;
-    line-height: 40px;
-}
+    line-height: 37px;
+  }
     .input-suffix-button {
     border-radius: 0px 4px 4px 0 !important;
     // right: -9px;
@@ -109,17 +130,38 @@ img.noDataFound {
                 font-size: 12px;
             }
         }
+        .footer {
+      // padding: 20px;
+
+        position: fixed;
+        left: 75px;
+        right:20px;
+        bottom: 10px;
+        // width: calc(94% + 2px);
+        width: calc(93% + 14px);
+        color: white;
+        text-align: center;
+      }
         .drawer-head {
             font-size: 14px;
         }
     }
+    .footer {
+      position: fixed;
+      left: 75px;
+      right:20px;
+      bottom: 10px;
+      width: calc(95% + 0px);
+      color: white;
+      text-align: center;
+    }
      .filter-wrap .filter-button-wrap button {
-    margin: 5px 8px;
+    margin: 4px 8px;
     padding: 2px;
   }
   .mat-stroked-button {
     padding: 4px 15px;
-    line-height: 40px;
+    line-height: 37px;
   }
     .input-suffix-button {
     border-radius: 0px 4px 4px 0 !important;
@@ -139,6 +181,17 @@ img.noDataFound {
             height: 35px;
             top: 5px;
         }
+        .footer {
+      // padding: 20px;
+
+          position: fixed;
+          left: 75px;
+          right:20px;
+          bottom: 10px;
+          width: calc(93% + 3px);
+          color: white;
+          text-align: center;
+        }
         .mat-form-field-suffix button mat-icon {
             position: relative;
             top: -5px;
@@ -152,13 +205,13 @@ img.noDataFound {
             font-size: 14px;
         }
     }
-     .filter-wrap .filter-button-wrap button {
-    margin: 5px 8px;
+  .filter-wrap .filter-button-wrap button {
+    margin: 4px 8px;
     padding: 2px;
   }
   .mat-stroked-button {
     padding: 4px 15px;
-    line-height: 40px;
+    line-height: 37px;
   }
     .input-suffix-button {
     border-radius: 0px 4px 4px 0 !important;
@@ -179,17 +232,36 @@ img.noDataFound {
                 font-size: 12px;
             }
         }
+        .footer {
+          position: fixed;
+          left: 75px;
+          right:20px;
+          bottom: 10px;
+              width: calc(93% + 0px);
+          color: white;
+          text-align: center;
+        }
         .drawer-head {
             font-size: 14px;
         }
+        .footer {
+          position: fixed;
+          left: 75px;
+          right:20px;
+          bottom: 10px;
+          width: calc(93% + 0px);
+          color: white;
+          text-align: center;
+        }
     }
-   .filter-wrap .filter-button-wrap button {
-    margin: 5px 8px;
+
+  .filter-wrap .filter-button-wrap button {
+    margin: 4px 8px;
     padding: 2px;
   }
   .mat-stroked-button {
     padding: 4px 15px;
-    line-height: 40px;
+    line-height: 37px;
   }
   .input-suffix-button {
     border-radius: 0px 4px 4px 0 !important;
@@ -213,17 +285,37 @@ img.noDataFound {
                 font-size: 12px;
             }
         }
+        .footer {
+          // padding: 20px;
+
+          position: fixed;
+          left: 75px;
+          right:20px;
+          bottom: 10px;
+          width: calc(92% + 8px);
+          color: white;
+          text-align: center;
+        }
         .drawer-head {
             font-size: 14px;
         }
+        .footer {
+          position: fixed;
+          left: 75px;
+          right:20px;
+          bottom: 10px;
+          width: calc(93% + 0px);
+          color: white;
+          text-align: center;
+        }
     }
-     .filter-wrap .filter-button-wrap button {
-    margin: 5px 8px;
+  .filter-wrap .filter-button-wrap button {
+    margin: 4px 8px;
     padding: 2px;
   }
   .mat-stroked-button {
     padding: 4px 15px;
-    line-height: 40px;
+    line-height: 37px;
   }
     .input-suffix-button {
     border-radius: 0px 4px 4px 0 !important;
@@ -249,13 +341,13 @@ img.noDataFound {
             font-size: 14px;
         }
     }
-  .filter-wrap .filter-button-wrap button {
-    margin: 5px 8px;
+   .filter-wrap .filter-button-wrap button {
+    margin: 4px 8px;
     padding: 2px;
   }
   .mat-stroked-button {
     padding: 4px 15px;
-    line-height: 40px;
+    line-height: 37px;
   }
 }
 

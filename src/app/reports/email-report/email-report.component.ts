@@ -8,7 +8,7 @@ import { ReportService } from 'src/app/service/report.service';
   selector: 'app-email-report',
   templateUrl: './email-report.component.html',
   styleUrls: ['./email-report.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class EmailReportComponent implements OnInit {
 

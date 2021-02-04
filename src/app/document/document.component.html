@@ -81,7 +81,8 @@
           </div>
         </div>
       </div>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z2 position-fixed" fxFlex="100" fxFill>
+      <!-- fxFlex="100"  -->
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z2 position-fixed" fxFill >
         <ng-container matColumnDef="doc-scan-id">
           <th mat-header-cell *matHeaderCellDef>Document Id and Scan Id</th>
           <td mat-cell *matCellDef="let document">

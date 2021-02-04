@@ -1,6 +1,41 @@
 <mat-drawer-container autosize>
-  <mat-drawer #rightDrawer class="right-side-drawer" mode="over" position="end">
-
+  <mat-drawer #rightDrawer class="right-side-drawer1" mode="over" position="end">
+    <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
+        <div>
+          Change password
+        </div>
+        <div class="header-buttons">
+          <button mat-icon-button (click)="rightDrawer.close()" class="close-button">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+      <form class="drawer-data" [formGroup]="form1" (ngSubmit)="onSubmit()">
+        <div fxLayout="column">
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>current Password</mat-label>
+            <input matInput placeholder="current Password" formControlName="currentPassword"  />
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill>
+            <mat-label>New Password </mat-label>
+            <input matInput placeholder="New Password" formControlName="newPassword" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill >
+            <mat-label>Confirm Password</mat-label>
+            <input matInput placeholder="Confirm Password" formControlName="confirmPassword"/>
+          </mat-form-field>
+          <div class="sticky-bottom-bar">
+            <div class="button-wrap">
+              <button mat-button type="button" class="cancel-button" (click)="rightDrawer.close()">
+                cancel
+              </button>
+              <button mat-button class="primary-button" type="submit" >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
   </mat-drawer>
   <mat-drawer-content>
     <mat-toolbar>
@@ -8,12 +43,82 @@
 </mat-toolbar>
 <div class="settings-wrap">
   <div class="tiles-wrap" fxLayout="row wrap" fxLayoutAlign="start start" >
-    <div fxFlex="20">
+    <div fxFlex="25">
       <ul class="tabView">
-        <li *ngFor=" let i of tabView">{{i}}</li>
+        <!-- <li class='ui-li-card' *ngFor=" let i of tabView;let j=index;" >
+          <mat-card class="card-left" [ngClass]="{'active': j === 0}">{{i}}</mat-card>
+        </li> -->
+        <li class='ui-li-card'>
+          <mat-card class="card-left active" >Display Profile</mat-card>
+        </li>
+        <li class='ui-li-card'>
+          <mat-card class="card-left" (click)="rightDrawer.open();userTOken()" >Change Password</mat-card>
+        </li>
       </ul>
     </div>
-    <div fxFlex="80"> Hi</div>
+    <div fxFlex="60" >
+      <div class="card-right">
+        <mat-card >
+        <h1 class="header">Profile  Details</h1>
+        <mat-divider class="divider"></mat-divider>
+        <div>
+          <img src="./../../assets/profileplaceholder.png" alt="Avatar" class="avatar" >
+        </div>
+        <div [formGroup]="form" fxLayout="row wrap" fxLayoutGap="20px" >
+            <div fxLayout="column wrap" fxFlex="48" >
+              <mat-form-field appearance="outline" *ngIf="data?.userDetails?.Contact_Email" >
+              <mat-label>Email</mat-label>
+                <input readonly matInput placeholder="Email"  formControlName='Contact_Email' />
+              </mat-form-field>
+              <mat-form-field appearance="outline" *ngIf="data?.userDetails?.Contact_Name" >
+              <mat-label>Name</mat-label>
+                <input readonly matInput placeholder="Name"  formControlName='Contact_Name' />
+              </mat-form-field>
+              <mat-form-field appearance="outline" *ngIf="data?.userDetails?.Tenant_ID" >
+              <mat-label>Tenant</mat-label>
+                <input readonly matInput placeholder="Tenant"  formControlName='Tenant_ID' />
+              </mat-form-field>
+              <mat-form-field appearance="outline" *ngIf="data?.userDetails?.createdAt" >
+              <mat-label>Craeted date</mat-label>
+                <input readonly matInput placeholder="Craeted date"  formControlName='createdAt' />
+              </mat-form-field>
+              <!-- <mat-form-field appearance="outline">
+              <mat-label>Last Login</mat-label>
+                <input matInput placeholder="Last Login"  formControlName='lastLogin'/>
+              </mat-form-field> -->
+            </div>
+          <div fxLayout="column wrap" fxFlex="48" class="right-side-input">
+              <!-- <mat-form-field appearance="outline">
+              <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Last Name" />
+              </mat-form-field> -->
+              <mat-form-field appearance="outline" *ngIf="data?.userDetails?.Access_Type" >
+              <mat-label>Role</mat-label>
+                <input readonly matInput placeholder="Role" formControlName='Access_Type'/>
+              </mat-form-field>
+              <mat-form-field appearance="outline" *ngIf="data?.lastLogin" >
+              <mat-label>Last Login</mat-label>
+                <input readonly matInput placeholder="Last Login"  formControlName='lastLogin'/>
+              </mat-form-field>
+              <!-- <mat-form-field appearance="outline">
+              <mat-label>Expiry date</mat-label>
+                <input matInput placeholder="Expiry date" />
+              </mat-form-field> -->
+           </div>
+
+        </div>
+         <!-- <div  fxLayout="row" fxLayoutAlign="center center">
+            <button mat-button type="button" class="cancel-button" >
+                cancel
+            </button>
+            <button mat-button class="primary-button" type="button">
+              Save
+            </button>
+          </div> -->
+        </mat-card>
+      </div>
+
+    </div>
   </div>
 </div>
 

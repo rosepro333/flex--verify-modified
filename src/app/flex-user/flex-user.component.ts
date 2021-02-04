@@ -57,7 +57,7 @@ export class FlexUserComponent implements OnInit {
   {name: 'Active', value: 'active'},
   {name: 'Suspended', value: 'suspended'}];
   detailsDetails: any = [];
-  dataSourceUser = new MatTableDataSource(ELEMENT_DATA_User);
+  dataSourceUser:any = [];
   dataSourceTenant = new MatTableDataSource(ELEMENT_DATA_Tenent);
   form: FormGroup;
   accessType = '';
@@ -136,14 +136,22 @@ export class FlexUserComponent implements OnInit {
     this.report.resendInvitation(data).subscribe((res)=>{
       console.log(res);
       if(res.msg === 'success'){
-        this.isResend =false;
+        console.log(this.dataSourceUser)
+        this.dataSourceUser.map((i:any,index: number)=>{
+          if(i._id == value){
+            this.dataSourceUser[index].hide= 'Resend invitation';
+            console.log(this.dataSourceUser[index])
+          }
+        })
+
         this.toster.openSnackBar('Successfully Resend Invitation', 'Success');
       }else{
-        this.isResend =true;
+        // this.isResend =true;
         this.toster.openSnackBar(res.data, 'Failed');
       }
     }, (err)=>{
       console.log(err);
+      this.clickAble = true;
     })
   }
   getUserList = () => {
@@ -394,7 +402,7 @@ export class FlexUserComponent implements OnInit {
       console.log(error);
     });
   }
-  clicked(a, data) {
+  clicked(a:any, data: any) {
     console.log(a,data);
     if(this.clickAble === true){
       if (a == 'create-user') {

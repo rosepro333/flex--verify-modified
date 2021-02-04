@@ -21,9 +21,7 @@ export class RightSidenavComponent implements OnInit {
   }
   userDetails = () => {
     this.service.userDetails().subscribe((res)=>{
-      console.log(res);
       this.data = res.data;
-      console.log(this.data);
     },(error: any) => {
       console.log(error);
     })

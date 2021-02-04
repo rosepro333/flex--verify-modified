@@ -18,7 +18,7 @@ export interface PeriodicElement {
   selector: 'app-portal-activity-report',
   templateUrl: './portal-activity-report.component.html',
   styleUrls: ['./portal-activity-report.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class PortalActivityReportComponent implements OnInit {
   activityList:any = [{name:'All',value:'All'},{name:'Login',value:'Login'},

@@ -15,7 +15,7 @@
       <i class="material-icons fs-40">api</i>
       <div class="title">API keys</div>
     </mat-card>
-    <mat-card class="tile cursor-pointer" fxLayout="column" fxLayoutAlign="end center">
+    <mat-card class="tile cursor-pointer" [routerLink]="['/web-hook']" *ngIf="accessType === '1'"  fxLayout="column" fxLayoutAlign="end center">
       <i class="material-icons fs-40">checkroom</i>
       <div class="title">Webhooks</div>
     </mat-card>
@@ -27,7 +27,7 @@
       <i class="material-icons fs-40">developer_mode</i>
       <div class="title">Developer</div>
     </mat-card>
-    <mat-card class="tile cursor-pointer" [routerLink]="['/document-config']" fxLayout="column" fxLayoutAlign="end center">
+    <mat-card class="tile cursor-pointer" [routerLink]="['/document-config']" *ngIf="accessType === '1'" fxLayout="column" fxLayoutAlign="end center">
       <i class="material-icons fs-40">developer_mode</i>
       <div class="title">Document <br> Setting</div>
     </mat-card>

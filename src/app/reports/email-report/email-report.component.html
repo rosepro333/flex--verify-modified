@@ -79,13 +79,6 @@
                         <img src="./../../assets/excelsheet1.png" />
                       </button>
                     </div>
-                    <!-- <mat-form-field appearance="outline" fxFlex="50">
-                        <mat-label>Document ID</mat-label>
-                        <input matInput #input [(ngModel)]="search" />
-                        <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search" (click)="searchFilter()">
-                            <mat-icon matSuffix>search</mat-icon>
-                        </button>
-                    </mat-form-field> -->
                 </div>
             </div>
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" fxFlex="100" fxFill>
@@ -119,9 +112,11 @@
             </table>
             <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="mat-elevation-z2" fxFill>
             </mat-paginator> -->
-            <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
-            [length]="totalSize" [pageIndex]="page" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
+            <div class="footer">
+              <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
+                [length]="totalSize" [pageIndex]="page" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
               </mat-paginator>
+           </div>
         </div>
 
     </mat-drawer-content>

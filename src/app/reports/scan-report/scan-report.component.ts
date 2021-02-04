@@ -18,7 +18,7 @@ export interface PeriodicElement {
   selector: 'app-scan-report',
   templateUrl: './scan-report.component.html',
   styleUrls: ['./scan-report.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ScanReportComponent implements OnInit {
   scanReport: any = [{name: 'All', value: 'All'},

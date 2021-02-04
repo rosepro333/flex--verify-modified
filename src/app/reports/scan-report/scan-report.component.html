@@ -153,9 +153,14 @@
                 </tr>
             </table>
 
-            <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
+            <!-- <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
             [length]="totalSize" [pageIndex]="page" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
+              </mat-paginator> -->
+            <div class="footer">
+              <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
+                [length]="totalSize" [pageIndex]="page" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
               </mat-paginator>
+           </div>
         </div>
 
     </mat-drawer-content>

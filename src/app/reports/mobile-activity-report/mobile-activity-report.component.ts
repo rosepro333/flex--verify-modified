@@ -18,7 +18,7 @@ export interface PeriodicElement {
   selector: 'app-mobile-activity-report',
   templateUrl: './mobile-activity-report.component.html',
   styleUrls: ['./mobile-activity-report.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class MobileActivityReportComponent implements OnInit {
   displayedColumns: string[] = ['docId', 'activity', 'dateTime', 'appVersion', 'ipAddress'];

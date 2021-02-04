@@ -1,5 +1,5 @@
 <mat-drawer-container autosize>
-  <mat-drawer #rightDrawer class="right-side-drawer" mode="over" position="end">
+  <mat-drawer #rightDrawer class="right-side-drawer1" mode="over" position="end">
     <div *ngIf="isCountry">
       <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
         <div>
@@ -13,35 +13,35 @@
         </div>
       </mat-toolbar>
       <form class="drawer-data">
-        <div fxLayout="column">
+        <div fxLayout="column" [formGroup]="form" *ngIf="countryLIst.length !== 0">
           <mat-form-field appearance="outline" class='search' >
             <mat-label>Search</mat-label>
-            <input matInput #input />
+            <input matInput #input (keyup)='countrySearch()' formControlName='countrySearch'/>
             <!-- <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search" (click)="searchCountry()"> -->
               <mat-icon matSuffix>search</mat-icon>
             <!-- </button> -->
           </mat-form-field>
-                <table mat-table [dataSource]="dataSource">
+                <table mat-table [dataSource]="countryLIst">
                     <ng-container matColumnDef="Countries"  >
                         <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Countries </th>
-                        <td mat-cell *matCellDef="let element" class="mat-cell" > India </td>
+                        <td mat-cell *matCellDef="let element" class="mat-cell" > {{element?.name}} </td>
                     </ng-container>
                     <ng-container matColumnDef="TakeAction">
                         <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Take Actions</th>
                         <td mat-cell *matCellDef="let element" class="mat-cell">
-                          <button mat-button class="primary-button" type="submit">
+                          <button mat-button class="bordered-light-green-button1" (click)="editCountryForm(element?._id,element?.name)" >
                             <mat-icon>edit</mat-icon>
-                            Edit
+                            <!-- Edit -->
                           </button>
-                           <mat-slide-toggle class="toggleInMiddleLine" (change)="toggle($event)">Active</mat-slide-toggle>
+                           <mat-slide-toggle class="toggleInMiddleLine" [color]='' [checked]="(element?.status!=='active')?false:true" (change)="countryToggle(element?._id,$event)"> {{(element?.status === 'active')?'Active':'Inactive'}}</mat-slide-toggle>
                         </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns1;" ></tr>
                 </table>
               <div class="sticky-bottom-bar">
-                <div class="button-wrap">
-                  <div fxLayout="row wrap"  fxLayoutAlign="{{countryInfo==false?'center center':'end center'}}"  >
+                <div class="button-wrap"*ngIf="!isCountryEdit" >
+                  <div fxLayout="row wrap"    fxLayoutAlign="{{countryInfo==false?'center center':'end center'}}"  >
                     <button mat-button class="primary-button" type="submit" *ngIf="checkCountry" (click)="enabledCreateCountry()">
                         <mat-icon>add</mat-icon>
                         Create Country
@@ -52,17 +52,122 @@
                   </div>
                   <mat-form-field appearance="outline" class="createCountry" fxFill *ngIf="countryInfo" >
                     <mat-label>Country</mat-label>
-                    <input matInput type="text" name="country">
+                    <input matInput type="text" name="country" formControlName="createCountry">
                   </mat-form-field>
-                  <div class="button-wrap" fxLayout="row wrap" fxLayoutAlign="space-around center" *ngIf="countryInfo">
-                    <button mat-button type="button" class="delete-button-black">
+                  <div class="button-wrap" fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="countryInfo">
+                    <button mat-button type="button" class="delete-button-black" (click) ="disableCreateCountry()">
                       Cancel
                     </button>
-                    <button mat-button class="primary-button" type="button"  (click)="rightDrawer.open();">
+                    <button mat-button class="primary-button" type="button"  (click)="createCountry();">
                       Save
                     </button>
                   </div>
               </div>
+              <div class="button-wrap"*ngIf="isCountryEdit" [formGroup]="form">
+                    <div fxLayout="row wrap" fxLayoutAlign="{{countryInfo==false?'center center':'end center'}}"  >
+                    <button mat-icon-button  class="close-button" *ngIf="countryInfo" (click) ="displayCreateCountry()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                  <mat-form-field appearance="outline" class="createCountry" fxFill>
+                    <mat-label>Country</mat-label>
+                    <input matInput type="text" name="country" formControlName="editCountry">
+                  </mat-form-field>
+                  <div class="button-wrap" fxLayout="row wrap" fxLayoutAlign="center center">
+                    <button mat-button type="button" class="delete-button-black" (click) ="displayCreateCountry()">
+                      Cancel
+                    </button>
+                    <button mat-button class="primary-button" type="button"  (click)="editCountry();">
+                      update
+                    </button>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </form>
+    </div>
+    <div *ngIf="isDocument">
+      <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
+        <div>
+          Document List
+        </div>
+
+        <div class="header-buttons">
+          <button mat-icon-button (click)="rightDrawer.close()" class="close-button">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+      <form class="drawer-data" [formGroup]="form1">
+        <div fxLayout="column" >
+          <mat-form-field appearance="outline" class='search' >
+            <mat-label>Search</mat-label>
+            <input matInput #input (keyup)='searchDocumentType()' formControlName='documentTypeSearch' />
+            <!-- <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search" (click)="searchCountry()"> -->
+              <mat-icon matSuffix>search</mat-icon>
+            <!-- </button> -->
+          </mat-form-field>
+                <table mat-table [dataSource]="documentTypeList" >
+                    <ng-container matColumnDef="Countries"  >
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Document </th>
+                        <td mat-cell *matCellDef="let element" class="mat-cell" > {{element?.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="TakeAction">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Take Actions</th>
+                        <td mat-cell *matCellDef="let element" class="mat-cell" (click)="editDocumentType(element?._id,element?.name)" >
+                          <button mat-button class="bordered-light-green-button1" >
+                            <mat-icon>edit</mat-icon>
+                            <!-- Edit -->
+                          </button>
+                           <mat-slide-toggle class="toggleInMiddleLine" [color]=''[checked]="(element?.status!=='active')?false:true" (change)="DocumentTypeToggle(element?._id,$event)"> {{(element?.status === 'active')?'Active':'Inactive'}}</mat-slide-toggle>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns1;" ></tr>
+                </table>
+              <div class="sticky-bottom-bar">
+                <div class="button-wrap" *ngIf="!isDocumentEdit" >
+                  <div fxLayout="row wrap"  fxLayoutAlign="{{documentInfo==false?'center center':'end center'}}"  >
+                    <button mat-button class="primary-button" type="submit" *ngIf="checkDocumentType" (click)="enabledDocumentType()">
+                        <mat-icon>add</mat-icon>
+                        Create Document
+                    </button>
+                    <button mat-icon-button  class="close-button" *ngIf="documentInfo" (click) ="disabledDocumentType()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                  <mat-form-field appearance="outline" class="createCountry" fxFill *ngIf="documentInfo" >
+                    <mat-label>Document</mat-label>
+                    <input matInput type="text" name="DocumentType" formControlName="createDocumentType">
+                  </mat-form-field>
+                  <div class="button-wrap" fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="documentInfo">
+                    <button mat-button type="button" class="delete-button-black" (click)="disabledDocumentType()">
+                      Cancel
+                    </button>
+                    <button mat-button class="primary-button" type="button"  (click)="createDocumentType();">
+                      Save
+                    </button>
+                  </div>
+              </div>
+              <div class="button-wrap" *ngIf="isDocumentEdit" [formGroup]="form1">
+                    <div fxLayout="row wrap" fxLayoutAlign="{{documentInfo==false?'center center':'end center'}}"  >
+                    <button mat-icon-button  class="close-button" *ngIf="documentInfo" (click) ="displayCreateDocumentType()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                  <mat-form-field appearance="outline" class="createCountry" fxFill>
+                    <mat-label>Document</mat-label>
+                    <input matInput type="text" name="country" formControlName="editDocumentType">
+                  </mat-form-field>
+                  <div class="button-wrap" fxLayout="row wrap" fxLayoutAlign="center center">
+                    <button mat-button type="button" class="delete-button-black" (click) ="displayCreateDocumentType()">
+                      Cancel
+                    </button>
+                    <button mat-button class="primary-button" type="button"  (click)="editDocument();">
+                      update
+                    </button>
+                  </div>
+                </div>
             </div>
           </div>
       </form>
@@ -77,8 +182,8 @@
         <div fxFlex>
           <mat-form-field class='form-rows' appearance="outline" fxFlex="20">
             <mat-label>Tenent List</mat-label>
-            <mat-select (selectionChange)="selectTenentUser($event.value)" >
-              <mat-option  *ngFor ="let i of tenentList" [value]="i?._id" >{{i.Name}}</mat-option>
+            <mat-select (selectionChange)="selectTenentUser($event.value)" [(ngModel)]="tenentID" >
+              <mat-option  *ngFor ="let i of tenentList" [value]="i?._id" >{{i?.Name}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline" fxFlex="20" >
@@ -88,87 +193,53 @@
               <mat-icon matSuffix>search</mat-icon>
             </button>
           </mat-form-field>
-            <div class="filter-button-wrap1"  fxFlex="400px">
-            <button mat-stroked-button >
+            <div class="filter-button-wrap1">
+            <button mat-stroked-button (click)='clearAll()' >
               Clear All
             </button>
-            <button mat-stroked-button (click)="addDocument()">
+            <!-- (click)="addDocument()"  -->
+            <button mat-stroked-button class="bordered-light-green-button2" (click)="rightDrawer.open();openDrawer('document')">
               <mat-icon>add</mat-icon>
               Document
             </button>
-            <button mat-stroked-button (click)="rightDrawer.open();openDrawer('countryList')">
+            <button mat-stroked-button class="bordered-light-green-button2" (click)="rightDrawer.open();openDrawer('countryList')">
               <mat-icon>add</mat-icon>
               Country
             </button>
           </div>
         </div>
       </div>
-      <table mat-table [dataSource]="dataSourceUser" class="mat-elevation-z2" matSort fxFlex="100" fxFill>
-        <ng-container matColumnDef="Countries">
-          <th mat-header-cell *matHeaderCellDef>Countries</th>
-          <td mat-cell *matCellDef="let element">
+      <table mat-table [dataSource]="tenentDataSource" class="mat-elevation-z2" matSort fxFlex="100" fxFill>
+        <ng-container  *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+          <th mat-header-cell *matHeaderCellDef>
+            <span class="idCard">{{ column?.header }}</span>
+            <mat-checkbox class="example-margin" *ngIf='column.header!=="Country"' (change)="checkedAll(column,$event)" ></mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row" >
             <div fxLayout="row" fxLayoutAlign="start center">
-              <!-- <div class="user-icon">
-                <mat-icon>account_circle</mat-icon>
-              </div> -->
               <div class="data-wrap">
-                <div class="value name">
-                  India
+                <div class="value name" *ngIf="column?.header==='Country'">
+                 {{row.name}}
+                </div>
+                 <div class="value name" *ngIf="column?.header!=='Country'"  fxLayoutAlign="center center" >
+                   <!-- <div *ngIf="row.documentType.le"></div> -->
+                   <div *ngIf = "row.documentType.length > 0">
+                    <div *ngFor="let j of row.documentType;">
+                    <mat-checkbox *ngIf="column?.headerId===j?.headerId"  class="example-margin" [checked]='j.cell === "active" ? true: false' (change)="checkedFunction(row,column,$event)" ></mat-checkbox>
+                   </div>
+                   </div>
+                   <div *ngIf = "row.documentType.length === 0">
+                    <mat-checkbox  class="example-margin" [checked]='false' (change)="checkedFunction(row,column,$event)" ></mat-checkbox>
+                   </div>
                 </div>
               </div>
-            </div>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="National ID">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            National ID
-          </th>
-          <td mat-cell *matCellDef="let element">
-            <div class="data-wrap">
-                <!-- <div class="value name">{{ element.Contact_Name }}</div> -->
-                <div class="value email">
-                  <mat-checkbox class="example-margin" ></mat-checkbox>
-                </div>
-            </div>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="Passport">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            <!-- <mat-checkbox ></mat-checkbox> -->
-            Passport
-          </th>
-          <td mat-cell *matCellDef="let element">
-            <!-- data need to be changed -->
-            <div class="data-wrap">
-              <div class="value">
-                <mat-checkbox class="example-margin"></mat-checkbox>
-              </div>
-
-            </div>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="Driving Licence">
-          <th mat-header-cell *matHeaderCellDef >Driving Licence</th>
-          <td mat-cell *matCellDef="let element">
-            <!-- start center -->
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap='5px'>
-              <div class="data-wrap" >
-                <div class="value">
-                  <div class="status">
-                    <mat-checkbox class="example-margin" ></mat-checkbox>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let document; columns: displayedColumns"
-          (click)="clicked('user-details',document)"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="4">
+          <td class="mat-cell" [attr.colspan]="colspanLength">
               <img class="noDataFound" src="assets/empty-tray.svg"/>
             </td>
           </tr>

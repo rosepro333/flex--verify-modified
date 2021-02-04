@@ -1,0 +1,232 @@
+<mat-drawer-container autosize>
+  <mat-drawer #rightDrawer class="right-side-drawer" mode="over" position="end">
+    <!-- *ngIf="isCreateUser" -->
+    <div *ngIf="isWebhook">
+      <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
+        <div *ngIf="!userEdit;else elseBlock">
+          Create Webhook
+        </div>
+        <ng-template #elseBlock>
+          Edit Webhook
+        </ng-template>
+        <div class="header-buttons">
+          <button mat-icon-button (click)="rightDrawer.close()" class="close-button">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+      <form [formGroup]="form" class="drawer-data" (ngSubmit)="onSave()">
+        <div fxLayout="column">
+          <mat-form-field class='form-rows' appearance="outline" fxFlex='35' *ngIf="accessType !== '3'">
+            <mat-label>Tenent List</mat-label>
+            <mat-select (selectionChange)="selectTenent($event.value)" formControlName="tenentId" >
+              <mat-option  *ngFor ="let i of tenentList" [value]="i?._id" >{{i.Name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill >
+            <mat-label>URL</mat-label>
+            <input matInput formControlName="url" placeholder="[required]"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill >
+            <mat-label>Secret Key</mat-label>
+            <input matInput formControlName="secrectKey" placeholder="[required]"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFill >
+            <mat-label>Secert Value</mat-label>
+            <input matInput formControlName="secretValue" placeholder="[required]"/>
+          </mat-form-field>
+
+          <div class="sticky-bottom-bar">
+            <div class="button-wrap">
+              <button mat-button type="button" class="cancel-button" (click)="rightDrawer.close()">
+                cancel
+              </button>
+              <button mat-button class="primary-button" *ngIf="!userEdit;" type="submit">
+                Save
+              </button>
+              <button mat-button class="primary-button" *ngIf="userEdit;" type="button" (click)="editWebhook()">
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="isUserDetails" class="user-details-wrap">
+      <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
+        <div fxFlex="65px" fxLayoutAlign="start start">
+          <div class="shortname">
+            {{detailsDetails?.tenentId?.Contact_Name | nameFilter}}
+          </div>
+        </div>
+        <div fxFlex>
+          <div>
+            <!-- dummy -->
+            {{detailsDetails?.tenentId?.Contact_Name | titlecase}}
+          </div>
+        </div>
+        <div class="header-buttons">
+          <button mat-icon-button (click)="rightDrawer.close()" class="close-button">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+      <div class="drawer-data" fxLayout="column">
+        <div class="data-wrap">
+          <div class="title">Tenent Id</div>
+          <div class="value">
+            <!-- dummy -->
+            {{detailsDetails?.tenentId?.Contact_Name |dataCheck}}
+          </div>
+        </div>
+        <div class="data-wrap" *ngIf="detailsDetails?.url">
+          <div class="title">URL</div>
+          <div class="value">
+            {{detailsDetails?.url |dataCheck}}
+          </div>
+        </div>
+        <div class="data-wrap">
+          <div class="title">Secret Key</div>
+          <div class="value">
+            {{detailsDetails?.secrectKey  |dataCheck}}
+          </div>
+        </div>
+        <div class="data-wrap">
+          <div class="title">Secret Value</div>
+          <div class="value">
+            {{detailsDetails?.secretValue |dataCheck}}
+          </div>
+        </div>
+
+        <div class="sticky-bottom-bar">
+          <div class="button-wrap" fxLayout="row wrap"  fxLayoutAlign="{{(userId !==detailsDetails._id)?'space-between center':'center center'}}">
+            <button mat-button type="button" *ngIf="userId !==detailsDetails._id"  class="delete-button-black" (click)="deleteUser(detailsDetails?.Contact_Name,detailsDetails?._id)">
+              <mat-icon>delete</mat-icon>
+              Delete
+            </button>
+            <button mat-button class="primary-button"  type="button" (click)="rightDrawer.open();clicked('create-user',detailsDetails)">
+              Edit
+            </button>
+            <button mat-button class="clear-button" *ngIf="userId !==detailsDetails._id" type="button" (click)="blockUser(detailsDetails,detailsDetails?._id)">
+              <mat-icon>block</mat-icon>
+              {{(detailsDetails.status ==='suspended')?'Unblock':'Block'}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" class="header">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <button mat-icon-button [routerLink]="['/settings']">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div>Web Hooks</div>
+      </div>
+    </mat-toolbar>
+    <div class="user-list-wrap" fxLayout="column" fxLayoutAlign="start start">
+      <div fxLayout="row wrap" class="w-100 filter-wrap" fxLayoutAlign="space-between center">
+        <div>
+          <p class="params"> Webhooks are one way that apps can send automated messages or information to other apps. It's how PayPal tells your accounting app when your clients pay you, how Twilio routes
+          phone calls to your number, and how WooCommerce can notify you vist our <span class="developer-doc"> developer documentions.</span></p>
+          <p class="params">  Create webhook using funcnality.</p></div>
+        <div fxFlex>
+          <mat-form-field class='form-rows' appearance="outline" fxFlex='35' *ngIf="accessType !== '3'">
+            <mat-label>Tenent List</mat-label>
+            <mat-select (selectionChange)="selectTenentUser($event.value)" >
+              <mat-option  *ngFor ="let i of tenentList" [value]="i?._id" >{{i.Name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex fxLayoutAlign="end none">
+          <div class="header-buttons" >
+            <button mat-button class="primary-button" (click)="rightDrawer.open();clicked('create-user',null)">
+               +  Create Webhook
+            </button>
+          </div>
+        </div>
+      </div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" matSort fxFlex="100" fxFill>
+        <ng-container matColumnDef="Tenant">
+          <th mat-header-cell *matHeaderCellDef>Tenent</th>
+          <td mat-cell *matCellDef="let element">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <!-- <div class="user-icon">
+                <mat-icon>account_circle</mat-icon>
+              </div> -->
+              <div class="data-wrap">
+                <div class="value name">{{ element?.tenentId?.Contact_Name |dataCheck}}</div>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="URL">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            URL
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="data-wrap">
+                <div class="value email">{{element?.url |dataCheck}}</div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Secret Key">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Secret Key
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="data-wrap">
+               <div class="value secretKey">{{element?.secrectKey |dataCheck}}
+                 <button (mouseover)="mouseOver()" (mouseout) ="mouseOut()" mat-icon-button [cdkCopyToClipboard]="element?.secrectKey" matTooltip="copy url" matTooltipPosition="right">
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+               </div>
+
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Secret Value">
+          <th mat-header-cell *matHeaderCellDef >Secret Value</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="data-wrap">
+               <div class="value email">{{element?.secretValue |dataCheck}}</div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Actions">
+           <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Actions
+          </th>
+          <td mat-cell *matCellDef="let element" class="mat-cell" >
+              <button mat-button class="bordered-light-green-button1">
+                <mat-icon>edit</mat-icon>
+              </button>
+               <!-- (change)="DocumentTypeToggle(element._id,$event)" -->
+              <mat-slide-toggle (mouseover)="mouseOver()" (mouseout) ="mouseOut()" class="toggleInMiddleLine" (change)="webhookStatus(element._id,$event)" [color]=''[checked]="(element.status!=='active')?false:true"> {{(element.status === 'active')?'Active':'Inactive'}}</mat-slide-toggle>
+          </td>
+          <!-- <td mat-cell *matCellDef="let element">
+            <div class="data-wrap">
+                <div class="value email">{{element.createdAt | date: "mediumDate" |dataCheck }}</div>
+            </div>
+          </td> -->
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let document; columns: displayedColumns"
+          (click)="(clickAble === true)?rightDrawer.open():'';clicked('webhook-details',document)"></tr>
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="5">
+              <img class="noDataFound" src="assets/empty-tray.svg"/>
+            </td>
+          </tr>
+      </table>
+      <div class="footer">
+        <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"
+        [length]="totalSize" [pageIndex]="page" (page)="handlePage($event)" class="mat-elevation-z2" fxFill>
+      </mat-paginator>
+      </div>
+    </div>
+
+  </mat-drawer-content>
+</mat-drawer-container>

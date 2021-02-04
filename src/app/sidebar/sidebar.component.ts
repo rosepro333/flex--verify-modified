@@ -41,7 +41,6 @@ export class SidebarComponent implements OnInit {
 
   toggleRightSidenav($event) {
     $event.stopPropagation();
-    console.log('Clicked');
     this.toggleActive = !this.toggleActive;
     this.sidenav.toggle();
   }
@@ -49,7 +48,6 @@ export class SidebarComponent implements OnInit {
     this.toggleActive = false;
   }
   toggleRightSidenav1() {
-    console.log('Clicked');
     this.toggleActive1 = !this.toggleActive1;
     this.sidenav.toggle1();
   }
@@ -65,8 +63,7 @@ export class SidebarComponent implements OnInit {
   }
   getAccessType = () => {
     this.accessType = Cookie.get('Access_Type');
-    console.log(this.accessType);
-    console.log(this.accessType);
+
   }
 
   logout = () => {
@@ -97,8 +94,6 @@ export class SidebarComponent implements OnInit {
   getUserDetails = () => {
     const id = Cookie.get('id');
     this.service.getUserDetails(id).subscribe((res) => {
-      console.log('2');
-      // console.log(res.data.Contact_Name);
       this.userName = res.data.Contact_Name;
     });
   }
@@ -110,9 +105,7 @@ export class SidebarComponent implements OnInit {
   }
   userDetails = () => {
     this.service.userDetails().subscribe((res)=>{
-      console.log(res);
       this.data = res.data;
-      console.log(this.data);
     },(error: any) => {
       console.log(error);
     })

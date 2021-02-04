@@ -28,6 +28,42 @@ export class ReportService {
     console.log(data);
     this.printData.next(data)
   }
+  selectTenentConfig(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/documentConfig/configAllCountryAndDocument/',data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  webhookUpdate(id:any,data:any): Observable<any> {
+    return this.http.put(this.apiUrl + '/webhook/'+ id,data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  webhookList(data:any): Observable<any> {
+    return this.http.post(this.apiUrl + '/webhook/list/',data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  createWebhook(data:any): Observable<any> {
+    return this.http.post(this.apiUrl + '/webhook/',data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  countryListData(): Observable<any> {
+    return this.http.get(this.apiUrl + '/country/countryList/', this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  docTypeListForHeader(): Observable<any> {
+    return this.http.get(this.apiUrl + '/documentType/docTypelist/', this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  documentTypeUpdate(id:any,data: any): Observable<any> {
+    return this.http.put(this.apiUrl + '/documentType/'+id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  documentTypeList(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/documentType/list/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  createDocumentType(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/documentType/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  countryList(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/country/list', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  countryUpdate(id:any,data: any): Observable<any> {
+    return this.http.put(this.apiUrl + '/country/'+id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+  createCountry(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/country/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   reGenerateUrl(): Observable<any> {
     return this.http.post(this.apiUrl + '/generate/regenerateURl', {}, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }

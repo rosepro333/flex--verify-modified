@@ -78,7 +78,20 @@ export class ServicesService {
       return this.http
         .post(this.apiUrl + '/tenent', data, this.httpOptions)
         .pipe(retry(1), catchError(this.handleError));
-
+  }
+  roleFilter = (value: any) => {
+    if(value === '1'){
+      return 'Flexm Admin';
+    }else if(value === '2'){
+      return 'Flexm Operator';
+    }
+    else if(value === '3'){
+      return 'Tenent Admin';
+    }
+    else if(value === '4'){
+      return 'Tenent Operator';
+    }
+    return null;
   }
   deleteTenent(id: any): Observable<any> {
     return this.http

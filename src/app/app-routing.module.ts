@@ -26,18 +26,19 @@ import { MobileActivityReportComponent } from './reports/mobile-activity-report/
 import { UserAboutComponent } from './user-about/user-about.component';
 import { ScanReportComponent } from './reports/scan-report/scan-report.component';
 import { NotificationComponent } from './notification/notification.component';
-import { EmailComponent }  from './notification/email/email.component';
-import { SmsComponent  } from './notification/sms/sms.component';
+import { EmailComponent } from './notification/email/email.component';
+import { SmsComponent } from './notification/sms/sms.component';
 import { PrintDocumentComponent } from './document-details/print-document/print-document.component';
 import { EmailReportComponent } from './reports/email-report/email-report.component';
 import { DeveloperPageComponent } from './developer-page/developer-page.component';
 import { TenentDocumentConfigComponent } from './tenent-document-config/tenent-document-config.component';
 import { ProfileSettingComponent } from './profile-setting/profile-setting.component';
+import { WebHookComponent } from './web-hook/web-hook.component';
 const routes: Routes = [
   {
     path: '',
     component: HomeLayoutComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -136,6 +137,10 @@ const routes: Routes = [
         path: 'profile-setting',
         component: ProfileSettingComponent,
       },
+      {
+        path: 'web-hook',
+        component: WebHookComponent,
+      },
     ],
   },
   {
@@ -174,7 +179,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabled'
-})],
+  })],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

@@ -237,10 +237,9 @@
                   <div class="status {{element.status | lowercase |dataCheck}}">
                     {{ element.status | titlecase}}
                   </div>
-
                 </div>
               </div>
-              <div class="data-wrap"  *ngIf="element.status ==='invitation sent' && isResend === true" (mouseover)="mouseOver()" (mouseout) ="mouseOut()" (click)="reSendInvitation(element._id)">
+              <div class="data-wrap"  *ngIf="element.status ==='invitation sent' &&  (element?.hide === ''|| element?.hide === null ||element?.hide === undefined)?true:false" (mouseover)="mouseOver()" (mouseout) ="mouseOut()" (click)="reSendInvitation(element._id)">
                 <div class="value" >
                   <div class=" resend">
                     Resend invitation

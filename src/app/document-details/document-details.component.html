@@ -370,7 +370,7 @@
                         <ng-container>
                             <ng-template class="slide" carouselSlide>
                                 <div class="justify-center" class="imageHover">
-                                    <img (click)="overLayImage(doc?.ID_Card_Front)" [src]="doc.ID_Card_Front!= null?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Front+'?alt=media':imagePlaceHolder" />
+                                    <img (click)="overLayImage(doc?.ID_Card_Front)" [src]="doc.ID_Card_Front!= null?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Front+'?alt=media':idCardPlaceholder" />
                                 </div>
                             </ng-template>
 
@@ -381,7 +381,7 @@
                                  <div class="justify-center">
                                   <!-- <img src="./../../assets/placeHolder.jpg"/> -->
                                  <!--   <img (click)="overLayImage(doc?.ID_Card_Back)" [src]="(doc?.ID_Card_Back!== null && doc?.ID_Card_Back!==undefined)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Back+'?alt=media':'https://palife.co.uk/wp-content/uploads/2017/11/dummy.jpg'" /> -->
-                                    <img (click)="overLayImage(doc?.ID_Card_Back)" [src]="(doc?.ID_Card_Back!== null && doc?.ID_Card_Back!==undefined)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Back+'?alt=media':imagePlaceHolder" />
+                                    <img (click)="overLayImage(doc?.ID_Card_Back)" [src]="(doc?.ID_Card_Back!== null && doc?.ID_Card_Back!==undefined)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+doc?.ID_Card_Back+'?alt=media':idCardPlaceholder" />
                                 </div>
                             </ng-template>
                         </ng-container>
