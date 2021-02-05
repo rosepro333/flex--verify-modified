@@ -250,7 +250,7 @@ export class TenentDocumentConfigComponent implements OnInit {
         // this.toster.openSnackBar('Something Went Wrong', 'Failed')
       }
     }, (error: any) => {
-      //(error)
+      console.log(error)
     })
   }
   editCountryForm = (id: any, name: any) => {
@@ -464,14 +464,19 @@ export class TenentDocumentConfigComponent implements OnInit {
 
   selectTenentUser = async (value: string) => {
     this.search = '';
+    if (value === 'All') {
+      return this.tenentDataSource = [];
+    }
     this.tenentID = value;
     const data = { tenentId: this.tenentID, }
     await this.countryListDoc().then(async (res: Array<any>) => {
       if (res.length > 0) {
+        this.ref.detectChanges();
         this.tenentDataSource = res;
         const temp = this.columns.slice(0);
         temp.splice(0, 1)
         this.tenentDataSource.map((data: { documentType: any[]; }) => data.documentType = [])
+        this.ref.detectChanges();
         await this.selectTenentConfig(data).then((res: Array<any>) => {
           if (res.length > 0) {
             for (let i = 0; i < res.length; i++) {
@@ -484,6 +489,7 @@ export class TenentDocumentConfigComponent implements OnInit {
                       cell: type.status
                     })
                   })
+                  this.ref.detectChanges();
                   const onlyInA = this.tenentDataSource[j].documentType.filter(this.comparer(temp));
                   const onlyInB = temp.filter(this.comparer(this.tenentDataSource[j].documentType));
                   const result = onlyInA.concat(onlyInB);
@@ -494,9 +500,11 @@ export class TenentDocumentConfigComponent implements OnInit {
                       cell: 'Inactive'
                     })
                   })
+                  this.ref.detectChanges();
                 }
               }
             }
+            this.ref.detectChanges();
           }
 
           this.ref.detectChanges();
@@ -508,6 +516,7 @@ export class TenentDocumentConfigComponent implements OnInit {
   }
 
   comparer = (otherArray: any) => {
+    this.ref.detectChanges();
     return function (current: { headerId: string; header: string; }) {
       return otherArray.filter(function (other) {
         return other.headerId === current.headerId && other.header === current.header
@@ -520,6 +529,7 @@ export class TenentDocumentConfigComponent implements OnInit {
       this.report.selectTenentConfig(data).subscribe((res) => {
         if (res.apires === 1 && res.msg === 'success') {
           resolve(res.data)
+          this.ref.detectChanges();
         }
       }, (err) => {
         reject(err);
@@ -532,6 +542,7 @@ export class TenentDocumentConfigComponent implements OnInit {
         if (res.apires === 1 && res.msg === 'success') {
           console.log(res.data)
           resolve(res.data)
+          this.ref.detectChanges();
         }
       }, (err) => {
         reject(err)
