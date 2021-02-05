@@ -36,7 +36,6 @@ export class ServicesService {
   userDrawer = (updateString: string) => {
     console.log(updateString)
     this.update.next('ddsdscdscdsc');
-    // this.update.next(updateString);
   }
   getToken = () => {
     return Cookie.get('data');
@@ -44,23 +43,23 @@ export class ServicesService {
   userDevice = () => {
     return Cookie.get('user-device');
   }
-  forgetUserId = () =>{
+  forgetUserId = () => {
     return Cookie.get('data_ID')
   }
-  resetUserId = () =>{
+  resetUserId = () => {
     return Cookie.get('reset_ID')
   }
-  getSdkKey = () =>{
+  getSdkKey = () => {
     return Cookie.get('sdkKey')
   }
-  docForRegenerateUrl = () =>{
+  docForRegenerateUrl = () => {
     return Cookie.get('docForRegenerateUrl')
   }
-  updateUser(id:string,data: any): Observable<any> {
-    return this.http.patch(this.apiUrl + '/user/update/'+ id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  updateUser(id: string, data: any): Observable<any> {
+    return this.http.patch(this.apiUrl + '/user/update/' + id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
-  updateTenent(id:string,data: any): Observable<any> {
-    return this.http.patch(this.apiUrl + '/tenent/update/'+ id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  updateTenent(id: string, data: any): Observable<any> {
+    return this.http.patch(this.apiUrl + '/tenent/update/' + id, data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   userForChangePassword(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/user/accessToken', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
@@ -75,20 +74,20 @@ export class ServicesService {
     return this.http.get(this.apiUrl + '/user/userInfo', this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   createTenent(data: any): Observable<any> {
-      return this.http
-        .post(this.apiUrl + '/tenent', data, this.httpOptions)
-        .pipe(retry(1), catchError(this.handleError));
+    return this.http
+      .post(this.apiUrl + '/tenent', data, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
   }
   roleFilter = (value: any) => {
-    if(value === '1'){
+    if (value === '1') {
       return 'Flexm Admin';
-    }else if(value === '2'){
+    } else if (value === '2') {
       return 'Flexm Operator';
     }
-    else if(value === '3'){
+    else if (value === '3') {
       return 'Tenent Admin';
     }
-    else if(value === '4'){
+    else if (value === '4') {
       return 'Tenent Operator';
     }
     return null;
@@ -98,15 +97,15 @@ export class ServicesService {
       .delete(this.apiUrl + '/tenent/delete/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  blockTenent(id: any,data: any): Observable<any> {
+  blockTenent(id: any, data: any): Observable<any> {
     return this.http
-      .patch(this.apiUrl + '/tenent/blockTenent/' + id,data, this.httpOptions)
+      .patch(this.apiUrl + '/tenent/blockTenent/' + id, data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   userCreate(data: any): Observable<any> {
-      return this.http
-        .post(this.apiUrl + '/user', data, this.httpOptions)
-        .pipe(retry(1), catchError(this.handleError));
+    return this.http
+      .post(this.apiUrl + '/user', data, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
 
   }
   createSdkKey(data: any): Observable<any> {
@@ -127,7 +126,7 @@ export class ServicesService {
   }
   getSdkKeyList(data: any): Observable<any> {
     return this.http
-      .post(this.apiUrl + '/sdkkey/list',data, this.httpOptions)
+      .post(this.apiUrl + '/sdkkey/list', data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   deleteSdyKey(id: any): Observable<any> {
@@ -136,9 +135,9 @@ export class ServicesService {
       .pipe(retry(1), catchError(this.handleError));
   }
   createApiKey(data: any): Observable<any> {
-      return this.http
-        .post(this.apiUrl + '/apikey', data, this.httpOptions)
-        .pipe(retry(1), catchError(this.handleError));
+    return this.http
+      .post(this.apiUrl + '/apikey', data, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
   }
   getApiKeyListById(id: any): Observable<any> {
     return this.http
@@ -147,7 +146,7 @@ export class ServicesService {
   }
   getApiKeyList(data: any): Observable<any> {
     return this.http
-      .post(this.apiUrl + '/apikey/list',data, this.httpOptions)
+      .post(this.apiUrl + '/apikey/list', data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   deleteApiKey(id: any): Observable<any> {
@@ -157,7 +156,7 @@ export class ServicesService {
   }
   getTenentList(data: any): Observable<any> {
     return this.http
-      .post(this.apiUrl + '/tenent/list',data, this.httpOptions)
+      .post(this.apiUrl + '/tenent/list', data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   getUserList(data: any): Observable<any> {
@@ -170,9 +169,9 @@ export class ServicesService {
       .get(this.apiUrl + '/user/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-  scanResults(id:any,data: any): Observable<any> {
+  scanResults(id: any, data: any): Observable<any> {
     return this.http
-      .put(this.apiUrl + '/scans/scanResult/' + id,data, this.httpOptions)
+      .put(this.apiUrl + '/scans/scanResult/' + id, data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   deleteScan(id: any): Observable<any> {
@@ -187,7 +186,7 @@ export class ServicesService {
   }
   blockUser(id: any, data: any): Observable<any> {
     return this.http
-      .patch(this.apiUrl + '/user/blockUser/' + id,data, this.httpOptions)
+      .patch(this.apiUrl + '/user/blockUser/' + id, data, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   findUserById(id: any): Observable<any> {
@@ -221,10 +220,10 @@ export class ServicesService {
     }
   }
   resetPassword(data: any): Observable<any> {
-    Cookie.set('reset_ID',data.id);
-      return this.http
-        .post(this.apiUrl + '/user/resetPassword', data, this.httpOptions)
-        .pipe(retry(1), catchError(this.handleError));
+    Cookie.set('reset_ID', data.id);
+    return this.http
+      .post(this.apiUrl + '/user/resetPassword', data, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
 
   }
   idFindMyMail(data: any): Observable<any> {
@@ -253,7 +252,7 @@ export class ServicesService {
   setForgetPassword(data: any): Observable<any> {
     // headers.append('user-access-token',data.id);
     // this.httpOptions.headers.append('user-access-token',data.id)
-    Cookie.set('data_ID',data.id);
+    Cookie.set('data_ID', data.id);
     if (data) {
       const formData = {
         // id: data.id,
@@ -265,7 +264,7 @@ export class ServicesService {
           formData,
           this.httpOptions
         )
-        .pipe(retry(1),map(()=>{}), catchError(this.handleError));
+        .pipe(retry(1), map(() => { }), catchError(this.handleError));
     }
   }
   // tslint:disable-next-line:variable-name
@@ -310,7 +309,7 @@ export class ServicesService {
     // const data = {
     //   header: key,
     // };
-    Cookie.set('sdkKey',key)
+    Cookie.set('sdkKey', key)
     return this.http
       .post(this.apiUrl + '/generate', {}, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
