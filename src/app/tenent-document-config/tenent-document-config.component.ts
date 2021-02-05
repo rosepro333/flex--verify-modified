@@ -295,9 +295,9 @@ export class TenentDocumentConfigComponent implements OnInit {
         this.countryList();
         this.countryListDoc();
         this.selectTenentUser(this.tenentID)
-        this.toster.openSnackBar('Successfully Update Country', 'Success')
+        this.toster.openSnackBar('Successfully update country', 'Success')
       } else {
-        this.toster.openSnackBar('Something Went Wrong', 'Failed')
+        this.toster.openSnackBar('Something went wrong', 'Failed')
       }
     }, (error: any) => {
       //(error)
@@ -375,7 +375,7 @@ export class TenentDocumentConfigComponent implements OnInit {
         this.DocumentTypeList();
         this.documentHeader();
         this.selectTenentUser(this.tenentID)
-        this.toster.openSnackBar('Successfully create DocumentType', 'Success')
+        this.toster.openSnackBar('Successfully create Document Type', 'Success')
       } else if (res.apires === 0) {
         this.toster.openSnackBar(res.data, 'Failed')
       }
@@ -416,9 +416,9 @@ export class TenentDocumentConfigComponent implements OnInit {
         this.DocumentTypeList();
         this.documentHeader();
         this.selectTenentUser(this.tenentID)
-        this.toster.openSnackBar('Successfully Update documentType', 'Success')
+        this.toster.openSnackBar('Successfully update document type', 'Success')
       } else {
-        this.toster.openSnackBar('Something Went Wrong', 'Failed')
+        this.toster.openSnackBar('Something went wrong', 'Failed')
       }
     }, (error: any) => {
       //(error)
