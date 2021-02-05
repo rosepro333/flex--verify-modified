@@ -140,7 +140,7 @@ export class TenentDocumentConfigComponent implements OnInit {
             if (index === 0) {
               const obj1 = {};
               obj1['_id'] = "All";
-              obj1['Name'] = "All";
+              obj1['Name'] = "Choose a Tenent";
               this.tenentList.push(obj1);
               obj['_id'] = i._id;
               obj['Name'] = i.Name;
@@ -193,17 +193,19 @@ export class TenentDocumentConfigComponent implements OnInit {
     console.log(value);
     if (value.checked === true) {
       this.headerCheck = true;
-      const data = {
-        tenentId: this.tenentID,
-        country: "601406cdf456a0401c485f80",
-        documentType: ["60140fe26770261aa8acc6de"],
-        checked: false
-      }
-
     } else {
       this.headerCheck = false;
     }
-
+    const data = {
+      tenentId: this.tenentID,
+      documentType: [this.checkHeaderId],
+      checked: value.checked
+    }
+    this.report.setDocumentForAllCountry(data).subscribe((res) => {
+      console.log(res);
+    }, (err) => {
+      console.log(err);
+    })
   }
   checkedFunction = (row: any, header: any, value: any) => {
     console.log(row);

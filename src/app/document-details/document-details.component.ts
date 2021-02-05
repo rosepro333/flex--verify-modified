@@ -1,5 +1,6 @@
 
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   OnInit,
@@ -31,7 +32,9 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   selector: 'app-document-details',
   templateUrl: './document-details.component.html',
   styleUrls: ['./document-details.component.scss'],
+  // encapsulation: ViewEncapsulation.Emulated,
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocumentDetailsComponent implements OnInit {
 
@@ -141,7 +144,8 @@ export class DocumentDetailsComponent implements OnInit {
     private ngxImgZoom: NgxImgZoomService,
     public dialog: MatDialog,
     private report: ReportService,
-    private location: Location
+    private location: Location,
+    private ref: ChangeDetectorRef
   ) {
     // this.ngxImgZoom.setZoomBreakPoints([{w: 100, h: 100}, {w: 150, h: 150}, {w: 200, h: 200}, {w: 250, h: 250}, {w: 300, h: 300}]);
   }
@@ -164,7 +168,8 @@ export class DocumentDetailsComponent implements OnInit {
   //   this.zoomImageSrc = img;
   // }
   overLayImage = (value: string) => {
-    const img = `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${value}?alt=media`;
+    const img = value;
+    // const img = `https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o${value}?alt=media`;
     const dialogRef = this.dialog.open(IdDetailsComponent, {
       panelClass: 'custom-dialog-container',
       width: '900px',
@@ -246,6 +251,7 @@ export class DocumentDetailsComponent implements OnInit {
           this.getAllComment(i._id, i.Document_ID);
           // this.scanDocument[index].push(obj);
         });
+        this.ref.detectChanges();
         // console.log(this.scanDocument);
       })
       .catch((error) => console.error(error));
@@ -306,6 +312,7 @@ export class DocumentDetailsComponent implements OnInit {
       this.document = response.data;
       console.log(this.document)
       this.docId = response.data._id;
+      this.ref.detectChanges();
     });
   }
   donwLoad = (data: any) => {
@@ -365,6 +372,7 @@ export class DocumentDetailsComponent implements OnInit {
         console.log(this.scanDocument);
         this.sideNav.close()
       }
+      this.ref.detectChanges();
     }, (err) => {
       console.log(err);
       this.toast.openSnackBar('Something Went Wrong', 'failed')
@@ -499,6 +507,7 @@ export class DocumentDetailsComponent implements OnInit {
         console.log(this.scanIdDetails);
         console.log(this.resutData);
       }
+      this.ref.detectChanges();
     }, (err) => {
       console.log(err);
       this.toast.openSnackBar('Something Went Wrong', 'failed')

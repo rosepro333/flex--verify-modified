@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-id--+**************************************',
@@ -10,23 +10,24 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   // encapsulation: ViewEncapsulation.None,
 })
 export class IdDetailsComponent implements OnInit {
-  img: File;
+  img: string;
   form: FormGroup;
-  constructor( private dialogRef: MatDialogRef<IdDetailsComponent>,
-        @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder,) {
-          console.log(data.img)
-          this.img = data.img;
-        }
+  constructor(private dialogRef: MatDialogRef<IdDetailsComponent>,
+    @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder,) {
+    console.log(data.img)
+    this.img = data.img;
+  }
 
   ngOnInit(): void {
     // this.formControl()
   }
+  isString(val): boolean { return val.includes('storage.googleapis.com') }
   formControl = () => {
     this.form = this.fb.group({
       img: new FormControl(''),
     });
   }
   clear = () => {
-     this.dialogRef.close();
+    this.dialogRef.close();
   }
 }
