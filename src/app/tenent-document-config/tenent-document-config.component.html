@@ -17,7 +17,6 @@
           <mat-form-field appearance="outline" class='search' >
             <mat-label>Search</mat-label>
             <input matInput #input (keyup)='countrySearch()' formControlName='countrySearch'/>
-            <!-- <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search" (click)="searchCountry()"> -->
               <mat-icon matSuffix>search</mat-icon>
             <!-- </button> -->
           </mat-form-field>
@@ -105,7 +104,6 @@
           <mat-form-field appearance="outline" class='search' >
             <mat-label>Search</mat-label>
             <input matInput #input (keyup)='searchDocumentType()' formControlName='documentTypeSearch' />
-            <!-- <button mat-button matSuffix class="primary-button input-suffix-button" aria-label="search" (click)="searchCountry()"> -->
               <mat-icon matSuffix>search</mat-icon>
             <!-- </button> -->
           </mat-form-field>
@@ -213,7 +211,7 @@
           </div>
         </div>
       </div>
-      <table mat-table [dataSource]="tenentDataSource" class="mat-elevation-z2" matSort fxFlex="100" fxFill>
+      <table mat-table [dataSource]="tenentDataSource |searchFilter:search" class="mat-elevation-z2" matSort fxFlex="100" fxFill>
         <ng-container  *ngFor="let column of columns" [matColumnDef]="column.columnDef">
           <th mat-header-cell *matHeaderCellDef>
             <span class="idCard">{{ column?.header }}</span>
@@ -223,16 +221,16 @@
             <div fxLayout="row" fxLayoutAlign="start center">
               <div class="data-wrap">
                 <div class="value name" *ngIf="column?.header==='Country'">
-                 {{row.name}}
+                 {{row?.name }}
                 </div>
                  <div class="value name" *ngIf="column?.header!=='Country'"  fxLayoutAlign="center center" >
                    <!-- <div *ngIf="row.documentType.le"></div> -->
-                   <div *ngIf = "row.documentType.length > 0">
-                    <div *ngFor="let j of row.documentType;">
-                    <mat-checkbox *ngIf="column?.headerId===j?.headerId"  class="example-margin" [checked]='j.cell === "active" ? true: false' (change)="checkedFunction(row,column,$event)" ></mat-checkbox>
+                   <div *ngIf = "row?.documentType.length > 0">
+                    <div *ngFor="let j of row?.documentType;">
+                    <mat-checkbox *ngIf="column?.headerId===j?.headerId"  class="example-margin" [checked]='j.cell === "active" ? true: false || (headerCheck===true &&checkHeaderId===j?.headerId) === true' (change)="checkedFunction(row,column,$event)" ></mat-checkbox>
                    </div>
                    </div>
-                   <div *ngIf = "row.documentType.length === 0">
+                   <div *ngIf = "row?.documentType.length === 0">
                     <mat-checkbox  class="example-margin" [checked]='false' (change)="checkedFunction(row,column,$event)" ></mat-checkbox>
                    </div>
                 </div>

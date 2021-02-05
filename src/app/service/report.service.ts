@@ -28,6 +28,9 @@ export class ReportService {
     console.log(data);
     this.printData.next(data)
   }
+  setDocumentForAllCountry(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/documentConfig/setHeaderForAllCountry/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
   toggleConfiguteForCountry(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/documentConfig/toggleConfiguteForCountry/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
@@ -44,7 +47,7 @@ export class ReportService {
     return this.http.post(this.apiUrl + '/webhook/', data, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   countryListData(): Observable<any> {
-    return this.http.get(this.apiUrl + '/country/countryList/', this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    return this.http.post(this.apiUrl + '/country/countryList/', {}, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
   docTypeListForHeader(): Observable<any> {
     return this.http.get(this.apiUrl + '/documentType/docTypelist/', this.httpOptions).pipe(retry(1), catchError(this.handleError));

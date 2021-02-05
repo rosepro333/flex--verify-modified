@@ -96,6 +96,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AddDocumentComponent } from './dialog-box/add-document/add-document.component';
 import { ProfileSettingComponent } from './profile-setting/profile-setting.component';
 import { WebHookComponent } from './web-hook/web-hook.component';
+import { SearchFilterPipe } from './service/search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -151,7 +152,8 @@ import { WebHookComponent } from './web-hook/web-hook.component';
     TenentDocumentConfigComponent,
     AddDocumentComponent,
     ProfileSettingComponent,
-    WebHookComponent
+    WebHookComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

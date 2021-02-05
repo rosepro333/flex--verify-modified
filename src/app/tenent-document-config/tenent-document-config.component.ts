@@ -74,18 +74,11 @@ export class TenentDocumentConfigComponent implements OnInit {
   countryListData: any = [];
   tenentConfigMap = new Map();
   tableHide: boolean = false;
-  columns = [
-    // { columnDef: 'position', header: 'No.',    cell: (element: any) => `${element.position}` },
-    // { columnDef: 'name',     header: 'Name',   cell: (element: any) => `${element.name}`     },
-    // { columnDef: 'weight',   header: 'Weight', cell: (element: any) => `${element.weight}`   },
-    // { columnDef: 'symbol',   header: 'Symbol', cell: (element: any) => `${element.symbol}`   },
-  ];
-  // columns: any =[];
+  columns = [];
   colspanLength: number;
   tenentDataSource: any = [];
-  dataSourceMap = new Map();
-  // tenentDataSource= new ExampleDataSource();
-  // displayedColumns :any = [];
+  headerCheck = false;
+  checkHeaderId = '';
   displayedColumns = this.columns.map(c => c.columnDef);
 
 
@@ -129,7 +122,8 @@ export class TenentDocumentConfigComponent implements OnInit {
   clearAll = () => {
     this.tenentID = "All"
     this.search = '';
-    this.countryListDoc();
+    this.tenentDataSource = []
+    // this.countryListDoc();
   }
   getTenentList = () => {
     const data = {
@@ -194,8 +188,21 @@ export class TenentDocumentConfigComponent implements OnInit {
     })
   }
   checkedAll = (column: any, value: any) => {
-    //(column);
-    //(value);
+    console.log(column);
+    this.checkHeaderId = column.headerId;
+    console.log(value);
+    if (value.checked === true) {
+      this.headerCheck = true;
+      const data = {
+        tenentId: this.tenentID,
+        country: "601406cdf456a0401c485f80",
+        documentType: ["60140fe26770261aa8acc6de"],
+        checked: false
+      }
+
+    } else {
+      this.headerCheck = false;
+    }
 
   }
   checkedFunction = (row: any, header: any, value: any) => {
@@ -456,10 +463,7 @@ export class TenentDocumentConfigComponent implements OnInit {
   selectTenentUser = async (value: string) => {
     this.search = '';
     this.tenentID = value;
-    // if (this.tenentID === 'All') {
-    //   return;
-    // }
-    const data = { tenentId: this.tenentID }
+    const data = { tenentId: this.tenentID, }
     await this.countryListDoc().then(async (res: Array<any>) => {
       if (res.length > 0) {
         this.tenentDataSource = res;
@@ -524,6 +528,7 @@ export class TenentDocumentConfigComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.report.countryListData().subscribe((res) => {
         if (res.apires === 1 && res.msg === 'success') {
+          console.log(res.data)
           resolve(res.data)
         }
       }, (err) => {
@@ -532,7 +537,7 @@ export class TenentDocumentConfigComponent implements OnInit {
     })
   }
   searchCountry = () => {
-
+    // this.countryListDoc();
   }
 
   documentToggle = (value: any) => {
