@@ -289,34 +289,34 @@
                             <div fxLayout="column">
                                 <mat-form-field appearance="outline" fxFill>
                                     <mat-label>Id type</mat-label>
-                                    <mat-select name="ID_Type" [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" [(ngModel)]="doc.ID_Type" (selectionChange)="SelectIdType($event)">
+                                    <mat-select name="ID_Type" [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus==='Submitted')?false:true" [(ngModel)]="doc.ID_Type" (selectionChange)="SelectIdType($event)">
                                         <mat-option *ngFor="let type of documentIdType" [value]="type.value">{{ type.value }}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFill>
                                     <mat-label>Id number</mat-label>
-                                    <input matInput [disabled]="disabled ||!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" placeholder="Id #" name="idCardNo" [(ngModel)]="doc.idCardNo" />
+                                    <input matInput [disabled]="disabled ||!doc.isActive ||(doc.scanResultStatus!=='Submitted')?true:false" placeholder="Id #" name="idCardNo" [(ngModel)]="doc.idCardNo" />
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFill>
                                     <mat-label>First name</mat-label>
                                     <!--  -->
-                                    <input matInput [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" placeholder="First name" name="firstName" [(ngModel)]="doc.firstName" />
+                                    <input matInput [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='Submitted')?true:false" placeholder="First name" name="firstName" [(ngModel)]="doc.firstName" />
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFill>
                                     <mat-label>Last Name</mat-label>
-                                    <input matInput [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" placeholder="Last name" name="lastName" [(ngModel)]="doc.lastName" />
+                                    <input matInput [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='Submitted')?true:false" placeholder="Last name" name="lastName" [(ngModel)]="doc.lastName" />
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFill>
                                     <mat-label>Date of birth</mat-label>
                                     <input matInput readonly [matDatepicker]="dobPicker" placeholder="Date of birth" name="dob" [(ngModel)]="doc.dob" />
                                     <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
-                                    <mat-datepicker [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" #dobPicker disabled="false"></mat-datepicker>
+                                    <mat-datepicker [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='Submitted')?true:false" #dobPicker disabled="false"></mat-datepicker>
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFill>
                                     <mat-label>Id expiry</mat-label>
                                     <input matInput readonly [matDatepicker]="idExpirypicker" placeholder="Id Expiry" name="idExpiryDate" [(ngModel)]="doc.idExpiryDate" />
                                     <mat-datepicker-toggle matSuffix [for]="idExpirypicker"></mat-datepicker-toggle>
-                                    <mat-datepicker [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" #idExpirypicker disabled="false"></mat-datepicker>
+                                    <mat-datepicker [disabled]="disabled ||!doc.isActive||(doc.scanResultStatus!=='Submitted')?true:false" #idExpirypicker disabled="false"></mat-datepicker>
                                 </mat-form-field>
                             </div>
                         </mat-tab>
@@ -324,25 +324,25 @@
                             <div fxLayout="column">
                                 <mat-form-field appearance="outline" fxFill>
                                     <mat-label>Building No</mat-label>
-                                    <input matInput [disabled]="disabled ||!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" placeholder="Building No" name="building_No" [(ngModel)]="doc.Building_No" />
+                                    <input matInput [disabled]="disabled ||!doc.isActive ||(doc.scanResultStatus!=='Submitted')?true:false" placeholder="Building No" name="building_No" [(ngModel)]="doc.Building_No" />
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFill>
                                     <mat-label>Street name</mat-label>
-                                    <input matInput [disabled]="disabled ||!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" placeholder="Street Name" name="streetName" [(ngModel)]="doc.streetName" />
+                                    <input matInput [disabled]="disabled ||!doc.isActive ||(doc.scanResultStatus!=='Submitted')?true:false" placeholder="Street Name" name="streetName" [(ngModel)]="doc.streetName" />
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFill>
                                     <mat-label>City</mat-label>
-                                    <input matInput [disabled]="disabled ||!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" placeholder="City" name="city" [(ngModel)]="doc.city" />
+                                    <input matInput [disabled]="disabled ||!doc.isActive ||(doc.scanResultStatus!=='Submitted')?true:false" placeholder="City" name="city" [(ngModel)]="doc.city" />
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFill>
                                     <mat-label>Postal code</mat-label>
-                                    <input matInput [disabled]="disabled ||!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" placeholder="Postal Code" name="postalCode" [(ngModel)]="doc.postalCode" />
+                                    <input matInput [disabled]="disabled ||!doc.isActive ||(doc.scanResultStatus!=='Submitted')?true:false" placeholder="Postal Code" name="postalCode" [(ngModel)]="doc.postalCode" />
                                 </mat-form-field>
                                 <!-- <div class="button-wrap"   fxLayoutAlign="center end">
-                                    <button mat-button type="button" *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" class="cancel-button" (click)="clear()">
+                                    <button mat-button type="button" *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='Submitted')?true:false" class="cancel-button" (click)="clear()">
                                       cancel
                                     </button>
-                                    <button *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" mat-button class="primary-button" type="submit">
+                                    <button *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='Submitted')?true:false" mat-button class="primary-button" type="submit">
                                       Save
                                     </button>
                                 </div> -->
@@ -351,10 +351,10 @@
                     </mat-tab-group>
                     <div class="sticky-bottom-bar">
                         <div  class="button-wrap" >
-                          <button mat-button type="button" *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='submitted')?true:false" class="cancel-button" (click)="clear()">
+                          <button mat-button type="button" *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive ||(doc.scanResultStatus!=='Submitted')?true:false" class="cancel-button" (click)="clear()">
                             cancel
                           </button>
-                          <button *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive||(doc.scanResultStatus!=='submitted')?true:false" mat-button class="primary-button" type="submit">
+                          <button *ngIf="accessType!=='3'&&accessType !=='4'" [disabled]="!doc.isActive||(doc.scanResultStatus!=='Submitted')?true:false" mat-button class="primary-button" type="submit">
                             Save
                           </button>
                         </div>
@@ -400,7 +400,7 @@
                             </div>
                         </div>
                         <div fxFlex="50" class="live-photos" *ngFor="let i of ((doc.LiveCheck_Photos.length>0)?doc.LiveCheck_Photos:[imagePlaceHolder]) ">
-                            <img [src]="(doc.LiveCheck_Photos.length===null)?'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+i+'?alt=media':null"/>
+                            <img [src]="(doc.LiveCheck_Photos.length!==null)? isString(i) === true ? i:'https://firebasestorage.googleapis.com/v0/b/flexverify.appspot.com/o'+i+'?alt=media':null"/>
                         </div>
                     </div>
                 </div>

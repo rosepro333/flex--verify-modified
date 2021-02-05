@@ -227,7 +227,7 @@
                    <!-- <div *ngIf="row.documentType.le"></div> -->
                    <div *ngIf = "row?.documentType.length > 0">
                     <div *ngFor="let j of row?.documentType;">
-                    <mat-checkbox *ngIf="column?.headerId===j?.headerId"  class="example-margin" [checked]='j.cell === "active" ? true: false || (headerCheck===true &&checkHeaderId===j?.headerId) === true' (change)="checkedFunction(row,column,$event)" ></mat-checkbox>
+                    <mat-checkbox *ngIf="column?.headerId===j?.headerId"  class="example-margin" [checked]='j.cell === "active" ? true: false || (headerCheck===true &&column?.headerId===checkHeaderId) === true' (change)="checkedFunction(row,column,$event)" ></mat-checkbox>
                    </div>
                    </div>
                    <div *ngIf = "row?.documentType.length === 0">
